@@ -7,6 +7,7 @@ export enum SDK_EVENTS {
   CONTENT_ITEM = 'content-item',
   CONTENT_TYPE = 'content-type',
   HEIGHT = 'height',
+  HEIGHT_UPDATE = 'height-update',
   AUTO_RESIZER_START = 'auto-resizer-start',
   AUTO_RESIZER_STOP = 'auto-resizer-stop',
 }
@@ -63,6 +64,10 @@ export class DCUI {
 
   private getHeight() {
     return this.$.$('body').clientHeight;
+  }
+
+  public heightUpdate() {
+    this.connection.emit(SDK_EVENTS.HEIGHT_UPDATE, this.getHeight());
   }
 
   public startAutoResizer() {
