@@ -6,9 +6,6 @@
   "main": "dist/dc-extensions-sdk.umd.js",
   "module": "dist/dc-extensions-sdk.es5.js",
   "typings": "dist/types/dc-extensions-sdk.d.ts",
-  "files": [
-    "dist"
-  ],
   "author": "ccorbett <ccorbett@amplience.com>",
   "repository": {
     "type": "git",
@@ -19,6 +16,7 @@
     "node": ">=6.0.0"
   },
   "scripts": {
+    "prepare": "npm run build",
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
     "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
