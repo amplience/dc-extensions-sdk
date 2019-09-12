@@ -20,6 +20,7 @@ export interface OptionsObject {
 
 export interface Options {
   window: Window;
+  connectionTimeout: number;
   debug: boolean;
 }
 
@@ -31,23 +32,35 @@ export class DCUI {
   protected options: Options;
   protected readonly defaultOptions: Options = {
     window: window,
+    connectionTimeout: 100,
     debug: false
   };
 
   constructor(options: OptionsObject = {}){
     this.options = { ...this.defaultOptions, ...options };
+    this.connection = new ClientConnection(this.options);
+    this.listenToSDKEvents();
     this.$ = new Bling(this.options.window);
   }
 
   public init(): Promise<void> {
     return new Promise((resolve, reject)=>{
-      this.connection = new ClientConnection(this.options);
-      this.connection.on(MIO_EVENTS.CONNECTED,()=>{
-        resolve();
-      })
-      this.listenToSDKEvents();
-      this.requestInfo();
+      if (this.connection.initiated) {
+        this.handleInitiation(resolve);
+      } else {
+        this.connection.on(MIO_EVENTS.CONNECTED,()=>{
+          this.handleInitiation(resolve);
+        })
+        this.connection.on(MIO_EVENTS.CONNECTION_TIMEOUT,()=>{
+          reject("Connection to DC timed out");
+        })
+      }
     });
+  }
+
+  private handleInitiation(resolve: Function) {
+    this.requestContentItem();
+    resolve();
   }
 
   private listenToSDKEvents() {
@@ -55,7 +68,7 @@ export class DCUI {
     this.connection.on(SDK_EVENTS.FIELD_MODEL, (payload: any)=>{this.fieldModel = payload});
   }
 
-  private requestInfo() {
+  private requestContentItem() {
     this.connection.request(SDK_EVENTS.CONTENT_ITEM)
       .then((body: ContentItemObject)=>{
         this.contentItem = new ContentItem(body);
