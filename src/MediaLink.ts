@@ -1,17 +1,18 @@
 import { ClientConnection } from 'message.io';
 import { MEDIA_LINK } from './Events';
 export interface MediaImageLink {
-  _meta: Meta;
+  _meta: {
+    schema: string;
+  }
   id: string;
   name: string;
   endpoint: string;
   defaultHost: string;
 }
-interface Meta {
-  schema: string;
-}
 export interface MediaVideoLink {
-  _meta: Meta;
+  _meta: {
+    schema: string;
+  }
 }
 export class MediaLink {
   /**

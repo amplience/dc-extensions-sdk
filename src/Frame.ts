@@ -17,11 +17,7 @@ export class Frame {
    */
   public getHeight(): number {
     const body = this.window.document.querySelector('body');
-    let height = 0;
-    if (body) {
-      height = body.clientHeight;
-    }
-    return height;
+    return body ? body.clientHeight : 0;
   }
 
   /**
