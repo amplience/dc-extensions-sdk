@@ -99,7 +99,7 @@ console.log(sdk.locales);
 
 ## Parameters
 
-These allow your component to be configurable via your schema (instance params) or registry (installation params). 
+These allow your component to be configurable. Either defined in the JSON Schema (instance) or defined in the registry (installation).
 
 ```js
 const sdk = await init();

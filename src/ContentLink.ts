@@ -9,8 +9,16 @@ interface Meta {
   schema: string;
 }
 export class ContentLink {
+  /**
+   * Content Link - Use to open the content browser.
+   * @param connection message.io connection
+   */
   constructor(private connection: ClientConnection) {}
-  get(schemas: Array<string>): Promise<ContentItemLink> {
-    return this.connection.request(CONTENT_LINK.CONTENT_GET, schemas);
+  /**
+   * This method will trigger a content browser. It returns a promise that will resolve to the chosen Content Link.
+   * @param contentTypeIds list of Content Type Ids to filter the Content Browser by.
+   */
+  get(contentTypeIds: Array<string>): Promise<ContentItemLink> {
+    return this.connection.request(CONTENT_LINK.CONTENT_GET, contentTypeIds);
   }
 }

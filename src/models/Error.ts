@@ -31,7 +31,9 @@ interface Location {
 interface Data {
   location: Location;
 }
-
+/**
+ * The JSON Schema errors that have been discovered on your set value. 
+ */
 export interface Error {
   errorCategory: ERROR_CATEGORY;
   errorData: ErrorData;

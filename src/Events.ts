@@ -27,7 +27,9 @@ export enum FIELD {
   MODEL_GET = 'field-model-get',
   MODEL_SET = 'field-model-set',
   MODEL_RESET = 'field-model-reset',
-  SCHEMA_GET = 'field-model-get'
+  MODEL_IS_VALID = 'field-model-is-valid',
+  MODEL_VALIDATE = 'field-model-validate',
+  SCHEMA_GET = 'field-schema-get',
 }
 
 export enum FRAME {

@@ -8,7 +8,9 @@ import { FIELD, PARAMS, LOCALES, CONTENT_TYPE } from './Events';
 import { MediaLink } from './MediaLink';
 import { ContentLink } from './ContentLink';
 import { LocalesModel } from './models/Locales';
-
+/**
+ * Expected format for the provided options
+ */
 export interface OptionsObject {
   window?: Window;
   connectionTimeout?: number;
@@ -20,16 +22,42 @@ export interface Options {
   connectionTimeout: number;
   debug: boolean;
 }
-
 export class SDK {
+  /**
+   * message.io [[ClientConnection]] instance. Use to listen to any of the message.io lifecycle events.
+   */
   public connection!: ClientConnection;
+  /**
+   * Content Item - The model of the Content Item that is being edited.
+   */
   public contentItem!: ContentItem;
+  /**
+   * Content Type - The JSON Schema of the Content Item that is being edited.
+   */
   public contentType!: ContentType;
+  /**
+   * Field - Allows you to get and set the value of the field the extension is control of.
+   */
   public field!: Field;
+  /**
+   * Frame - Use to control the height sizing behaviour of your extension.
+   */
   public frame!: Frame;
+  /**
+   * Params - optional paramaters for your extension.
+   */
   public params!: Params;
+  /**
+   * Locales - The locales you currently have available.
+   */
   public locales!: LocalesModel;
+  /**
+   * Content Link - Use to open a content browser.
+   */
   public contentLink: ContentLink;
+  /**
+   * Content Link - Use to open a media browser.
+   */
   public mediaLink: MediaLink;
   protected options: Options;
   protected readonly defaultOptions: Options = {
@@ -38,6 +66,10 @@ export class SDK {
     debug: false
   };
 
+  /**
+   * The SDK instance is the central place for all SDK methods. It takes an options object.
+   * @param options
+   */
   constructor(options: OptionsObject = {}) {
     this.options = { ...this.defaultOptions, ...options };
     this.connection = new ClientConnection(this.options);
