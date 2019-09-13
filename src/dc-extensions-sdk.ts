@@ -2,7 +2,6 @@ export * from './models/ContentItemModel';
 export * from './models/ContentItemBody';
 export * from './models/ContentType';
 export * from './models/Error';
-export * from './models/FieldSchema';
 export * from './models/Locales';
 export * from './models/Params';
 export * from './MediaLink';

@@ -1,7 +1,11 @@
 import { ClientConnection } from 'message.io';
 import { FIELD } from './Events';
-import { FieldSchema } from './models/FieldSchema';
 import { Error } from './models/Error';
+export interface FieldSchema {
+  title: string;
+  type: string;
+}
+
 export class Field {
   /**
    * Allows you to perform actions on the field that is being edited.

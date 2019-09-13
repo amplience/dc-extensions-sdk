@@ -1,10 +1,10 @@
 import { ClientConnection, MIO_EVENTS } from 'message.io';
 import { ContentItem } from './ContentItem';
 import { ContentType } from './models/ContentType';
-import { Field } from './Field';
+import { Field, FieldSchema } from './Field';
 import { Frame } from './Frame';
 import { Params } from './models/Params';
-import { FIELD, PARAMS, LOCALES, CONTENT_TYPE } from './Events';
+import { CONTEXT } from './Events';
 import { MediaLink } from './MediaLink';
 import { ContentLink } from './ContentLink';
 import { LocalesModel } from './models/Locales';
@@ -16,11 +16,25 @@ export interface OptionsObject {
   connectionTimeout?: number;
   debug?: boolean;
 }
+export interface VSE {
+  domain: string
+  src: string
+}
 
 export interface Options {
   window: Window;
   connectionTimeout: number;
   debug: boolean;
+}
+
+export interface ContextObject {
+  contentItemId: string,
+  contentType: ContentType,
+  fieldSchema: FieldSchema,
+  params: Params,
+  locales: LocalesModel,
+  vse: VSE,
+  visualisation: string
 }
 export class SDK {
   /**
@@ -56,9 +70,17 @@ export class SDK {
    */
   public contentLink: ContentLink;
   /**
-   * Content Link - Use to open a media browser.
+   * Media Link - Use to open a media browser.
    */
   public mediaLink: MediaLink;
+  /**
+   * VSE - Virtual Staging Environment - used for accessing staged assets.
+   */
+  public vse!: VSE;
+  /**
+   * Visualisation - URL of the visualisation
+   */
+  public visualisation!: string;
   protected options: Options;
   protected readonly defaultOptions: Options = {
     window: window,
@@ -67,18 +89,20 @@ export class SDK {
   };
 
   /**
-   * The SDK instance is the central place for all SDK methods. It takes an options object.
+   * The SDK instance is the central place for all SDK methods. It takes an optional options object.
    * @param options
    */
   constructor(options: OptionsObject = {}) {
     this.options = { ...this.defaultOptions, ...options };
     this.connection = new ClientConnection(this.options);
-    this.contentItem = new ContentItem(this.connection);
     this.mediaLink = new MediaLink(this.connection);
     this.contentLink = new ContentLink(this.connection);
     this.frame = new Frame(this.connection, this.options.window);
   }
 
+  /**
+   * Initialiser. Returns a promise that resolves to an instance of the SDK.
+   */
   public async init(): Promise<any> {
     return new Promise(async (resolve, reject) => {
       if (this.connection.initiated) {
@@ -96,23 +120,21 @@ export class SDK {
 
   private async handleInitiation(resolve: Function, reject: Function) {
     try {
-      const [field, params, contentType, locales] = await this.requestInitial();
-      this.field = new Field(this.connection, field);
+      const {contentItemId, contentType, fieldSchema, params, locales, vse, visualisation} = await this.requestContext();
+      this.contentItem = new ContentItem(this.connection, contentItemId);
+      this.field = new Field(this.connection, fieldSchema);
       this.contentType = contentType;
       this.params = params;
       this.locales = locales;
+      this.visualisation = visualisation;
+      this.vse = vse;
       resolve(this);
     } catch {
       reject();
     }
   }
 
-  private async requestInitial(): Promise<Array<any>> {
-    return Promise.all([
-      this.connection.request(FIELD.SCHEMA_GET),
-      this.connection.request(PARAMS.GET),
-      this.connection.request(CONTENT_TYPE.GET),
-      this.connection.request(LOCALES.GET)
-    ]);
+  private async requestContext(): Promise<ContextObject> {
+    return this.connection.request(CONTEXT.GET);
   }
 }

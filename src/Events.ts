@@ -1,17 +1,9 @@
-export enum CONTENT_TYPE {
-  GET = 'content-type-get'
+export enum CONTEXT {
+  GET = 'context-get'
 }
 
 export enum CONTENT_ITEM {
   GET = 'content-item-get'
-}
-
-export enum LOCALES {
-  GET = 'locales-get'
-}
-
-export enum PARAMS {
-  GET = 'params-get'
 }
 
 export enum MEDIA_LINK {
