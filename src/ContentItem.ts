@@ -1,29 +1,9 @@
-import { ContentItemBody, ContentItemBodyObject } from './ContentItemBody';
-import { throws } from 'assert';
-export interface ContentItemObject {
-  id: string,
-  label: string,
-  body: ContentItemBodyObject
-  deliveryId: string
-}
-
+import { ClientConnection } from 'message.io';
+import { CONTENT_TYPE } from './Events';
+import { ContentItemModel } from './models/ContentItemModel';
 export class ContentItem {
-  public id: string;
-  public label: string;
-  public body: ContentItemBody;
-  public deliveryId: string;
-  constructor({id, label, body, deliveryId}: ContentItemObject){
-    this.id = id;
-    this.label = label;
-    this.body = new ContentItemBody(body);
-    this.deliveryId = deliveryId;
-  }
-  toJson() {
-    return {
-      id: this.id,
-      label: this.label,
-      body: this.body.toJSON(),
-      deliveryId: this.deliveryId
-    }
+  constructor(private connection: ClientConnection) {}
+  getValue(): Promise<ContentItemModel> {
+    return this.connection.request(CONTENT_TYPE.GET);
   }
 }

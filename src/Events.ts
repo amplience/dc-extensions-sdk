@@ -1,0 +1,38 @@
+export enum CONTENT_TYPE {
+  GET = 'content-type-get'
+}
+
+export enum CONTENT_ITEM {
+  GET = 'content-item-get'
+}
+
+export enum LOCALES {
+  GET = 'locales-get'
+}
+
+export enum PARAMS {
+  GET = 'params-get'
+}
+
+export enum MEDIA_LINK {
+  IMAGE_GET = 'media-image-get',
+  VIDEO_GET = 'media-video-get'
+}
+
+export enum CONTENT_LINK {
+  CONTENT_GET = 'content-link-get'
+}
+
+export enum FIELD {
+  MODEL_GET = 'field-model-get',
+  MODEL_SET = 'field-model-set',
+  MODEL_RESET = 'field-model-reset',
+  SCHEMA_GET = 'field-model-get'
+}
+
+export enum FRAME {
+  HEIGHT_GET = 'height-get',
+  HEIGHT_SET = 'height-set',
+  AUTO_RESIZER_START = 'auto-resizer-start',
+  AUTO_RESIZER_STOP = 'auto-resizer-stop'
+}
