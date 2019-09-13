@@ -3,7 +3,6 @@ import { ContentItem } from './ContentItem';
 import { ContentType } from './models/ContentType';
 import { Field, FieldSchema } from './Field';
 import { Frame } from './Frame';
-import { Params } from './models/Params';
 import { CONTEXT } from './Events';
 import { MediaLink } from './MediaLink';
 import { ContentLink } from './ContentLink';
@@ -27,16 +26,22 @@ export interface Options {
   debug: boolean;
 }
 
-export interface ContextObject {
+export interface Params {
+  instance: object;
+  installation: object;
+}
+
+export interface ContextObject<ParamType> {
   contentItemId: string,
   contentType: ContentType,
   fieldSchema: FieldSchema,
-  params: Params,
+  params: ParamType,
   locales: LocalesModel,
   vse: VSE,
   visualisation: string
 }
-export class SDK {
+
+export class SDK <FieldType = any, ParamType extends Params = Params>{
   /**
    * message.io [[ClientConnection]] instance. Use to listen to any of the message.io lifecycle events.
    */
@@ -52,7 +57,7 @@ export class SDK {
   /**
    * Field - Allows you to get and set the value of the field the extension is control of.
    */
-  public field!: Field;
+  public field!: Field<FieldType>;
   /**
    * Frame - Use to control the height sizing behaviour of your extension.
    */
@@ -60,7 +65,7 @@ export class SDK {
   /**
    * Params - optional paramaters for your extension.
    */
-  public params!: Params;
+  public params!: ParamType;
   /**
    * Locales - The locales you currently have available.
    */
@@ -134,7 +139,7 @@ export class SDK {
     }
   }
 
-  private async requestContext(): Promise<ContextObject> {
+  private async requestContext(): Promise<ContextObject<ParamType>> {
     return this.connection.request(CONTEXT.GET);
   }
 }

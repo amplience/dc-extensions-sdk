@@ -1,7 +1,12 @@
-import { ContentItemBody } from './ContentItemBody';
 export interface ContentItemModel {
   id: string;
   label: string;
-  body: ContentItemBody;
+  body: {
+    _meta: {
+      name: string;
+      schema: string;
+    };
+    [key: string]: any;
+  };
   deliveryId: string;
 }

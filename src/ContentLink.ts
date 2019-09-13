@@ -1,12 +1,11 @@
 import { ClientConnection } from 'message.io';
 import { CONTENT_LINK } from './Events';
 export interface ContentItemLink {
-  _meta: Meta;
+  _meta: {
+    schema: string;
+  }
   id: string;
   contentType: string;
-}
-interface Meta {
-  schema: string;
 }
 export class ContentLink {
   /**
