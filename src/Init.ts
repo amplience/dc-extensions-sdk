@@ -1,5 +1,4 @@
 import { SDK, Params, OptionsObject } from './SDK';
-import { callbackify } from 'util';
 /**
  * The method that starts it all
  * @param options
