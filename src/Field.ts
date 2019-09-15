@@ -1,12 +1,12 @@
 import { ClientConnection } from 'message.io';
 import { FIELD } from './Events';
-import { Error } from './models/Error';
+import { ErrorReport } from './models/ErrorReport';
 export interface FieldSchema {
   title: string;
   type: string;
 }
 
-export class Field<FieldType> {
+export class Field<FieldType = {}> {
   /**
    * Allows you to perform actions on the field that is being edited.
    * @param connection message.io connection
@@ -25,9 +25,9 @@ export class Field<FieldType> {
    * Change the value of the field
    * @param value The new value you want to set on the field
    */
-  setValue(value: FieldType): Promise<[Error]> {
+  setValue(value: FieldType): Promise<[ErrorReport]> {
     return new Promise(async (resolve, reject) => {
-      const errors: [Error] = await this.connection.request(FIELD.MODEL_SET, value);
+      const errors: [ErrorReport] = await this.connection.request(FIELD.MODEL_SET, value);
       if (errors.length) {
         reject(errors);
       } else {
@@ -41,17 +41,17 @@ export class Field<FieldType> {
    */
   isValid(value: FieldType): Promise<Boolean> {
     return new Promise(async (resolve, reject) => {
-      const errors: [Error] = await this.connection.request(FIELD.MODEL_IS_VALID, value);
-      resolve(errors.length <= 0);
+      const isValid: Boolean = await this.connection.request(FIELD.MODEL_IS_VALID, value);
+      resolve(isValid);
     });
   }
   /**
    * Check the validation of your value. Returns an array containing any JSON Schema errors found.
    * @param value The value you whish to test
    */
-  validate(value: FieldType): Promise<[Error]> {
+  validate(value: FieldType): Promise<[ErrorReport]> {
     return new Promise(async (resolve, reject) => {
-      const errors: [Error] = await this.connection.request(FIELD.MODEL_VALIDATE, value);
+      const errors: [ErrorReport] = await this.connection.request(FIELD.MODEL_VALIDATE, value);
       resolve(errors);
     });
   }

@@ -15,23 +15,21 @@ export interface OptionsObject {
   connectionTimeout?: number;
   debug?: boolean;
 }
-export interface VSE {
-  domain: string
-  src: string
-}
-
 export interface Options {
   window: Window;
   connectionTimeout: number;
   debug: boolean;
 }
-
+export interface VSE {
+  domain: string
+  src: string
+}
 export interface Params {
   instance: object;
   installation: object;
 }
 
-export interface ContextObject<ParamType> {
+type ContextObject<ParamType> = {
   contentItemId: string,
   contentType: ContentType,
   fieldSchema: FieldSchema,
