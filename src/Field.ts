@@ -25,10 +25,10 @@ export class Field<FieldType = {}> {
    * Change the value of the field
    * @param value The new value you want to set on the field
    */
-  setValue(value: FieldType): Promise<[ErrorReport]> {
+  setValue(value?: FieldType): Promise<[ErrorReport]> {
     return new Promise(async (resolve, reject) => {
       const errors: [ErrorReport] = await this.connection.request(FIELD.MODEL_SET, value);
-      if (errors.length) {
+      if (errors && errors.length) {
         reject(errors);
       } else {
         resolve();
@@ -52,7 +52,11 @@ export class Field<FieldType = {}> {
   validate(value: FieldType): Promise<[ErrorReport]> {
     return new Promise(async (resolve, reject) => {
       const errors: [ErrorReport] = await this.connection.request(FIELD.MODEL_VALIDATE, value);
-      resolve(errors);
+      if (errors && errors.length) {
+        resolve(errors);
+      } else {
+        resolve();
+      }
     });
   }
   /**

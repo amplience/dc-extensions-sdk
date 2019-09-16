@@ -32,7 +32,11 @@ describe('Field', () => {
     field = new Field(connection, schema);
   });
 
-  it('getValue should return a value', async () => {
+  it('set schema should be accessible', async () => {
+    expect(field.schema).toEqual(schema);
+  });
+
+  it('getValue() should emit FIELD.MODEL_GET request once and return the value from request', async () => {
     const p: Promise<object> = new Promise(resolve => {
       resolve(testValue);
     });
@@ -43,51 +47,139 @@ describe('Field', () => {
     expect(fieldGet).toEqual(testValue);
   });
 
-  it('setValue should send value and return null if there are no errors returned', async () => {
+  it('getValue() should return undefined value from request', async () => {
+    const p: Promise<object> = new Promise(resolve => {
+      resolve();
+    });
+    spyOn(connection, 'request').and.returnValue(p);
+    const fieldGet = await field.getValue();
+    expect(fieldGet).toEqual(undefined);
+  });
+
+  it('getValue() should return null value from request', async () => {
+    const p: Promise<object> = new Promise(resolve => {
+      resolve(null);
+    });
+    spyOn(connection, 'request').and.returnValue(p);
+    const fieldGet = await field.getValue();
+    expect(fieldGet).toEqual(null);
+  });
+
+  it('setValue(testValue) should should emit FIELD.MODEL_SET event once with testValue', async () => {
+    const requestSpy = spyOn(connection, 'request');
+    field.setValue(testValue);
+    expect(requestSpy).toHaveBeenCalledTimes(1);
+    expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_SET, testValue);
+  });
+
+  it('setValue(null) should should emit FIELD.MODEL_SET event with null', async () => {
+    const requestSpy = spyOn(connection, 'request');
+    field.setValue(null);
+    expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_SET, null);
+  });
+
+  it('setValue() should should emit FIELD.MODEL_SET event with undefined value', async () => {
+    const requestSpy = spyOn(connection, 'request');
+    field.setValue();
+    expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_SET, undefined);
+  });
+
+  it('setValue(testValue) should not throw if no validation errors are returned', async () => {
     const p: Promise<any> = new Promise(resolve => {
       resolve([]);
     });
-    const requestSpy = spyOn(connection, 'request').and.returnValue(p);
+    spyOn(connection, 'request').and.returnValue(p);
     const fieldSet = await field.setValue(testValue);
-    expect(requestSpy).toHaveBeenCalledTimes(1);
-    expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_SET, testValue);
     expect(fieldSet).toEqual(undefined);
   });
 
-  it('setValue should promise should reject and return errors', async () => {
+  it('setValue(testValue) should not throw if no validation undefined is returned', async () => {
+    const p: Promise<any> = new Promise(resolve => {
+      resolve();
+    });
+    spyOn(connection, 'request').and.returnValue(p);
+    const fieldSet = await field.setValue(testValue);
+    expect(fieldSet).toEqual(undefined);
+  });
+
+
+  it('setValue(testValue) should throw when validation errors are returned', async (done) => {
     const p: Promise<any> = new Promise(resolve => {
       resolve([testError]);
     });
-    const requestSpy = spyOn(connection, 'request').and.returnValue(p);
+    spyOn(connection, 'request').and.returnValue(p);
     try{
       await field.setValue(testValue);
     } catch (e) {
-      expect(requestSpy).toHaveBeenCalledTimes(1);
-      expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_SET, testValue);
-      expect(e[0]).toEqual(testError);
+      expect(e).toEqual([testError]);
+      done();
     }
-
   });
 
-  it('isValid should return a boolean', async () => {
+  it('isValid(testValue) should emit an FIELD.MODEL_IS_VALID request with the testValue once', async () => {
     const p: Promise<any> = new Promise(resolve => {
       resolve(true);
     });
     const requestSpy = spyOn(connection, 'request').and.returnValue(p);
-    const fieldSet = await field.isValid(testValue);
+    await field.isValid(testValue);
     expect(requestSpy).toHaveBeenCalledTimes(1);
     expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_IS_VALID, testValue);
-    expect(fieldSet).toEqual(true);
   });
 
-  it('validate should be able to return errors', async () => {
+  it('isValid(testValue) should resolve a false boolean value', async () => {
+    const p: Promise<any> = new Promise(resolve => {
+      resolve(true);
+    });
+    spyOn(connection, 'request').and.returnValue(p);
+    const valid = await field.isValid(testValue);
+    expect(typeof valid === "boolean").toBeTruthy();
+    expect(valid).toEqual(true);
+  });
+
+  it('isValid(testValue) should resolve a true boolean value', async () => {
+    const p: Promise<any> = new Promise(resolve => {
+      resolve(false);
+    });
+    spyOn(connection, 'request').and.returnValue(p);
+    const valid = await field.isValid(testValue);
+    expect(typeof valid === "boolean").toBeTruthy();
+    expect(valid).toEqual(false);
+  });
+
+  it('validate(testValue) should emit an FIELD.MODEL_VALIDATE request with the testValue once', async () => {
     const p: Promise<any> = new Promise(resolve => {
       resolve([testError]);
     });
     const requestSpy = spyOn(connection, 'request').and.returnValue(p);
-    const errors = await field.validate(testValue);
+    await field.validate(testValue);
     expect(requestSpy).toHaveBeenCalledTimes(1);
     expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_VALIDATE, testValue);
-    expect(errors[0]).toEqual(testError);
+  });
+
+  it('validate(testValue) should return nothing if it resolved with []', async () => {
+    const p: Promise<any> = new Promise(resolve => {
+      resolve([]);
+    });
+    spyOn(connection, 'request').and.returnValue(p);
+    const errors = await field.validate(testValue);
+    expect(errors).toEqual(undefined);
+  });
+
+  it('validate(testValue) should return nothing if it resolved with nothing', async () => {
+    const p: Promise<any> = new Promise(resolve => {
+      resolve();
+    });
+    spyOn(connection, 'request').and.returnValue(p);
+    const errors = await field.validate(testValue);
+    expect(errors).toEqual(undefined);
+  });
+
+  it('validate(testValue) should be able to return errors', async () => {
+    const p: Promise<any> = new Promise(resolve => {
+      resolve([testError]);
+    });
+    spyOn(connection, 'request').and.returnValue(p);
+    const errors = await field.validate(testValue);
+    expect(errors).toEqual([testError]);
   });
 });
