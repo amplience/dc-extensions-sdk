@@ -5,9 +5,9 @@ export class ContentItem {
   /**
    * Content Item - Used for fetching the model of the Content Item that is being edited.
    * @param connection message.io connection
-   * @param id Content Item id - optional, Content Item may not have an id if it has not been saved yet
+   * @param id Content Item id - optional, Content Item may not have an id if it has not been saved.
    */
-  constructor(private connection: ClientConnection, private id?: string) {}
+  constructor(private connection: ClientConnection, public id?: string) {}
   /**
    * Use to fetch the model of the Content Item that is being edited. Returns a promise which will resolve to a [[ContentItemModel]]
    */

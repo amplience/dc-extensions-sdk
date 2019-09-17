@@ -1,7 +1,7 @@
-import { FIELD } from '../src/Events';
-import { Field, FieldSchema } from '../src/Field';
+import { FIELD } from '../src/lib/Events';
+import { Field, FieldSchema } from '../src/lib/Field';
 import { ClientConnection } from 'message.io';
-import { ErrorReport } from '../src/models/ErrorReport';
+import { ErrorReport } from '../src/lib/models/ErrorReport';
 
 var testValue = {
   hello: 'world'
@@ -36,7 +36,7 @@ describe('Field', () => {
     expect(field.schema).toEqual(schema);
   });
 
-  it('getValue() should emit FIELD.MODEL_GET request once and return the value from request', async () => {
+  it('getValue() should emit one request with the FIELD.MODEL_GET event and return the value from request', async () => {
     const p: Promise<object> = new Promise(resolve => {
       resolve(testValue);
     });
@@ -65,7 +65,7 @@ describe('Field', () => {
     expect(fieldGet).toEqual(null);
   });
 
-  it('setValue(testValue) should should emit FIELD.MODEL_SET event once with testValue', async () => {
+  it('setValue(testValue) should should emit one request with the FIELD.MODEL_SET event with testValue', async () => {
     const requestSpy = spyOn(connection, 'request');
     field.setValue(testValue);
     expect(requestSpy).toHaveBeenCalledTimes(1);
@@ -116,7 +116,7 @@ describe('Field', () => {
     }
   });
 
-  it('isValid(testValue) should emit an FIELD.MODEL_IS_VALID request with the testValue once', async () => {
+  it('isValid(testValue) should emit one request with the FIELD.MODEL_IS_VALID event with testValue', async () => {
     const p: Promise<any> = new Promise(resolve => {
       resolve(true);
     });
@@ -146,7 +146,7 @@ describe('Field', () => {
     expect(valid).toEqual(false);
   });
 
-  it('validate(testValue) should emit an FIELD.MODEL_VALIDATE request with the testValue once', async () => {
+  it('validate(testValue) should emit one request with the FIELD.MODEL_VALIDATE event with testValue', async () => {
     const p: Promise<any> = new Promise(resolve => {
       resolve([testError]);
     });

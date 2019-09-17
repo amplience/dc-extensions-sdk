@@ -26,7 +26,7 @@ export class Frame {
    */
   public setHeight(height?: number) {
     if(height !== undefined && typeof height !== 'number') {
-      throw new Error('setHeight() only accepts an optional number argument')
+      throw new TypeError('setHeight() only accepts an optional number argument')
     }
     let h = height === undefined ? this.getHeight() : height;
     this.connection.emit(FRAME.HEIGHT_SET, h < 0 ? 0 : h);

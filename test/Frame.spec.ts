@@ -1,5 +1,5 @@
-import { FRAME } from '../src/Events';
-import { Frame } from '../src/Frame';
+import { FRAME } from '../src/lib/Events';
+import { Frame } from '../src/lib/Frame';
 import { ClientConnection } from 'message.io';
 describe('Frame', () => {
   var connection: ClientConnection, frame: Frame, body:HTMLBodyElement = window.document.querySelector('body');
@@ -73,7 +73,7 @@ describe('Frame', () => {
     try {
       frame.setHeight('bananas' as unknown as number);
     } catch (e) {
-      expect(e.toString()).toEqual('Error: setHeight() only accepts an optional number argument');
+      expect(e.message).toEqual('setHeight() only accepts an optional number argument');
       expect(onSpy).not.toHaveBeenCalled();
       done();
     }
@@ -85,7 +85,7 @@ describe('Frame', () => {
     try {
       frame.setHeight(body as unknown as number);
     } catch (e) {
-      expect(e.toString()).toEqual('Error: setHeight() only accepts an optional number argument');
+      expect(e.message).toEqual('setHeight() only accepts an optional number argument');
       expect(emitSpy).not.toHaveBeenCalled();
       done();
     }

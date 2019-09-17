@@ -8,5 +8,5 @@ export interface ContentItemModel {
     };
     [key: string]: any;
   };
-  deliveryId: string;
+  deliveryId?: string;
 }

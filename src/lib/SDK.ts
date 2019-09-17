@@ -7,6 +7,7 @@ import { CONTEXT } from './Events';
 import { MediaLink } from './MediaLink';
 import { ContentLink } from './ContentLink';
 import { LocalesModel } from './models/Locales';
+import { ERRORS_INIT } from './Errors';
 /**
  * Expected format for the provided options
  */
@@ -115,7 +116,7 @@ export class SDK <FieldType = any, ParamType extends Params = Params>{
           this.handleInitiation(resolve, reject);
         });
         this.connection.on(MIO_EVENTS.CONNECTION_TIMEOUT, () => {
-          reject('Connection timed out');
+          reject(new Error(ERRORS_INIT.CONNTECTION_TIMEOUT));
         });
       }
     });
@@ -133,7 +134,7 @@ export class SDK <FieldType = any, ParamType extends Params = Params>{
       this.vse = vse;
       resolve(this);
     } catch {
-      reject();
+      reject(new Error(ERRORS_INIT.CONTEXT));
     }
   }
 
