@@ -25,8 +25,8 @@ export class Frame {
    * @param height - should be used if you want to override the calculated height of your extension
    */
   public setHeight(height?: number) {
-    if(height !== undefined && typeof height !== 'number') {
-      throw new TypeError('setHeight() only accepts an optional number argument')
+    if (height !== undefined && typeof height !== 'number') {
+      throw new TypeError('setHeight() only accepts an optional number argument');
     }
     let h = height === undefined ? this.getHeight() : height;
     this.connection.emit(FRAME.HEIGHT_SET, h < 0 ? 0 : h);

@@ -18,6 +18,6 @@ export class ContentLink {
    * @param contentTypeIds list of Content Type Ids to filter the Content Browser by.
    */
   get(contentTypeIds: Array<string>): Promise<ContentItemLink> {
-    return this.connection.request(CONTENT_LINK.CONTENT_GET, contentTypeIds);
+    return this.connection.request(CONTENT_LINK.CONTENT_GET, contentTypeIds, { timeout: false });
   }
 }

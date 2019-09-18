@@ -22,8 +22,8 @@ export interface Options {
   debug: boolean;
 }
 export interface VSE {
-  domain: string
-  src: string
+  domain: string;
+  src: string;
 }
 export interface Params {
   instance: object;
@@ -31,16 +31,16 @@ export interface Params {
 }
 
 type ContextObject<ParamType> = {
-  contentItemId: string,
-  contentType: ContentType,
-  fieldSchema: FieldSchema,
-  params: ParamType,
-  locales: LocalesModel,
-  vse: VSE,
-  visualisation: string
-}
+  contentItemId: string;
+  contentType: ContentType;
+  fieldSchema: FieldSchema;
+  params: ParamType;
+  locales: LocalesModel;
+  vse: VSE;
+  visualisation: string;
+};
 
-export class SDK <FieldType = any, ParamType extends Params = Params>{
+export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
    * message.io [[ClientConnection]] instance. Use to listen to any of the message.io lifecycle events.
    */
@@ -111,10 +111,10 @@ export class SDK <FieldType = any, ParamType extends Params = Params>{
     return new Promise(async (resolve, reject) => {
       this.connection.init();
       this.connection.on(MIO_EVENTS.CONNECTED, async () => {
-        try{
+        try {
           await this.setupContext(resolve, reject);
           resolve(this);
-        } catch(e) {
+        } catch (e) {
           reject(new Error(ERRORS_INIT.CONTEXT));
         }
       });
@@ -125,7 +125,15 @@ export class SDK <FieldType = any, ParamType extends Params = Params>{
   }
 
   private async setupContext(resolve: Function, reject: Function) {
-    const {contentItemId, contentType, fieldSchema, params, locales, vse, visualisation} = await this.requestContext();
+    const {
+      contentItemId,
+      contentType,
+      fieldSchema,
+      params,
+      locales,
+      vse,
+      visualisation
+    } = await this.requestContext();
     this.contentItem = new ContentItem(this.connection, contentItemId);
     this.field = new Field(this.connection, fieldSchema);
     this.contentType = contentType;

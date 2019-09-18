@@ -62,7 +62,7 @@ export class Field<FieldType = {}> {
   /**
    * Reset the value to the previously loaded state
    */
-  reset(): Promise<any> {
+  reset(): Promise<FieldType> {
     return this.connection.request(FIELD.MODEL_RESET);
   }
 }
