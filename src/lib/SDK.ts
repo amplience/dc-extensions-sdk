@@ -21,7 +21,7 @@ export interface Options {
   connectionTimeout: number;
   debug: boolean;
 }
-export interface VSE {
+export interface StagingEnvironment {
   domain: string;
   src: string;
 }
@@ -36,7 +36,7 @@ type ContextObject<ParamType> = {
   fieldSchema: FieldSchema;
   params: ParamType;
   locales: LocalesModel;
-  vse: VSE;
+  stagingEnvironment: StagingEnvironment;
   visualisation: string;
 };
 
@@ -78,9 +78,9 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
    */
   public mediaLink: MediaLink;
   /**
-   * VSE - Virtual Staging Environment - used for accessing staged assets.
+   * stagingEnvironment - Used for accessing staged assets.
    */
-  public vse!: VSE;
+  public stagingEnvironment!: StagingEnvironment;
   /**
    * Visualisation - URL of the visualisation
    */
@@ -131,7 +131,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
       fieldSchema,
       params,
       locales,
-      vse,
+      stagingEnvironment,
       visualisation
     } = await this.requestContext();
     this.contentItem = new ContentItem(this.connection, contentItemId);
@@ -140,7 +140,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
     this.params = params;
     this.locales = locales;
     this.visualisation = visualisation;
-    this.vse = vse;
+    this.stagingEnvironment = stagingEnvironment;
   }
 
   private async requestContext(): Promise<ContextObject<ParamType>> {

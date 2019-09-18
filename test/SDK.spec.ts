@@ -9,7 +9,7 @@ let contextObject = {
     default: ['en-GB'],
     available: ['en-GB', 'fr-Fr']
   },
-  vse: {
+  stagingEnvironment: {
     src: '',
     domain: ''
   },
