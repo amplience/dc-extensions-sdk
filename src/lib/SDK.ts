@@ -109,33 +109,30 @@ export class SDK <FieldType = any, ParamType extends Params = Params>{
    */
   public async init(): Promise<any> {
     return new Promise(async (resolve, reject) => {
-      if (this.connection.initiated) {
-        this.handleInitiation(resolve, reject);
-      } else {
-        this.connection.on(MIO_EVENTS.CONNECTED, async () => {
-          this.handleInitiation(resolve, reject);
-        });
-        this.connection.on(MIO_EVENTS.CONNECTION_TIMEOUT, () => {
-          reject(new Error(ERRORS_INIT.CONNTECTION_TIMEOUT));
-        });
-      }
+      this.connection.init();
+      this.connection.on(MIO_EVENTS.CONNECTED, async () => {
+        try{
+          await this.setupContext(resolve, reject);
+          resolve(this);
+        } catch(e) {
+          reject(new Error(ERRORS_INIT.CONTEXT));
+        }
+      });
+      this.connection.on(MIO_EVENTS.CONNECTION_TIMEOUT, () => {
+        reject(new Error(ERRORS_INIT.CONNTECTION_TIMEOUT));
+      });
     });
   }
 
-  private async handleInitiation(resolve: Function, reject: Function) {
-    try {
-      const {contentItemId, contentType, fieldSchema, params, locales, vse, visualisation} = await this.requestContext();
-      this.contentItem = new ContentItem(this.connection, contentItemId);
-      this.field = new Field(this.connection, fieldSchema);
-      this.contentType = contentType;
-      this.params = params;
-      this.locales = locales;
-      this.visualisation = visualisation;
-      this.vse = vse;
-      resolve(this);
-    } catch {
-      reject(new Error(ERRORS_INIT.CONTEXT));
-    }
+  private async setupContext(resolve: Function, reject: Function) {
+    const {contentItemId, contentType, fieldSchema, params, locales, vse, visualisation} = await this.requestContext();
+    this.contentItem = new ContentItem(this.connection, contentItemId);
+    this.field = new Field(this.connection, fieldSchema);
+    this.contentType = contentType;
+    this.params = params;
+    this.locales = locales;
+    this.visualisation = visualisation;
+    this.vse = vse;
   }
 
   private async requestContext(): Promise<ContextObject<ParamType>> {

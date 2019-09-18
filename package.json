@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "dc-delivery-sdk-js": "^0.3.0",
-    "message.io": "git+ssh://git@bitbucket.org/amplience/message.io.git#b8aea5ee5923ef2d3ba357e1f07f4fbd4d0fd22b"
+    "message.io": "git+ssh://git@bitbucket.org/amplience/message.io.git#0.1.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.1.2",
@@ -94,6 +94,6 @@
     "tslint-config-prettier": "^1.15.0",
     "tslint-config-standard": "^8.0.1",
     "typedoc": "^0.12.0",
-    "typescript": "^3.0.3"
+    "typescript": "^3.6.3"
   }
 }
