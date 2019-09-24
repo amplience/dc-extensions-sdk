@@ -1,5 +1,7 @@
 import { ClientConnection } from 'message.io';
+
 import { FRAME } from './Events';
+import { ERRORS_FRAME } from './Errors';
 export class Frame {
   /**
    * Use in order to control the re-sizing of the Extension
@@ -7,7 +9,7 @@ export class Frame {
    * @param win override the default window object
    */
   constructor(private connection: ClientConnection, private win: Window = window) {
-    this.connection.on(FRAME.HEIGHT_GET, (_payload: any, resolve: Function, _reject: Function) => {
+    this.connection.on(FRAME.HEIGHT_GET, (_payload: any, resolve: Function) => {
       resolve(this.getHeight());
     });
   }
@@ -25,10 +27,12 @@ export class Frame {
    * @param height - should be used if you want to override the calculated height of your extension
    */
   public setHeight(height?: number) {
-    if (height !== undefined && typeof height !== 'number') {
-      throw new TypeError('setHeight() only accepts an optional number argument');
+    if (height !== undefined && (typeof height as unknown) !== 'number') {
+      throw new TypeError(ERRORS_FRAME.SET_HEIGHT_NUMBER);
     }
-    let h = height === undefined ? this.getHeight() : height;
+
+    const h = height === undefined ? this.getHeight() : height;
+
     this.connection.emit(FRAME.HEIGHT_SET, h < 0 ? 0 : h);
   }
 

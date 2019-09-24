@@ -1,13 +1,13 @@
 import { ClientConnection, MIO_EVENTS } from 'message.io';
-import { ContentItem } from './ContentItem';
-import { ContentType } from './models/ContentType';
-import { Field, FieldSchema } from './Field';
 import { Frame } from './Frame';
 import { CONTEXT } from './Events';
+import { ERRORS_INIT } from './Errors';
 import { MediaLink } from './MediaLink';
 import { ContentLink } from './ContentLink';
+import { ContentType } from './models/ContentType';
+import { ContentItem } from './ContentItem';
 import { LocalesModel } from './models/Locales';
-import { ERRORS_INIT } from './Errors';
+import { Field, FieldSchema } from './Field';
 /**
  * Expected format for the provided options
  */
@@ -107,7 +107,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
    * Initialiser. Returns a promise that resolves to an instance of the SDK.
    */
-  public async init(): Promise<any> {
+  public async init(): Promise<SDK<FieldType, ParamType>> {
     return new Promise(async (resolve, reject) => {
       this.connection.init();
       this.connection.on(MIO_EVENTS.CONNECTED, async () => {

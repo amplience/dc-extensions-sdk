@@ -14,4 +14,15 @@ describe('init', () => {
       done();
     }
   });
+
+  it('should beable to accept options', async done => {
+    try {
+      spyOn(console, 'log');
+      await init({ debug: true });
+      expect(console.log).toHaveBeenCalled();
+    } catch (e) {
+      expect(e.message).toEqual('Failed to establish connection to DC Application');
+      done();
+    }
+  });
 });

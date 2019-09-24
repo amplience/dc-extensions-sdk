@@ -2,15 +2,17 @@ import { FRAME } from '../src/lib/Events';
 import { Frame } from '../src/lib/Frame';
 import { ClientConnection } from 'message.io';
 describe('Frame', () => {
-  var connection: ClientConnection, frame: Frame, body:HTMLBodyElement = window.document.querySelector('body');
+  let connection: ClientConnection;
+  let body: HTMLBodyElement;
 
-  beforeAll(() => {
+  beforeEach(() => {
     connection = new ClientConnection();
+    body = window.document.querySelector('body');
   });
 
   it('Constructor should set the FAME.GET_HEIGHT event', () => {
     const onSpy = spyOn(connection, 'on');
-    new Frame(connection);
+    const frame = new Frame(connection);
     expect(onSpy).toHaveBeenCalledTimes(1);
     expect(onSpy).toHaveBeenCalledWith(FRAME.HEIGHT_GET, jasmine.any(Function));
   });
@@ -32,6 +34,13 @@ describe('Frame', () => {
     expect(height).toEqual(body.clientHeight);
     expect(height).toEqual(100);
     body.style.height = null;
+  });
+
+  it('getHeight() returns the height of the body should default to 0 if no body', () => {
+    spyOn(document, 'querySelector').and.returnValue(null);
+    const frame: Frame = new Frame(connection);
+    const height: number = frame.getHeight();
+    expect(height).toEqual(0);
   });
 
   it('setHeight() triggers a FRAME.HEIGHT_SET event with the body height', () => {
@@ -67,11 +76,11 @@ describe('Frame', () => {
     expect(onSpy).toHaveBeenCalledWith(FRAME.HEIGHT_SET, 0);
   });
 
-  it('setHeight("bananas") throws exception', (done) => {
+  it('setHeight("bananas") throws exception', done => {
     const frame: Frame = new Frame(connection);
     const onSpy = spyOn(connection, 'emit');
     try {
-      frame.setHeight('bananas' as unknown as number);
+      frame.setHeight(('bananas' as unknown) as number);
     } catch (e) {
       expect(e.message).toEqual('setHeight() only accepts an optional number argument');
       expect(onSpy).not.toHaveBeenCalled();
@@ -79,11 +88,11 @@ describe('Frame', () => {
     }
   });
 
-  it('setHeight(<HTMLBodyElement>) throws exception', (done) => {
+  it('setHeight(<HTMLBodyElement>) throws exception', done => {
     const frame: Frame = new Frame(connection);
     const emitSpy = spyOn(connection, 'emit');
     try {
-      frame.setHeight(body as unknown as number);
+      frame.setHeight((body as unknown) as number);
     } catch (e) {
       expect(e.message).toEqual('setHeight() only accepts an optional number argument');
       expect(emitSpy).not.toHaveBeenCalled();
@@ -106,5 +115,4 @@ describe('Frame', () => {
     expect(emitSpy).toHaveBeenCalledTimes(1);
     expect(emitSpy).toHaveBeenCalledWith(FRAME.AUTO_RESIZER_STOP);
   });
-
 });

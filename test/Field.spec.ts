@@ -3,25 +3,27 @@ import { Field, FieldSchema } from '../src/lib/Field';
 import { ClientConnection } from 'message.io';
 import { ErrorReport } from '../src/lib/models/ErrorReport';
 
-var testValue = {
+const testValue = {
   hello: 'world'
 };
 
-var testError: ErrorReport = {
-  message: "wrong",
-  pointer: "/here",
+const testError: ErrorReport = {
+  message: 'wrong',
+  pointer: '/here',
   data: {
-    keyword: "fail",
+    keyword: 'fail',
     params: null
   },
   schema: {
-    id: "aschema",
-    pointer: "/blah/blah"
+    id: 'aschema',
+    pointer: '/blah/blah'
   }
 };
 
 describe('Field', () => {
-  var connection: ClientConnection, schema: FieldSchema, field: Field;
+  let connection: ClientConnection;
+  let schema: FieldSchema;
+  let field: Field;
 
   beforeAll(() => {
     connection = new ClientConnection();
@@ -67,20 +69,29 @@ describe('Field', () => {
 
   it('setValue(testValue) should should emit one request with the FIELD.MODEL_SET event with testValue', async () => {
     const requestSpy = spyOn(connection, 'request');
-    field.setValue(testValue);
+    field
+      .setValue(testValue)
+      .then()
+      .catch();
     expect(requestSpy).toHaveBeenCalledTimes(1);
     expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_SET, testValue);
   });
 
   it('setValue(null) should should emit FIELD.MODEL_SET event with null', async () => {
     const requestSpy = spyOn(connection, 'request');
-    field.setValue(null);
+    field
+      .setValue(null)
+      .then()
+      .catch();
     expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_SET, null);
   });
 
   it('setValue() should should emit FIELD.MODEL_SET event with undefined value', async () => {
     const requestSpy = spyOn(connection, 'request');
-    field.setValue();
+    field
+      .setValue()
+      .then()
+      .catch();
     expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_SET, undefined);
   });
 
@@ -102,13 +113,12 @@ describe('Field', () => {
     expect(fieldSet).toEqual(undefined);
   });
 
-
-  it('setValue(testValue) should throw when validation errors are returned', async (done) => {
+  it('setValue(testValue) should throw when validation errors are returned', async done => {
     const p: Promise<any> = new Promise(resolve => {
       resolve([testError]);
     });
     spyOn(connection, 'request').and.returnValue(p);
-    try{
+    try {
       await field.setValue(testValue);
     } catch (e) {
       expect(e).toEqual([testError]);
@@ -132,7 +142,7 @@ describe('Field', () => {
     });
     spyOn(connection, 'request').and.returnValue(p);
     const valid = await field.isValid(testValue);
-    expect(typeof valid === "boolean").toBeTruthy();
+    expect(typeof valid === 'boolean').toBeTruthy();
     expect(valid).toEqual(true);
   });
 
@@ -142,7 +152,7 @@ describe('Field', () => {
     });
     spyOn(connection, 'request').and.returnValue(p);
     const valid = await field.isValid(testValue);
-    expect(typeof valid === "boolean").toBeTruthy();
+    expect(typeof valid === 'boolean').toBeTruthy();
     expect(valid).toEqual(false);
   });
 
@@ -181,5 +191,14 @@ describe('Field', () => {
     spyOn(connection, 'request').and.returnValue(p);
     const errors = await field.validate(testValue);
     expect(errors).toEqual([testError]);
+  });
+
+  it('should be able to reset model to original value', () => {
+    spyOn(connection, 'request').and.callThrough();
+    field
+      .reset()
+      .then()
+      .catch();
+    expect(connection.request).toHaveBeenCalledWith(FIELD.MODEL_RESET);
   });
 });

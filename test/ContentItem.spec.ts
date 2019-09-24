@@ -3,18 +3,18 @@ import { CONTENT_ITEM } from '../src/lib/Events';
 import { ContentItem } from '../src/lib/ContentItem';
 import { ContentItemModel } from '../src/lib/models/ContentItemModel';
 describe('ContentItem', () => {
-  var connection: ClientConnection,
-    contentItemModel: ContentItemModel = {
-      id: 'id',
-      label: 'My Content Item',
-      body: {
-        _meta: {
-          name: 'Name',
-          schema: 'http://www.aschema.com'
-        }
-      },
-      deliveryId: 'deliveryId'
-    };
+  let connection: ClientConnection;
+  const contentItemModel: ContentItemModel = {
+    id: 'id',
+    label: 'My Content Item',
+    body: {
+      _meta: {
+        name: 'Name',
+        schema: 'http://www.aschema.com'
+      }
+    },
+    deliveryId: 'deliveryId'
+  };
   beforeAll(() => {
     connection = new ClientConnection();
   });

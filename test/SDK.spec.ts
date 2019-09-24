@@ -19,7 +19,7 @@ let contextObject = {
 describe('SDK', () => {
   it('init() should retrun a promise', () => {
     const sdk = new SDK();
-    const p = sdk.init().catch(e => {});
+    const p = sdk.init().catch(e => ({}));
     expect(p instanceof Promise).toBeTruthy();
   });
 
@@ -42,7 +42,7 @@ describe('SDK', () => {
     const cOn = spyOn(sdk.connection, 'on');
     sdk
       .init()
-      .then(() => {})
+      .then(() => ({}))
       .catch(e => {
         expect(e.message).toEqual('Failed to fetch context for UI Extension');
         done();
@@ -52,7 +52,7 @@ describe('SDK', () => {
   });
 
   it('init() should return sdk instance if it completes', async done => {
-    const sdk = new SDK();
+    const sdk = new SDK({ debug: false });
     const p = new Promise((resolve, reject) => {
       resolve(contextObject);
     });
@@ -61,10 +61,10 @@ describe('SDK', () => {
     sdk
       .init()
       .then(sdkInstance => {
-        expect(sdkInstance instanceof SDK).toBeTruthy;
+        expect(sdkInstance instanceof SDK).toBeTruthy();
         done();
       })
-      .catch(e => {});
+      .catch(e => ({}));
     const fnCall = cOn.calls.argsFor(0)[1] as Function;
     fnCall();
   });
