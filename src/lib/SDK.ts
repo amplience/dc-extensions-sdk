@@ -113,8 +113,8 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
    * Initialiser. Returns a promise that resolves to an instance of the SDK.
    */
-  public async init(): Promise<SDK<FieldType, ParamType>> {
-    return new Promise(async (resolve, reject) => {
+  public async init() {
+    return new Promise<SDK<FieldType, ParamType>>(async (resolve, reject) => {
       this.connection.init();
       this.connection.on(MIO_EVENTS.CONNECTED, async () => {
         try {
