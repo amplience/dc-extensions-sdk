@@ -3,7 +3,7 @@ export enum ERRORS_INIT {
   CONNTECTION_TIMEOUT = 'Failed to establish connection to DC Application'
 }
 
-export enum ERRORS_CONTENT_LINK {
+export enum ERRORS_CONTENT_ITEM {
   NO_IDS = 'Please provide content type ids'
 }
 
