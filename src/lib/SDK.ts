@@ -1,12 +1,14 @@
 import { ClientConnection, MIO_EVENTS } from 'message.io';
-import { ContentItem } from './ContentItem';
-import { ContentType } from './models/ContentType';
-import { Field, FieldSchema } from './Field';
 import { Frame } from './Frame';
 import { CONTEXT } from './Events';
+import { ERRORS_INIT } from './Errors';
 import { MediaLink } from './MediaLink';
 import { ContentLink } from './ContentLink';
+import { ContentType } from './models/ContentType';
+import { ContentItem } from './ContentItem';
+import { ContentReference } from './ContentReference';
 import { LocalesModel } from './models/Locales';
+import { Field, FieldSchema } from './Field';
 /**
  * Expected format for the provided options
  */
@@ -15,33 +17,31 @@ export interface OptionsObject {
   connectionTimeout?: number;
   debug?: boolean;
 }
-export interface VSE {
-  domain: string
-  src: string
-}
-
 export interface Options {
   window: Window;
   connectionTimeout: number;
   debug: boolean;
 }
-
+export interface StagingEnvironment {
+  domain: string;
+  src: string;
+}
 export interface Params {
   instance: object;
   installation: object;
 }
 
-export interface ContextObject<ParamType> {
-  contentItemId: string,
-  contentType: ContentType,
-  fieldSchema: FieldSchema,
-  params: ParamType,
-  locales: LocalesModel,
-  vse: VSE,
-  visualisation: string
-}
+type ContextObject<ParamType> = {
+  contentItemId: string;
+  contentType: ContentType;
+  fieldSchema: FieldSchema;
+  params: ParamType;
+  locales: LocalesModel;
+  stagingEnvironment: StagingEnvironment;
+  visualisation: string;
+};
 
-export class SDK <FieldType = any, ParamType extends Params = Params>{
+export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
    * message.io [[ClientConnection]] instance. Use to listen to any of the message.io lifecycle events.
    */
@@ -75,13 +75,17 @@ export class SDK <FieldType = any, ParamType extends Params = Params>{
    */
   public contentLink: ContentLink;
   /**
+   * Content Reference - Use to open a content browser.
+   */
+  public contentReference: ContentReference;
+  /**
    * Media Link - Use to open a media browser.
    */
   public mediaLink: MediaLink;
   /**
-   * VSE - Virtual Staging Environment - used for accessing staged assets.
+   * stagingEnvironment - Used for accessing staged assets.
    */
-  public vse!: VSE;
+  public stagingEnvironment!: StagingEnvironment;
   /**
    * Visualisation - URL of the visualisation
    */
@@ -102,41 +106,47 @@ export class SDK <FieldType = any, ParamType extends Params = Params>{
     this.connection = new ClientConnection(this.options);
     this.mediaLink = new MediaLink(this.connection);
     this.contentLink = new ContentLink(this.connection);
+    this.contentReference = new ContentReference(this.connection);
     this.frame = new Frame(this.connection, this.options.window);
   }
 
   /**
    * Initialiser. Returns a promise that resolves to an instance of the SDK.
    */
-  public async init(): Promise<any> {
-    return new Promise(async (resolve, reject) => {
-      if (this.connection.initiated) {
-        this.handleInitiation(resolve, reject);
-      } else {
-        this.connection.on(MIO_EVENTS.CONNECTED, async () => {
-          this.handleInitiation(resolve, reject);
-        });
-        this.connection.on(MIO_EVENTS.CONNECTION_TIMEOUT, () => {
-          reject('Connection timed out');
-        });
-      }
+  public async init() {
+    return new Promise<SDK<FieldType, ParamType>>(async (resolve, reject) => {
+      this.connection.init();
+      this.connection.on(MIO_EVENTS.CONNECTED, async () => {
+        try {
+          await this.setupContext(resolve, reject);
+          resolve(this);
+        } catch (e) {
+          reject(new Error(ERRORS_INIT.CONTEXT));
+        }
+      });
+      this.connection.on(MIO_EVENTS.CONNECTION_TIMEOUT, () => {
+        reject(new Error(ERRORS_INIT.CONNTECTION_TIMEOUT));
+      });
     });
   }
 
-  private async handleInitiation(resolve: Function, reject: Function) {
-    try {
-      const {contentItemId, contentType, fieldSchema, params, locales, vse, visualisation} = await this.requestContext();
-      this.contentItem = new ContentItem(this.connection, contentItemId);
-      this.field = new Field(this.connection, fieldSchema);
-      this.contentType = contentType;
-      this.params = params;
-      this.locales = locales;
-      this.visualisation = visualisation;
-      this.vse = vse;
-      resolve(this);
-    } catch {
-      reject();
-    }
+  private async setupContext(resolve: Function, reject: Function) {
+    const {
+      contentItemId,
+      contentType,
+      fieldSchema,
+      params,
+      locales,
+      stagingEnvironment,
+      visualisation
+    } = await this.requestContext();
+    this.contentItem = new ContentItem(this.connection, contentItemId);
+    this.field = new Field(this.connection, fieldSchema);
+    this.contentType = contentType;
+    this.params = params;
+    this.locales = locales;
+    this.visualisation = visualisation;
+    this.stagingEnvironment = stagingEnvironment;
   }
 
   private async requestContext(): Promise<ContextObject<ParamType>> {
