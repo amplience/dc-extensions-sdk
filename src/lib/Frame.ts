@@ -18,8 +18,8 @@ export class Frame {
    * Get the height of the Extension
    */
   public getHeight(): number {
-    const body = this.win.document.querySelector('body');
-    return body ? body.clientHeight : 0;
+    const doc = this.win.document.querySelector('html');
+    return doc ? doc.clientHeight : 0;
   }
 
   /**
