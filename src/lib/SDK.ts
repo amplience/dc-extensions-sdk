@@ -6,6 +6,7 @@ import { MediaLink } from './MediaLink';
 import { ContentLink } from './ContentLink';
 import { ContentType } from './models/ContentType';
 import { ContentItem } from './ContentItem';
+import { ContentReference } from './ContentReference';
 import { LocalesModel } from './models/Locales';
 import { Field, FieldSchema } from './Field';
 /**
@@ -74,6 +75,10 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
    */
   public contentLink: ContentLink;
   /**
+   * Content Reference - Use to open a content browser.
+   */
+  public contentReference: ContentReference;
+  /**
    * Media Link - Use to open a media browser.
    */
   public mediaLink: MediaLink;
@@ -101,14 +106,15 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
     this.connection = new ClientConnection(this.options);
     this.mediaLink = new MediaLink(this.connection);
     this.contentLink = new ContentLink(this.connection);
+    this.contentReference = new ContentReference(this.connection);
     this.frame = new Frame(this.connection, this.options.window);
   }
 
   /**
    * Initialiser. Returns a promise that resolves to an instance of the SDK.
    */
-  public async init(): Promise<SDK<FieldType, ParamType>> {
-    return new Promise(async (resolve, reject) => {
+  public async init() {
+    return new Promise<SDK<FieldType, ParamType>>(async (resolve, reject) => {
       this.connection.init();
       this.connection.on(MIO_EVENTS.CONNECTED, async () => {
         try {

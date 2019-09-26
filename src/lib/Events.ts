@@ -15,13 +15,17 @@ export enum CONTENT_LINK {
   CONTENT_GET = 'content-link-get'
 }
 
+export enum CONTENT_REFERENCE {
+  CONTENT_REF_GET = 'content-reference-get'
+}
+
 export enum FIELD {
   MODEL_GET = 'field-model-get',
   MODEL_SET = 'field-model-set',
   MODEL_RESET = 'field-model-reset',
   MODEL_IS_VALID = 'field-model-is-valid',
   MODEL_VALIDATE = 'field-model-validate',
-  SCHEMA_GET = 'field-schema-get',
+  SCHEMA_GET = 'field-schema-get'
 }
 
 export enum FRAME {
