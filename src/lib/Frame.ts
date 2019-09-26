@@ -1,13 +1,15 @@
 import { ClientConnection } from 'message.io';
+
 import { FRAME } from './Events';
+import { ERRORS_FRAME } from './Errors';
 export class Frame {
   /**
    * Use in order to control the re-sizing of the Extension
    * @param connection message.io connection
-   * @param window override the default window object
+   * @param win override the default window object
    */
-  constructor(private connection: ClientConnection, private window: Window) {
-    this.connection.on(FRAME.HEIGHT_GET, (_payload: any, resolve: Function, _reject: Function) => {
+  constructor(private connection: ClientConnection, private win: Window = window) {
+    this.connection.on(FRAME.HEIGHT_GET, (_payload: any, resolve: Function) => {
       resolve(this.getHeight());
     });
   }
@@ -16,7 +18,7 @@ export class Frame {
    * Get the height of the Extension
    */
   public getHeight(): number {
-    const doc = this.window.document.querySelector('html');
+    const doc = this.win.document.querySelector('html');
     return doc ? doc.clientHeight : 0;
   }
 
@@ -25,7 +27,13 @@ export class Frame {
    * @param height - should be used if you want to override the calculated height of your extension
    */
   public setHeight(height?: number) {
-    this.connection.emit(FRAME.HEIGHT_SET, height === undefined ? this.getHeight() : height);
+    if (height !== undefined && (typeof height as unknown) !== 'number') {
+      throw new TypeError(ERRORS_FRAME.SET_HEIGHT_NUMBER);
+    }
+
+    const h = height === undefined ? this.getHeight() : height;
+
+    this.connection.emit(FRAME.HEIGHT_SET, h < 0 ? 0 : h);
   }
 
   /**

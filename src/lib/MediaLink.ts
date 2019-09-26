@@ -3,7 +3,7 @@ import { MEDIA_LINK } from './Events';
 export interface MediaImageLink {
   _meta: {
     schema: string;
-  }
+  };
   id: string;
   name: string;
   endpoint: string;
@@ -12,7 +12,7 @@ export interface MediaImageLink {
 export interface MediaVideoLink {
   _meta: {
     schema: string;
-  }
+  };
 }
 export class MediaLink {
   /**
@@ -24,12 +24,12 @@ export class MediaLink {
    * This method will trigger an image browser. It returns a promise that will resolve to the chosen Image Link.
    */
   getImage(): Promise<MediaImageLink> {
-    return this.connection.request(MEDIA_LINK.IMAGE_GET);
+    return this.connection.request(MEDIA_LINK.IMAGE_GET, null, { timeout: false });
   }
   /**
    * This method will trigger a video browser. It returns a promise that will resolve to the chosen Video Link.
    */
   getVideo(): Promise<MediaVideoLink> {
-    return this.connection.request(MEDIA_LINK.VIDEO_GET);
+    return this.connection.request(MEDIA_LINK.VIDEO_GET, null, { timeout: false });
   }
 }
