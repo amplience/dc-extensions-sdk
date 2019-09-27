@@ -14,13 +14,14 @@ export class Frame {
       if (this.frameLoaded) {
         resolve(true);
       }
-      window.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener('load', () => {
         this.frameLoaded = true;
         resolve(true);
       });
     });
     this.connection.on(FRAME.HEIGHT_GET, async (_payload: any, resolve: Function) => {
       await frameLoaded;
+      console.log('loaded');
       resolve(this.getHeight());
     });
   }
