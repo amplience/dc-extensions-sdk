@@ -12,7 +12,7 @@ interface ContentTypeSettings {
   label: string;
   icons: Array<string>;
   cards: Array<string>;
-  visualisation: Array<string>;
+  visualizations: Array<string>;
 }
 
 interface DefaultSchemaProperties {
