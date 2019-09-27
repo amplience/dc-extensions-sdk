@@ -15,14 +15,12 @@ export class Frame {
         resolve(true);
       }
       window.addEventListener('load', () => {
-        alert('loaded');
         this.frameLoaded = true;
         resolve(true);
       });
     });
     this.connection.on(FRAME.HEIGHT_GET, async (_payload: any, resolve: Function) => {
       await frameLoaded;
-      alert('loaded');
       resolve(this.getHeight());
     });
   }
@@ -32,7 +30,7 @@ export class Frame {
    */
   public getHeight(): number {
     const doc = this.win.document.querySelector('html');
-    return doc ? doc.clientHeight : 0;
+    return doc ? doc.offsetHeight : 0;
   }
 
   /**
