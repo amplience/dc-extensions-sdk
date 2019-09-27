@@ -15,11 +15,11 @@ export class Frame {
         resolve(true);
       }
       window.addEventListener('load', () => {
+        alert('loaded');
         this.frameLoaded = true;
         resolve(true);
       });
     });
-    alert('HELLLLLOOOOO');
     this.connection.on(FRAME.HEIGHT_GET, async (_payload: any, resolve: Function) => {
       await frameLoaded;
       alert('loaded');
