@@ -3,7 +3,7 @@ import { ClientConnection } from 'message.io';
 import { FRAME } from './Events';
 import { ERRORS_FRAME } from './Errors';
 export class Frame {
-  frameLoaded: boolean = false;
+  private frameLoaded: boolean = false;
   /**
    * Use in order to control the re-sizing of the Extension
    * @param connection message.io connection
