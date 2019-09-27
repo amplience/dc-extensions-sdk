@@ -19,10 +19,10 @@ export class Frame {
         resolve(true);
       });
     });
-    console.log('HELLLLLOOOOO');
+    alert('HELLLLLOOOOO');
     this.connection.on(FRAME.HEIGHT_GET, async (_payload: any, resolve: Function) => {
       await frameLoaded;
-      console.log('loaded');
+      alert('loaded');
       resolve(this.getHeight());
     });
   }
