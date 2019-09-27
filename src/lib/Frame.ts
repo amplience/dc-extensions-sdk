@@ -3,13 +3,24 @@ import { ClientConnection } from 'message.io';
 import { FRAME } from './Events';
 import { ERRORS_FRAME } from './Errors';
 export class Frame {
+  frameLoaded: boolean = false;
   /**
    * Use in order to control the re-sizing of the Extension
    * @param connection message.io connection
    * @param win override the default window object
    */
   constructor(private connection: ClientConnection, private win: Window = window) {
-    this.connection.on(FRAME.HEIGHT_GET, (_payload: any, resolve: Function) => {
+    const frameLoaded = new Promise(resolve => {
+      if (this.frameLoaded) {
+        resolve(true);
+      }
+      window.addEventListener('load', () => {
+        this.frameLoaded = true;
+        resolve(true);
+      });
+    });
+    this.connection.on(FRAME.HEIGHT_GET, async (_payload: any, resolve: Function) => {
+      await frameLoaded;
       resolve(this.getHeight());
     });
   }
@@ -19,7 +30,7 @@ export class Frame {
    */
   public getHeight(): number {
     const doc = this.win.document.querySelector('html');
-    return doc ? doc.clientHeight : 0;
+    return doc ? doc.offsetHeight : 0;
   }
 
   /**
