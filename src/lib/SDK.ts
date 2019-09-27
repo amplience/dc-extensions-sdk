@@ -22,10 +22,6 @@ export interface Options {
   connectionTimeout: number;
   debug: boolean;
 }
-export interface StagingEnvironment {
-  domain: string;
-  src: string;
-}
 export interface Params {
   instance: object;
   installation: object;
@@ -37,7 +33,7 @@ type ContextObject<ParamType> = {
   fieldSchema: FieldSchema;
   params: ParamType;
   locales: LocalesModel;
-  stagingEnvironment: StagingEnvironment;
+  stagingEnvironment: string;
   visualisation: string;
 };
 
@@ -85,7 +81,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
    * stagingEnvironment - Used for accessing staged assets.
    */
-  public stagingEnvironment!: StagingEnvironment;
+  public stagingEnvironment!: string;
   /**
    * Visualisation - URL of the visualisation
    */
