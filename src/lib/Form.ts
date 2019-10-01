@@ -20,7 +20,9 @@ export class Form {
    * Functions to be run after readonly changes
    * @param cb function that handles what happens after readonly changes
    */
-  onReadOnlyChange(cb: onChangeHandler) {
+  onReadOnlyChange(cb: onChangeHandler): Form {
     this.onChangeStack.push(cb);
+    cb(this.readOnly);
+    return this;
   }
 }
