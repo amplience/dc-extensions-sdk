@@ -9,6 +9,7 @@ import { ContentItem } from './ContentItem';
 import { ContentReference } from './ContentReference';
 import { LocalesModel } from './models/Locales';
 import { Field, FieldSchema } from './Field';
+import { Form } from './Form';
 /**
  * Expected format for the provided options
  */
@@ -80,9 +81,9 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
    */
   public mediaLink: MediaLink;
   /**
-   * readOnly - Weather or not the form should be editable.
+   * Form - controls over the form such as readonly change handlers.
    */
-  public readOnly!: boolean;
+  public form!: Form;
   /**
    * stagingEnvironment - Used for accessing staged assets.
    */
@@ -144,16 +145,12 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
     } = await this.requestContext();
     this.contentItem = new ContentItem(this.connection, contentItemId);
     this.field = new Field(this.connection, fieldSchema);
+    this.form = new Form(this.connection, readOnly);
     this.contentType = contentType;
     this.params = params;
     this.locales = locales;
     this.visualisation = visualisation;
     this.stagingEnvironment = stagingEnvironment;
-    this.readOnly = readOnly;
-
-    this.connection.on(CONTEXT.READ_ONLY, (readonly: boolean) => {
-      this.readOnly = readonly;
-    });
   }
 
   private async requestContext(): Promise<ContextObject<ParamType>> {

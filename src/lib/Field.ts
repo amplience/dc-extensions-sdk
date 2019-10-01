@@ -44,11 +44,6 @@ export class Field<FieldType = {}> {
     return isValid;
   }
 
-  async isReadOnly() {
-    const readOnly = await this.connection.request<Boolean>(FIELD.GET_READ_ONLY);
-
-    return readOnly;
-  }
   /**
    * Check the validation of your value. Returns an array containing any JSON Schema errors found.
    * @param value The value you whish to test
