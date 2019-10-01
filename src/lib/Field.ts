@@ -1,5 +1,5 @@
 import { ClientConnection } from 'message.io';
-import { FIELD } from './Events';
+import { FIELD, CONTEXT } from './Events';
 import { ErrorReport } from './models/ErrorReport';
 export interface FieldSchema {
   title: string;
@@ -42,6 +42,12 @@ export class Field<FieldType = {}> {
     const isValid = await this.connection.request<Boolean>(FIELD.MODEL_IS_VALID, value);
 
     return isValid;
+  }
+
+  async isReadOnly() {
+    const readOnly = await this.connection.request<Boolean>(FIELD.GET_READ_ONLY);
+
+    return readOnly;
   }
   /**
    * Check the validation of your value. Returns an array containing any JSON Schema errors found.

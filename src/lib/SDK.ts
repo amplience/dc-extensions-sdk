@@ -35,6 +35,7 @@ type ContextObject<ParamType> = {
   locales: LocalesModel;
   stagingEnvironment: string;
   visualisation: string;
+  readOnly: boolean;
 };
 
 export class SDK<FieldType = any, ParamType extends Params = Params> {
@@ -78,6 +79,10 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
    * Media Link - Use to open a media browser.
    */
   public mediaLink: MediaLink;
+  /**
+   * readOnly - Weather or not the form should be editable.
+   */
+  public readOnly!: boolean;
   /**
    * stagingEnvironment - Used for accessing staged assets.
    */
@@ -134,6 +139,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
       params,
       locales,
       stagingEnvironment,
+      readOnly,
       visualisation
     } = await this.requestContext();
     this.contentItem = new ContentItem(this.connection, contentItemId);
@@ -143,6 +149,11 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
     this.locales = locales;
     this.visualisation = visualisation;
     this.stagingEnvironment = stagingEnvironment;
+    this.readOnly = readOnly;
+
+    this.connection.on(CONTEXT.READ_ONLY, (readonly: boolean) => {
+      this.readOnly = readonly;
+    });
   }
 
   private async requestContext(): Promise<ContextObject<ParamType>> {

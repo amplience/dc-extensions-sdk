@@ -1,5 +1,6 @@
 export enum CONTEXT {
-  GET = 'context-get'
+  GET = 'context-get',
+  READ_ONLY = 'read-only'
 }
 
 export enum CONTENT_ITEM {
@@ -25,7 +26,8 @@ export enum FIELD {
   MODEL_RESET = 'field-model-reset',
   MODEL_IS_VALID = 'field-model-is-valid',
   MODEL_VALIDATE = 'field-model-validate',
-  SCHEMA_GET = 'field-schema-get'
+  SCHEMA_GET = 'field-schema-get',
+  GET_READ_ONLY = 'get-read-only'
 }
 
 export enum FRAME {
