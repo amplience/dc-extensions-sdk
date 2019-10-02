@@ -28,6 +28,10 @@ export enum FIELD {
   SCHEMA_GET = 'field-schema-get'
 }
 
+export enum FORM {
+  READ_ONLY = 'read-only'
+}
+
 export enum FRAME {
   HEIGHT_GET = 'height-get',
   HEIGHT_SET = 'height-set',

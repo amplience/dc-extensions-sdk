@@ -9,6 +9,7 @@ import { ContentItem } from './ContentItem';
 import { ContentReference } from './ContentReference';
 import { LocalesModel } from './models/Locales';
 import { Field, FieldSchema } from './Field';
+import { Form } from './Form';
 /**
  * Expected format for the provided options
  */
@@ -35,6 +36,7 @@ type ContextObject<ParamType> = {
   locales: LocalesModel;
   stagingEnvironment: string;
   visualisation: string;
+  readOnly: boolean;
 };
 
 export class SDK<FieldType = any, ParamType extends Params = Params> {
@@ -78,6 +80,10 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
    * Media Link - Use to open a media browser.
    */
   public mediaLink: MediaLink;
+  /**
+   * Form - controls over the form such as readonly change handlers.
+   */
+  public form!: Form;
   /**
    * stagingEnvironment - Used for accessing staged assets.
    */
@@ -134,10 +140,12 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
       params,
       locales,
       stagingEnvironment,
+      readOnly,
       visualisation
     } = await this.requestContext();
     this.contentItem = new ContentItem(this.connection, contentItemId);
     this.field = new Field(this.connection, fieldSchema);
+    this.form = new Form(this.connection, readOnly);
     this.contentType = contentType;
     this.params = params;
     this.locales = locales;

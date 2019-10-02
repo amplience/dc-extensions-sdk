@@ -1,5 +1,5 @@
 import { ClientConnection } from 'message.io';
-import { FIELD } from './Events';
+import { FIELD, CONTEXT } from './Events';
 import { ErrorReport } from './models/ErrorReport';
 export interface FieldSchema {
   title: string;
@@ -43,6 +43,7 @@ export class Field<FieldType = {}> {
 
     return isValid;
   }
+
   /**
    * Check the validation of your value. Returns an array containing any JSON Schema errors found.
    * @param value The value you whish to test
