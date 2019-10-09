@@ -5,10 +5,10 @@ export interface ContentItemModel {
     _meta: ContentMeta;
     [key: string]: any;
   };
-  deliveryId?: string;
+  deliveryId: string;
 }
 interface ContentMeta {
   name: string;
   schema: string;
-  deliveryId?: string;
+  deliveryKey?: string;
 }
