@@ -8,6 +8,7 @@ describe('Frame', () => {
   beforeEach(() => {
     connection = new ClientConnection();
     body = window.document.querySelector('body');
+    body.style.margin = '0';
   });
 
   it('Constructor should set the FAME.GET_HEIGHT event', () => {
@@ -34,13 +35,6 @@ describe('Frame', () => {
     expect(height).toEqual(body.clientHeight);
     expect(height).toEqual(100);
     body.style.height = null;
-  });
-
-  it('getHeight() returns the height of the body should default to 0 if no body', () => {
-    spyOn(document, 'querySelector').and.returnValue(null);
-    const frame: Frame = new Frame(connection);
-    const height: number = frame.getHeight();
-    expect(height).toEqual(0);
   });
 
   it('setHeight() triggers a FRAME.HEIGHT_SET event with the body height', () => {
@@ -100,19 +94,21 @@ describe('Frame', () => {
     }
   });
 
-  it('startAutoResizer() triggers a FRAME.AUTO_RESIZER_START event', () => {
+  it('startAutoResizer()', () => {
     const frame: Frame = new Frame(connection);
     const emitSpy = spyOn(connection, 'emit');
     frame.startAutoResizer();
+    expect(frame.isAutoResizing).toEqual(true);
     expect(emitSpy).toHaveBeenCalledTimes(1);
-    expect(emitSpy).toHaveBeenCalledWith(FRAME.AUTO_RESIZER_START);
   });
 
-  it('stopAutoResizer() triggers a FRAME.AUTO_RESIZER_STOP event', () => {
+  it('stopAutoResizer()', () => {
     const frame: Frame = new Frame(connection);
-    const emitSpy = spyOn(connection, 'emit');
+    const eventHandlerSpy = spyOn(window, 'removeEventListener');
+    frame.startAutoResizer();
+    expect(frame.isAutoResizing).toEqual(true);
     frame.stopAutoResizer();
-    expect(emitSpy).toHaveBeenCalledTimes(1);
-    expect(emitSpy).toHaveBeenCalledWith(FRAME.AUTO_RESIZER_STOP);
+    expect(frame.isAutoResizing).toEqual(false);
+    expect(eventHandlerSpy).toHaveBeenCalled();
   });
 });

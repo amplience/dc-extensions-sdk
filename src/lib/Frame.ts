@@ -3,10 +3,10 @@ import { ClientConnection } from 'message.io';
 import { FRAME } from './Events';
 import { ERRORS_FRAME } from './Errors';
 export class Frame {
+  public isAutoResizing: boolean = false;
   private frameLoaded: boolean = false;
-  private isAutoResizing: boolean = false;
-  private observer: MutationObserver = new MutationObserver(this.updateHeight.bind(this));
   private previousHeight?: number;
+  private observer: MutationObserver = new MutationObserver(this.updateHeight.bind(this));
   /**
    * Use in order to control the re-sizing of the Extension
    * @param connection message.io connection
