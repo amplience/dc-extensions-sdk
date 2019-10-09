@@ -10,20 +10,9 @@ export interface ContentType {
 }
 interface ContentTypeSettings {
   label: string;
-  icons: Array<SettingsIcon>;
-  cards?: Array<SettingsVisualization>;
-  visualizations: Array<SettingsVisualization>;
-}
-
-interface SettingsIcon {
-  size?: number;
-  url?: string;
-}
-
-interface SettingsVisualization {
-  label?: string;
-  templatedUri?: string;
-  isDefault?: boolean;
+  icons: Array<string>;
+  cards: Array<string>;
+  visualizations: Array<string>;
 }
 
 interface DefaultSchemaProperties {
