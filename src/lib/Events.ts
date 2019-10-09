@@ -34,7 +34,5 @@ export enum FORM {
 
 export enum FRAME {
   HEIGHT_GET = 'height-get',
-  HEIGHT_SET = 'height-set',
-  AUTO_RESIZER_START = 'auto-resizer-start',
-  AUTO_RESIZER_STOP = 'auto-resizer-stop'
+  HEIGHT_SET = 'height-set'
 }

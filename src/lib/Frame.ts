@@ -4,6 +4,9 @@ import { FRAME } from './Events';
 import { ERRORS_FRAME } from './Errors';
 export class Frame {
   private frameLoaded: boolean = false;
+  private isAutoResizing: boolean = false;
+  private observer: MutationObserver = new MutationObserver(this.updateHeight.bind(this));
+  private previousHeight?: number;
   /**
    * Use in order to control the re-sizing of the Extension
    * @param connection message.io connection
@@ -19,6 +22,7 @@ export class Frame {
         resolve(true);
       });
     });
+
     this.connection.on(FRAME.HEIGHT_GET, async (_payload: any, resolve: Function) => {
       await frameLoaded;
       resolve(this.getHeight());
@@ -29,8 +33,15 @@ export class Frame {
    * Get the height of the Extension
    */
   public getHeight(): number {
-    const doc = this.win.document.querySelector('html');
-    return doc ? doc.offsetHeight : 0;
+    const { documentElement } = this.win.document;
+
+    if (documentElement) {
+      const { height } = documentElement.getBoundingClientRect();
+
+      return height;
+    }
+
+    return 0;
   }
 
   /**
@@ -44,6 +55,7 @@ export class Frame {
 
     const h = height === undefined ? this.getHeight() : height;
 
+    this.previousHeight = height;
     this.connection.emit(FRAME.HEIGHT_SET, h < 0 ? 0 : h);
   }
 
@@ -51,12 +63,39 @@ export class Frame {
    * Start the auto-resizer
    */
   public startAutoResizer() {
-    this.connection.emit(FRAME.AUTO_RESIZER_START);
+    this.updateHeight();
+
+    if (this.isAutoResizing) return;
+
+    this.isAutoResizing = true;
+
+    this.observer.observe(this.win.document.body, {
+      attributes: true,
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+
+    this.win.addEventListener('resize', this.updateHeight.bind(this));
   }
   /**
    * Stop the auto-resizer
    */
   public stopAutoResizer() {
-    this.connection.emit(FRAME.AUTO_RESIZER_STOP);
+    if (!this.isAutoResizing) return;
+
+    this.isAutoResizing = false;
+    this.observer.disconnect();
+    this.win.removeEventListener('resize', this.updateHeight.bind(this));
+  }
+
+  private updateHeight() {
+    const height = this.getHeight();
+
+    if (height === this.previousHeight) {
+      return;
+    }
+
+    this.setHeight(height);
   }
 }
