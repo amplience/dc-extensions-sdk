@@ -1,3 +1,5 @@
+import 'url-polyfill';
+
 export * from './lib/models/ContentItemModel';
 export * from './lib/models/ContentType';
 export * from './lib/models/ErrorReport';
