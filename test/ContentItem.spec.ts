@@ -13,6 +13,7 @@ describe('ContentItem', () => {
         schema: 'http://www.aschema.com'
       }
     },
+    version: 1,
     deliveryId: 'deliveryId'
   };
   beforeAll(() => {

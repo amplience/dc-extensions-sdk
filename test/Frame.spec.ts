@@ -8,6 +8,7 @@ describe('Frame', () => {
   beforeEach(() => {
     connection = new ClientConnection();
     body = window.document.querySelector('body');
+    body.style.margin = '0';
   });
 
   it('Constructor should set the FAME.GET_HEIGHT event', () => {

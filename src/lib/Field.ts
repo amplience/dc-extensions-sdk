@@ -1,18 +1,29 @@
 import { ClientConnection } from 'message.io';
-import { FIELD, CONTEXT } from './Events';
+import { FIELD } from './Events';
+import { ObjectMap } from './models/ContentItemModel';
 import { ErrorReport } from './models/ErrorReport';
-export interface FieldSchema {
+import { Params } from './SDK';
+
+export type FieldSchema<ParamType> = ObjectMap<{
   title: string;
   type: string;
+  description?: string;
+  ['ui:extension']: UiExtension<ParamType>;
+}>;
+
+interface UiExtension<ParamType> {
+  url: string;
+  params?: ParamType;
+  height?: number;
 }
 
-export class Field<FieldType = {}> {
+export class Field<FieldType = any, ParamType extends Params = Params> {
   /**
    * Allows you to perform actions on the field that is being edited.
    * @param connection message.io connection
    * @param schema JSON Schema of the field
    */
-  constructor(private connection: ClientConnection, public schema: FieldSchema) {}
+  constructor(private connection: ClientConnection, public schema: FieldSchema<ParamType>) {}
 
   /**
    * Fetch the value of the field

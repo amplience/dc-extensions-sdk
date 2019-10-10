@@ -25,4 +25,13 @@ export class Form {
     cb(this.readOnly);
     return this;
   }
+
+  /**
+   * Get the content item's current model state, not just field level model
+   */
+  async getValue() {
+    const value = await this.connection.request(FORM.GET_FORM_MODEL);
+
+    return value;
+  }
 }
