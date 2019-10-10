@@ -31,8 +31,14 @@ export class Form<FieldType = any> {
    * Get the content item's current model state, not just field level model
    */
   async getValue(): Promise<ContentItemModel<FieldType>> {
-    const value = await this.connection.request(FORM.GET_FORM_MODEL);
+    try {
+      const value = await this.connection.request(FORM.GET_FORM_MODEL);
 
-    return value;
+      return value;
+    } catch (e) {
+      throw new Error(
+        `This normally means you're calling get form model in a context where it's not created`
+      );
+    }
   }
 }

@@ -29,8 +29,8 @@ export enum FIELD {
 }
 
 export enum FORM {
-  READ_ONLY = 'read-only',
-  GET_FORM_MODEL = 'get-form-model'
+  READ_ONLY = 'form-readonly-get',
+  GET_FORM_MODEL = 'form-model-get'
 }
 
 export enum FRAME {
