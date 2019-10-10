@@ -4,16 +4,16 @@ import { ObjectMap } from './models/ContentItemModel';
 import { ErrorReport } from './models/ErrorReport';
 import { Params } from './SDK';
 
-export type FieldSchema<ParamType> = ObjectMap<{
+export type FieldSchema<ParamType extends Params = Params> = ObjectMap<{
   title: string;
   type: string;
   description?: string;
   ['ui:extension']: UiExtension<ParamType>;
 }>;
 
-interface UiExtension<ParamType> {
+interface UiExtension<ParamType extends Params = Params> {
   url: string;
-  params?: ParamType;
+  params?: ParamType['instance'];
   height?: number;
 }
 

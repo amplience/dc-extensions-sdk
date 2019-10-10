@@ -27,7 +27,7 @@ export interface Params {
   installation: object;
 }
 
-type ContextObject<ParamType> = {
+type ContextObject<ParamType extends Params = Params> = {
   contentItemId: string;
   fieldSchema: FieldSchema<ParamType>;
   params: ParamType;
@@ -77,7 +77,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
    * Form - controls over the form such as readonly change handlers.
    */
-  public form!: Form;
+  public form!: Form<FieldType>;
   /**
    * stagingEnvironment - Used for accessing staged assets.
    */
