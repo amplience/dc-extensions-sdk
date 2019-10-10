@@ -6,7 +6,7 @@ export class Frame {
   public isAutoResizing: boolean = false;
   private frameLoaded: boolean = false;
   private previousHeight?: number;
-  private observer: MutationObserver = new MutationObserver(this.updateHeight.bind(this));
+  private observer: MutationObserver = new MutationObserver(() => this.updateHeight());
   /**
    * Use in order to control the re-sizing of the Extension
    * @param connection message.io connection
@@ -65,7 +65,9 @@ export class Frame {
   public startAutoResizer() {
     this.updateHeight();
 
-    if (this.isAutoResizing) return;
+    if (this.isAutoResizing) {
+      return;
+    }
 
     this.isAutoResizing = true;
 
@@ -76,17 +78,19 @@ export class Frame {
       characterData: true
     });
 
-    this.win.addEventListener('resize', this.updateHeight.bind(this));
+    this.win.addEventListener('resize', () => this.updateHeight());
   }
   /**
    * Stop the auto-resizer
    */
   public stopAutoResizer() {
-    if (!this.isAutoResizing) return;
+    if (!this.isAutoResizing) {
+      return;
+    }
 
     this.isAutoResizing = false;
     this.observer.disconnect();
-    this.win.removeEventListener('resize', this.updateHeight.bind(this));
+    this.win.removeEventListener('resize', () => this.updateHeight());
   }
 
   private updateHeight() {
