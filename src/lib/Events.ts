@@ -29,7 +29,7 @@ export enum FIELD {
 }
 
 export enum FORM {
-  READ_ONLY = 'form-readonly-get',
+  READ_ONLY = 'form-readonly-change',
   GET_FORM_MODEL = 'form-model-get'
 }
 
