@@ -4,7 +4,7 @@ import { Body } from './models/ContentItemModel';
 
 export type onChangeHandler = (readonly: boolean) => void;
 
-export class Form<T = {}> {
+export class Form<FieldType = {}> {
   private onChangeStack: Array<onChangeHandler>;
 
   constructor(private connection: ClientConnection, public readOnly: boolean) {
@@ -21,7 +21,7 @@ export class Form<T = {}> {
    * Functions to be run after readonly changes
    * @param cb function that handles what happens after readonly changes
    */
-  onReadOnlyChange(cb: onChangeHandler): Form<T> {
+  onReadOnlyChange(cb: onChangeHandler): Form<FieldType> {
     this.onChangeStack.push(cb);
     cb(this.readOnly);
     return this;
@@ -30,9 +30,9 @@ export class Form<T = {}> {
   /**
    * Get the content item's current model state, not just field level model
    */
-  async getValue(): Promise<Body<T>> {
+  async getValue(): Promise<Body<FieldType>> {
     try {
-      const value = await this.connection.request<Body<T>>(FORM.GET_FORM_MODEL);
+      const value = await this.connection.request<Body<FieldType>>(FORM.GET_FORM_MODEL);
 
       return value;
     } catch (e) {

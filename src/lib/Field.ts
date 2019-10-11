@@ -17,7 +17,7 @@ interface UiExtension<ParamType extends Params = Params> {
   height?: number;
 }
 
-export class Field<FieldType = {}, ParamType extends Params = Params> {
+export class Field<FieldType = any, ParamType extends Params = Params> {
   /**
    * Allows you to perform actions on the field that is being edited.
    * @param connection message.io connection
