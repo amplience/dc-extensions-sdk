@@ -13,7 +13,7 @@ export type FieldSchema<ParamType extends Params = Params> = ObjectMap<{
 
 interface UiExtension<ParamType extends Params = Params> {
   url: string;
-  params?: Pick<ParamType, 'instance'>;
+  params?: ParamType['instance'];
   height?: number;
 }
 
