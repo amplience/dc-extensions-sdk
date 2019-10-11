@@ -136,9 +136,9 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
       readOnly,
       visualisation
     } = await this.requestContext();
-    this.contentItem = new ContentItem(this.connection, contentItemId);
-    this.field = new Field(this.connection, fieldSchema);
-    this.form = new Form(this.connection, readOnly);
+    this.contentItem = new ContentItem<FieldType>(this.connection, contentItemId);
+    this.field = new Field<FieldType, ParamType>(this.connection, fieldSchema);
+    this.form = new Form<FieldType>(this.connection, readOnly);
     this.params = params;
     this.locales = locales;
     this.visualisation = visualisation;
