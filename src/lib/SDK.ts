@@ -45,7 +45,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
    * Content Item - The model of the Content Item that is being edited.
    */
-  public contentItem!: ContentItem<FieldType>;
+  public contentItem!: ContentItem;
   /**
    * Field - Allows you to get and set the value of the field the extension is control of.
    */
@@ -77,7 +77,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
    * Form - controls over the form such as readonly change handlers.
    */
-  public form!: Form<FieldType>;
+  public form!: Form;
   /**
    * stagingEnvironment - Used for accessing staged assets.
    */
