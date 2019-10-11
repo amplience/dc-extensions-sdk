@@ -1,4 +1,5 @@
 import { FORM } from './Events';
+import { FORM as ERRORS } from './Errors';
 import { ClientConnection } from 'message.io';
 import { Body } from './models/ContentItemModel';
 
@@ -28,7 +29,7 @@ export class Form {
   }
 
   /**
-   * Get the content item's current model state, not just field level model
+   * Get the current model state of all the fields in the form.
    */
   async getValue<FormModel = {}>(): Promise<Body<FormModel>> {
     try {
@@ -36,9 +37,7 @@ export class Form {
 
       return value;
     } catch (e) {
-      throw new Error(
-        `This normally means you're calling get form model in a context where it's not created`
-      );
+      throw new Error(ERRORS.NO_MODEL);
     }
   }
 }
