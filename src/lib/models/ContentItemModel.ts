@@ -11,7 +11,11 @@ export type ContentItemModel<T = {}> = {
   deliveryId: string;
 };
 
-type Body<T> = ObjectMap<T & { _meta: ContentMeta }>;
+export type Body<T = {}> = ObjectMap<
+  T & {
+    _meta: ContentMeta;
+  }
+>;
 
 interface ContentMeta {
   name: string;
