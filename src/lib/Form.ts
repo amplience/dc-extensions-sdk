@@ -30,7 +30,7 @@ export class Form<FieldType = any> {
   /**
    * Get the content item's current model state, not just field level model
    */
-  async getValue(): Promise<ContentItemModel<FieldType>> {
+  async getValue(): Promise<ContentItemModel<FieldType>['body']> {
     try {
       const value = await this.connection.request(FORM.GET_FORM_MODEL);
 
