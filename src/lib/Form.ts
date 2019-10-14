@@ -1,5 +1,7 @@
 import { FORM } from './Events';
+import { FORM as ERRORS } from './Errors';
 import { ClientConnection } from 'message.io';
+import { Body } from './models/ContentItemModel';
 
 export type onChangeHandler = (readonly: boolean) => void;
 
@@ -24,5 +26,18 @@ export class Form {
     this.onChangeStack.push(cb);
     cb(this.readOnly);
     return this;
+  }
+
+  /**
+   * Get the current model state of all the fields in the form.
+   */
+  async getValue<FormModel = {}>(): Promise<Body<FormModel>> {
+    try {
+      const value = await this.connection.request<Body<FormModel>>(FORM.GET_FORM_MODEL);
+
+      return value;
+    } catch (e) {
+      throw new Error(ERRORS.NO_MODEL);
+    }
   }
 }

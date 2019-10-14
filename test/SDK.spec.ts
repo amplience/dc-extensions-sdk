@@ -2,7 +2,6 @@ import { SDK } from '../src/lib/SDK';
 
 let contextObject = {
   contentItemId: '',
-  contentType: {},
   fieldSchema: {},
   params: {},
   locales: {

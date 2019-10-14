@@ -4,7 +4,6 @@ import { CONTEXT } from './Events';
 import { ERRORS_INIT } from './Errors';
 import { MediaLink } from './MediaLink';
 import { ContentLink } from './ContentLink';
-import { ContentType } from './models/ContentType';
 import { ContentItem } from './ContentItem';
 import { ContentReference } from './ContentReference';
 import { LocalesModel } from './models/Locales';
@@ -28,10 +27,9 @@ export interface Params {
   installation: object;
 }
 
-type ContextObject<ParamType> = {
+type ContextObject<ParamType extends Params = Params> = {
   contentItemId: string;
-  contentType: ContentType;
-  fieldSchema: FieldSchema;
+  fieldSchema: FieldSchema<ParamType>;
   params: ParamType;
   locales: LocalesModel;
   stagingEnvironment: string;
@@ -49,13 +47,9 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
    */
   public contentItem!: ContentItem;
   /**
-   * Content Type - The JSON Schema of the Content Item that is being edited.
-   */
-  public contentType!: ContentType;
-  /**
    * Field - Allows you to get and set the value of the field the extension is control of.
    */
-  public field!: Field<FieldType>;
+  public field!: Field<FieldType, ParamType>;
   /**
    * Frame - Use to control the height sizing behaviour of your extension.
    */
@@ -135,7 +129,6 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   private async setupContext(resolve: Function, reject: Function) {
     const {
       contentItemId,
-      contentType,
       fieldSchema,
       params,
       locales,
@@ -146,7 +139,6 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
     this.contentItem = new ContentItem(this.connection, contentItemId);
     this.field = new Field(this.connection, fieldSchema);
     this.form = new Form(this.connection, readOnly);
-    this.contentType = contentType;
     this.params = params;
     this.locales = locales;
     this.visualisation = visualisation;

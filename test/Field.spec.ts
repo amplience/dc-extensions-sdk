@@ -2,6 +2,7 @@ import { FIELD } from '../src/lib/Events';
 import { Field, FieldSchema } from '../src/lib/Field';
 import { ClientConnection } from 'message.io';
 import { ErrorReport } from '../src/lib/models/ErrorReport';
+import { Params } from '../src/lib/SDK';
 
 const testValue = {
   hello: 'world'
@@ -22,14 +23,15 @@ const testError: ErrorReport = {
 
 describe('Field', () => {
   let connection: ClientConnection;
-  let schema: FieldSchema;
+  let schema: FieldSchema<Params>;
   let field: Field;
 
   beforeAll(() => {
     connection = new ClientConnection();
     schema = {
       title: 'My Field',
-      type: 'string'
+      type: 'string',
+      'ui:extension': { url: '124' }
     };
     field = new Field(connection, schema);
   });

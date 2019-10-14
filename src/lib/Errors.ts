@@ -10,3 +10,7 @@ export enum ERRORS_CONTENT_ITEM {
 export enum ERRORS_FRAME {
   SET_HEIGHT_NUMBER = 'setHeight() only accepts an optional number argument'
 }
+
+export enum FORM {
+  NO_MODEL = 'Unable to retrieve form model as form context does not have an active model.'
+}

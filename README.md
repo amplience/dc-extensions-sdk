@@ -69,13 +69,6 @@ Fetching the field schema
 const schema = sdk.field.schema;
 ```
 
-## Content Type
-
-Get the Effective Schema for the Content Item you are editing
-```js
-const contentType = sdk.contentType;
-```
-
 ## Content Item
 
 Get the full model for the Content Item you are editing
