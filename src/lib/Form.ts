@@ -24,7 +24,6 @@ export class Form {
    */
   onReadOnlyChange(cb: onChangeHandler): Form {
     this.onChangeStack.push(cb);
-    cb(this.readOnly);
     return this;
   }
 
