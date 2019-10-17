@@ -4,7 +4,6 @@ import { FRAME } from './Events';
 import { ERRORS_FRAME } from './Errors';
 export class Frame {
   public isAutoResizing: boolean = false;
-  private frameLoaded: boolean = false;
   private previousHeight?: number;
   private observer: MutationObserver = new MutationObserver(() => this.updateHeight());
   /**
@@ -18,7 +17,6 @@ export class Frame {
         resolve(true);
       }
       win.addEventListener('load', () => {
-        this.frameLoaded = true;
         resolve(true);
       });
     });
