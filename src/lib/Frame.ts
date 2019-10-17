@@ -14,10 +14,10 @@ export class Frame {
    */
   constructor(private connection: ClientConnection, private win: Window = window) {
     const frameLoaded = new Promise(resolve => {
-      if (this.frameLoaded) {
+      if (win.document.readyState === 'complete') {
         resolve(true);
       }
-      window.addEventListener('load', () => {
+      win.addEventListener('load', () => {
         this.frameLoaded = true;
         resolve(true);
       });
