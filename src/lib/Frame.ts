@@ -13,18 +13,11 @@ export class Frame {
    * @param win override the default window object
    */
   constructor(private connection: ClientConnection, private win: Window = window) {
-    const frameLoaded = new Promise(resolve => {
-      if (this.frameLoaded) {
-        resolve(true);
-      }
-      window.addEventListener('load', () => {
-        this.frameLoaded = true;
-        resolve(true);
-      });
+    window.addEventListener('load', () => {
+      this.setHeight();
     });
 
     this.connection.on(FRAME.HEIGHT_GET, async (_payload: any, resolve: Function) => {
-      await frameLoaded;
       resolve(this.getHeight());
     });
   }
