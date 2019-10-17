@@ -146,6 +146,6 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   }
 
   private async requestContext(): Promise<ContextObject<ParamType>> {
-    return this.connection.request(CONTEXT.GET);
+    return this.connection.request(CONTEXT.GET, null, { timeout: false });
   }
 }
