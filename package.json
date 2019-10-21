@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "dc-delivery-sdk-js": "^0.3.0",
-    "message.io": "git+ssh://git@bitbucket.org/amplience/message.io.git#1e0376654a1e9f44b7c1e2134ca91ea1e4841a4e"
+    "message.io": "git+ssh://git@bitbucket.org/amplience/message.io.git#6e528f830b47461ea808505cc5d541a6a9e1bfa7"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.1.2",
