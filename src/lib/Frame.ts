@@ -4,7 +4,6 @@ import { FRAME } from './Events';
 import { ERRORS_FRAME } from './Errors';
 export class Frame {
   public isAutoResizing: boolean = false;
-  private frameLoaded: boolean = false;
   private previousHeight?: number;
   private observer: MutationObserver = new MutationObserver(() => this.updateHeight());
   /**
@@ -14,11 +13,10 @@ export class Frame {
    */
   constructor(private connection: ClientConnection, private win: Window = window) {
     const frameLoaded = new Promise(resolve => {
-      if (this.frameLoaded) {
+      if (win.document.readyState === 'complete') {
         resolve(true);
       }
-      window.addEventListener('load', () => {
-        this.frameLoaded = true;
+      win.addEventListener('load', () => {
         resolve(true);
       });
     });
