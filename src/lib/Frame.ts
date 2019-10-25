@@ -61,8 +61,6 @@ export class Frame {
    * Start the auto-resizer
    */
   public startAutoResizer() {
-    this.updateHeight();
-
     if (this.isAutoResizing) {
       return;
     }
