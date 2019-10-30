@@ -41,7 +41,7 @@ type ContextObject<ParamType extends Params = Params> = {
 
 export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
-   * message.io [[IClientConnection]] instance. Use to listen to any of the message.io lifecycle events.
+   * message.io [[ClientConnection]] instance. Use to listen to any of the message.io lifecycle events.
    */
   public connection!: ClientConnection;
   /**
