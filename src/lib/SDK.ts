@@ -10,6 +10,7 @@ import { LocalesModel } from './models/Locales';
 import { Field, FieldSchema } from './Field';
 import { Form } from './Form';
 
+export interface IClientConnection extends ClientConnection {}
 /**
  * Expected format for the provided options
  */
@@ -40,7 +41,7 @@ type ContextObject<ParamType extends Params = Params> = {
 
 export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
-   * message.io ClientConnection instance. Use to listen to any of the message.io lifecycle events.
+   * message.io [[IClientConnection]] instance. Use to listen to any of the message.io lifecycle events.
    */
   public connection!: ClientConnection;
   /**

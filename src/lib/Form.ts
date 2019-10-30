@@ -19,14 +19,18 @@ export class Form {
 
   /**
    *
-   * Functions to be run after readonly changes you're able to chain this method for better seperation of readOnly changes
-   * @param cb function that handles what happens after readonly changes
+   * Allows you to provide a callback to be executed after the readonly state changes. This method can be chained to append multiple callbacks.
+   * @param cb Callback function that executes upon readonly state change.
    *
    * @returns [[Form]]
    *
    * ```typescript
    * const container = document.querySelector('.container');
    * const inputs = Array.from(document.querySelectorAll('input'));
+   *
+   * sdk.form
+   *  .onReadOnlyChange(setReadOnlyClass)
+   *  .onReadOnlyChange(disableInputs)
    *
    * function disableInputs(readOnly)  {
    *   inputs.forEach(input => {
@@ -37,10 +41,6 @@ export class Form {
    * function setReadOnlyClass(readOnly) {
    *   container.classList[readOnly ? 'add' : 'remove']('read-only')
    * }
-   *
-   * sdk.form
-   *  .onReadOnlyChange(setReadOnlyClass)
-   *  .onReadOnlyChange(disableInputs)
    * ```
    */
   onReadOnlyChange(cb: onChangeHandler): Form {
