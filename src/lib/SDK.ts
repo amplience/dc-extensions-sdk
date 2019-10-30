@@ -9,6 +9,7 @@ import { ContentReference } from './ContentReference';
 import { LocalesModel } from './models/Locales';
 import { Field, FieldSchema } from './Field';
 import { Form } from './Form';
+
 /**
  * Expected format for the provided options
  */
@@ -39,7 +40,7 @@ type ContextObject<ParamType extends Params = Params> = {
 
 export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
-   * message.io [[ClientConnection]] instance. Use to listen to any of the message.io lifecycle events.
+   * message.io ClientConnection instance. Use to listen to any of the message.io lifecycle events.
    */
   public connection!: ClientConnection;
   /**
@@ -114,7 +115,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
       this.connection.init();
       this.connection.on(MIO_EVENTS.CONNECTED, async () => {
         try {
-          await this.setupContext(resolve, reject);
+          await this.setupContext();
           resolve(this);
         } catch (e) {
           reject(new Error(ERRORS_INIT.CONTEXT));
@@ -126,7 +127,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
     });
   }
 
-  private async setupContext(resolve: Function, reject: Function) {
+  private async setupContext() {
     const {
       contentItemId,
       fieldSchema,

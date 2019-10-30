@@ -5,8 +5,8 @@ import { ErrorReport } from './models/ErrorReport';
 import { Params } from './SDK';
 
 export type FieldSchema<ParamType extends Params = Params> = ObjectMap<{
-  title: string;
-  type: string;
+  title?: string;
+  type?: string;
   description?: string;
   ['ui:extension']: UiExtension<ParamType>;
 }>;

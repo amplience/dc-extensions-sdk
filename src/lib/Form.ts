@@ -19,8 +19,29 @@ export class Form {
 
   /**
    *
-   * Functions to be run after readonly changes
+   * Functions to be run after readonly changes you're able to chain this method for better seperation of readOnly changes
    * @param cb function that handles what happens after readonly changes
+   *
+   * @returns [[Form]]
+   *
+   * ```typescript
+   * const container = document.querySelector('.container');
+   * const inputs = Array.from(document.querySelectorAll('input'));
+   *
+   * function disableInputs(readOnly)  {
+   *   inputs.forEach(input => {
+   *     input.style.pointerEvents = readOnly ? 'none' : ''
+   *   })
+   * }
+   *
+   * function setReadOnlyClass(readOnly) {
+   *   container.classList[readOnly ? 'add' : 'remove']('read-only')
+   * }
+   *
+   * sdk.form
+   *  .onReadOnlyChange(setReadOnlyClass)
+   *  .onReadOnlyChange(disableInputs)
+   * ```
    */
   onReadOnlyChange(cb: onChangeHandler): Form {
     this.onChangeStack.push(cb);
@@ -29,6 +50,8 @@ export class Form {
 
   /**
    * Get the current model state of all the fields in the form.
+   *
+   * @type FormModel is the entire parent model that will be a peer to this extension
    */
   async getValue<FormModel = {}>(): Promise<Body<FormModel>> {
     try {
