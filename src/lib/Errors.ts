@@ -25,7 +25,7 @@ export enum ERRORS_FRAME {
 
 export enum FORM {
   /**
-   * This normally means you're in a context where their is no model to return i.e Schema Editor
+   * This normally means you're in a context where there is no model to return i.e Schema Editor
    */
   NO_MODEL = 'Unable to retrieve form model as form context does not have an active model.'
 }

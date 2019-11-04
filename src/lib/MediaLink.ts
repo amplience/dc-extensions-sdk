@@ -38,7 +38,35 @@ export class MediaLink {
    * Example of displaying a image in your custom control
    *
    * ```typescript
-   * WIP
+   * import { init } from 'dc-extensions-sdk';
+   * import { Image: ImageBuilder } from 'dc-delivery-sdk-js';
+   *
+   * async function start() {
+   *   const sdk = await init();
+   *   const img = document.querySelector('img');
+   *   const button = document.querySelector('button')
+   *
+   *   function onClick() {
+   *     sdk.mediaLink
+   *      .getImage()
+   *      .then(image => {
+   *         setImage(image)
+   *       })
+   *      .catch(err => console.log('not selected'));
+   *   }
+   *
+   *   function setImage(image) {
+   *      img.src = (
+   *         new ImageBuilder(image, { stagingEnvironment: sdk.stagingEnvironment })
+   *         .url()
+   *         .build()
+   *      )
+   *   }
+   *
+   *   button.onclick = onClick;
+   * }
+   *
+   * start()
    * ```
    */
   getImage(): Promise<MediaImageLink> {
@@ -57,12 +85,6 @@ export class MediaLink {
    * } catch (e) {
    *   // no video returned
    * }
-   * ```
-   *
-   * Example of displaying a video in your custom control
-   *
-   * ```typescript
-   * WIP
    * ```
    */
   getVideo(): Promise<MediaVideoLink> {
