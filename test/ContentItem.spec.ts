@@ -20,31 +20,21 @@ describe('ContentItem', () => {
     connection = new ClientConnection();
   });
 
-  it('Constructor should assign Content Item Id and it should be accessible', () => {
-    const contentItem: ContentItem = new ContentItem(connection, 'myid');
-    expect(contentItem.id === 'myid');
-  });
-
-  it('Constructor should allow for no Content Item Id argument', () => {
-    const contentItem: ContentItem = new ContentItem(connection);
-    expect(contentItem.id === undefined);
-  });
-
-  it('getValue() should make one request with CONTENT_ITEM.GET event', async () => {
+  it('getCurrent() should make one request with CONTENT_ITEM.GET event', async () => {
     const requestSpy = spyOn(connection, 'request');
-    const contentItem: ContentItem = new ContentItem(connection, 'myid');
-    await contentItem.getValue();
+    const contentItem: ContentItem = new ContentItem(connection);
+    await contentItem.getCurrent();
     expect(requestSpy).toHaveBeenCalledTimes(1);
     expect(requestSpy).toHaveBeenCalledWith(CONTENT_ITEM.GET);
   });
 
-  it('getValue() should return what comes back from the request', async () => {
+  it('getCurrent() should return what comes back from the request', async () => {
     const p: Promise<object> = new Promise(resolve => {
       resolve(contentItemModel);
     });
     spyOn(connection, 'request').and.returnValue(p);
-    const contentItem: ContentItem = new ContentItem(connection, 'myid');
-    const value = await contentItem.getValue();
+    const contentItem: ContentItem = new ContentItem(connection);
+    const value = await contentItem.getCurrent();
     expect(value).toEqual(contentItemModel);
   });
 });

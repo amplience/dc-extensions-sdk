@@ -4,21 +4,15 @@ import { ContentItemModel } from './models/ContentItemModel';
 
 export class ContentItem {
   /**
-   * Content Item - Used for fetching the model of the Content Item that is being edited.
+   * Content Item - Used for retrieving Content Items.
    * @param connection message.io connection
-   * @param id Content Item id - optional, Content Item may not have an id if it has not been saved.
    */
-  constructor(private connection: ClientConnection, public id?: string) {}
+  constructor(private connection: ClientConnection) {}
   /**
-   * Use to fetch the model of the Content Item that is being edited. Returns a promise which will resolve to a [[ContentItemModel]]
+   * Use to fetch the Content Item that is currently being edited. Returns a promise which will resolve to a [[ContentItemModel]]
    */
-  async getValue<FormModel = {}>(): Promise<ContentItemModel<FormModel>> {
+  async getCurrent<ContentItemBody = {}>(): Promise<ContentItemModel<ContentItemBody>> {
     const contentItem = await this.connection.request(CONTENT_ITEM.GET);
-
-    if (contentItem && contentItem.id) {
-      this.id = contentItem.id;
-    }
-
     return contentItem;
   }
 }
