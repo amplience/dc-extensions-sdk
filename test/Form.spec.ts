@@ -48,7 +48,7 @@ describe('Form', () => {
       spyOn(connection, 'request').and.returnValue(Promise.reject());
       try {
         await form.getValue();
-      } catch(e) {
+      } catch (e) {
         expect(e).toEqual(new Error(ERRORS.NO_MODEL));
       }
     });

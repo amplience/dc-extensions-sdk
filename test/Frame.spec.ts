@@ -21,12 +21,12 @@ describe('Frame', () => {
 
     it('should resolve on load if window is not ready', () => {
       const mockWindow = {
-        document: {readyState: false},
+        document: { readyState: false },
         addEventListener: () => {}
       };
       let callBack;
       // @ts-ignore
-      spyOn(mockWindow, 'addEventListener').and.callFake(async (_, cb) => {
+      spyOn(mockWindow, 'addEventListener').and.callFake((_, cb) => {
         callBack = cb;
         cb();
       });
@@ -36,7 +36,7 @@ describe('Frame', () => {
 
       expect(mockWindow.addEventListener).toHaveBeenCalledWith('load', callBack);
     });
-  
+
     it('should set the FRAME.GET_HEIGHT event with a method that returns the height', () => {
       const onSpy = spyOn(connection, 'on');
       const frame = new Frame(connection);
@@ -60,7 +60,7 @@ describe('Frame', () => {
     it('should return 0 if window does not have a body', () => {
       const frame: Frame = new Frame(connection);
       //@ts-ignore
-      frame.win = {document: {}};
+      frame.win = { document: {} };
       const height = frame.getHeight();
       expect(height).toEqual(0);
     });
@@ -75,7 +75,7 @@ describe('Frame', () => {
       expect(onSpy).toHaveBeenCalledTimes(1);
       expect(onSpy).toHaveBeenCalledWith(FRAME.HEIGHT_SET, 100);
     });
-  
+
     it('should send value 1', () => {
       const frame: Frame = new Frame(connection);
       const onSpy = spyOn(connection, 'emit');
@@ -83,7 +83,7 @@ describe('Frame', () => {
       expect(onSpy).toHaveBeenCalledTimes(1);
       expect(onSpy).toHaveBeenCalledWith(FRAME.HEIGHT_SET, 1);
     });
-  
+
     it('should send value 0', () => {
       const frame: Frame = new Frame(connection);
       const onSpy = spyOn(connection, 'emit');
@@ -91,7 +91,7 @@ describe('Frame', () => {
       expect(onSpy).toHaveBeenCalledTimes(1);
       expect(onSpy).toHaveBeenCalledWith(FRAME.HEIGHT_SET, 0);
     });
-  
+
     it('should send value 0 when passed a negative number', () => {
       const frame: Frame = new Frame(connection);
       const onSpy = spyOn(connection, 'emit');
@@ -99,7 +99,7 @@ describe('Frame', () => {
       expect(onSpy).toHaveBeenCalledTimes(1);
       expect(onSpy).toHaveBeenCalledWith(FRAME.HEIGHT_SET, 0);
     });
-  
+
     it('should throw an exception when not passed a numeric value', done => {
       const frame: Frame = new Frame(connection);
       const onSpy = spyOn(connection, 'emit');
@@ -111,7 +111,7 @@ describe('Frame', () => {
         done();
       }
     });
-  
+
     it('should throw an exception when passed an HTML element', done => {
       const frame: Frame = new Frame(connection);
       const emitSpy = spyOn(connection, 'emit');
@@ -131,7 +131,7 @@ describe('Frame', () => {
       const emitSpy = spyOn(connection, 'emit');
       frame.startAutoResizer();
       body.style.height = '100px';
-      setTimeout(()=>{
+      setTimeout(() => {
         expect(frame.isAutoResizing).toEqual(true);
         expect(emitSpy).toHaveBeenCalledWith(FRAME.HEIGHT_SET, 100);
         done();
@@ -158,7 +158,7 @@ describe('Frame', () => {
     });
     it('should not do anything if autoResiszing is false', () => {
       const frame: Frame = new Frame(connection);
-      spyOn(window, 'removeEventListener')
+      spyOn(window, 'removeEventListener');
       frame.isAutoResizing = false;
       frame.stopAutoResizer();
       expect(window.removeEventListener).not.toHaveBeenCalled();
@@ -186,7 +186,7 @@ describe('Frame', () => {
       frame.previousHeight = 10;
       //@ts-ignore
       frame.updateHeight();
-      expect(frame.setHeight).not.toHaveBeenCalled();      
+      expect(frame.setHeight).not.toHaveBeenCalled();
     });
   });
 });
