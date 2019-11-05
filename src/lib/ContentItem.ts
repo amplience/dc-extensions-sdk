@@ -10,7 +10,7 @@ export class ContentItem {
   constructor(private connection: ClientConnection) {}
   /**
    *
-   * @type FormModel is the entire parent model that will be a peer to this extension
+   * @type ContentItemBody defines the shape of the data that is expected to be returned in the Content Item body
    *
    * Use to fetch the Content Item that is currently being edited. Returns a promise which will resolve to a [[ContentItemModel]]
    *
