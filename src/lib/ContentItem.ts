@@ -17,9 +17,9 @@ export class ContentItem {
    * ### Example
    * ```typescript
    * try {
-   *   const formModel = await sdk.contentItem.getCurrent();
+   *   const contentItem = await sdk.contentItem.getCurrent();
    *
-   *   console.log(formModel)
+   *   console.log(contentItem)
    * } catch (e) {
    *   // In a context where contentItem doesn't exist yet
    * }
