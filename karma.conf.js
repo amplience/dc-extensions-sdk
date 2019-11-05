@@ -3,20 +3,20 @@ module.exports = function(config) {
     frameworks: ['jasmine', 'karma-typescript'],
     files: [
       { pattern: './src/**/*.ts' },
-      { pattern: './test/**/*.spec.ts' },
-      { pattern: './test/**/*.html', included: false, host: true },
       { pattern: './test/**/*.ts' }
     ],
     preprocessors: {
       './src/**/*.ts': ['karma-typescript'],
-      './test/**/*.ts': ['karma-typescript'],
-      './src/**/!(*spec).ts': ['karma-typescript', 'coverage']
+      './test/**/*.ts': ['karma-typescript']
     },
-    reporters: ['dots', 'coverage', 'karma-typescript'],
+    reporters: ['dots', 'karma-typescript'],
     browsers: ['Chrome'],
-    coverageReporter: {
-      type: 'text',
-      dir: 'coverage/'
+    karmaTypescriptConfig: {
+      reports: {
+        text: null,
+        'text-summary': null,
+        html: 'coverage/'
+      }
     },
     singleRun: false
   });
