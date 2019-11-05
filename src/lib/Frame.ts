@@ -74,7 +74,7 @@ export class Frame {
       characterData: true
     });
 
-    this.win.addEventListener('resize', () => this.updateHeight());
+    this.win.addEventListener('resize', this.updateHeight);
   }
   /**
    * Stop the auto-resizer
@@ -86,7 +86,7 @@ export class Frame {
 
     this.isAutoResizing = false;
     this.observer.disconnect();
-    this.win.removeEventListener('resize', () => this.updateHeight());
+    this.win.removeEventListener('resize', this.updateHeight);
   }
 
   private updateHeight() {
