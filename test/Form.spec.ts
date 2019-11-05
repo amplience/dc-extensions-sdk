@@ -1,4 +1,3 @@
-import { FORM } from '../src/lib/Events';
 import { FORM as ERRORS } from '../src/lib/Errors';
 import { ClientConnection } from 'message.io';
 import { Body } from '../src/lib/models/ContentItemModel';
