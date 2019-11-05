@@ -19,6 +19,14 @@ export class ContentReference {
   /**
    * This method will trigger a content browser. It returns a promise that will resolve to the chosen Content Link.
    * @param contentTypeIds list of Content Type Ids to filter the Content Browser by.
+   *
+   * ### Example
+   * ```typescript
+   * const enums = sdk.field.schema.allOf[1].properties.contentType.enum;
+   * const contentRef = await sdk.contentReference.get(enums);
+   *
+   * console.log(contentRef);
+   * ```
    */
   async get(contentTypeIds: Array<string>): Promise<ContentItemReference> {
     if (!contentTypeIds || !Array.isArray(contentTypeIds) || !contentTypeIds.length) {

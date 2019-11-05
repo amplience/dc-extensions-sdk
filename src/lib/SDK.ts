@@ -9,6 +9,8 @@ import { ContentReference } from './ContentReference';
 import { LocalesModel } from './models/Locales';
 import { Field, FieldSchema } from './Field';
 import { Form } from './Form';
+
+export interface IClientConnection extends ClientConnection {}
 /**
  * Expected format for the provided options
  */
@@ -114,7 +116,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
       this.connection.init();
       this.connection.on(MIO_EVENTS.CONNECTED, async () => {
         try {
-          await this.setupContext(resolve, reject);
+          await this.setupContext();
           resolve(this);
         } catch (e) {
           reject(new Error(ERRORS_INIT.CONTEXT));
@@ -126,7 +128,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
     });
   }
 
-  private async setupContext(resolve: Function, reject: Function) {
+  private async setupContext() {
     const {
       fieldSchema,
       params,

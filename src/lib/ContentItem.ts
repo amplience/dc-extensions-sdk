@@ -9,7 +9,22 @@ export class ContentItem {
    */
   constructor(private connection: ClientConnection) {}
   /**
+   *
+   * @type ContentItemBody defines the shape of the data that is expected to be returned in the Content Item body
+   *
    * Use to fetch the Content Item that is currently being edited. Returns a promise which will resolve to a [[ContentItemModel]]
+   *
+   * ### Example
+   * ```typescript
+   * try {
+   *   const contentItem = await sdk.contentItem.getCurrent();
+   *
+   *   console.log(contentItem)
+   * } catch (e) {
+   *   // In a context where contentItem doesn't exist yet
+   * }
+   *
+   * ```
    */
   async getCurrent<ContentItemBody = {}>(): Promise<ContentItemModel<ContentItemBody>> {
     const contentItem = await this.connection.request(CONTENT_ITEM.GET);

@@ -33,6 +33,16 @@ export class Frame {
 
   /**
    * Get the height of the Extension
+   *
+   * Returns the extensions total height
+   *
+   * ### Example
+   * ```typescript
+   * const height = sdk.frame.getHeight()
+   *
+   * // 200
+   * console.log(height)
+   * ```
    */
   public getHeight(): number {
     const { documentElement } = this.win.document;
@@ -49,6 +59,17 @@ export class Frame {
   /**
    * Set the height of the frame to the height of the Extension. Can optionally override the measured height with a defined value.
    * @param height - should be used if you want to override the calculated height of your extension
+   *
+   * If no height is passed it will try get the extension height or default to 0
+   *
+   * ### Example
+   *
+   * ```typescript
+   * // sets height to extension height
+   * sdk.frame.setHeight()
+   * // sets height to 200
+   * sdk.frame.setHeight(200)
+   * ```
    */
   public setHeight(height?: number) {
     if (height !== undefined && (typeof height as unknown) !== 'number') {
@@ -62,7 +83,18 @@ export class Frame {
   }
 
   /**
-   * Start the auto-resizer
+   * Starts the auto-resizer
+   *
+   * It creates an event listener on resize and creates a mutation observer that updates
+   * the height when the body height changes you should clean up from this function on unmount
+   * to avoid memory leaks
+   *
+   * If called when already active it does nothing
+   *
+   * ### Example
+   * ```typescript
+   * sdk.frame.startAutoResizer();
+   * ```
    */
   public startAutoResizer() {
     if (this.isAutoResizing) {
@@ -80,8 +112,19 @@ export class Frame {
 
     this.win.addEventListener('resize', this.updateHeightHandler);
   }
+
   /**
-   * Stop the auto-resizer
+   * Stops the auto-resizer
+   *
+   * It tears down the event listeners and observers created from startAutoResizer should be
+   * called when you want to mannaully handle the height or when unmounting
+   *
+   * If called without autoResizer being active it does nothing
+   *
+   * ### Example
+   * ```typescript
+   * sdk.frame.stopAutoResizer();
+   * ```
    */
   public stopAutoResizer() {
     if (!this.isAutoResizing) {

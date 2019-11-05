@@ -19,8 +19,30 @@ export class Form {
 
   /**
    *
-   * Functions to be run after readonly changes
-   * @param cb function that handles what happens after readonly changes
+   * Allows you to provide a callback to be executed after the readonly state changes. This method can be chained to append multiple callbacks.
+   * @param cb Callback function that executes upon readonly state change.
+   *
+   * @returns [[Form]]
+   *
+   * ### Example
+   * ```typescript
+   * const container = document.querySelector('.container');
+   * const inputs = Array.from(document.querySelectorAll('input'));
+   *
+   * sdk.form
+   *  .onReadOnlyChange(setReadOnlyClass)
+   *  .onReadOnlyChange(disableInputs)
+   *
+   * function disableInputs(readOnly)  {
+   *   inputs.forEach(input => {
+   *     input.style.pointerEvents = readOnly ? 'none' : ''
+   *   })
+   * }
+   *
+   * function setReadOnlyClass(readOnly) {
+   *   container.classList[readOnly ? 'add' : 'remove']('read-only')
+   * }
+   * ```
    */
   onReadOnlyChange(cb: onChangeHandler): Form {
     this.onChangeStack.push(cb);
@@ -29,6 +51,19 @@ export class Form {
 
   /**
    * Get the current model state of all the fields in the form.
+   *
+   * @type FormModel is the entire parent model that will be a peer to this extension
+   *
+   * ### Example
+   * ```typescript
+   * try {
+   *   const value = await sdk.form.getValue();
+   *
+   *   console.log(value)
+   * } catch (e) {
+   *   // In a context where there is no form model
+   * }
+   * ```
    */
   async getValue<FormModel = {}>(): Promise<Body<FormModel>> {
     try {
