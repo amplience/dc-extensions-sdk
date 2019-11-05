@@ -26,7 +26,7 @@ describe('Frame', () => {
       };
       let callBack;
       // @ts-ignore
-      spyOn(mockWindow, 'addEventListener').and.callFake(async (_, cb) => {
+      spyOn(mockWindow, 'addEventListener').and.callFake((_, cb) => {
         callBack = cb;
         cb();
       });
