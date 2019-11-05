@@ -130,7 +130,6 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
 
   private async setupContext() {
     const {
-      contentItemId,
       fieldSchema,
       params,
       locales,
@@ -138,7 +137,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
       readOnly,
       visualisation
     } = await this.requestContext();
-    this.contentItem = new ContentItem(this.connection, contentItemId);
+    this.contentItem = new ContentItem(this.connection);
     this.field = new Field(this.connection, fieldSchema);
     this.form = new Form(this.connection, readOnly);
     this.params = params;
