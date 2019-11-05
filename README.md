@@ -2,13 +2,6 @@
 
 An SDK to aid in the making of UI Extensions for the Dynamic Content App, extensions allow developers to create their own controls in Dynamic Content.
 
-## Resources
-- [Documentation](http://link-to-docs)
-- [Beginners Tutorial](http://link-to-blog-post)
-- [StackOverflow](http://stackoverflowlink)
-- [Styling guide](http://link-to-styling-guide)
-- [Awesome list of extensions](http://link-to-awesome-list)
-
 # Installation
 
 Using npm:
