@@ -126,14 +126,16 @@ describe('Frame', () => {
   });
 
   describe('Frame.startAutoResizer()', () => {
-    it('should start auto resizer', () => {
+    it('should start auto resizer', done => {
       const frame: Frame = new Frame(connection);
       const emitSpy = spyOn(connection, 'emit');
-      body.style.height = '100px';
       frame.startAutoResizer();
-      expect(frame.isAutoResizing).toEqual(true);
-      expect(emitSpy).toHaveBeenCalledTimes(1);
-      expect(emitSpy).toHaveBeenCalledWith(FRAME.HEIGHT_SET, 100);
+      body.style.height = '100px';
+      setTimeout(()=>{
+        expect(frame.isAutoResizing).toEqual(true);
+        expect(emitSpy).toHaveBeenCalledWith(FRAME.HEIGHT_SET, 100);
+        done();
+      });
     });
     it('should not do anything if autoResizing is true', () => {
       const frame: Frame = new Frame(connection);
