@@ -1,4 +1,4 @@
-import { ClientConnection } from 'message.io';
+import { ClientConnection } from 'message-event-channel';
 import { CONTENT_LINK } from './Events';
 import { ERRORS_CONTENT_ITEM } from './Errors';
 export interface ContentItemLink {
@@ -11,7 +11,7 @@ export interface ContentItemLink {
 export class ContentLink {
   /**
    * Content Link - Use to open the content browser.
-   * @param connection message.io connection
+   * @param connection message-event-channel connection
    */
   constructor(private connection: ClientConnection) {}
   /**

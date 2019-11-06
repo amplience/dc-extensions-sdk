@@ -1,4 +1,4 @@
-import { ClientConnection, MIO_EVENTS } from 'message.io';
+import { ClientConnection, MC_EVENTS } from 'message-event-channel';
 import { Frame } from './Frame';
 import { CONTEXT } from './Events';
 import { ERRORS_INIT } from './Errors';
@@ -41,7 +41,7 @@ type ContextObject<ParamType extends Params = Params> = {
 
 export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
-   * message.io [[ClientConnection]] instance. Use to listen to any of the message.io lifecycle events.
+   * message-event-channel [[ClientConnection]] instance. Use to listen to any of the message-event-channel lifecycle events.
    */
   public connection!: ClientConnection;
   /**
@@ -114,7 +114,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   public async init() {
     return new Promise<SDK<FieldType, ParamType>>(async (resolve, reject) => {
       this.connection.init();
-      this.connection.on(MIO_EVENTS.CONNECTED, async () => {
+      this.connection.on(MC_EVENTS.CONNECTED, async () => {
         try {
           await this.setupContext();
           resolve(this);
@@ -122,7 +122,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
           reject(new Error(ERRORS_INIT.CONTEXT));
         }
       });
-      this.connection.on(MIO_EVENTS.CONNECTION_TIMEOUT, () => {
+      this.connection.on(MC_EVENTS.CONNECTION_TIMEOUT, () => {
         reject(new Error(ERRORS_INIT.CONNTECTION_TIMEOUT));
       });
     });

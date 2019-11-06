@@ -1,4 +1,4 @@
-import { ClientConnection } from 'message.io';
+import { ClientConnection } from 'message-event-channel';
 import { ContentLink } from '../src/lib/ContentLink';
 
 describe('ContentItem', () => {

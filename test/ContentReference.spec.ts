@@ -1,4 +1,4 @@
-import { ClientConnection } from 'message.io';
+import { ClientConnection } from 'message-event-channel';
 import { ContentReference } from '../src/lib/ContentReference';
 
 describe('ContentReference', () => {
