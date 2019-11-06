@@ -53,7 +53,7 @@
     ]
   },
   "dependencies": {
-    "message.io": "git+ssh://git@bitbucket.org/amplience/message.io.git#6e528f830b47461ea808505cc5d541a6a9e1bfa7"
+    "message.io": "git+ssh://git@bitbucket.org/amplience/message.io.git#master"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.3",
