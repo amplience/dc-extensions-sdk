@@ -126,7 +126,7 @@ describe('Frame', () => {
   });
 
   describe('Frame.startAutoResizer()', () => {
-    it('should start auto resizer', done => {
+    xit('should start auto resizer', done => {
       const frame: Frame = new Frame(connection);
       const emitSpy = spyOn(connection, 'emit');
       frame.startAutoResizer();
