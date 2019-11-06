@@ -1,6 +1,6 @@
 {
   "name": "dc-extensions-sdk",
-  "version": "0.0.0",
+  "version": "0.0.0-development",
   "description": "",
   "keywords": [],
   "main": "dist/dc-extensions-sdk.umd.js",
@@ -9,7 +9,7 @@
   "author": "ccorbett <ccorbett@amplience.com>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/amplience/dc-extensions-sdk.git"
   },
   "license": "MIT",
   "engines": {
@@ -30,7 +30,9 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-    "travis-deploy-once": "travis-deploy-once"
+    "travis-deploy-once": "travis-deploy-once",
+    "prepush": "npm run test:prod && npm run build",
+    "commitmsg": "commitlint -E HUSKY_GIT_PARAMS"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
@@ -53,7 +55,7 @@
     ]
   },
   "dependencies": {
-    "message-event-channel": "git+ssh://git@bitbucket.org/amplience/message-event-channel.git#360a2dd8394c4df488e3a473423c0be79c8133df"
+    "message-event-channel": "^1.0.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.3",
