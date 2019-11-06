@@ -1,5 +1,5 @@
 import { FORM as ERRORS } from '../src/lib/Errors';
-import { ClientConnection } from 'message.io';
+import { ClientConnection } from 'message-event-channel';
 import { Body } from '../src/lib/models/ContentItemModel';
 import { Form } from '../src/lib/Form';
 

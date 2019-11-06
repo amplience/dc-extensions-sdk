@@ -1,6 +1,6 @@
 import { FRAME } from '../src/lib/Events';
 import { Frame } from '../src/lib/Frame';
-import { ClientConnection } from 'message.io';
+import { ClientConnection } from 'message-event-channel';
 describe('Frame', () => {
   let connection: ClientConnection;
   let body: HTMLBodyElement;

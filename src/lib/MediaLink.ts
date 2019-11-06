@@ -1,4 +1,4 @@
-import { ClientConnection } from 'message.io';
+import { ClientConnection } from 'message-event-channel';
 import { MEDIA_LINK } from './Events';
 export interface MediaImageLink {
   _meta: {
@@ -17,7 +17,7 @@ export interface MediaVideoLink {
 export class MediaLink {
   /**
    * Media Link - Use to open the media browser.
-   * @param connection message.io connection
+   * @param connection message-event-channel connection
    */
   constructor(private connection: ClientConnection) {}
   /**

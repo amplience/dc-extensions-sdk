@@ -1,4 +1,4 @@
-import { ClientConnection } from 'message.io';
+import { ClientConnection } from 'message-event-channel';
 import { CONTENT_ITEM } from '../src/lib/Events';
 import { ContentItem } from '../src/lib/ContentItem';
 import { ContentItemModel } from '../src/lib/models/ContentItemModel';

@@ -1,6 +1,6 @@
 import { FORM } from './Events';
 import { FORM as ERRORS } from './Errors';
-import { ClientConnection } from 'message.io';
+import { ClientConnection } from 'message-event-channel';
 import { Body } from './models/ContentItemModel';
 
 export type onChangeHandler = (readonly: boolean) => void;

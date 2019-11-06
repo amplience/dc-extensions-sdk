@@ -1,6 +1,6 @@
 import { FIELD } from '../src/lib/Events';
 import { Field, FieldSchema } from '../src/lib/Field';
-import { ClientConnection } from 'message.io';
+import { ClientConnection } from 'message-event-channel';
 import { ErrorReport } from '../src/lib/models/ErrorReport';
 import { Params } from '../src/lib/SDK';
 

@@ -1,4 +1,4 @@
-import { ClientConnection } from 'message.io';
+import { ClientConnection } from 'message-event-channel';
 import { MEDIA_LINK } from '../src/lib/Events';
 import { MediaLink } from '../src/lib/MediaLink';
 

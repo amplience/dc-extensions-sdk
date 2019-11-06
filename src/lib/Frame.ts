@@ -1,4 +1,4 @@
-import { ClientConnection } from 'message.io';
+import { ClientConnection } from 'message-event-channel';
 
 import { FRAME } from './Events';
 import { ERRORS_FRAME } from './Errors';
@@ -10,7 +10,7 @@ export class Frame {
 
   /**
    * Use in order to control the re-sizing of the Extension
-   * @param connection message.io connection
+   * @param connection message-event-channel connection
    * @param win override the default window object
    */
   constructor(private connection: ClientConnection, private win: Window = window) {
