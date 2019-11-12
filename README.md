@@ -1,6 +1,9 @@
 # dc-extensions-sdk
 
-An SDK to aid in the making of UI Extensions for the Dynamic Content App, extensions allow developers to create their own controls in Dynamic Content.
+An SDK that enables the creation of Extensions for Dynamic Content. Extensions are custom form controls that can be used in the content editing form in the Dynamic Content App.
+
+- [How to use Extensions in Dynamic Content](https://docs.amplience.net/development/extensions.html)
+- [SDK Documentation](https://amplience.github.io/dc-extensions-sdk/)
 
 # Installation
 
@@ -197,9 +200,11 @@ sdk.frame.setHeight(300); // override height
 
 ### Auto Resizing
 
-While the application's height will be automatically set on load, your application's size might change over time. You can either trigger `sdk.frame.setHeight();` manually or use the Auto Resizer.
+While the application's height will be automatically set on load, your application's size might change over time. When this happens you can either trigger `sdk.frame.setHeight();` or use the Auto Resizer.
 
-The Auto Resizer will listen for any change to your DOM nodes or attributes as well as window resizing. When it is triggered it will automatically resize the container’s height to the size of the extension.
+The Auto Resizer will listen for any change to the DOM as well as window resizing. When it is triggered it will automatically resize the container’s height to the size of the extension.
+
+*NOTE: If your application dynamically loads images we suggest you attach a load event listener that will trigger `sdk.frame.setHeight();`*
 
 ```js
 const sdk = await init();
