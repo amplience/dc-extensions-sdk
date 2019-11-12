@@ -1,6 +1,9 @@
 # dc-extensions-sdk
 
-An SDK to aid in the making of UI Extensions for the Dynamic Content App, extensions allow developers to create their own controls in Dynamic Content.
+An SDK that enables the creation of Extensions for Dynamic Content. Extensions are custom form controls that can be used in the content editing form in the Dynamic Content App.
+
+- [How to use Extensions in Dynamic Content](https://docs.amplience.net/development/extensions.html)
+- [SDK Documentation](https://amplience.github.io/dc-extensions-sdk/)
 
 # Installation
 
@@ -90,12 +93,10 @@ You can configure your extension with the options object passed into the init fu
 import { init } from 'dc-extensions-sdk';
 
 const options = {
-  // used to enable useful behind-the-scenes info
+  // enable useful behind-the-scenes info
   debug: false,
-  // if you want to manually attach the window object
-  window: window,
-  // if you want more control over timeouts
-  connectionTimeout: 2000
+  // the max time to wait for a connection to establish 
+  connectionTimeout: 1000
 };
 
 async function initialize() {
@@ -110,65 +111,113 @@ initialize();
 # Usage
 
 ## Field
-Fetching the field value
+### Fetching the field value
 ```js
 const fieldValue = await sdk.field.getValue();
 
 console.log(fieldValue);
 ```
 
-Setting the field value
+### Setting the field value
+
+*Note: The field model isn't updated when the form is in a read only state.*
 ```js
 const sdk = await init();
 
 await sdk.field.setValue('some value');
 ```
 
-Resetting the field value to an empty state or a previously saved state
+### Resetting the field value
+This will reset to the previously saved state or `undefined` if the item hasn't been saved.
 ```js
 const sdk = await init();
 
 await sdk.field.resetValue();
 ```
 
-Fetching the field schema
+### Retrieving the field schema
 ```js
 const sdk = await init();
 
 const schema = sdk.field.schema;
 ```
 
-## Content Item
+### Test if a model is valid
+Will evaluate the supplied model against the schema. Returns a boolean.
 
-Get the full model for the Content Item you are editing
 ```js
 const sdk = await init();
 
-const contentType = await sdk.contentItem.getValue();
+const isValid = await sdk.field.isValid('some value');
+```
+### Test if a model is valid (with errors)
+Will evaluate the supplied model against the schema. Will either return an array of errors or `undefined`.
+```js
+const sdk = await init();
+
+const errors = await sdk.field.validate('some value');
+```
+
+## Content Item
+
+Use to fetch the Content Item that is currently being edited.
+```js
+const sdk = await init();
+
+const contentItem = await sdk.contentItem.getCurrent();
+```
+Example Content Item:
+```json
+{
+  "id": "4801f662-de68-43d3-8864-52d2d9c10bf4",
+  "deliveryId": "4801f662-de68-43d3-8864-52d2d9c10bf4",
+  "locale": "en-GB",
+  "body": {
+    "_meta": {
+      "name": "hello-world",
+      "schema": "http://www.hello-world.com"
+    },
+    "helloWorld": "Test"
+  },
+  "label": "Hello World",
+  "version": 8
+}
 ```
 
 
 ## Frame
 
-You can set the height mannually using, this messages the parent window and sets the iframe height.
+### Setting the height
+
+This changes the height of the extension. It will measure the height of the application and change the container's height to fit. You can also force a height by specifying an integer value.
+
 ```js
 const sdk = await init();
 
-sdk.frame.setHeight(300);
+sdk.frame.setHeight(); // measures height
+sdk.frame.setHeight(300); // override height
 ```
 
-(Recommended) If you want your extension to automaticlly resize its height to the size of the extension use the autoResizer function `startAutoResizer`
+### Auto Resizing
+
+While the application's height will be automatically set on load, your application's size might change over time. When this happens you can either trigger `sdk.frame.setHeight();` or use the Auto Resizer.
+
+The Auto Resizer will listen for any change to the DOM as well as window resizing. When it is triggered it will automatically resize the container’s height to the size of the extension.
+
+*NOTE: If your application dynamically loads images we suggest you attach a load event listener that will trigger `sdk.frame.setHeight();`*
+
 ```js
 const sdk = await init();
-
+// turn on the Auto Resizer
 sdk.frame.startAutoResizer();
 
-
-// To clean up use
+// turn off the Auto Resizer
 sdk.frame.stopAutoResizer();
 ```
 
 ## Locales
+
+The available locales for the Content Item.
 
 ```js
 const sdk = await init();
@@ -177,32 +226,32 @@ const locales = sdk.locales;
 
 console.log(locales);
 ```
-
-```js
+Example:
+```json
 {
-  default: ["en-GB", "fr-FR"],
-  available: [
+  "default": ["en-GB", "fr-FR"],
+  "available": [
     {
-      locale: "en-GB",
-      language: "en",
-      country: "GB",
-      index: 0,
-      selected: true
+      "locale": "en-GB",
+      "language": "en",
+      "country": "GB",
+      "index": 0,
+      "selected": true
     },
     {
-      locale: "fr-FR",
-      language: "fr",
-      country: "FR",
-      index: 1,
-      selected: false
+      "locale": "fr-FR",
+      "language": "fr",
+      "country": "FR",
+      "index": 1,
+      "selected": false
     }
   ]
 }
 ```
 
-## Parameters
+## Params
 
-These allow your component to be configurable. Either defined in the JSON Schema (instance) or defined in the registry (installation).
+These allow your component to be configurable. They can be defined in the JSON Schema (instance) or defined in the registry (installation), or both.
 
 ```js
 const sdk = await init();
@@ -218,7 +267,7 @@ console.log(sdk.params);
 ```
 
 
-## MediaLink
+## Media Link
 
 Use this to trigger an image or video browser.
 
@@ -229,7 +278,7 @@ const image = await sdk.mediaLink.getImage();
 const video = await sdk.mediaLink.getVideo();
 ```
 
-## ContentLink
+## Content Link
 
 Use this to trigger an content-item browser for including content-links. Include a list of schemas to browse for.
 
@@ -239,7 +288,7 @@ const sdk = await init();
 const contentLink = await sdk.contentLink.get(['http://my.schema/carousel.json']);
 ```
 
-## ContentReference
+## Content Reference
 
 Use this to trigger an content-item browser for including content references. Include a list of schemas to browse for.
 
@@ -249,11 +298,23 @@ const sdk = await init();
 const contentReference = await sdk.contentReference.get(['http://my.schema/carousel.json']);
 ```
 
-## Read Only
+## Form
+
+### Model
+
+Use this to fetch the in-progress form model. This can change while the extension is open. 
+
+```js
+const sdk = await init();
+
+const formModel = await sdk.form.getValue();
+```
+
+### Read Only
 
 In some contexts in the form content is not editable and we provide a boolean value that specifies if content should not be editable if you want to react to these changes we give you a function to do so.
 
-We don't save content when it's in this state but it's good to give the user of the content some contextual feedback that it's in a readOnly state.
+*Note: The field model isn't updated when the form is in a read only state.*
 
 ```js
 const input = document.querySelector('input');
@@ -265,14 +326,4 @@ console.log(sdk.form.readOnly);
 sdk.form.onReadOnlyChange(readOnly => {
   input.style.pointerEvents = readOnly ? 'none' : ''
 });
-```
-
-## The entire model value
-
-We provide the entire forms value and not just the field value. If you want to react to changes to the form model you can do that using this function and using the returned value to make changes.
-
-```js
-const sdk = await init();
-
-const formModel = await sdk.form.getValue();
 ```
