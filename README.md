@@ -1,4 +1,8 @@
+[![Amplience Dynamic Content](media/header.png)](https://amplience.com/dynamic-content)
+
 # dc-extensions-sdk
+[![Build Status](https://travis-ci.org/amplience/dc-extensions-sdk.svg?branch=master)](https://travis-ci.org/amplience/dc-extensions-sdk)
+[![npm version](https://badge.fury.io/js/dc-extensions-sdk.svg)](https://badge.fury.io/js/dc-extensions-sdk)
 
 An SDK that enables the creation of Extensions for Dynamic Content. Extensions are custom form controls that can be used in the content editing form in the Dynamic Content App.
 
@@ -324,6 +328,10 @@ const sdk = await init();
 console.log(sdk.form.readOnly);
 
 sdk.form.onReadOnlyChange(readOnly => {
-  input.style.pointerEvents = readOnly ? 'none' : ''
+  if (readOnly) {
+    input.setAttribute('disabled', true);
+  } else {
+    input.removeAttribute('disabled');
+  }
 });
 ```
