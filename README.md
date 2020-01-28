@@ -100,7 +100,7 @@ const options = {
   // enable useful behind-the-scenes info
   debug: false,
   // the max time to wait for a connection to establish 
-  connectionTimeout: 3500
+  connectionTimeout: 4500
 };
 
 async function initialize() {

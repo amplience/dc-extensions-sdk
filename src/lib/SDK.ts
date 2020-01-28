@@ -91,7 +91,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   protected options: Options;
   protected readonly defaultOptions: Options = {
     window: window,
-    connectionTimeout: 3500,
+    connectionTimeout: 4500,
     debug: false
   };
 
