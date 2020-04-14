@@ -35,6 +35,9 @@ export class ContentLink {
     contentTypeIds: Array<string>,
     options: CotnentLinkOptions = { max: null }
   ): Promise<ContentItemLink[]> {
+    if (options.max === undefined) {
+      options.max = null;
+    }
     return this.fetchLinks(contentTypeIds, options.max);
   }
   /**
