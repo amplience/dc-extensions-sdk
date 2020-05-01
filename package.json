@@ -55,7 +55,7 @@
     ]
   },
   "dependencies": {
-    "message-event-channel": "^1.0.1"
+    "message-event-channel": "github:amplience/message-event-channel#feature/teardown-behaviour"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.3",
