@@ -23,7 +23,7 @@ describe('SDK', () => {
   });
 
   it('init() should reject the promise when it times out', async done => {
-    const sdk = new SDK();
+    const sdk = new SDK({ connectionTimeout: 1 });
     try {
       await sdk.init();
     } catch (e) {
