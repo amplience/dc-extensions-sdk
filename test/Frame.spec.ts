@@ -126,8 +126,9 @@ describe('Frame', () => {
   });
 
   describe('Frame.startAutoResizer()', () => {
-    xit('should start auto resizer', done => {
+    it('should start auto resizer', done => {
       const frame: Frame = new Frame(connection);
+      body.style.height = '0px';
       const emitSpy = spyOn(connection, 'emit');
       frame.startAutoResizer();
       body.style.height = '100px';

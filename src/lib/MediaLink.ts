@@ -14,6 +14,10 @@ export interface MediaVideoLink {
     schema: string;
   };
 }
+
+export interface MediaOptions {
+  max: number | null;
+}
 export class MediaLink {
   /**
    * Media Link - Use to open the media browser.
@@ -70,7 +74,27 @@ export class MediaLink {
    * ```
    */
   getImage(): Promise<MediaImageLink> {
-    return this.connection.request(MEDIA_LINK.IMAGE_GET, null, { timeout: false });
+    return this.connection.request(MEDIA_LINK.IMAGE_GET, null, {
+      timeout: false
+    });
+  }
+  /**
+   * This method will trigger an image browser. It returns a promise that will resolve to the chosen Image Links.
+   *
+   * Example of fetching an image from DC
+   * ```typescript
+   * try {
+   *   // open browser and waits for image
+   *   // returns object that should be saved to the model
+   *   const images = await sdk.mediaLink.getImages({ max: 10 })
+   *
+   * } catch (e) {
+   *   // no image returned
+   * }
+   * ```
+   */
+  getImages({ max }: MediaOptions = { max: null }): Promise<MediaImageLink[]> {
+    return this.connection.request(MEDIA_LINK.IMAGE_GET, { max }, { timeout: false });
   }
   /**
    * This method will trigger a video browser. It returns a promise that will resolve to the chosen Video Link.
@@ -88,6 +112,32 @@ export class MediaLink {
    * ```
    */
   getVideo(): Promise<MediaVideoLink> {
-    return this.connection.request(MEDIA_LINK.VIDEO_GET, null, { timeout: false });
+    return this.connection.request(MEDIA_LINK.VIDEO_GET, null, {
+      timeout: false
+    });
+  }
+  /**
+   * This method will trigger a video browser. It returns a promise that will resolve to the chosen Video Links.
+   *
+   * Example of fetching an video from DC
+   * ```typescript
+   * try {
+   *   // open browser and waits for video
+   *   // returns object that should be saved to the model
+   *   const videos = await sdk.mediaLink.getVideos()
+   *
+   * } catch (e) {
+   *   // no video returned
+   * }
+   * ```
+   */
+  getVideos({ max }: MediaOptions = { max: null }): Promise<MediaVideoLink[]> {
+    return this.connection.request(
+      MEDIA_LINK.VIDEO_GET,
+      { max },
+      {
+        timeout: false
+      }
+    );
   }
 }

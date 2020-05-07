@@ -16,12 +16,14 @@ export interface IClientConnection extends ClientConnection {}
  */
 export interface OptionsObject {
   window?: Window;
-  connectionTimeout?: number;
+  connectionTimeout?: number | boolean;
+  timeout?: number | boolean;
   debug?: boolean;
 }
 export interface Options {
   window: Window;
-  connectionTimeout: number;
+  connectionTimeout: number | boolean;
+  timeout: number | boolean;
   debug: boolean;
 }
 export interface Params {
@@ -91,7 +93,8 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   protected options: Options;
   protected readonly defaultOptions: Options = {
     window: window,
-    connectionTimeout: 4500,
+    connectionTimeout: false,
+    timeout: false,
     debug: false
   };
 
