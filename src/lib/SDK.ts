@@ -9,6 +9,7 @@ import { ContentReference } from './ContentReference';
 import { LocalesModel } from './models/Locales';
 import { Field, FieldSchema } from './Field';
 import { Form } from './Form';
+import { HttpClient } from './HttpClient';
 
 export interface IClientConnection extends ClientConnection {}
 /**
@@ -98,6 +99,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
     debug: false
   };
 
+  protected client!: HttpClient;
   /**
    * The SDK instance is the central place for all SDK methods. It takes an optional options object.
    * @param options
@@ -109,6 +111,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
     this.contentLink = new ContentLink(this.connection);
     this.contentReference = new ContentReference(this.connection);
     this.frame = new Frame(this.connection, this.options.window);
+    this.client = new HttpClient(this.connection);
   }
 
   /**
