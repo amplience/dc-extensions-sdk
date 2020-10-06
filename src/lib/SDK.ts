@@ -90,6 +90,12 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
    * Visualisation - URL of the visualisation
    */
+
+  /**
+   *  Client - used with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js) to make requests to dynamic-content
+   */
+  public client!: HttpClient;
+
   public visualisation!: string;
   protected options: Options;
   protected readonly defaultOptions: Options = {
@@ -99,7 +105,6 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
     debug: false
   };
 
-  protected client!: HttpClient;
   /**
    * The SDK instance is the central place for all SDK methods. It takes an optional options object.
    * @param options

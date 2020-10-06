@@ -29,6 +29,24 @@ export interface HttpRequest {
   headers?: { [key: string]: string };
 }
 
+/**
+ * Client to be used with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js)
+ *
+ * You must enabled your extension for this service to work like so:
+ *
+ * @TODO talk about how to enable a extension to make requests
+ *
+ * ```typescript
+ * const dcExtension = await init();
+ * const dcManagement = new DynamicContent(
+ *  {},
+ *  {},
+ *  dcExtension.client
+ * );
+ *
+ * const hubs = await dcManagement.hubs.list();
+ * ```
+ */
 export class HttpClient {
   constructor(private connection: ClientConnection) {}
 
