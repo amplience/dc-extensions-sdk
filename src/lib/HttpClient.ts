@@ -37,6 +37,9 @@ export interface HttpRequest {
  * @TODO talk about how to enable a extension to make requests
  *
  * ```typescript
+ * import { init } from 'dc-extensions-sdk';
+ * import { DynamicContent } from "dc-management-sdk-js";
+ *
  * const dcExtension = await init();
  * const dcManagement = new DynamicContent(
  *  {},

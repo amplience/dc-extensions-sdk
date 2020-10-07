@@ -362,6 +362,9 @@ sdk.form.onReadOnlyChange(readOnly => {
 ### Use client with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js)
 
 ```js
+import { init } from 'dc-extensions-sdk';
+import { DynamicContent } from 'dc-management-sdk-js';
+
 const dcExtension = await init();
 const dcManagement = new DynamicContent({}, {}, dcExtension.client);
 
