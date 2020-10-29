@@ -355,10 +355,6 @@ sdk.form.onReadOnlyChange(readOnly => {
 
 ## Client
 
-### How to enable your extension to use [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js)
-
-@TODO when we've implemented guarding fill in here
-
 ### Use client with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js)
 
 ```js

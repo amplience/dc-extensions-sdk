@@ -32,9 +32,7 @@ export interface HttpRequest {
 /**
  * Client to be used with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js)
  *
- * You must enabled your extension for this service to work like so:
- *
- * @TODO talk about how to enable a extension to make requests
+ * You must have enabled your extension in Dynamic Content for this service to work
  *
  * ```typescript
  * import { init } from 'dc-extensions-sdk';
@@ -51,6 +49,19 @@ export interface HttpRequest {
  * ```
  */
 export class HttpClient {
+  private DEFAULT_ERROR = {
+    status: 403,
+    data: {
+      errors: [
+        {
+          code: 'UNKNOWN',
+          level: 'ERROR',
+          message: 'Unknown error'
+        }
+      ]
+    }
+  };
+
   constructor(private connection: ClientConnection) {}
 
   public async request(config: HttpRequest): Promise<HttpResponse> {
@@ -67,13 +78,14 @@ export class HttpClient {
         status: response.status
       };
     } catch (error) {
-      if (error && error.response) {
+      if (error) {
         return {
-          data: error.response.data,
-          status: error.response.status
+          data: error.data,
+          status: error.status
         };
       }
-      return error;
+
+      return this.DEFAULT_ERROR;
     }
   }
 }

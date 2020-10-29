@@ -51,10 +51,8 @@ describe('HttpClient', () => {
   it('should catch errors and return status and data', async () => {
     spyOn(connection, 'request').and.returnValue(
       Promise.reject({
-        response: {
-          data: 'hello world',
-          status: 400
-        }
+        data: 'hello world',
+        status: 400
       })
     );
 
