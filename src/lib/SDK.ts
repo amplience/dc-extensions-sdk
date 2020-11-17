@@ -9,6 +9,7 @@ import { ContentReference } from './ContentReference';
 import { LocalesModel } from './models/Locales';
 import { Field, FieldSchema } from './Field';
 import { Form } from './Form';
+import { HttpClient } from './HttpClient';
 
 export interface IClientConnection extends ClientConnection {}
 /**
@@ -89,6 +90,12 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
    * Visualisation - URL of the visualisation
    */
+
+  /**
+   *  Client - used with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js) to make requests to dynamic-content
+   */
+  public client!: HttpClient;
+
   public visualisation!: string;
   protected options: Options;
   protected readonly defaultOptions: Options = {
@@ -109,6 +116,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
     this.contentLink = new ContentLink(this.connection);
     this.contentReference = new ContentReference(this.connection);
     this.frame = new Frame(this.connection, this.options.window);
+    this.client = new HttpClient(this.connection);
   }
 
   /**
