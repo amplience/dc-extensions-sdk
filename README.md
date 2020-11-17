@@ -1,6 +1,7 @@
 [![Amplience Dynamic Content](media/header.png)](https://amplience.com/dynamic-content)
 
 # dc-extensions-sdk
+
 [![Build Status](https://travis-ci.org/amplience/dc-extensions-sdk.svg?branch=master)](https://travis-ci.org/amplience/dc-extensions-sdk)
 [![npm version](https://badge.fury.io/js/dc-extensions-sdk.svg)](https://badge.fury.io/js/dc-extensions-sdk)
 
@@ -25,9 +26,10 @@ yarn add dc-extensions-sdk
 
 Using cdn:
 
-``` html
+```html
 <script src="https://unpkg.com/dc-extensions-sdk/dist/dc-extensions-sdk.umd.js"></script>
 ```
+
 # Including
 
 ```ts
@@ -66,7 +68,8 @@ initialize();
 ```
 
 or
-``` html
+
+```html
 <script src="https://unpkg.com/dc-extensions-sdk/dist/dc-extensions-sdk.umd.js"></script>
 <script>
   async function initialize() {
@@ -93,13 +96,14 @@ init().then(sdk => {
 # Options
 
 You can configure your extension with the options object passed into the init function.
+
 ```js
 import { init } from 'dc-extensions-sdk';
 
 const options = {
   // enable useful behind-the-scenes info
   debug: false,
-  // the max time to wait for a connection to establish 
+  // the max time to wait for a connection to establish
   connectionTimeout: 4500
 };
 
@@ -115,7 +119,9 @@ initialize();
 # Usage
 
 ## Field
+
 ### Fetching the field value
+
 ```js
 const fieldValue = await sdk.field.getValue();
 
@@ -124,7 +130,8 @@ console.log(fieldValue);
 
 ### Setting the field value
 
-*Note: The field model isn't updated when the form is in a read only state.*
+_Note: The field model isn't updated when the form is in a read only state._
+
 ```js
 const sdk = await init();
 
@@ -132,7 +139,9 @@ await sdk.field.setValue('some value');
 ```
 
 ### Resetting the field value
+
 This will reset to the previously saved state or `undefined` if the item hasn't been saved.
+
 ```js
 const sdk = await init();
 
@@ -140,6 +149,7 @@ await sdk.field.resetValue();
 ```
 
 ### Retrieving the field schema
+
 ```js
 const sdk = await init();
 
@@ -147,6 +157,7 @@ const schema = sdk.field.schema;
 ```
 
 ### Test if a model is valid
+
 Will evaluate the supplied model against the schema. Returns a boolean.
 
 ```js
@@ -154,8 +165,11 @@ const sdk = await init();
 
 const isValid = await sdk.field.isValid('some value');
 ```
+
 ### Test if a model is valid (with errors)
+
 Will evaluate the supplied model against the schema. Will either return an array of errors or `undefined`.
+
 ```js
 const sdk = await init();
 
@@ -165,12 +179,15 @@ const errors = await sdk.field.validate('some value');
 ## Content Item
 
 Use to fetch the Content Item that is currently being edited.
+
 ```js
 const sdk = await init();
 
 const contentItem = await sdk.contentItem.getCurrent();
 ```
+
 Example Content Item:
+
 ```json
 {
   "id": "4801f662-de68-43d3-8864-52d2d9c10bf4",
@@ -187,7 +204,6 @@ Example Content Item:
   "version": 8
 }
 ```
-
 
 ## Frame
 
@@ -208,7 +224,7 @@ While the application's height will be automatically set on load, your applicati
 
 The Auto Resizer will listen for any change to the DOM as well as window resizing. When it is triggered it will automatically resize the container’s height to the size of the extension.
 
-*NOTE: If your application dynamically loads images we suggest you attach a load event listener that will trigger `sdk.frame.setHeight();`*
+_NOTE: If your application dynamically loads images we suggest you attach a load event listener that will trigger `sdk.frame.setHeight();`_
 
 ```js
 const sdk = await init();
@@ -230,7 +246,9 @@ const locales = sdk.locales;
 
 console.log(locales);
 ```
+
 Example:
+
 ```json
 {
   "default": ["en-GB", "fr-FR"],
@@ -270,7 +288,6 @@ console.log(sdk.params);
 }
 ```
 
-
 ## Media Link
 
 Use this to trigger an image or video browser.
@@ -306,7 +323,7 @@ const contentReference = await sdk.contentReference.get(['http://my.schema/carou
 
 ### Model
 
-Use this to fetch the in-progress form model. This can change while the extension is open. 
+Use this to fetch the in-progress form model. This can change while the extension is open.
 
 ```js
 const sdk = await init();
@@ -318,7 +335,7 @@ const formModel = await sdk.form.getValue();
 
 In some contexts in the form content is not editable and we provide a boolean value that specifies if content should not be editable if you want to react to these changes we give you a function to do so.
 
-*Note: The field model isn't updated when the form is in a read only state.*
+_Note: The field model isn't updated when the form is in a read only state._
 
 ```js
 const input = document.querySelector('input');
@@ -334,4 +351,18 @@ sdk.form.onReadOnlyChange(readOnly => {
     input.removeAttribute('disabled');
   }
 });
+```
+
+## Client
+
+### Use client with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js)
+
+```js
+import { init } from 'dc-extensions-sdk';
+import { DynamicContent } from 'dc-management-sdk-js';
+
+const dcExtension = await init();
+const dcManagement = new DynamicContent({}, {}, dcExtension.client);
+
+const hubs = await dcManagement.hubs.list();
 ```
