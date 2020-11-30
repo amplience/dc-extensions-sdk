@@ -16,7 +16,7 @@ let contextObject = {
 };
 
 describe('SDK', () => {
-  it('init() should retrun a promise', () => {
+  it('init() should return a promise', () => {
     const sdk = new SDK();
     const p = sdk.init().catch(e => ({}));
     expect(p instanceof Promise).toBeTruthy();

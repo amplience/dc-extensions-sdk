@@ -2,7 +2,7 @@ import { FIELD } from '../src/lib/Events';
 import { Field, FieldSchema } from '../src/lib/Field';
 import { ClientConnection } from 'message-event-channel';
 import { ErrorReport } from '../src/lib/models/ErrorReport';
-import { Params } from '../src/lib/SDK';
+import { Params } from '../src/lib/models/Params';
 
 const testValue = {
   hello: 'world'

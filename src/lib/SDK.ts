@@ -7,42 +7,24 @@ import { ContentLink } from './ContentLink';
 import { ContentItem } from './ContentItem';
 import { ContentReference } from './ContentReference';
 import { LocalesModel } from './models/Locales';
-import { Field, FieldSchema } from './Field';
+import { Field } from './Field';
 import { Form } from './Form';
 import { HttpClient } from './HttpClient';
+import { Params } from './models/Params';
+import { ContentFieldExtension } from './models/ContentFieldExtension';
+import { ContentFieldContextObject } from './models/ContentFieldContextObject';
 
 export interface IClientConnection extends ClientConnection {}
-/**
- * Expected format for the provided options
- */
-export interface OptionsObject {
-  window?: Window;
-  connectionTimeout?: number | boolean;
-  timeout?: number | boolean;
-  debug?: boolean;
-}
+
 export interface Options {
   window: Window;
   connectionTimeout: number | boolean;
   timeout: number | boolean;
   debug: boolean;
 }
-export interface Params {
-  instance: object;
-  installation: object;
-}
 
-type ContextObject<ParamType extends Params = Params> = {
-  contentItemId: string;
-  fieldSchema: FieldSchema<ParamType>;
-  params: ParamType;
-  locales: LocalesModel;
-  stagingEnvironment: string;
-  visualisation: string;
-  readOnly: boolean;
-};
-
-export class SDK<FieldType = any, ParamType extends Params = Params> {
+export class SDK<FieldType = any, ParamType extends Params = Params>
+  implements ContentFieldExtension<FieldType, ParamType> {
   /**
    * message-event-channel [[ClientConnection]] instance. Use to listen to any of the message-event-channel lifecycle events.
    */
@@ -90,13 +72,12 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
    * Visualisation - URL of the visualisation
    */
-
+  public visualisation!: string;
   /**
    *  Client - used with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js) to make requests to dynamic-content
    */
   public client!: HttpClient;
 
-  public visualisation!: string;
   protected options: Options;
   protected readonly defaultOptions: Options = {
     window: window,
@@ -109,7 +90,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
    * The SDK instance is the central place for all SDK methods. It takes an optional options object.
    * @param options
    */
-  constructor(options: OptionsObject = {}) {
+  constructor(options: Partial<Options> = {}) {
     this.options = { ...this.defaultOptions, ...options };
     this.connection = new ClientConnection(this.options);
     this.mediaLink = new MediaLink(this.connection);
@@ -157,7 +138,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
     this.stagingEnvironment = stagingEnvironment;
   }
 
-  private async requestContext(): Promise<ContextObject<ParamType>> {
+  private async requestContext(): Promise<ContentFieldContextObject<ParamType>> {
     return this.connection.request(CONTEXT.GET, null, { timeout: false });
   }
 }

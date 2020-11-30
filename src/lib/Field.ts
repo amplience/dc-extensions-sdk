@@ -2,7 +2,7 @@ import { ClientConnection } from 'message-event-channel';
 import { FIELD } from './Events';
 import { ObjectMap } from './models/ContentItemModel';
 import { ErrorReport } from './models/ErrorReport';
-import { Params } from './SDK';
+import { Params } from './models/Params';
 
 export type FieldSchema<ParamType extends Params = Params> = ObjectMap<{
   title?: string;

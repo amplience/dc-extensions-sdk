@@ -1,4 +1,5 @@
-import { SDK, Params, OptionsObject } from './SDK';
+import { Params } from './models/Params';
+import { SDK, Options } from './SDK';
 /**
  * The method that starts it all
  *
@@ -19,7 +20,7 @@ import { SDK, Params, OptionsObject } from './SDK';
  * ```
  */
 export async function init<FieldType = {}, ParamType extends Params = Params>(
-  options?: OptionsObject
+  options?: Partial<Options>
 ): Promise<SDK<FieldType, ParamType>> {
   const sdk = new SDK<FieldType, ParamType>(options);
 
