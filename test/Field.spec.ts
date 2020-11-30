@@ -53,7 +53,7 @@ describe('Field', () => {
 
   it('getValue() should return undefined value from request', async () => {
     const p: Promise<object> = new Promise(resolve => {
-      resolve();
+      resolve(undefined);
     });
     spyOn(connection, 'request').and.returnValue(p);
     const fieldGet = await field.getValue();
@@ -108,7 +108,7 @@ describe('Field', () => {
 
   it('setValue(testValue) should not throw if no validation undefined is returned', async () => {
     const p: Promise<any> = new Promise(resolve => {
-      resolve();
+      resolve(undefined);
     });
     spyOn(connection, 'request').and.returnValue(p);
     const fieldSet = await field.setValue(testValue);
@@ -179,7 +179,7 @@ describe('Field', () => {
 
   it('validate(testValue) should return nothing if it resolved with nothing', async () => {
     const p: Promise<any> = new Promise(resolve => {
-      resolve();
+      resolve(undefined);
     });
     spyOn(connection, 'request').and.returnValue(p);
     const errors = await field.validate(testValue);
