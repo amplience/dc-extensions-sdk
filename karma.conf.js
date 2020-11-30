@@ -6,8 +6,7 @@ module.exports = function(config) {
       { pattern: './test/**/*.ts' }
     ],
     preprocessors: {
-      './src/**/*.ts': ['karma-typescript'],
-      './test/**/*.ts': ['karma-typescript']
+      '**/*.ts': 'karma-typescript',
     },
     reporters: ['dots', 'karma-typescript'],
     browsers: ['ChromeHeadless'],
