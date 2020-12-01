@@ -21,6 +21,7 @@ interface UiExtension<ParamType extends Params = Params> {
 export class Field<FieldType = any, ParamType extends Params = Params> {
   /**
    * Allows you to perform actions on the field that is being edited.
+   *
    * @param connection message-event-channel connection
    * @param schema JSON Schema of the field
    */
@@ -42,6 +43,7 @@ export class Field<FieldType = any, ParamType extends Params = Params> {
 
   /**
    * Change the value of the field
+   *
    * @param value The new value you want to set on the field
    * @throws Errors are thrown If the value is not set it throws an array of [[ErrorReport]]
    * @returns
@@ -66,6 +68,7 @@ export class Field<FieldType = any, ParamType extends Params = Params> {
   }
   /**
    * Check if your value is valid
+   *
    * @param value The value you wish to test
    *
    * Gives the current validity of the field returns a boolean

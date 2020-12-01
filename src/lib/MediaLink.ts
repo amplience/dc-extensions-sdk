@@ -21,6 +21,7 @@ export interface MediaOptions {
 export class MediaLink {
   /**
    * Media Link - Use to open the media browser.
+   *
    * @param connection message-event-channel connection
    */
   constructor(private connection: ClientConnection) {}

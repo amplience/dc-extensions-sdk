@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { FIELD } from '../src/lib/Events';
 import { Field, FieldSchema } from '../src/lib/Field';
 import { ClientConnection } from 'message-event-channel';
@@ -8,7 +9,7 @@ const testValue = {
   hello: 'world'
 };
 
-const testError: ErrorReport = {
+const testError = ({
   message: 'wrong',
   pointer: '/here',
   data: {
@@ -19,7 +20,7 @@ const testError: ErrorReport = {
     id: 'aschema',
     pointer: '/blah/blah'
   }
-};
+} as unknown) as ErrorReport;
 
 describe('Field', () => {
   let connection: ClientConnection;
@@ -53,6 +54,7 @@ describe('Field', () => {
 
   it('getValue() should return undefined value from request', async () => {
     const p: Promise<object> = new Promise(resolve => {
+      // @ts-ignore
       resolve(undefined);
     });
     spyOn(connection, 'request').and.returnValue(p);
@@ -62,6 +64,7 @@ describe('Field', () => {
 
   it('getValue() should return null value from request', async () => {
     const p: Promise<object> = new Promise(resolve => {
+      // @ts-ignore
       resolve(null);
     });
     spyOn(connection, 'request').and.returnValue(p);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { ClientConnection } from 'message-event-channel';
 import { HttpClient, HttpMethod } from '../src/lib/HttpClient';
 

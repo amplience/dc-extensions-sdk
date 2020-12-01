@@ -5,6 +5,7 @@ import { ContentItemModel } from './models/ContentItemModel';
 export class ContentItem {
   /**
    * Content Item - Used for retrieving Content Items.
+   *
    * @param connection message-event-channel connection
    */
   constructor(private connection: ClientConnection) {}

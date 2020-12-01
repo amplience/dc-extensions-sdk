@@ -47,9 +47,10 @@ export async function init<ExtensionType extends Extension<{}>>(
     connection.on(MC_EVENTS.CONNECTED, async () => {
       try {
         const context = await connection.request(CONTEXT.GET, null, { timeout: false });
-        const extension = <ExtensionType>(
-          extensionFactory(context, { connection, ...mergedOptions })
-        );
+        const extension: ExtensionType = extensionFactory(context, {
+          connection,
+          ...mergedOptions
+        });
         resolve(extension);
       } catch (e) {
         reject(new Error(ERRORS_INIT.CONTEXT));

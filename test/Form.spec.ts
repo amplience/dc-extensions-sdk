@@ -6,7 +6,7 @@ import { Form } from '../src/lib/Form';
 describe('Form', () => {
   let connection: ClientConnection;
   let form: Form;
-  let onSpy;
+  let onSpy: jasmine.Spy;
   beforeEach(() => {
     connection = new ClientConnection();
     onSpy = spyOn(connection, 'on');

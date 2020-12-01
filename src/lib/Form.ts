@@ -20,6 +20,7 @@ export class Form {
   /**
    *
    * Allows you to provide a callback to be executed after the readonly state changes. This method can be chained to append multiple callbacks.
+   *
    * @param cb Callback function that executes upon readonly state change.
    *
    * @returns [[Form]]

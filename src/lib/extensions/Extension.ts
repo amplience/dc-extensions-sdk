@@ -27,7 +27,7 @@ export abstract class Extension<ContextObject> {
   public readonly connection!: ClientConnection;
 
   /**
-   *  Client - used with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js) to make requests to dynamic-content
+   * Client - used with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js) to make requests to dynamic-content
    */
   public client!: HttpClient;
 

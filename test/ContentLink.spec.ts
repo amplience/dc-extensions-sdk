@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { ClientConnection } from 'message-event-channel';
 import { ContentLink } from '../src/lib/ContentLink';
 import { CONTENT_LINK } from '../src/lib/Events';
@@ -11,18 +12,11 @@ describe('ContentItem', () => {
     contentLink = new ContentLink(connection);
   });
 
-  it('get should return a promise', () => {
-    spyOn(connection, 'request').and.callThrough();
-    const promise = contentLink.get(['123']);
-    expect(promise instanceof Promise).toBeTruthy();
-  });
-
-  it('should pass an array of ids', () => {
+  it('should pass an array of ids', async () => {
     spyOn(connection, 'request');
-    contentLink
-      .get(['123', '564'])
-      .then()
-      .catch();
+    const promise = contentLink.get(['123', '564']);
+    expect(promise instanceof Promise).toBeTruthy();
+    await promise;
     expect(connection.request).toHaveBeenCalledWith(
       'content-link-get',
       { contentTypeIds: ['123', '564'] },
@@ -32,29 +26,23 @@ describe('ContentItem', () => {
     );
   });
 
-  it('should throw an error if no ids are passed', () => {
+  it('should throw an error if no ids are passed', async () => {
     spyOn(connection, 'request');
-    contentLink
-      .get([])
-      .then()
-      .catch();
+    await expectAsync(contentLink.get([])).toBeRejectedWithError('Please provide content type ids');
     expect(connection.request).not.toHaveBeenCalled();
   });
 
-  it('should throw an error if params are not in the expected format', () => {
+  it('should throw an error if params are not in the expected format', async () => {
     spyOn(connection, 'request');
-    contentLink
-      .get(('123' as unknown) as Array<string>)
-      .then()
-      .catch();
+    await expectAsync(contentLink.get(('123' as unknown) as Array<string>)).toBeRejectedWithError(
+      'Please provide content type ids'
+    );
     expect(connection.request).not.toHaveBeenCalled();
   });
 
-  it('should beable to return multiple items', () => {
+  it('should beable to return multiple items', async () => {
     spyOn(connection, 'request');
-
-    contentLink.getMultiple(['123']);
-
+    await contentLink.getMultiple(['123']);
     expect(connection.request).toHaveBeenCalledWith(
       CONTENT_LINK.CONTENT_GET,
       {
@@ -65,11 +53,9 @@ describe('ContentItem', () => {
     );
   });
 
-  it('should set max to number if passed', () => {
+  it('should set max to number if passed', async () => {
     spyOn(connection, 'request');
-
-    contentLink.getMultiple(['123'], { max: 2 });
-
+    await contentLink.getMultiple(['123'], { max: 2 });
     expect(connection.request).toHaveBeenCalledWith(
       CONTENT_LINK.CONTENT_GET,
       {

@@ -11,18 +11,11 @@ describe('ContentReference', () => {
     contentReference = new ContentReference(connection);
   });
 
-  it('get should return a promise', () => {
-    spyOn(connection, 'request').and.callThrough();
-    const promise = contentReference.get(['123']);
-    expect(promise instanceof Promise).toBeTruthy();
-  });
-
-  it('should pass an array of ids', () => {
+  it('should pass an array of ids', async () => {
     spyOn(connection, 'request');
-    contentReference
-      .get(['123', '564'])
-      .then()
-      .catch();
+    const promise = contentReference.get(['123', '564']);
+    expect(promise instanceof Promise).toBeTruthy();
+    await promise;
     expect(connection.request).toHaveBeenCalledWith(
       'content-reference-get',
       { contentTypeIds: ['123', '564'] },
@@ -32,29 +25,25 @@ describe('ContentReference', () => {
     );
   });
 
-  it('should throw an error if no ids are passed', () => {
+  it('should throw an error if no ids are passed', async () => {
     spyOn(connection, 'request');
-    contentReference
-      .get([])
-      .then()
-      .catch();
+    await expectAsync(contentReference.get([])).toBeRejectedWithError(
+      'Please provide content type ids'
+    );
     expect(connection.request).not.toHaveBeenCalled();
   });
 
-  it('should throw an error if params are not in the expected format', () => {
+  it('should throw an error if params are not in the expected format', async () => {
     spyOn(connection, 'request');
-    contentReference
-      .get(('123' as unknown) as Array<string>)
-      .then()
-      .catch();
+    await expectAsync(
+      contentReference.get(('123' as unknown) as Array<string>)
+    ).toBeRejectedWithError('Please provide content type ids');
     expect(connection.request).not.toHaveBeenCalled();
   });
 
-  it('should beable to return multiple items', () => {
+  it('should be able to return multiple items', async () => {
     spyOn(connection, 'request');
-
-    contentReference.getMultiple(['123']);
-
+    await contentReference.getMultiple(['123']);
     expect(connection.request).toHaveBeenCalledWith(
       CONTENT_REFERENCE.CONTENT_REF_GET,
       {
@@ -65,11 +54,9 @@ describe('ContentReference', () => {
     );
   });
 
-  it('should set max to number if passed', () => {
+  it('should set max to number if passed', async () => {
     spyOn(connection, 'request');
-
-    contentReference.getMultiple(['123'], { max: 2 });
-
+    await contentReference.getMultiple(['123'], { max: 2 });
     expect(connection.request).toHaveBeenCalledWith(
       CONTENT_REFERENCE.CONTENT_REF_GET,
       {

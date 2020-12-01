@@ -12,7 +12,6 @@ import { Form } from './Form';
 import { HttpClient } from './HttpClient';
 import { Params } from './models/Params';
 import { ContentFieldContextObject } from './extensions/content-field/ContentFieldContextObject';
-import { ContentFieldExtension } from './extensions/content-field/ContentFieldExtension';
 
 export interface IClientConnection extends ClientConnection {}
 
@@ -73,7 +72,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
    */
   public visualisation!: string;
   /**
-   *  Client - used with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js) to make requests to dynamic-content
+   * Client - used with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js) to make requests to dynamic-content
    */
   public client!: HttpClient;
 
@@ -87,6 +86,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params> {
 
   /**
    * The SDK instance is the central place for all SDK methods. It takes an optional options object.
+   *
    * @param options
    */
   constructor(options: Partial<Options> = {}) {
