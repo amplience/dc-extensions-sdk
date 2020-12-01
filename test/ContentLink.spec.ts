@@ -13,7 +13,7 @@ describe('ContentItem', () => {
 
   it('get should return a promise', () => {
     spyOn(connection, 'request').and.callThrough();
-    const promise = contentLink.get([]);
+    const promise = contentLink.get(['123']);
     expect(promise instanceof Promise).toBeTruthy();
   });
 

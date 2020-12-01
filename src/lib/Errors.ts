@@ -6,7 +6,7 @@ export enum ERRORS_INIT {
   /**
    * Extension failed to connect to Dynamic content
    */
-  CONNTECTION_TIMEOUT = 'Failed to establish connection to DC Application'
+  CONNECTION_TIMEOUT = 'Failed to establish connection to DC Application'
 }
 
 export enum ERRORS_CONTENT_ITEM {

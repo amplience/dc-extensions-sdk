@@ -11,8 +11,8 @@ import { Field } from './Field';
 import { Form } from './Form';
 import { HttpClient } from './HttpClient';
 import { Params } from './models/Params';
-import { ContentFieldExtension } from './models/ContentFieldExtension';
-import { ContentFieldContextObject } from './models/ContentFieldContextObject';
+import { ContentFieldContextObject } from './extensions/content-field/ContentFieldContextObject';
+import { ContentFieldExtension } from './extensions/content-field/ContentFieldExtension';
 
 export interface IClientConnection extends ClientConnection {}
 
@@ -23,8 +23,7 @@ export interface Options {
   debug: boolean;
 }
 
-export class SDK<FieldType = any, ParamType extends Params = Params>
-  implements ContentFieldExtension<FieldType, ParamType> {
+export class SDK<FieldType = any, ParamType extends Params = Params> {
   /**
    * message-event-channel [[ClientConnection]] instance. Use to listen to any of the message-event-channel lifecycle events.
    */
@@ -115,7 +114,7 @@ export class SDK<FieldType = any, ParamType extends Params = Params>
         }
       });
       this.connection.on(MC_EVENTS.CONNECTION_TIMEOUT, () => {
-        reject(new Error(ERRORS_INIT.CONNTECTION_TIMEOUT));
+        reject(new Error(ERRORS_INIT.CONNECTION_TIMEOUT));
       });
     });
   }
