@@ -21,9 +21,16 @@
     "prebuild": "rimraf dist",
     "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src --media media/",
     "start": "rollup -c rollup.config.ts -w",
-    "test": "karma start",
-    "test:watch": "karma start -auto-watch",
-    "test:prod": "npm run lint && npm run test -- --no-cache",
+    "pretest": "rimraf coverage",
+    "test": "npm run test:unit && npm run test:headless",
+    "posttest": "npm run coverage",
+    "test:unit": "jest",
+    "test:headless": "karma start  -- --no-cache",
+    "test:unit:watch": "jest --watch",
+    "coverage": "npm run coverage:collect && npm run coverage:merge && npm run coverage:report",
+    "coverage:collect": "mv coverage/jest/coverage-final.json coverage/jest-coverage-final.json && mv coverage/karma/coverage-final.json coverage/karma-coverage-final.json",
+    "coverage:merge": "nyc merge coverage coverage/coverage-final.json && lcov-result-merger 'coverage/*/lcov.info' coverage/lcov.info",
+    "coverage:report": "nyc report -t coverage",
     "deploy-docs": "ts-node tools/gh-pages-publish",
     "report-coverage": "cat './coverage/lcov.info' | coveralls",
     "commit": "git-cz",
@@ -57,7 +64,6 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^7.1.2",
-    "@types/jasmine": "^3.6.2",
     "@types/node": "^10.17.47",
     "colors": "^1.4.0",
     "commitizen": "^3.0.0",
@@ -66,14 +72,17 @@
     "cz-conventional-changelog": "^2.1.0",
     "dotenv": "^8.2.0",
     "husky": "^1.0.1",
+    "jest": "^26.6.3",
     "karma": "^5.2.3",
     "karma-chrome-launcher": "^3.0.0",
     "karma-cli": "^2.0.0",
     "karma-firefox-launcher": "^2.1.0",
     "karma-jasmine": "^4.0.1",
     "karma-typescript": "^5.2.0",
-    "lint-staged": "^8.0.0",
+    "lcov-result-merger": "^3.1.0",
+    "lint-staged": "^10.2.11",
     "lodash.camelcase": "^4.3.0",
+    "nyc": "^15.1.0",
     "prettier": "^1.19.1",
     "prompt": "^1.0.0",
     "replace-in-file": "^3.4.2",
@@ -87,6 +96,7 @@
     "semantic-release": "^15.14.0",
     "shelljs": "^0.8.4",
     "travis-deploy-once": "^5.0.9",
+    "ts-jest": "^26.4.4",
     "ts-node": "^9.0.0",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.15.0",
@@ -97,8 +107,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run test:prod && npm run build"
+      "pre-commit": "npm run test && npm run build"
     }
   }
 }

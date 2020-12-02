@@ -34,7 +34,7 @@ describe('Frame', () => {
       // @ts-ignore
       new Frame(connection, mockWindow);
 
-      // expect(mockWindow.addEventListener).toHaveBeenCalledWith('load', callBack);
+      expect(mockWindow.addEventListener).toHaveBeenCalledWith('load', callBack);
     });
 
     it('should set the FRAME.GET_HEIGHT event with a method that returns the height', () => {

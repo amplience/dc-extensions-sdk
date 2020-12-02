@@ -1,4 +1,4 @@
-import { SDK } from '../src/lib/SDK';
+import { SDK } from './SDK';
 
 let contextObject = {
   contentItemId: '',
@@ -37,8 +37,8 @@ describe('SDK', () => {
     const p = new Promise((resolve, reject) => {
       reject();
     });
-    spyOn(sdk.connection, 'request').and.returnValue(p);
-    const cOn = spyOn(sdk.connection, 'on');
+    jest.spyOn(sdk.connection, 'request').mockReturnValue(p);
+    const cOn = jest.spyOn(sdk.connection, 'on');
     sdk
       .init()
       .then(() => ({}))
@@ -46,7 +46,7 @@ describe('SDK', () => {
         expect(e.message).toEqual('Failed to fetch context for UI Extension');
         done();
       });
-    const fnCall = cOn.calls.argsFor(0)[1] as Function;
+    const fnCall = cOn.mock.calls[0][1] as Function;
     fnCall();
   });
 
@@ -55,8 +55,8 @@ describe('SDK', () => {
     const p = new Promise((resolve, reject) => {
       resolve(contextObject);
     });
-    spyOn(sdk.connection, 'request').and.returnValue(p);
-    const cOn = spyOn(sdk.connection, 'on');
+    jest.spyOn(sdk.connection, 'request').mockReturnValue(p);
+    const cOn = jest.spyOn(sdk.connection, 'on');
     sdk
       .init()
       .then(sdkInstance => {
@@ -64,7 +64,7 @@ describe('SDK', () => {
         done();
       })
       .catch(e => ({}));
-    const fnCall = cOn.calls.argsFor(0)[1] as Function;
+    const fnCall = cOn.mock.calls[0][1] as Function;
     fnCall();
   });
 });

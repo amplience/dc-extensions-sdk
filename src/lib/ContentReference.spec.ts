@@ -1,6 +1,6 @@
 import { ClientConnection } from 'message-event-channel';
-import { ContentReference } from '../src/lib/ContentReference';
-import { CONTENT_REFERENCE } from '../src/lib/Events';
+import { ContentReference } from './ContentReference';
+import { CONTENT_REFERENCE } from './Events';
 
 describe('ContentReference', () => {
   let connection: ClientConnection;
@@ -12,13 +12,13 @@ describe('ContentReference', () => {
   });
 
   it('get should return a promise', () => {
-    spyOn(connection, 'request').and.callThrough();
-    const promise = contentReference.get(['123']);
+    jest.spyOn(connection, 'request').mockResolvedValue({});
+    const promise = contentReference.get([]);
     expect(promise instanceof Promise).toBeTruthy();
   });
 
   it('should pass an array of ids', () => {
-    spyOn(connection, 'request');
+    jest.spyOn(connection, 'request').mockResolvedValue({});
     contentReference
       .get(['123', '564'])
       .then()
@@ -33,7 +33,7 @@ describe('ContentReference', () => {
   });
 
   it('should throw an error if no ids are passed', () => {
-    spyOn(connection, 'request');
+    jest.spyOn(connection, 'request').mockResolvedValue({});
     contentReference
       .get([])
       .then()
@@ -42,7 +42,7 @@ describe('ContentReference', () => {
   });
 
   it('should throw an error if params are not in the expected format', () => {
-    spyOn(connection, 'request');
+    jest.spyOn(connection, 'request').mockResolvedValue({});
     contentReference
       .get(('123' as unknown) as Array<string>)
       .then()
@@ -51,7 +51,7 @@ describe('ContentReference', () => {
   });
 
   it('should beable to return multiple items', () => {
-    spyOn(connection, 'request');
+    jest.spyOn(connection, 'request').mockResolvedValue({});
 
     contentReference.getMultiple(['123']);
 
@@ -66,7 +66,7 @@ describe('ContentReference', () => {
   });
 
   it('should set max to number if passed', () => {
-    spyOn(connection, 'request');
+    jest.spyOn(connection, 'request').mockResolvedValue({});
 
     contentReference.getMultiple(['123'], { max: 2 });
 
