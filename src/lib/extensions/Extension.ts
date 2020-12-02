@@ -1,22 +1,20 @@
 import { ClientConnection } from 'message-event-channel';
 import { HttpClient } from '../HttpClient';
 import { InitOptions } from '../init';
+import { Params } from '../models/Params';
 
 export interface ExtensionOptions extends InitOptions {
   connection: ClientConnection;
 }
 
 export interface ContextObject {
-  category: string;
-  hubId: string;
-  locationHref: string;
+  params: Params;
 }
 
 export function isContextObject(context: unknown | ContextObject): context is ContextObject {
   return (
-    (context as ContextObject).category !== undefined &&
-    (context as ContextObject).hubId !== undefined &&
-    (context as ContextObject).locationHref !== undefined
+    (context as ContextObject)?.params?.installation !== undefined &&
+    (context as ContextObject)?.params?.instance !== undefined
   );
 }
 

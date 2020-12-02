@@ -12,9 +12,6 @@ describe('ExtensionFactory', () => {
     };
     const connection = new ClientConnection(options);
     const context = {
-      category: 'CONTENT_FIELD',
-      hubId: 'abcdef1234567890abcdef12',
-      locationHref: 'https://test-extension-location-href',
       contentItemId: '12345678-abcd-1234-1234-abcdef123456',
       fieldSchema: {
         title: 'test-field-schema-title',
@@ -22,7 +19,10 @@ describe('ExtensionFactory', () => {
         description: 'test-field-schema-desc',
         'ui:extension': {}
       },
-      params: {},
+      params: {
+        installation: {},
+        instance: {}
+      },
       locales: {
         default: ['en'],
         available: [

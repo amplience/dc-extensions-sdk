@@ -1,10 +1,8 @@
 import { ClientConnection } from 'message-event-channel';
 import { ContentItem } from '../../../src/lib/ContentItem';
-import { ContentLink } from '../../../src/lib/ContentLink';
 import { ContentFieldExtension } from '../../../src/lib/extensions/content-field/ContentFieldExtension';
 import { Field } from '../../../src/lib/Field';
 import { Form } from '../../../src/lib/Form';
-import { MediaLink } from '../../../src/lib/MediaLink';
 
 describe('ContentFieldExtension', () => {
   it('should create a new instance of ContentFieldExtension', () => {
@@ -31,9 +29,6 @@ describe('ContentFieldExtension', () => {
       const connection = new ClientConnection(options);
       const instance = new ContentFieldExtension({ connection, ...options });
       const context = {
-        category: 'CONTENT_FIELD',
-        hubId: 'abcdef1234567890abcdef12',
-        locationHref: 'https://test-extension-location-href',
         contentItemId: '12345678-abcd-1234-1234-abcdef123456',
         fieldSchema: {
           title: 'test-field-schema-title',
@@ -43,7 +38,10 @@ describe('ContentFieldExtension', () => {
         },
         params: {
           instance: {},
-          installation: {}
+          installation: {},
+          category: 'CONTENT_FIELD',
+          hubId: 'abcdef1234567890abcdef12',
+          locationHref: 'https://test-extension-location-href'
         },
         locales: {
           default: ['en'],
@@ -55,7 +53,6 @@ describe('ContentFieldExtension', () => {
       };
 
       instance.setupContext(context);
-      console.log(instance.contentItem);
 
       expect(instance.contentItem).toBeInstanceOf(ContentItem);
       expect(instance.field).toBeInstanceOf(Field);

@@ -7,6 +7,7 @@ export function extensionFactory<ExtensionType extends Extension<{}>>(
   options: ExtensionOptions
 ): ExtensionType {
   let extension;
+
   if (isContentFieldContextObject(context)) {
     extension = new ContentFieldExtension<ExtensionType>(options);
     extension.setupContext(context);
