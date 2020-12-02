@@ -34,16 +34,17 @@ describe('ContentItem', () => {
 
   it('should throw an error if no ids are passed', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
-    await expect(contentLink.get([])).rejects.toThrowError('');
+    await expect(contentLink.get([])).rejects.toThrowErrorMatchingInlineSnapshot(
+      `"Please provide content type ids"`
+    );
     expect(connection.request).not.toHaveBeenCalled();
   });
 
-  it('should throw an error if params are not in the expected format', () => {
+  it('should throw an error if params are not in the expected format', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
-    contentLink
-      .get(('123' as unknown) as Array<string>)
-      .then()
-      .catch();
+    await expect(
+      contentLink.get(('123' as unknown) as Array<string>)
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`"Please provide content type ids"`);
     expect(connection.request).not.toHaveBeenCalled();
   });
 

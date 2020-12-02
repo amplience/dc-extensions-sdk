@@ -13,7 +13,7 @@ describe('ContentReference', () => {
 
   it('get should return a promise', () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
-    const promise = contentReference.get([]);
+    const promise = contentReference.get(['123']);
     expect(promise instanceof Promise).toBeTruthy();
   });
 
@@ -32,21 +32,19 @@ describe('ContentReference', () => {
     );
   });
 
-  it('should throw an error if no ids are passed', () => {
+  it('should throw an error if no ids are passed', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
-    contentReference
-      .get([])
-      .then()
-      .catch();
+    await expect(contentReference.get([])).rejects.toThrowErrorMatchingInlineSnapshot(
+      `"Please provide content type ids"`
+    );
     expect(connection.request).not.toHaveBeenCalled();
   });
 
-  it('should throw an error if params are not in the expected format', () => {
+  it('should throw an error if params are not in the expected format', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
-    contentReference
-      .get(('123' as unknown) as Array<string>)
-      .then()
-      .catch();
+    await expect(
+      contentReference.get(('123' as unknown) as Array<string>)
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`"Please provide content type ids"`);
     expect(connection.request).not.toHaveBeenCalled();
   });
 
