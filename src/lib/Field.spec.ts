@@ -1,8 +1,8 @@
-import { FIELD } from '../src/lib/Events';
-import { Field, FieldSchema } from '../src/lib/Field';
+import { FIELD } from './Events';
+import { Field, FieldSchema } from './Field';
 import { ClientConnection } from 'message-event-channel';
-import { ErrorReport } from '../src/lib/models/ErrorReport';
-import { Params } from '../src/lib/SDK';
+import { ErrorReport } from './models/ErrorReport';
+import { Params } from './SDK';
 
 const testValue = {
   hello: 'world'
@@ -13,7 +13,7 @@ const testError: ErrorReport = {
   pointer: '/here',
   data: {
     keyword: 'fail',
-    params: null
+    params: {}
   },
   schema: {
     id: 'aschema',
@@ -36,6 +36,10 @@ describe('Field', () => {
     field = new Field(connection, schema);
   });
 
+  beforeEach(() => {
+    jest.resetAllMocks();
+  })
+
   it('set schema should be accessible', async () => {
     expect(field.schema).toEqual(schema);
   });
@@ -44,7 +48,7 @@ describe('Field', () => {
     const p: Promise<object> = new Promise(resolve => {
       resolve(testValue);
     });
-    const requestSpy = spyOn(connection, 'request').and.returnValue(p);
+    const requestSpy = jest.spyOn(connection, 'request').mockReturnValue(p);
     const fieldGet = await field.getValue();
     expect(requestSpy).toHaveBeenCalledTimes(1);
     expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_GET);
@@ -52,25 +56,19 @@ describe('Field', () => {
   });
 
   it('getValue() should return undefined value from request', async () => {
-    const p: Promise<object> = new Promise(resolve => {
-      resolve();
-    });
-    spyOn(connection, 'request').and.returnValue(p);
+    jest.spyOn(connection, 'request').mockResolvedValue(undefined);
     const fieldGet = await field.getValue();
     expect(fieldGet).toEqual(undefined);
   });
 
   it('getValue() should return null value from request', async () => {
-    const p: Promise<object> = new Promise(resolve => {
-      resolve(null);
-    });
-    spyOn(connection, 'request').and.returnValue(p);
+    jest.spyOn(connection, 'request').mockResolvedValue(null);
     const fieldGet = await field.getValue();
     expect(fieldGet).toEqual(null);
   });
 
   it('setValue(testValue) should should emit one request with the FIELD.MODEL_SET event with testValue', async () => {
-    const requestSpy = spyOn(connection, 'request');
+    const requestSpy = jest.spyOn(connection, 'request');
     field
       .setValue(testValue)
       .then()
@@ -80,7 +78,7 @@ describe('Field', () => {
   });
 
   it('setValue(null) should should emit FIELD.MODEL_SET event with null', async () => {
-    const requestSpy = spyOn(connection, 'request');
+    const requestSpy = jest.spyOn(connection, 'request');
     field
       .setValue(null)
       .then()
@@ -89,7 +87,7 @@ describe('Field', () => {
   });
 
   it('setValue() should should emit FIELD.MODEL_SET event with undefined value', async () => {
-    const requestSpy = spyOn(connection, 'request');
+    const requestSpy = jest.spyOn(connection, 'request');
     field
       .setValue()
       .then()
@@ -98,28 +96,19 @@ describe('Field', () => {
   });
 
   it('setValue(testValue) should not throw if no validation errors are returned', async () => {
-    const p: Promise<any> = new Promise(resolve => {
-      resolve([]);
-    });
-    spyOn(connection, 'request').and.returnValue(p);
+    jest.spyOn(connection, 'request').mockResolvedValue([]);
     const fieldSet = await field.setValue(testValue);
     expect(fieldSet).toEqual(undefined);
   });
 
   it('setValue(testValue) should not throw if no validation undefined is returned', async () => {
-    const p: Promise<any> = new Promise(resolve => {
-      resolve();
-    });
-    spyOn(connection, 'request').and.returnValue(p);
+    jest.spyOn(connection, 'request').mockResolvedValue(undefined);
     const fieldSet = await field.setValue(testValue);
     expect(fieldSet).toEqual(undefined);
   });
 
   it('setValue(testValue) should throw when validation errors are returned', async done => {
-    const p: Promise<any> = new Promise(resolve => {
-      resolve([testError]);
-    });
-    spyOn(connection, 'request').and.returnValue(p);
+    jest.spyOn(connection, 'request').mockResolvedValue([testError]);
     try {
       await field.setValue(testValue);
     } catch (e) {
@@ -129,74 +118,53 @@ describe('Field', () => {
   });
 
   it('isValid(testValue) should emit one request with the FIELD.MODEL_IS_VALID event with testValue', async () => {
-    const p: Promise<any> = new Promise(resolve => {
-      resolve(true);
-    });
-    const requestSpy = spyOn(connection, 'request').and.returnValue(p);
+    const requestSpy = jest.spyOn(connection, 'request').mockResolvedValue(true);
     await field.isValid(testValue);
     expect(requestSpy).toHaveBeenCalledTimes(1);
     expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_IS_VALID, testValue);
   });
 
   it('isValid(testValue) should resolve a false boolean value', async () => {
-    const p: Promise<any> = new Promise(resolve => {
-      resolve(true);
-    });
-    spyOn(connection, 'request').and.returnValue(p);
+    jest.spyOn(connection, 'request').mockResolvedValue(true);
     const valid = await field.isValid(testValue);
     expect(typeof valid === 'boolean').toBeTruthy();
     expect(valid).toEqual(true);
   });
 
   it('isValid(testValue) should resolve a true boolean value', async () => {
-    const p: Promise<any> = new Promise(resolve => {
-      resolve(false);
-    });
-    spyOn(connection, 'request').and.returnValue(p);
+    jest.spyOn(connection, 'request').mockResolvedValue(false);
     const valid = await field.isValid(testValue);
     expect(typeof valid === 'boolean').toBeTruthy();
     expect(valid).toEqual(false);
   });
 
   it('validate(testValue) should emit one request with the FIELD.MODEL_VALIDATE event with testValue', async () => {
-    const p: Promise<any> = new Promise(resolve => {
-      resolve([testError]);
-    });
-    const requestSpy = spyOn(connection, 'request').and.returnValue(p);
+    const requestSpy = jest.spyOn(connection, 'request').mockResolvedValue([testError]);
     await field.validate(testValue);
     expect(requestSpy).toHaveBeenCalledTimes(1);
     expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_VALIDATE, testValue);
   });
 
   it('validate(testValue) should return nothing if it resolved with []', async () => {
-    const p: Promise<any> = new Promise(resolve => {
-      resolve([]);
-    });
-    spyOn(connection, 'request').and.returnValue(p);
+    jest.spyOn(connection, 'request').mockResolvedValue([]);
     const errors = await field.validate(testValue);
     expect(errors).toEqual(undefined);
   });
 
   it('validate(testValue) should return nothing if it resolved with nothing', async () => {
-    const p: Promise<any> = new Promise(resolve => {
-      resolve();
-    });
-    spyOn(connection, 'request').and.returnValue(p);
+    jest.spyOn(connection, 'request').mockResolvedValue(undefined);
     const errors = await field.validate(testValue);
     expect(errors).toEqual(undefined);
   });
 
   it('validate(testValue) should be able to return errors', async () => {
-    const p: Promise<any> = new Promise(resolve => {
-      resolve([testError]);
-    });
-    spyOn(connection, 'request').and.returnValue(p);
+    jest.spyOn(connection, 'request').mockResolvedValue([testError]);
     const errors = await field.validate(testValue);
     expect(errors).toEqual([testError]);
   });
 
   it('should be able to reset model to original value', () => {
-    spyOn(connection, 'request').and.callThrough();
+    jest.spyOn(connection, 'request').mockResolvedValue({});
     field
       .reset()
       .then()

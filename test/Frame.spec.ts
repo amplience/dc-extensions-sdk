@@ -22,7 +22,7 @@ describe('Frame', () => {
     it('should resolve on load if window is not ready', () => {
       const mockWindow = {
         document: { readyState: false },
-        addEventListener: () => {}
+        addEventListener: window.addEventListener
       };
       let callBack;
       // @ts-ignore

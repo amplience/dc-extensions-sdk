@@ -1,6 +1,6 @@
 import { ClientConnection } from 'message-event-channel';
-import { ContentLink } from '../src/lib/ContentLink';
-import { CONTENT_LINK } from '../src/lib/Events';
+import { ContentLink } from './ContentLink';
+import { CONTENT_LINK } from './Events';
 
 describe('ContentItem', () => {
   let connection: ClientConnection;
@@ -12,13 +12,13 @@ describe('ContentItem', () => {
   });
 
   it('get should return a promise', () => {
-    spyOn(connection, 'request').and.callThrough();
-    const promise = contentLink.get([]);
+    jest.spyOn(connection, 'request').mockResolvedValue({});
+    const promise = contentLink.get(['123']);
     expect(promise instanceof Promise).toBeTruthy();
   });
 
   it('should pass an array of ids', () => {
-    spyOn(connection, 'request');
+    jest.spyOn(connection, 'request').mockResolvedValue({});
     contentLink
       .get(['123', '564'])
       .then()
@@ -32,26 +32,24 @@ describe('ContentItem', () => {
     );
   });
 
-  it('should throw an error if no ids are passed', () => {
-    spyOn(connection, 'request');
-    contentLink
-      .get([])
-      .then()
-      .catch();
+  it('should throw an error if no ids are passed', async () => {
+    jest.spyOn(connection, 'request').mockResolvedValue({});
+    await expect(contentLink.get([])).rejects.toThrowErrorMatchingInlineSnapshot(
+      `"Please provide content type ids"`
+    );
     expect(connection.request).not.toHaveBeenCalled();
   });
 
-  it('should throw an error if params are not in the expected format', () => {
-    spyOn(connection, 'request');
-    contentLink
-      .get(('123' as unknown) as Array<string>)
-      .then()
-      .catch();
+  it('should throw an error if params are not in the expected format', async () => {
+    jest.spyOn(connection, 'request').mockResolvedValue({});
+    await expect(
+      contentLink.get(('123' as unknown) as Array<string>)
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`"Please provide content type ids"`);
     expect(connection.request).not.toHaveBeenCalled();
   });
 
   it('should beable to return multiple items', () => {
-    spyOn(connection, 'request');
+    jest.spyOn(connection, 'request').mockResolvedValue({});
 
     contentLink.getMultiple(['123']);
 
@@ -66,7 +64,7 @@ describe('ContentItem', () => {
   });
 
   it('should set max to number if passed', () => {
-    spyOn(connection, 'request');
+    jest.spyOn(connection, 'request').mockResolvedValue({});
 
     contentLink.getMultiple(['123'], { max: 2 });
 

@@ -1,5 +1,5 @@
 import { ClientConnection } from 'message-event-channel';
-import { HttpClient, HttpMethod } from '../src/lib/HttpClient';
+import { HttpClient, HttpMethod } from './HttpClient';
 
 describe('HttpClient', () => {
   let httpClient: HttpClient;
@@ -11,7 +11,7 @@ describe('HttpClient', () => {
   });
 
   it('should pass on request config to connection', () => {
-    const request = spyOn(connection, 'request').and.returnValue(Promise.resolve());
+    const request = jest.spyOn(connection, 'request').mockReturnValue(Promise.resolve());
 
     httpClient.request({
       url: 'https://bigcontent.io',
@@ -28,7 +28,7 @@ describe('HttpClient', () => {
   });
 
   it('should just return status and data', async () => {
-    spyOn(connection, 'request').and.returnValue(
+    jest.spyOn(connection, 'request').mockReturnValue(
       Promise.resolve({
         status: 200,
         data: 'hello world',
@@ -49,7 +49,7 @@ describe('HttpClient', () => {
   });
 
   it('should catch errors and return status and data', async () => {
-    spyOn(connection, 'request').and.returnValue(
+    jest.spyOn(connection, 'request').mockReturnValue(
       Promise.reject({
         data: 'hello world',
         status: 400

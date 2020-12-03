@@ -1,15 +1,15 @@
-import { FORM as ERRORS } from '../src/lib/Errors';
+import { FORM as ERRORS } from './Errors';
 import { ClientConnection } from 'message-event-channel';
-import { Body } from '../src/lib/models/ContentItemModel';
-import { Form } from '../src/lib/Form';
+import { Body } from './models/ContentItemModel';
+import { Form } from './Form';
 
 describe('Form', () => {
   let connection: ClientConnection;
   let form: Form;
-  let onSpy;
+  let onSpy : jest.SpyInstance;
   beforeEach(() => {
     connection = new ClientConnection();
-    onSpy = spyOn(connection, 'on');
+    onSpy = jest.spyOn(connection, 'on');
     form = new Form(connection, true);
   });
 
@@ -20,9 +20,9 @@ describe('Form', () => {
   });
   describe('Form.onReadOnlyChange()', () => {
     it('should push callback to the onChangeStack, return an instance of the class and set readOnly value', () => {
-      const cb = jasmine.createSpy();
+      const cb = jest.fn();
       const $form = form.onReadOnlyChange(cb);
-      const callOn = onSpy.calls.argsFor(0)[1];
+      const callOn = onSpy.mock.calls[0][1];
       callOn(false);
       expect($form).toBe(form);
       expect(cb).toHaveBeenCalledWith(false);
@@ -40,12 +40,12 @@ describe('Form', () => {
           test: true
         }
       };
-      spyOn(connection, 'request').and.returnValue(Promise.resolve(formModel));
+      jest.spyOn(connection, 'request').mockReturnValue(Promise.resolve(formModel));
       const value = await form.getValue();
       expect(value).toBe(formModel);
     });
     it('should throw an error if the connection request fails', async () => {
-      spyOn(connection, 'request').and.returnValue(Promise.reject());
+      jest.spyOn(connection, 'request').mockReturnValue(Promise.reject());
       try {
         await form.getValue();
       } catch (e) {
