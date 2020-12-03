@@ -1,6 +1,6 @@
 import { ClientConnection } from 'message-event-channel';
-import { ContentReference } from '../src/lib/ContentReference';
-import { CONTENT_REFERENCE } from '../src/lib/Events';
+import { ContentReference } from './ContentReference';
+import { CONTENT_REFERENCE } from './Events';
 
 describe('ContentReference', () => {
   let connection: ClientConnection;
@@ -11,11 +11,18 @@ describe('ContentReference', () => {
     contentReference = new ContentReference(connection);
   });
 
-  it('should pass an array of ids', async () => {
-    spyOn(connection, 'request');
-    const promise = contentReference.get(['123', '564']);
+  it('get should return a promise', () => {
+    jest.spyOn(connection, 'request').mockResolvedValue({});
+    const promise = contentReference.get(['123']);
     expect(promise instanceof Promise).toBeTruthy();
-    await promise;
+  });
+
+  it('should pass an array of ids', () => {
+    jest.spyOn(connection, 'request').mockResolvedValue({});
+    contentReference
+      .get(['123', '564'])
+      .then()
+      .catch();
     expect(connection.request).toHaveBeenCalledWith(
       'content-reference-get',
       { contentTypeIds: ['123', '564'] },
@@ -26,24 +33,26 @@ describe('ContentReference', () => {
   });
 
   it('should throw an error if no ids are passed', async () => {
-    spyOn(connection, 'request');
-    await expectAsync(contentReference.get([])).toBeRejectedWithError(
-      'Please provide content type ids'
+    jest.spyOn(connection, 'request').mockResolvedValue({});
+    await expect(contentReference.get([])).rejects.toThrowErrorMatchingInlineSnapshot(
+      `"Please provide content type ids"`
     );
     expect(connection.request).not.toHaveBeenCalled();
   });
 
   it('should throw an error if params are not in the expected format', async () => {
-    spyOn(connection, 'request');
-    await expectAsync(
+    jest.spyOn(connection, 'request').mockResolvedValue({});
+    await expect(
       contentReference.get(('123' as unknown) as Array<string>)
-    ).toBeRejectedWithError('Please provide content type ids');
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`"Please provide content type ids"`);
     expect(connection.request).not.toHaveBeenCalled();
   });
 
-  it('should be able to return multiple items', async () => {
-    spyOn(connection, 'request');
-    await contentReference.getMultiple(['123']);
+  it('should beable to return multiple items', () => {
+    jest.spyOn(connection, 'request').mockResolvedValue({});
+
+    contentReference.getMultiple(['123']);
+
     expect(connection.request).toHaveBeenCalledWith(
       CONTENT_REFERENCE.CONTENT_REF_GET,
       {
@@ -54,9 +63,11 @@ describe('ContentReference', () => {
     );
   });
 
-  it('should set max to number if passed', async () => {
-    spyOn(connection, 'request');
-    await contentReference.getMultiple(['123'], { max: 2 });
+  it('should set max to number if passed', () => {
+    jest.spyOn(connection, 'request').mockResolvedValue({});
+
+    contentReference.getMultiple(['123'], { max: 2 });
+
     expect(connection.request).toHaveBeenCalledWith(
       CONTENT_REFERENCE.CONTENT_REF_GET,
       {

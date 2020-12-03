@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { ClientConnection } from 'message-event-channel';
-import { MEDIA_LINK } from '../src/lib/Events';
-import { MediaLink } from '../src/lib/MediaLink';
+import { MEDIA_LINK } from './Events';
+import { MediaLink } from './MediaLink';
 
 describe('ContentItem', () => {
   let connection: ClientConnection;
@@ -12,20 +12,20 @@ describe('ContentItem', () => {
     media = new MediaLink(connection);
   });
 
-  it('should beable to request image media browser', () => {
-    spyOn(connection, 'request');
+  it('should be able to request image media browser', () => {
+    jest.spyOn(connection, 'request').mockResolvedValue({});
     media.getImage();
     expect(connection.request).toHaveBeenCalledWith(MEDIA_LINK.IMAGE_GET, null, { timeout: false });
   });
 
-  it('should beable to request video media browser', () => {
-    spyOn(connection, 'request');
+  it('should be able to request video media browser', () => {
+    jest.spyOn(connection, 'request').mockResolvedValue({});
     media.getVideo();
     expect(connection.request).toHaveBeenCalledWith(MEDIA_LINK.VIDEO_GET, null, { timeout: false });
   });
 
-  it('should beable to request video media browser an ask for multiple', () => {
-    spyOn(connection, 'request');
+  it('should be able to request video media browser an ask for multiple', () => {
+    jest.spyOn(connection, 'request').mockResolvedValue({});
     media.getVideos();
     expect(connection.request).toHaveBeenCalledWith(
       MEDIA_LINK.VIDEO_GET,
@@ -33,8 +33,8 @@ describe('ContentItem', () => {
       { timeout: false }
     );
   });
-  it('should beable to request video media browser an ask for multiple if asked for max send number', () => {
-    spyOn(connection, 'request');
+  it('should be able to request video media browser an ask for multiple if asked for max send number', () => {
+    jest.spyOn(connection, 'request').mockResolvedValue({});
     media.getVideos({ max: 4 });
     expect(connection.request).toHaveBeenCalledWith(
       MEDIA_LINK.VIDEO_GET,
@@ -42,8 +42,8 @@ describe('ContentItem', () => {
       { timeout: false }
     );
   });
-  it('should beable to request image media browser an ask for multiple', () => {
-    spyOn(connection, 'request');
+  it('should be able to request image media browser an ask for multiple', () => {
+    jest.spyOn(connection, 'request').mockResolvedValue({});
     media.getImages();
     expect(connection.request).toHaveBeenCalledWith(
       MEDIA_LINK.IMAGE_GET,
@@ -51,8 +51,8 @@ describe('ContentItem', () => {
       { timeout: false }
     );
   });
-  it('should beable to request image media browser an ask for multiple if passed max send number', () => {
-    spyOn(connection, 'request');
+  it('should be able to request image media browser an ask for multiple if passed max send number', () => {
+    jest.spyOn(connection, 'request').mockResolvedValue({});
     media.getImages({ max: 5 });
     expect(connection.request).toHaveBeenCalledWith(
       MEDIA_LINK.IMAGE_GET,

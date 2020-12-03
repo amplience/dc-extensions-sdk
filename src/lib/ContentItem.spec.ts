@@ -1,7 +1,7 @@
 import { ClientConnection } from 'message-event-channel';
-import { CONTENT_ITEM } from '../src/lib/Events';
-import { ContentItem } from '../src/lib/ContentItem';
-import { ContentItemModel } from '../src/lib/models/ContentItemModel';
+import { CONTENT_ITEM } from './Events';
+import { ContentItem } from './ContentItem';
+import { ContentItemModel } from './models/ContentItemModel';
 describe('ContentItem', () => {
   let connection: ClientConnection;
   const contentItemModel: ContentItemModel = {
@@ -21,7 +21,7 @@ describe('ContentItem', () => {
   });
 
   it('getCurrent() should make one request with CONTENT_ITEM.GET event', async () => {
-    const requestSpy = spyOn(connection, 'request');
+    const requestSpy = jest.spyOn(connection, 'request').mockResolvedValue({});
     const contentItem: ContentItem = new ContentItem(connection);
     await contentItem.getCurrent();
     expect(requestSpy).toHaveBeenCalledTimes(1);
@@ -32,7 +32,7 @@ describe('ContentItem', () => {
     const p: Promise<object> = new Promise(resolve => {
       resolve(contentItemModel);
     });
-    spyOn(connection, 'request').and.returnValue(p);
+    jest.spyOn(connection, 'request').mockReturnValue(p);
     const contentItem: ContentItem = new ContentItem(connection);
     const value = await contentItem.getCurrent();
     expect(value).toEqual(contentItemModel);

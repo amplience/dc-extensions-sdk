@@ -1,4 +1,4 @@
-import { init } from '../src/lib/init';
+import { init } from './init';
 
 describe('init', () => {
   it('should retrun a promise', () => {
@@ -17,7 +17,7 @@ describe('init', () => {
 
   it('should be able to accept options', async done => {
     try {
-      spyOn(console, 'log');
+      jest.spyOn(console, 'log').mockImplementation(() => {});
       await init({ debug: true, connectionTimeout: 1 });
       expect(console.log).toHaveBeenCalled();
     } catch (e) {
