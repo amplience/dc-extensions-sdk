@@ -2,10 +2,9 @@ import { Params } from '../../models/Params';
 import { Extension, ExtensionOptions } from '../Extension';
 import { DashboardContextObject } from './DashboardContextObject';
 
-export class DashboardExtension<
-  FieldType = {},
-  ParamType extends Params = Params
-> extends Extension<DashboardContextObject<ParamType>> {
+export class DashboardExtension<ParamType extends Params = Params> extends Extension<
+  DashboardContextObject<ParamType>
+> {
   /**
    * Params - optional parameters for your extension.
    */
