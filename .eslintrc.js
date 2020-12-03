@@ -14,13 +14,13 @@ Happy linting! 💖
 module.exports = {
   env: {
     browser: true,
-    node: true
+    node: true,
   },
   extends: ['prettier', 'prettier/@typescript-eslint'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: 'tsconfig.json',
-    sourceType: 'module'
+    project: 'tsconfig.eslint.json',
+    sourceType: 'module',
   },
   plugins: ['eslint-plugin-import', 'eslint-plugin-jsdoc', '@typescript-eslint'],
   rules: {
@@ -32,18 +32,18 @@ module.exports = {
       {
         multiline: {
           delimiter: 'none',
-          requireLast: true
+          requireLast: true,
         },
         singleline: {
           delimiter: 'semi',
-          requireLast: false
-        }
-      }
+          requireLast: false,
+        },
+      },
     ],
     '@typescript-eslint/naming-convention': [
       'error',
       { selector: 'enumMember', format: ['UPPER_CASE', 'PascalCase'] },
-      { selector: 'enum', format: ['UPPER_CASE', 'PascalCase'] }
+      { selector: 'enum', format: ['UPPER_CASE', 'PascalCase'] },
     ],
     '@typescript-eslint/no-empty-function': 'error',
     '@typescript-eslint/no-floating-promises': 'error',
@@ -54,8 +54,8 @@ module.exports = {
       'error',
       {
         allowTaggedTemplates: true,
-        allowShortCircuit: true
-      }
+        allowShortCircuit: true,
+      },
     ],
     '@typescript-eslint/prefer-namespace-keyword': 'error',
     '@typescript-eslint/quotes': 'off',
@@ -65,8 +65,8 @@ module.exports = {
       {
         path: 'always',
         types: 'prefer-import',
-        lib: 'always'
-      }
+        lib: 'always',
+      },
     ],
     '@typescript-eslint/type-annotation-spacing': 'off',
     '@typescript-eslint/unified-signatures': 'error',
@@ -86,7 +86,7 @@ module.exports = {
       'Boolean',
       'boolean',
       'Undefined',
-      'undefined'
+      'undefined',
     ],
     'id-match': 'error',
     'import/no-deprecated': 'error',
@@ -126,9 +126,9 @@ module.exports = {
       'error',
       'always',
       {
-        markers: ['/']
-      }
+        markers: ['/'],
+      },
     ],
-    'use-isnan': 'error'
-  }
+    'use-isnan': 'error',
+  },
 };
