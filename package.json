@@ -39,10 +39,8 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "lint-staged": {
-    "{src,test}/**/*.ts": [
-      "prettier --write",
-      "eslint --fix"
-    ]
+    "*.ts": "eslint --cache --fix",
+    "*.{js,css,md,ts}": "prettier --write"
   },
   "config": {
     "commitizen": {
@@ -111,7 +109,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run lint && npm run test && npm run build"
+      "pre-commit": "lint-staged && npm run lint && npm run test && npm run build"
     }
   }
 }
