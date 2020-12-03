@@ -12,3 +12,4 @@ export * from './lib/Field';
 export * from './lib/init';
 export * from './lib/HttpClient';
 export * from './lib/extensions/content-field/ContentFieldExtension';
+export * from './lib/extensions/dashboard/DashboardExtension';
