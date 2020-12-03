@@ -46,7 +46,7 @@ describe('SDK', () => {
         expect(e.message).toEqual('Failed to fetch context for UI Extension');
         done();
       });
-    const fnCall = cOn.mock.calls[0][1] as Function;
+    const fnCall = cOn.mock.calls[0][1];
     fnCall();
   });
 
@@ -64,7 +64,7 @@ describe('SDK', () => {
         done();
       })
       .catch(e => ({}));
-    const fnCall = cOn.mock.calls[0][1] as Function;
+    const fnCall = cOn.mock.calls[0][1];
     fnCall();
   });
 });

@@ -38,7 +38,7 @@ describe('Field', () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
-  })
+  });
 
   it('set schema should be accessible', async () => {
     expect(field.schema).toEqual(schema);
@@ -69,29 +69,20 @@ describe('Field', () => {
 
   it('setValue(testValue) should should emit one request with the FIELD.MODEL_SET event with testValue', async () => {
     const requestSpy = jest.spyOn(connection, 'request');
-    field
-      .setValue(testValue)
-      .then()
-      .catch();
+    await expect(field.setValue(testValue)).resolves.toBeUndefined();
     expect(requestSpy).toHaveBeenCalledTimes(1);
     expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_SET, testValue);
   });
 
   it('setValue(null) should should emit FIELD.MODEL_SET event with null', async () => {
     const requestSpy = jest.spyOn(connection, 'request');
-    field
-      .setValue(null)
-      .then()
-      .catch();
+    await expect(field.setValue(null)).resolves.toBeUndefined();
     expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_SET, null);
   });
 
   it('setValue() should should emit FIELD.MODEL_SET event with undefined value', async () => {
     const requestSpy = jest.spyOn(connection, 'request');
-    field
-      .setValue()
-      .then()
-      .catch();
+    await expect(field.setValue(undefined)).resolves.toBeUndefined();
     expect(requestSpy).toHaveBeenCalledWith(FIELD.MODEL_SET, undefined);
   });
 
@@ -163,12 +154,9 @@ describe('Field', () => {
     expect(errors).toEqual([testError]);
   });
 
-  it('should be able to reset model to original value', () => {
+  it('should be able to reset model to original value', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
-    field
-      .reset()
-      .then()
-      .catch();
+    await expect(field.reset()).resolves.toEqual({});
     expect(connection.request).toHaveBeenCalledWith(FIELD.MODEL_RESET);
   });
 });

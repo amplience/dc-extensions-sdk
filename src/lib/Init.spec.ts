@@ -17,7 +17,7 @@ describe('init', () => {
 
   it('should be able to accept options', async done => {
     try {
-      jest.spyOn(console, 'log').mockImplementation(() => {});
+      jest.spyOn(console, 'log').mockReturnValue(undefined);
       await init({ debug: true, connectionTimeout: 1 });
       expect(console.log).toHaveBeenCalled();
     } catch (e) {

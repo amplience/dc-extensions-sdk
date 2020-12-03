@@ -17,12 +17,9 @@ describe('ContentReference', () => {
     expect(promise instanceof Promise).toBeTruthy();
   });
 
-  it('should pass an array of ids', () => {
+  it('should pass an array of ids', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
-    contentReference
-      .get(['123', '564'])
-      .then()
-      .catch();
+    await expect(contentReference.get(['123', '564'])).resolves.toEqual({});
     expect(connection.request).toHaveBeenCalledWith(
       'content-reference-get',
       { contentTypeIds: ['123', '564'] },
@@ -48,10 +45,10 @@ describe('ContentReference', () => {
     expect(connection.request).not.toHaveBeenCalled();
   });
 
-  it('should beable to return multiple items', () => {
+  it('should beable to return multiple items', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
 
-    contentReference.getMultiple(['123']);
+    await expect(contentReference.getMultiple(['123'])).resolves.toEqual({});
 
     expect(connection.request).toHaveBeenCalledWith(
       CONTENT_REFERENCE.CONTENT_REF_GET,
@@ -63,10 +60,10 @@ describe('ContentReference', () => {
     );
   });
 
-  it('should set max to number if passed', () => {
+  it('should set max to number if passed', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
 
-    contentReference.getMultiple(['123'], { max: 2 });
+    await expect(contentReference.getMultiple(['123'], { max: 2 })).resolves.toEqual({});
 
     expect(connection.request).toHaveBeenCalledWith(
       CONTENT_REFERENCE.CONTENT_REF_GET,
