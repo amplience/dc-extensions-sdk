@@ -30,24 +30,15 @@ Using cdn:
 <script src="https://unpkg.com/dc-extensions-sdk/dist/dc-extensions-sdk.umd.js"></script>
 ```
 
-# Including
+# Usage
 
-```ts
+## Creating a vanilla Javascript extension
+
+```js
 import { init } from 'dc-extensions-sdk';
 
-interface FieldModel {}
-
-interface Parameters {
-  instance: {};
-  installation: {};
-}
-
 async function initialize() {
-  // generics are optional and don't need to be provided
-  // but provide nice autocompletion when using typescript
-  const sdk = await init<ContentFieldExtension<FieldModel, Parameters>>();
-
-  //..
+  const sdk = await dcExtensionsSdk.init();
 }
 
 initialize();
@@ -60,37 +51,61 @@ const dcExtensionsSdk = require('dc-extensions-sdk');
 
 async function initialize() {
   const sdk = await dcExtensionsSdk.init();
-
-  //..
 }
 
 initialize();
 ```
 
-or
+## Creating a typed Content Field extensions with Typescript
 
-```html
-<script src="https://unpkg.com/dc-extensions-sdk/dist/dc-extensions-sdk.umd.js"></script>
-<script>
-  async function initialize() {
-    const sdk = await dcExtensionsSdk.init();
+```typescript
+import { init } from 'dc-extensions-sdk';
+import type { ContentFieldExtension } from 'dc-extensions-sdk';
 
-    //...
-  }
+// define the input field model
+interface FieldModel {
+  title: string;
+  type: string;
+  control: string;
+  format: string;
+  minLength: number;
+  maxLength: number;
+}
 
-  initialize();
-</script>
+// define the installation config parameters
+interface Parameters {
+  instance: {};
+  installation: {
+    configParam: string;
+  };
+}
+
+async function initialize() {
+  const sdk = await init<ContentFieldExtension<FieldModel, Parameters>>();
+}
+
+initialize();
 ```
 
-or if you prefer `.then` syntax
+## Creating a typed Dashboard extensions with Typescript
 
-```js
+```typescript
 import { init } from 'dc-extensions-sdk';
+import type { DashboardExtension } from 'dc-extensions-sdk';
 
-init().then(sdk => {
-  // output available locales
-  console.log(sdk.locales);
-});
+// define the installation config parameters
+interface Parameters {
+  instance: {};
+  installation: {
+    configParam: string;
+  };
+}
+
+async function initialize() {
+  const sdk = await init<DashboardExtension<Parameters>>();
+}
+
+initialize();
 ```
 
 # Options
@@ -104,7 +119,7 @@ const options = {
   // enable useful behind-the-scenes info
   debug: false,
   // the max time to wait for a connection to establish
-  connectionTimeout: 4500
+  connectionTimeout: 4500,
 };
 
 async function initialize() {
@@ -344,7 +359,7 @@ const sdk = await init();
 // the state is set on load of the form
 console.log(sdk.form.readOnly);
 
-sdk.form.onReadOnlyChange(readOnly => {
+sdk.form.onReadOnlyChange((readOnly) => {
   if (readOnly) {
     input.setAttribute('disabled', true);
   } else {
