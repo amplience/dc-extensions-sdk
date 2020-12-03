@@ -1,3 +1,4 @@
+import { EXTENSION } from '../Errors';
 import { isContentFieldContextObject } from './content-field/ContentFieldContextObject';
 import { ContentFieldExtension } from './content-field/ContentFieldExtension';
 import { Extension, ExtensionOptions } from './Extension';
@@ -14,7 +15,7 @@ export function extensionFactory<ExtensionType extends Extension<{}>>(
   }
 
   if (!extension) {
-    throw new Error('Unsupported extension');
+    throw new Error(EXTENSION.UNSUPPORTED_EXTENSION);
   }
   return (extension as unknown) as ExtensionType;
 }

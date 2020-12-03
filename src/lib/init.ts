@@ -15,7 +15,7 @@ const defaultOptions: InitOptions = {
   window: window,
   connectionTimeout: false,
   timeout: false,
-  debug: false
+  debug: false,
 };
 
 /**
@@ -45,15 +45,20 @@ export async function init<ExtensionType extends Extension<{}>>(
   return new Promise<ExtensionType>(async (resolve, reject) => {
     connection.init();
     connection.on(MC_EVENTS.CONNECTED, async () => {
+      let context;
       try {
-        const context = await connection.request(CONTEXT.GET, null, { timeout: false });
+        context = await connection.request(CONTEXT.GET, null, { timeout: false });
+      } catch (e) {
+        reject(new Error(ERRORS_INIT.CONTEXT));
+      }
+      try {
         const extension: ExtensionType = extensionFactory(context, {
           connection,
-          ...mergedOptions
+          ...mergedOptions,
         });
         resolve(extension);
       } catch (e) {
-        reject(new Error(ERRORS_INIT.CONTEXT));
+        reject(e);
       }
     });
     connection.on(MC_EVENTS.CONNECTION_TIMEOUT, () => {
