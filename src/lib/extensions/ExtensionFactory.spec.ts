@@ -1,6 +1,6 @@
 import { ClientConnection } from 'message-event-channel';
-import { ContentFieldExtension } from '../../src/lib/extensions/content-field/ContentFieldExtension';
-import { extensionFactory } from '../../src/lib/extensions/ExtensionFactory';
+import { ContentFieldExtension } from './content-field/ContentFieldExtension';
+import { extensionFactory } from './ExtensionFactory';
 
 describe('ExtensionFactory', () => {
   it('should return a content field extension', () => {

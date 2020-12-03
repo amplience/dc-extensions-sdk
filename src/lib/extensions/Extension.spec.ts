@@ -1,4 +1,4 @@
-import { isContextObject } from '../../src/lib/extensions/Extension';
+import { isContextObject } from './Extension';
 
 describe('Extension', () => {
   describe('isContextObject', () => {

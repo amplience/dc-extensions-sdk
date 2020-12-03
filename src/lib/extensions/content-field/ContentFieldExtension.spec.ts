@@ -1,8 +1,8 @@
 import { ClientConnection } from 'message-event-channel';
-import { ContentItem } from '../../../src/lib/ContentItem';
-import { ContentFieldExtension } from '../../../src/lib/extensions/content-field/ContentFieldExtension';
-import { Field } from '../../../src/lib/Field';
-import { Form } from '../../../src/lib/Form';
+import { ContentItem } from '../../ContentItem';
+import { ContentFieldExtension } from './ContentFieldExtension';
+import { Field } from '../../Field';
+import { Form } from '../../Form';
 
 describe('ContentFieldExtension', () => {
   it('should create a new instance of ContentFieldExtension', () => {

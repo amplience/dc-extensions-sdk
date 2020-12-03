@@ -1,4 +1,4 @@
-import { isContentFieldContextObject } from '../../../src/lib/extensions/content-field/ContentFieldContextObject';
+import { isContentFieldContextObject } from './ContentFieldContextObject';
 
 describe('ContentFieldContextObject', () => {
   describe('isContentFieldContextObject', () => {
