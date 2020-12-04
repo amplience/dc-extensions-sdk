@@ -11,14 +11,14 @@ describe('Extension', () => {
       };
       expect(isContextObject(context)).toBe(true);
     });
-    it('should return false when context object has undefined instance param', () => {
+    it('should return true when context object has undefined instance param', () => {
       const context = {
         params: {
           installation: {},
           instance: undefined,
         },
       };
-      expect(isContextObject(context)).toBe(false);
+      expect(isContextObject(context)).toBe(true);
     });
     it('should return false when context object has undefined installation param', () => {
       const context = {
