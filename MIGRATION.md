@@ -18,7 +18,7 @@ In version `2.x.x` you can now pass an additional extension type:
 const sdk = await init<ContentFieldExtension<FieldModel, Parameters>>();
 ```
 
-### The SDK class is no longer exposed
+### The `SDK` class is no longer exposed
 
 The SDK class has been removed and the SDK properties have been moved to the ContentFieldExtension class.
 
@@ -38,3 +38,7 @@ import { init } from 'dc-extensions-sdk';
 
 const sdk = await init<ContentFieldExtension<FieldModel, Parameters>>();
 ```
+
+### `Options`, `OptionsObject` interfaces are no longer exposed
+
+Please use `InitOptions` and `Partial<InitOptions>` instead
