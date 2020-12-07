@@ -1,5 +1,6 @@
 import { ClientConnection } from 'message-event-channel';
 import { ContentFieldExtension } from './content-field/ContentFieldExtension';
+import { DashboardExtension } from './dashboard/DashboardExtension';
 import { extensionFactory } from './ExtensionFactory';
 
 describe('ExtensionFactory', () => {
@@ -8,7 +9,7 @@ describe('ExtensionFactory', () => {
       window: window,
       connectionTimeout: false,
       timeout: false,
-      debug: false
+      debug: false,
     };
     const connection = new ClientConnection(options);
     const context = {
@@ -17,11 +18,11 @@ describe('ExtensionFactory', () => {
         title: 'test-field-schema-title',
         type: 'test-field-schema-type',
         description: 'test-field-schema-desc',
-        'ui:extension': {}
+        'ui:extension': {},
       },
       params: {
         installation: {},
-        instance: {}
+        instance: {},
       },
       locales: {
         default: ['en'],
@@ -31,13 +32,13 @@ describe('ExtensionFactory', () => {
             language: 'en',
             country: 'gb',
             index: 1,
-            selected: true
-          }
-        ]
+            selected: true,
+          },
+        ],
       },
       stagingEnvironment: 'https://test-staging-environment',
       visualisation: 'test-visualization',
-      readOnly: true
+      readOnly: true,
     };
 
     expect(
@@ -45,16 +46,40 @@ describe('ExtensionFactory', () => {
     ).toBeInstanceOf(ContentFieldExtension);
   });
 
+  it('should return a dashboard extension', () => {
+    const options = {
+      window: window,
+      connectionTimeout: false,
+      timeout: false,
+      debug: false,
+    };
+    const connection = new ClientConnection(options);
+    const context = {
+      category: 'DASHBOARD',
+      hubId: 'abcdef1234567890abcdef12',
+      locationHref: 'https://test-extension-location-href',
+      params: {
+        instance: {},
+        installation: {
+          configParam: 'test-config-param',
+        },
+      },
+    };
+    expect(
+      extensionFactory<DashboardExtension>(context, { connection, ...options })
+    ).toBeInstanceOf(DashboardExtension);
+  });
+
   it('should throw an error when extension context is not recognised', () => {
     const options = {
       window: window,
       connectionTimeout: false,
       timeout: false,
-      debug: false
+      debug: false,
     };
     const connection = new ClientConnection(options);
     const context = {
-      category: 'UNKNOWN_CATEGORY'
+      category: 'UNKNOWN_CATEGORY',
     };
 
     expect(() =>

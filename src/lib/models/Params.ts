@@ -1,6 +1,6 @@
 export interface Params {
-  instance: object;
   installation: object;
+  instance?: object;
   hubId?: string;
   locationHref?: string;
   category?: string;

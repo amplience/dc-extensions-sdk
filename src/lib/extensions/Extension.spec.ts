@@ -7,33 +7,35 @@ describe('Extension', () => {
         params: {
           installation: {},
           instance: {},
-          category: 'TEST_EXTENSION_CATEGORY',
-          hubId: 'abcdef1234567890abcdef12',
-          locationHref: 'https://test-extension-location-href'
-        }
+        },
       };
       expect(isContextObject(context)).toBe(true);
     });
-    it('should return false when context object is missing isntance params', () => {
+    it('should return true when context object has undefined instance param', () => {
       const context = {
         params: {
           installation: {},
-          category: 'TEST_EXTENSION_CATEGORY',
-          hubId: 'abcdef1234567890abcdef12',
-          locationHref: 'https://test-extension-location-href'
-        }
+          instance: undefined,
+        },
+      };
+      expect(isContextObject(context)).toBe(true);
+    });
+    it('should return false when context object has undefined installation param', () => {
+      const context = {
+        params: {
+          installation: undefined,
+          instance: {},
+        },
       };
       expect(isContextObject(context)).toBe(false);
     });
-    it('should return false when context object is missing installation params', () => {
-      const context = {
-        params: {
-          instance: {},
-          category: 'TEST_EXTENSION_CATEGORY',
-          hubId: 'abcdef1234567890abcdef12',
-          locationHref: 'https://test-extension-location-href'
-        }
-      };
+    it('should return false when context object is missing all params', () => {
+      const context = {};
+      expect(isContextObject(context)).toBe(false);
+    });
+
+    it('should return false when context object has empty params', () => {
+      const context = { params: {} };
       expect(isContextObject(context)).toBe(false);
     });
   });
