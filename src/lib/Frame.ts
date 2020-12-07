@@ -10,6 +10,7 @@ export class Frame {
 
   /**
    * Use in order to control the re-sizing of the Extension
+   *
    * @param connection message-event-channel connection
    * @param win override the default window object
    */
@@ -58,6 +59,7 @@ export class Frame {
 
   /**
    * Set the height of the frame to the height of the Extension. Can optionally override the measured height with a defined value.
+   *
    * @param height - should be used if you want to override the calculated height of your extension
    *
    * If no height is passed it will try get the extension height or default to 0

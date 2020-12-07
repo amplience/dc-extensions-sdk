@@ -1,4 +1,23 @@
-import { SDK, Params, OptionsObject } from './SDK';
+import { ClientConnection, MC_EVENTS } from 'message-event-channel';
+import { ERRORS_INIT } from './Errors';
+import { CONTEXT } from './Events';
+import { Extension } from './extensions/Extension';
+import { extensionFactory } from './extensions/ExtensionFactory';
+
+export interface InitOptions {
+  window: Window;
+  connectionTimeout: number | boolean;
+  timeout: number | boolean;
+  debug: boolean;
+}
+
+const defaultOptions: InitOptions = {
+  window: window,
+  connectionTimeout: false,
+  timeout: false,
+  debug: false,
+};
+
 /**
  * The method that starts it all
  *
@@ -12,16 +31,38 @@ import { SDK, Params, OptionsObject } from './SDK';
  * import { init } from 'dc-extensions-sdk';
  *
  * async function initialize() {
- *  const sdk = await init();
+ *  const contentFieldExtension = await <ContentFieldExtension>init();
  *
  *  //.. setup extension
  * }
  * ```
  */
-export async function init<FieldType = {}, ParamType extends Params = Params>(
-  options?: OptionsObject
-): Promise<SDK<FieldType, ParamType>> {
-  const sdk = new SDK<FieldType, ParamType>(options);
-
-  return sdk.init();
+export async function init<ExtensionType extends Extension<{}>>(
+  options: Partial<InitOptions> = {}
+): Promise<ExtensionType> {
+  const mergedOptions: InitOptions = { ...defaultOptions, ...options };
+  const connection = new ClientConnection(mergedOptions);
+  return new Promise<ExtensionType>(async (resolve, reject) => {
+    connection.init();
+    connection.on(MC_EVENTS.CONNECTED, async () => {
+      let context;
+      try {
+        context = await connection.request(CONTEXT.GET, null, { timeout: false });
+      } catch (e) {
+        reject(new Error(ERRORS_INIT.CONTEXT));
+      }
+      try {
+        const extension: ExtensionType = extensionFactory(context, {
+          connection,
+          ...mergedOptions,
+        });
+        resolve(extension);
+      } catch (e) {
+        reject(e);
+      }
+    });
+    connection.on(MC_EVENTS.CONNECTION_TIMEOUT, () => {
+      reject(new Error(ERRORS_INIT.CONNECTION_TIMEOUT));
+    });
+  });
 }

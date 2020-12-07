@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { ClientConnection } from 'message-event-channel';
 import { ContentLink } from './ContentLink';
 import { CONTENT_LINK } from './Events';

@@ -45,7 +45,7 @@ interface Parameters {
 async function initialize() {
   // generics are optional and don't need to be provided
   // but provide nice autocompletion when using typescript
-  const sdk = await init<FieldModel, Parameters>();
+  const sdk = await init<ContentFieldExtension<FieldModel, Parameters>>();
 
   //..
 }

@@ -15,11 +15,13 @@ export interface CotnentLinkOptions {
 export class ContentLink {
   /**
    * Content Link - Use to open the content browser.
+   *
    * @param connection message-event-channel connection
    */
   constructor(private connection: ClientConnection) {}
   /**
    * This method will trigger a content browser. It returns a promise that will resolve to the chosen Content References.
+   *
    * @param contentTypeIds list of Content Type Ids to filter the Content Browser by.
    * @param options.max Max amount of selected contnet links
    *
@@ -42,6 +44,7 @@ export class ContentLink {
   }
   /**
    * This method will trigger a content browser. It returns a promise that will resolve to the chosen Content Link.
+   *
    * @param contentTypeIds list of Content Type Ids to filter the Content Browser by.
    *
    * ### Example
