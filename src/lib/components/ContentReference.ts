@@ -1,6 +1,6 @@
 import { ClientConnection } from 'message-event-channel';
-import { ERRORS_CONTENT_ITEM } from './Errors';
-import { CONTENT_REFERENCE } from './Events';
+import { ERRORS_CONTENT_ITEM } from '../constants/Errors';
+import { CONTENT_REFERENCE } from '../constants/Events';
 
 export interface ContentItemReference {
   _meta: {
@@ -66,11 +66,11 @@ export class ContentReference {
 
     const response = {
       contentTypeIds,
-      ...((max !== undefined && { max }) || {})
+      ...((max !== undefined && { max }) || {}),
     };
 
     return this.connection.request(CONTENT_REFERENCE.CONTENT_REF_GET, response, {
-      timeout: false
+      timeout: false,
     });
   }
 }

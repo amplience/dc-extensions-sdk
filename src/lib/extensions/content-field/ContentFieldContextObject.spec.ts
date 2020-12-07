@@ -9,18 +9,18 @@ describe('ContentFieldContextObject', () => {
           title: 'test-field-schema-title',
           type: 'test-field-schema-type',
           description: 'test-field-schema-desc',
-          'ui:extension': {}
+          'ui:extension': {},
         },
         params: {
           installation: {},
-          instance: {}
+          instance: {},
         },
         locales: {
-          default: ['en']
+          default: ['en'],
         },
         stagingEnvironment: 'https://test-staging-environment',
         visualisation: 'test-visualization',
-        readOnly: true
+        readOnly: true,
       };
 
       expect(isContentFieldContextObject(context)).toBe(true);
@@ -28,7 +28,7 @@ describe('ContentFieldContextObject', () => {
 
     it('should return false when context does not contain content field params', () => {
       const context = {
-        params: { installation: {}, instance: {} }
+        params: { installation: {}, instance: {} },
       };
 
       expect(isContentFieldContextObject(context)).toBe(false);

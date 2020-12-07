@@ -131,7 +131,7 @@ async function initialize() {
 initialize();
 ```
 
-# Usage
+# Content Field Usage
 
 ## Field
 
@@ -368,9 +368,75 @@ sdk.form.onReadOnlyChange((readOnly) => {
 });
 ```
 
-## Client
+# Dashboard
 
-### Use client with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js)
+## Application Navigator
+
+The `ApplicationNavigator` is exposed on the `Dashboard` extension under the property `applicationNavigator`.
+
+For each of the open commands you can supply an additional options argument if you wish to only return the href.
+This maybe useful if you need to set the href directly on an anchor within your extension.
+
+```js
+const sdk = await init();
+const href = sdk.applicationNavigator.openEventsCalendar({ returnHref: true });
+
+const anchor = window.document.getElementById('my-anchor');
+anchor.setAttribute('href', href);
+```
+
+### Open the events calendar
+
+```js
+const sdk = await init();
+sdk.applicationNavigator.openEventsCalendar();
+```
+
+### Open the events timeline
+
+```js
+const sdk = await init();
+sdk.applicationNavigator.openEventsTimeline();
+```
+
+### Open the events list
+
+```js
+const sdk = await init();
+sdk.applicationNavigator.openEventsList();
+```
+
+### Open an event by id
+
+```js
+const sdk = await init();
+sdk.applicationNavigator.openEvent({ id: 'EVENT_ID...' });
+```
+
+### Open edition by edition id & event id
+
+```js
+const sdk = await init();
+sdk.applicationNavigator.openEdition({ id: 'EDITION_ID...', eventId: 'EVENT_ID...' });
+```
+
+### Open the content Library
+
+```js
+const sdk = await init();
+sdk.applicationNavigator.openContentLibrary();
+```
+
+### Open a content item by id
+
+```js
+const sdk = await init();
+sdk.applicationNavigator.openContentItem({ id: 'CONTENT_ITEM_ID...' });
+```
+
+# Client (Supported on Content Field & Dashboard extensions)
+
+## Use client with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js)
 
 ```js
 import { init } from 'dc-extensions-sdk';

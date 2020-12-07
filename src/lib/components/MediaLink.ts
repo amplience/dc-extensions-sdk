@@ -1,5 +1,5 @@
 import { ClientConnection } from 'message-event-channel';
-import { MEDIA_LINK } from './Events';
+import { MEDIA_LINK } from '../constants/Events';
 export interface MediaImageLink {
   _meta: {
     schema: string;
@@ -76,7 +76,7 @@ export class MediaLink {
    */
   getImage(): Promise<MediaImageLink> {
     return this.connection.request(MEDIA_LINK.IMAGE_GET, null, {
-      timeout: false
+      timeout: false,
     });
   }
   /**
@@ -114,7 +114,7 @@ export class MediaLink {
    */
   getVideo(): Promise<MediaVideoLink> {
     return this.connection.request(MEDIA_LINK.VIDEO_GET, null, {
-      timeout: false
+      timeout: false,
     });
   }
   /**
@@ -137,7 +137,7 @@ export class MediaLink {
       MEDIA_LINK.VIDEO_GET,
       { max },
       {
-        timeout: false
+        timeout: false,
       }
     );
   }

@@ -36,3 +36,10 @@ export enum EXTENSION {
    */
   UNSUPPORTED_EXTENSION = 'Unsupported extension',
 }
+
+export enum APPLICATION_NAVIGATOR {
+  /**
+   * The location href must include a #!
+   */
+  MUST_INCLUDE_HASH_BANG = 'locationHref must include a hash bang (#!)',
+}

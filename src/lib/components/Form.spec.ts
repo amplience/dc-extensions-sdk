@@ -1,12 +1,12 @@
-import { FORM as ERRORS } from './Errors';
+import { FORM as ERRORS } from '../constants/Errors';
 import { ClientConnection } from 'message-event-channel';
-import { Body } from './models/ContentItemModel';
+import { Body } from '../models/ContentItemModel';
 import { Form } from './Form';
 
 describe('Form', () => {
   let connection: ClientConnection;
   let form: Form;
-  let onSpy : jest.SpyInstance;
+  let onSpy: jest.SpyInstance;
   beforeEach(() => {
     connection = new ClientConnection();
     onSpy = jest.spyOn(connection, 'on');
@@ -34,11 +34,11 @@ describe('Form', () => {
       const formModel: Body = {
         _meta: {
           name: 'test',
-          schema: 'http://test.test'
+          schema: 'http://test.test',
         },
         properties: {
-          test: true
-        }
+          test: true,
+        },
       };
       jest.spyOn(connection, 'request').mockReturnValue(Promise.resolve(formModel));
       const value = await form.getValue();

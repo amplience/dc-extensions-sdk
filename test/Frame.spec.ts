@@ -1,5 +1,5 @@
-import { FRAME } from '../src/lib/Events';
-import { Frame } from '../src/lib/Frame';
+import { FRAME } from '../src/lib/constants/Events';
+import { Frame } from '../src/lib/components/Frame';
 import { ClientConnection } from 'message-event-channel';
 describe('Frame', () => {
   let connection: ClientConnection;
@@ -22,7 +22,7 @@ describe('Frame', () => {
     it('should resolve on load if window is not ready', () => {
       const mockWindow = {
         document: { readyState: false },
-        addEventListener: window.addEventListener
+        addEventListener: window.addEventListener,
       };
       let callBack;
       // @ts-ignore
@@ -100,7 +100,7 @@ describe('Frame', () => {
       expect(onSpy).toHaveBeenCalledWith(FRAME.HEIGHT_SET, 0);
     });
 
-    it('should throw an exception when not passed a numeric value', done => {
+    it('should throw an exception when not passed a numeric value', (done) => {
       const frame: Frame = new Frame(connection);
       const onSpy = spyOn(connection, 'emit');
       try {
@@ -112,7 +112,7 @@ describe('Frame', () => {
       }
     });
 
-    it('should throw an exception when passed an HTML element', done => {
+    it('should throw an exception when passed an HTML element', (done) => {
       const frame: Frame = new Frame(connection);
       const emitSpy = spyOn(connection, 'emit');
       try {
@@ -126,7 +126,7 @@ describe('Frame', () => {
   });
 
   describe('Frame.startAutoResizer()', () => {
-    it('should start auto resizer', done => {
+    it('should start auto resizer', (done) => {
       const frame: Frame = new Frame(connection);
       body.style.height = '0px';
       const emitSpy = spyOn(connection, 'emit');

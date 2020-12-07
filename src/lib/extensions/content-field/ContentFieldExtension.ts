@@ -1,10 +1,10 @@
-import { ContentItem } from '../../ContentItem';
-import { ContentLink } from '../../ContentLink';
-import { ContentReference } from '../../ContentReference';
-import { Field } from '../../Field';
-import { Form } from '../../Form';
-import { Frame } from '../../Frame';
-import { MediaLink } from '../../MediaLink';
+import { ContentItem } from '../../components/ContentItem';
+import { ContentLink } from '../../components/ContentLink';
+import { ContentReference } from '../../components/ContentReference';
+import { Field } from '../../components/Field';
+import { Form } from '../../components/Form';
+import { Frame } from '../../components/Frame';
+import { MediaLink } from '../../components/MediaLink';
 import { LocalesModel } from '../../models/Locales';
 import { Params } from '../../models/Params';
 import { Extension, ExtensionOptions } from '../Extension';

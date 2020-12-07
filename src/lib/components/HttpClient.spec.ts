@@ -17,14 +17,14 @@ describe('HttpClient', () => {
     httpClient.request({
       url: 'https://bigcontent.io',
       method: HttpMethod.GET,
-      data: {}
+      data: {},
     });
 
     expect(request).toHaveBeenCalledWith('dc-management-sdk-js:request', {
       url: 'https://bigcontent.io',
       method: HttpMethod.GET,
       headers: undefined,
-      data: {}
+      data: {},
     });
   });
 
@@ -33,19 +33,19 @@ describe('HttpClient', () => {
       Promise.resolve({
         status: 200,
         data: 'hello world',
-        headers: {}
+        headers: {},
       })
     );
 
     const response = await httpClient.request({
       url: 'https://bigcontent.io',
       method: HttpMethod.GET,
-      data: {}
+      data: {},
     });
 
     expect(response).toEqual({
       status: 200,
-      data: 'hello world'
+      data: 'hello world',
     });
   });
 
@@ -53,19 +53,19 @@ describe('HttpClient', () => {
     jest.spyOn(connection, 'request').mockReturnValue(
       Promise.reject({
         data: 'hello world',
-        status: 400
+        status: 400,
       })
     );
 
     const response = await httpClient.request({
       url: 'https://bigcontent.io',
       method: HttpMethod.GET,
-      data: {}
+      data: {},
     });
 
     expect(response).toEqual({
       status: 400,
-      data: 'hello world'
+      data: 'hello world',
     });
   });
 });

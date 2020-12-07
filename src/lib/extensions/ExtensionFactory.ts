@@ -1,4 +1,4 @@
-import { EXTENSION } from '../Errors';
+import { EXTENSION } from '../constants/Errors';
 import { isContentFieldContextObject } from './content-field/ContentFieldContextObject';
 import { ContentFieldExtension } from './content-field/ContentFieldExtension';
 import { isDashboardContextObject } from './dashboard/DashboardContextObject';

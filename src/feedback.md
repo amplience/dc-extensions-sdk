@@ -4,7 +4,7 @@ High level
 - No use for the interface?
 - Naming convention - Noun as the type name, with .model
 - which is more likley to be used
-- overexporting? 
+- overexporting?
 - index.ts?
 - effective content type vs root content type
 - backwards compatiability - evolutionary vs handling multiple interfaces

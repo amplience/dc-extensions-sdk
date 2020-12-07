@@ -1,5 +1,5 @@
 import { ClientConnection } from 'message-event-channel';
-import { HttpClient } from '../HttpClient';
+import { HttpClient } from '../components/HttpClient';
 import { InitOptions } from '../init';
 import { Params } from '../models/Params';
 
@@ -26,8 +26,8 @@ export abstract class Extension<ContextObject> {
    */
   public client!: HttpClient;
 
-  constructor(options: ExtensionOptions) {
-    this.connection = options.connection;
+  constructor(protected readonly options: ExtensionOptions) {
+    this.connection = this.options.connection;
     this.client = new HttpClient(this.connection);
   }
 

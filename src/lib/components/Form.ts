@@ -1,7 +1,7 @@
-import { FORM } from './Events';
-import { FORM as ERRORS } from './Errors';
+import { FORM } from '../constants/Events';
+import { FORM as ERRORS } from '../constants/Errors';
 import { ClientConnection } from 'message-event-channel';
-import { Body } from './models/ContentItemModel';
+import { Body } from '../models/ContentItemModel';
 
 export type onChangeHandler = (readonly: boolean) => void;
 
@@ -13,7 +13,7 @@ export class Form {
 
     this.connection.on(FORM.READ_ONLY, (readonly: boolean) => {
       this.readOnly = readonly;
-      this.onChangeStack.forEach(cb => cb(this.readOnly));
+      this.onChangeStack.forEach((cb) => cb(this.readOnly));
     });
   }
 

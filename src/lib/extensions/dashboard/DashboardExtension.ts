@@ -1,3 +1,4 @@
+import { ApplicationNavigator } from '../../components/ApplicationNavigator';
 import { Params } from '../../models/Params';
 import { Extension, ExtensionOptions } from '../Extension';
 import { DashboardContextObject } from './DashboardContextObject';
@@ -17,6 +18,10 @@ export class DashboardExtension<ParamType extends Params = Params> extends Exten
    * Location Href - Href of the Dashboards parent container.
    */
   public locationHref!: string;
+  /**
+   * Application Navigator - Able to navigate the user to certain Dynamic Content related pages
+   */
+  public applicationNavigator!: ApplicationNavigator;
 
   constructor(options: ExtensionOptions) {
     super(options);
@@ -28,5 +33,6 @@ export class DashboardExtension<ParamType extends Params = Params> extends Exten
     this.hubId = hubId;
     this.locationHref = locationHref;
     this.params = params;
+    this.applicationNavigator = new ApplicationNavigator(this.locationHref, this.options.window);
   }
 }
