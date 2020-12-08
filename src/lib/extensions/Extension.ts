@@ -12,10 +12,7 @@ export interface ContextObject {
 }
 
 export function isContextObject(context: unknown | ContextObject): context is ContextObject {
-  return (
-    (context as ContextObject)?.params?.installation !== undefined &&
-    (context as ContextObject)?.params?.instance !== undefined
-  );
+  return (context as ContextObject)?.params?.installation !== undefined;
 }
 
 export abstract class Extension<ContextObject> {
