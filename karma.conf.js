@@ -13,6 +13,14 @@ module.exports = function(config) {
     browsers: ['ChromeHeadless'],
     karmaTypescriptConfig: {
       reports: {
+        json: {
+          directory: 'coverage',
+          subdirectory: 'karma'
+        },
+        lcovonly: {
+          directory: 'coverage',
+          subdirectory: 'karma'
+        },
         text: null,
         'text-summary': null,
         html: 'coverage/'

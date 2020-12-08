@@ -1,6 +1,6 @@
 {
   "name": "dc-extensions-sdk",
-  "version": "0.0.0-development",
+  "version": "1.2.0",
   "description": "",
   "keywords": [],
   "main": "dist/dc-extensions-sdk.umd.js",
@@ -24,12 +24,9 @@
     "test": "karma start",
     "test:watch": "karma start -auto-watch",
     "test:prod": "npm run lint && npm run test -- --no-cache",
-    "deploy-docs": "ts-node tools/gh-pages-publish",
-    "report-coverage": "cat './coverage/lcov.info' | coveralls",
     "commit": "git-cz",
-    "semantic-release": "semantic-release",
-    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
-    "travis-deploy-once": "travis-deploy-once"
+    "release": "standard-version",
+    "postrelease": "ts-node tools/gh-pages-publish"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
@@ -84,9 +81,8 @@
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
     "rollup-plugin-typescript2": "^0.24.3",
-    "semantic-release": "^15.13.30",
     "shelljs": "^0.8.3",
-    "travis-deploy-once": "^5.0.9",
+    "standard-version": "^9.0.0",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
