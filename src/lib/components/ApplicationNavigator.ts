@@ -3,6 +3,10 @@ import { APPLICATION_NAVIGATOR } from '../constants/Errors';
 interface ContentItem {
   id: string;
 }
+interface ContentType {
+  id: string;
+  repoId: string;
+}
 
 interface Edition {
   id: string;
@@ -45,6 +49,16 @@ export class ApplicationNavigator {
 
   openContentItem(id: ContentItem, options: Partial<OpenOptions> = {}): undefined | string {
     return this.processHref(`${this.getBaseHref()}/authoring/content-item/edit/${id.id}`, options);
+  }
+
+  openCreateContent(
+    contentType: ContentType,
+    options: Partial<OpenOptions> = {}
+  ): undefined | string {
+    return this.processHref(
+      `${this.getBaseHref()}/authoring/content-item/create/${contentType.repoId}/${contentType.id}`,
+      options
+    );
   }
 
   private processHref(href: string, options: Partial<OpenOptions>): string | undefined {
