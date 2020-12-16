@@ -1,4 +1,4 @@
-import { FieldSchema } from '../../Field';
+import { FieldSchema } from '../../components/Field';
 import { LocalesModel } from '../../models/Locales';
 import { Params } from '../../models/Params';
 import { ContextObject, isContextObject } from '../Extension';

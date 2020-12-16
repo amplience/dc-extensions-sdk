@@ -16,7 +16,7 @@ export enum HttpMethod {
   POST = 'POST',
   PUT = 'PUT',
   PATCH = 'PATCH',
-  DELETE = 'DELETE'
+  DELETE = 'DELETE',
 }
 
 /**
@@ -56,10 +56,10 @@ export class HttpClient {
         {
           code: 'UNKNOWN',
           level: 'ERROR',
-          message: 'Unknown error'
-        }
-      ]
-    }
+          message: 'Unknown error',
+        },
+      ],
+    },
   };
 
   constructor(private connection: ClientConnection) {}
@@ -70,18 +70,18 @@ export class HttpClient {
         data: config.data,
         method: config.method,
         headers: config.headers,
-        url: config.url
+        url: config.url,
       });
 
       return {
         data: response.data,
-        status: response.status
+        status: response.status,
       };
     } catch (error) {
       if (error) {
         return {
           data: error.data,
-          status: error.status
+          status: error.status,
         };
       }
 

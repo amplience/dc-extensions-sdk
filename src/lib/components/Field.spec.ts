@@ -1,11 +1,11 @@
-import { FIELD } from './Events';
+import { FIELD } from '../constants/Events';
 import { Field, FieldSchema } from './Field';
 import { ClientConnection } from 'message-event-channel';
-import { ErrorReport } from './models/ErrorReport';
-import { Params } from './models/Params';
+import { ErrorReport } from '../models/ErrorReport';
+import { Params } from '../models/Params';
 
 const testValue = {
-  hello: 'world'
+  hello: 'world',
 };
 
 const testError = ({
@@ -13,12 +13,12 @@ const testError = ({
   pointer: '/here',
   data: {
     keyword: 'fail',
-    params: {}
+    params: {},
   },
   schema: {
     id: 'aschema',
-    pointer: '/blah/blah'
-  }
+    pointer: '/blah/blah',
+  },
 } as unknown) as ErrorReport;
 
 describe('Field', () => {
@@ -31,7 +31,7 @@ describe('Field', () => {
     schema = {
       title: 'My Field',
       type: 'string',
-      'ui:extension': { url: '124' }
+      'ui:extension': { url: '124' },
     };
     field = new Field(connection, schema);
   });
@@ -45,7 +45,7 @@ describe('Field', () => {
   });
 
   it('getValue() should emit one request with the FIELD.MODEL_GET event and return the value from request', async () => {
-    const p: Promise<object> = new Promise(resolve => {
+    const p: Promise<object> = new Promise((resolve) => {
       resolve(testValue);
     });
     const requestSpy = jest.spyOn(connection, 'request').mockReturnValue(p);
@@ -98,7 +98,7 @@ describe('Field', () => {
     expect(fieldSet).toEqual(undefined);
   });
 
-  it('setValue(testValue) should throw when validation errors are returned', async done => {
+  it('setValue(testValue) should throw when validation errors are returned', async (done) => {
     jest.spyOn(connection, 'request').mockResolvedValue([testError]);
     try {
       await field.setValue(testValue);

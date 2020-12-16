@@ -42,3 +42,13 @@ const sdk = await init<ContentFieldExtension<FieldModel, Parameters>>();
 ### `Options`, `OptionsObject` interfaces are no longer exposed
 
 Please use `InitOptions` and `Partial<InitOptions>` instead
+
+### `Events` are no longer exported
+
+Not exported as Events are internal
+
+### Extensions components are no longer exported
+
+`ContentItem`, `ContentLink`, `ContentReference`, `Field`, `Frame`, `Form`, `HttpClient` & `MediaLink` are no longer exported as these are internal components.
+
+You can still access each of these form the resulting extension from `await init();` call.

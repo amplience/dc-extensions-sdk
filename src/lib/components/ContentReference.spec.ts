@@ -1,41 +1,37 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import { ClientConnection } from 'message-event-channel';
-import { ContentLink } from './ContentLink';
-import { CONTENT_LINK } from './Events';
+import { ContentReference } from './ContentReference';
+import { CONTENT_REFERENCE } from '../constants/Events';
 
-describe('ContentItem', () => {
+describe('ContentReference', () => {
   let connection: ClientConnection;
-  let contentLink: ContentLink;
+  let contentReference: ContentReference;
 
   beforeEach(() => {
     connection = new ClientConnection();
-    contentLink = new ContentLink(connection);
+    contentReference = new ContentReference(connection);
   });
 
   it('get should return a promise', () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
-    const promise = contentLink.get(['123']);
+    const promise = contentReference.get(['123']);
     expect(promise instanceof Promise).toBeTruthy();
   });
 
-  it('should pass an array of ids', () => {
+  it('should pass an array of ids', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
-    contentLink
-      .get(['123', '564'])
-      .then()
-      .catch();
+    await expect(contentReference.get(['123', '564'])).resolves.toEqual({});
     expect(connection.request).toHaveBeenCalledWith(
-      'content-link-get',
+      'content-reference-get',
       { contentTypeIds: ['123', '564'] },
       {
-        timeout: false
+        timeout: false,
       }
     );
   });
 
   it('should throw an error if no ids are passed', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
-    await expect(contentLink.get([])).rejects.toThrowErrorMatchingInlineSnapshot(
+    await expect(contentReference.get([])).rejects.toThrowErrorMatchingInlineSnapshot(
       `"Please provide content type ids"`
     );
     expect(connection.request).not.toHaveBeenCalled();
@@ -44,36 +40,36 @@ describe('ContentItem', () => {
   it('should throw an error if params are not in the expected format', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
     await expect(
-      contentLink.get(('123' as unknown) as Array<string>)
+      contentReference.get(('123' as unknown) as Array<string>)
     ).rejects.toThrowErrorMatchingInlineSnapshot(`"Please provide content type ids"`);
     expect(connection.request).not.toHaveBeenCalled();
   });
 
-  it('should beable to return multiple items', () => {
+  it('should beable to return multiple items', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
 
-    contentLink.getMultiple(['123']);
+    await expect(contentReference.getMultiple(['123'])).resolves.toEqual({});
 
     expect(connection.request).toHaveBeenCalledWith(
-      CONTENT_LINK.CONTENT_GET,
+      CONTENT_REFERENCE.CONTENT_REF_GET,
       {
         contentTypeIds: ['123'],
-        max: null
+        max: null,
       },
       { timeout: false }
     );
   });
 
-  it('should set max to number if passed', () => {
+  it('should set max to number if passed', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
 
-    contentLink.getMultiple(['123'], { max: 2 });
+    await expect(contentReference.getMultiple(['123'], { max: 2 })).resolves.toEqual({});
 
     expect(connection.request).toHaveBeenCalledWith(
-      CONTENT_LINK.CONTENT_GET,
+      CONTENT_REFERENCE.CONTENT_REF_GET,
       {
         contentTypeIds: ['123'],
-        max: 2
+        max: 2,
       },
       { timeout: false }
     );

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { ClientConnection } from 'message-event-channel';
-import { MEDIA_LINK } from './Events';
+import { MEDIA_LINK } from '../constants/Events';
 import { MediaLink } from './MediaLink';
 
 describe('ContentItem', () => {

@@ -1,12 +1,12 @@
 import { ClientConnection } from 'message-event-channel';
-import { ContentItem } from '../../ContentItem';
+import { ContentItem } from '../../components/ContentItem';
 import { ContentFieldExtension } from './ContentFieldExtension';
-import { Field } from '../../Field';
-import { Form } from '../../Form';
-import { Frame } from '../../Frame';
-import { ContentReference } from '../../ContentReference';
-import { ContentLink } from '../../ContentLink';
-import { MediaLink } from '../../MediaLink';
+import { Field } from '../../components/Field';
+import { Form } from '../../components/Form';
+import { Frame } from '../../components/Frame';
+import { ContentReference } from '../../components/ContentReference';
+import { ContentLink } from '../../components/ContentLink';
+import { MediaLink } from '../../components/MediaLink';
 
 describe('ContentFieldExtension', () => {
   it('should create a new instance of ContentFieldExtension', () => {

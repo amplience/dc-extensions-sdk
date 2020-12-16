@@ -1,7 +1,7 @@
 import { ClientConnection } from 'message-event-channel';
 
-import { FRAME } from './Events';
-import { ERRORS_FRAME } from './Errors';
+import { FRAME } from '../constants/Events';
+import { ERRORS_FRAME } from '../constants/Errors';
 export class Frame {
   public isAutoResizing: boolean = false;
   private previousHeight?: number;
@@ -15,7 +15,7 @@ export class Frame {
    * @param win override the default window object
    */
   constructor(private connection: ClientConnection, private win: Window = window) {
-    const frameLoaded = new Promise(resolve => {
+    const frameLoaded = new Promise((resolve) => {
       if (win.document.readyState === 'complete') {
         resolve(true);
       }
@@ -109,7 +109,7 @@ export class Frame {
       attributes: true,
       childList: true,
       subtree: true,
-      characterData: true
+      characterData: true,
     });
 
     this.win.addEventListener('resize', this.updateHeightHandler);

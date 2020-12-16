@@ -1,6 +1,6 @@
 import { ClientConnection, MC_EVENTS } from 'message-event-channel';
-import { ERRORS_INIT } from './Errors';
-import { CONTEXT } from './Events';
+import { ERRORS_INIT } from './constants/Errors';
+import { CONTEXT } from './constants/Events';
 import { Extension } from './extensions/Extension';
 import { extensionFactory } from './extensions/ExtensionFactory';
 

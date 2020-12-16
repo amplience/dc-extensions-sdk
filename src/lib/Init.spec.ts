@@ -1,7 +1,7 @@
 import { init } from './init';
 import { ClientConnection, MC_EVENTS } from 'message-event-channel';
 import { extensionFactory } from './extensions/ExtensionFactory';
-import { EXTENSION } from './Errors';
+import { EXTENSION } from './constants/Errors';
 
 jest.mock('message-event-channel');
 jest.mock('./extensions/ExtensionFactory');

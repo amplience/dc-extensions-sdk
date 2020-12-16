@@ -1,6 +1,6 @@
 import { ClientConnection } from 'message-event-channel';
-import { CONTENT_ITEM } from './Events';
-import { ContentItemModel } from './models/ContentItemModel';
+import { CONTENT_ITEM } from '../constants/Events';
+import { ContentItemModel } from '../models/ContentItemModel';
 
 export class ContentItem {
   /**

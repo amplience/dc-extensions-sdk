@@ -1,6 +1,6 @@
 import { ClientConnection } from 'message-event-channel';
-import { CONTENT_LINK } from './Events';
-import { ERRORS_CONTENT_ITEM } from './Errors';
+import { CONTENT_LINK } from '../constants/Events';
+import { ERRORS_CONTENT_ITEM } from '../constants/Errors';
 export interface ContentItemLink {
   _meta: {
     schema: string;
@@ -66,11 +66,11 @@ export class ContentLink {
 
     const response = {
       contentTypeIds,
-      ...((max !== undefined && { max }) || {})
+      ...((max !== undefined && { max }) || {}),
     };
 
     return this.connection.request(CONTENT_LINK.CONTENT_GET, response, {
-      timeout: false
+      timeout: false,
     });
   }
 }

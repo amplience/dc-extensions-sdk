@@ -1,7 +1,7 @@
 import { ClientConnection } from 'message-event-channel';
-import { CONTENT_ITEM } from './Events';
+import { CONTENT_ITEM } from '../constants/Events';
 import { ContentItem } from './ContentItem';
-import { ContentItemModel } from './models/ContentItemModel';
+import { ContentItemModel } from '../models/ContentItemModel';
 describe('ContentItem', () => {
   let connection: ClientConnection;
   const contentItemModel: ContentItemModel = {
@@ -10,11 +10,11 @@ describe('ContentItem', () => {
     body: {
       _meta: {
         name: 'Name',
-        schema: 'http://www.aschema.com'
-      }
+        schema: 'http://www.aschema.com',
+      },
     },
     version: 1,
-    deliveryId: 'deliveryId'
+    deliveryId: 'deliveryId',
   };
   beforeAll(() => {
     connection = new ClientConnection();
@@ -29,7 +29,7 @@ describe('ContentItem', () => {
   });
 
   it('getCurrent() should return what comes back from the request', async () => {
-    const p: Promise<object> = new Promise(resolve => {
+    const p: Promise<object> = new Promise((resolve) => {
       resolve(contentItemModel);
     });
     jest.spyOn(connection, 'request').mockReturnValue(p);
