@@ -1,12 +1,16 @@
 import { LOCATION_HREF } from '../constants/LocationHref';
 import { APPLICATION_NAVIGATOR } from '../constants/Errors';
 interface ContentItem {
-  id: string;
+  id?: string;
+}
+
+interface Event {
+  id?: string;
 }
 
 interface Edition {
-  id: string;
-  eventId: string;
+  id?: string;
+  eventId?: string;
 }
 
 export interface OpenOptions {
@@ -28,8 +32,8 @@ export class ApplicationNavigator {
     return this.processHref(`${this.getBaseHref()}/planning/events/list`, options);
   }
 
-  openEvent(eventId: string, options: Partial<OpenOptions> = {}): undefined | string {
-    return this.processHref(`${this.getBaseHref()}/planning/event/${eventId}`, options);
+  openEvent(event: Event, options: Partial<OpenOptions> = {}): undefined | string {
+    return this.processHref(`${this.getBaseHref()}/planning/event/${event.id}`, options);
   }
 
   openEdition(edition: Edition, options: Partial<OpenOptions> = {}): undefined | string {

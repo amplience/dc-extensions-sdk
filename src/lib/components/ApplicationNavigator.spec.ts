@@ -67,12 +67,14 @@ describe('ApplicationNavigator', () => {
       const eventId = 'EVENT_ID';
 
       it('should return navigate to the requested route ', () => {
-        expect(applicationNavigation.openEvent(eventId)).toBeUndefined();
+        expect(applicationNavigation.openEvent({ id: eventId })).toBeUndefined();
         expect(mockWindow.parent.location.href).toEqual(expectedUrl);
       });
 
       it('should open return the href', () => {
-        expect(applicationNavigation.openEvent(eventId, { returnHref: true })).toEqual(expectedUrl);
+        expect(applicationNavigation.openEvent({ id: eventId }, { returnHref: true })).toEqual(
+          expectedUrl
+        );
         expect(mockWindow.parent.location.href).toBeUndefined();
       });
     });
