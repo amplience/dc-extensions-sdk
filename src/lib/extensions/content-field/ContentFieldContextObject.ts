@@ -19,6 +19,7 @@ export function isContentFieldContextObject(
 ): context is ContentFieldContextObject {
   return (
     isContextObject(context) &&
+    (context as ContentFieldContextObject).category === 'CONTENT_FIELD' &&
     (context as ContentFieldContextObject)?.params?.instance !== undefined &&
     (context as ContentFieldContextObject).contentItemId !== undefined &&
     (context as ContentFieldContextObject).fieldSchema !== undefined &&
