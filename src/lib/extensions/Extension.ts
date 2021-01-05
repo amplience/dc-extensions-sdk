@@ -8,6 +8,7 @@ export interface ExtensionOptions extends InitOptions {
 }
 
 export interface ContextObject {
+  category: string;
   params: Params;
 }
 
