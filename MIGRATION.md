@@ -4,7 +4,7 @@ Below are instructions for migrating from one version of dc-extension-sdk to ano
 
 ## `1.x.x` to `2.x.x`
 
-### Specifying extension types
+### Specifying extension types (TypeScript only)
 
 We have introduced improved control over the extension types you are initialising. Previously you would initialise the extension using:
 
@@ -39,16 +39,12 @@ import { init } from 'dc-extensions-sdk';
 const sdk = await init<ContentFieldExtension<FieldModel, Parameters>>();
 ```
 
-### `Options`, `OptionsObject` interfaces are no longer exposed
+### `Options`, `OptionsObject` interfaces are no longer exposed (TypeScript only)
 
 Please use `InitOptions` and `Partial<InitOptions>` instead
 
-### `Events` are no longer exported
+### `Events`, `ContentItem`, `ContentLink`, `ContentReference`, `Field`, `Frame`, `Form`, `HttpClient` & `MediaLink` are no longer exported
 
-Not exported as Events are internal
+`Events`, `ContentItem`, `ContentLink`, `ContentReference`, `Field`, `Frame`, `Form`, `HttpClient` & `MediaLink` are no longer exported as these are internal/private data structures.
 
-### Extensions components are no longer exported
-
-`ContentItem`, `ContentLink`, `ContentReference`, `Field`, `Frame`, `Form`, `HttpClient` & `MediaLink` are no longer exported as these are internal components.
-
-You can still access each of these form the resulting extension from `await init();` call.
+You should only be using the resolved result from the `init();` call.
