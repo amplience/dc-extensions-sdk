@@ -165,29 +165,4 @@ describe('Frame', () => {
       expect(window.removeEventListener).not.toHaveBeenCalled();
     });
   });
-
-  describe('Frame.updateHeight()', () => {
-    it('should set a new height', () => {
-      const frame: Frame = new Frame(connection);
-      // @ts-ignore
-      spyOn(frame, 'getHeight').and.returnValue(10);
-      spyOn(frame, 'setHeight');
-      // @ts-ignore
-      frame.previousHeight = 20;
-      //@ts-ignore
-      frame.updateHeight();
-      expect(frame.setHeight).toHaveBeenCalledWith(10);
-    });
-    it('should not set a new height if the height has not changed', () => {
-      const frame: Frame = new Frame(connection);
-      // @ts-ignore
-      spyOn(frame, 'getHeight').and.returnValue(10);
-      spyOn(frame, 'setHeight');
-      // @ts-ignore
-      frame.previousHeight = 10;
-      //@ts-ignore
-      frame.updateHeight();
-      expect(frame.setHeight).not.toHaveBeenCalled();
-    });
-  });
 });
