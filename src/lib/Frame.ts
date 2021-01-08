@@ -137,7 +137,14 @@ export class Frame {
   }
 
   private updateHeight() {
-    const height = this.getHeight();
+    const body = document.querySelector('body');
+    const container = document.createElement('div');
+
+    container.innerHTML = body && body.innerHTML ? body.innerHTML : '';
+
+    const { height } = container.getBoundingClientRect();
+
+    container.remove();
 
     if (height === this.previousHeight) {
       return;
