@@ -126,18 +126,6 @@ describe('Frame', () => {
   });
 
   describe('Frame.startAutoResizer()', () => {
-    it('should start auto resizer', done => {
-      const frame: Frame = new Frame(connection);
-      body.style.height = '0px';
-      const emitSpy = spyOn(connection, 'emit');
-      frame.startAutoResizer();
-      body.style.height = '100px';
-      setTimeout(() => {
-        expect(frame.isAutoResizing).toEqual(true);
-        expect(emitSpy).toHaveBeenCalledWith(FRAME.HEIGHT_SET, 100);
-        done();
-      });
-    });
     it('should not do anything if autoResizing is true', () => {
       const frame: Frame = new Frame(connection);
       spyOn(window, 'addEventListener');
