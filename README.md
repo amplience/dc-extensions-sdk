@@ -447,3 +447,29 @@ const dcManagement = new DynamicContent({}, {}, dcExtension.client);
 
 const hubs = await dcManagement.hubs.list();
 ```
+
+# Users (Supported on Content Field & Dashboard extensions)
+
+## Return users logged in to the Content Management application
+
+```js
+import { init } from 'dc-extensions-sdk';
+
+const dcExtension = await init();
+
+const users = await dcExtension.users.list();
+console.log(users);
+```
+
+Example:
+
+```
+[
+  {
+    id: '7078e5e7-d5bf-4015-4832-b75fb6f60537',
+    firstName: 'Test',
+    lastName: 'User',
+    email: 'testuser@bigcontent.io',
+  }
+]
+```

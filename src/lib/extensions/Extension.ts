@@ -1,5 +1,6 @@
 import { ClientConnection } from 'message-event-channel';
 import { HttpClient } from '../components/HttpClient';
+import { Users } from '../components/Users';
 import { InitOptions } from '../init';
 import { Params } from '../models/Params';
 
@@ -27,9 +28,15 @@ export abstract class Extension<ContextObject> {
    */
   public client!: HttpClient;
 
+  /**
+   * Users - used to get the current user or all users under the company
+   */
+  public users!: Users;
+
   constructor(protected readonly options: ExtensionOptions) {
     this.connection = this.options.connection;
     this.client = new HttpClient(this.connection);
+    this.users = new Users(this.connection);
   }
 
   public abstract setupContext(context: ContextObject): void;

@@ -9,7 +9,7 @@ export interface ContentItemLink {
   contentType: string;
 }
 
-export interface CotnentLinkOptions {
+export interface ContentLinkOptions {
   max?: number | null;
 }
 export class ContentLink {
@@ -35,7 +35,7 @@ export class ContentLink {
    */
   getMultiple(
     contentTypeIds: Array<string>,
-    options: CotnentLinkOptions = { max: null }
+    options: ContentLinkOptions = { max: null }
   ): Promise<ContentItemLink[]> {
     if (options.max === undefined) {
       options.max = null;
