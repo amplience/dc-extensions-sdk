@@ -1,1 +1,1 @@
-export const USERS_URL = 'https://auth.adis.ws/users' as const;
+export const USERS_URL = 'https://auth.amplience.net/users' as const;

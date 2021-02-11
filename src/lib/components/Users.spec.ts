@@ -39,7 +39,7 @@ describe('Users', () => {
     const response = await users.list();
 
     expect(request).toHaveBeenCalledWith('dc-management-sdk-js:request', {
-      url: 'https://auth.adis.ws/users',
+      url: 'https://auth.amplience.net/users',
       method: HttpMethod.GET,
       headers: undefined,
       data: undefined,
@@ -68,7 +68,7 @@ describe('Users', () => {
     const response = await users.list();
 
     expect(request).toHaveBeenCalledWith('dc-management-sdk-js:request', {
-      url: 'https://auth.adis.ws/users',
+      url: 'https://auth.amplience.net/users',
       method: HttpMethod.GET,
       headers: undefined,
       data: undefined,
