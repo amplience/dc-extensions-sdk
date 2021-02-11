@@ -1,6 +1,6 @@
 {
   "name": "dc-extensions-sdk",
-  "version": "0.0.0-development",
+  "version": "1.2.0",
   "description": "",
   "keywords": [],
   "main": "dist/dc-extensions-sdk.umd.js",
@@ -35,9 +35,8 @@
     "deploy-docs": "ts-node tools/gh-pages-publish",
     "report-coverage": "cat './coverage/lcov.info' | coveralls",
     "commit": "git-cz",
-    "semantic-release": "semantic-release",
-    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
-    "travis-deploy-once": "travis-deploy-once"
+    "release": "standard-version",
+    "postrelease": "ts-node tools/gh-pages-publish"
   },
   "lint-staged": {
     "*.ts": "eslint --cache --fix",
@@ -63,6 +62,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^7.1.2",
+    "@types/jest": "^26.0.20",
     "@types/node": "^10.17.47",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/eslint-plugin-tslint": "^4.9.0",
@@ -99,9 +99,8 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-typescript2": "^0.29.0",
-    "semantic-release": "^15.14.0",
     "shelljs": "^0.8.4",
-    "travis-deploy-once": "^5.0.9",
+    "standard-version": "^9.0.0",
     "ts-jest": "^26.4.4",
     "ts-node": "^9.0.0",
     "typedoc": "^0.19.2",

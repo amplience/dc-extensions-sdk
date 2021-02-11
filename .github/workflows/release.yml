@@ -1,6 +1,8 @@
-name: App
+name: Publish
 
-on: [push, pull_request]
+on:
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -8,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 15.x]
+        node-version: [10.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -17,7 +19,6 @@ jobs:
         id: npm-cache
         run: |
           echo "::set-output name=dir::$(npm config get cache)"
-
       - uses: actions/cache@v2
         with:
           path: ${{ steps.npm-cache.outputs.dir }}
@@ -36,10 +37,6 @@ jobs:
         env:
           CI: true
 
-      - if: matrix.node-version == '14.x'
-        continue-on-error: true
-        name: Coveralls GitHub Action
-        uses: coverallsapp/github-action@8cbef1dea373ebce56de0a14c68d6267baa10b44 #v1.1.2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: './coverage/karma/lcovonly'
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

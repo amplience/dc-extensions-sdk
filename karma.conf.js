@@ -1,10 +1,10 @@
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
     frameworks: ['jasmine', 'karma-typescript'],
     files: [{ pattern: './src/**/*.ts' }, { pattern: './test/**/*.ts' }],
     exclude: ['src/**/*.spec.ts'],
     preprocessors: {
-      '**/*.ts': 'karma-typescript'
+      '**/*.ts': 'karma-typescript',
     },
     reporters: ['dots', 'karma-typescript'],
     browsers: ['ChromeHeadless'],
@@ -12,14 +12,14 @@ module.exports = function(config) {
       reports: {
         json: {
           directory: 'coverage',
-          subdirectory: 'karma'
+          subdirectory: 'karma',
         },
         lcovonly: {
           directory: 'coverage',
-          subdirectory: 'karma'
-        }
-      }
+          subdirectory: 'karma',
+        },
+      },
     },
-    singleRun: true
+    singleRun: true,
   });
 };
