@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - master
 
 name: release-please
 jobs:
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v1
         if: ${{ steps.release.outputs.release_created }}
         with:
-          node-version: 12
+          node-version: 14
           registry-url: 'https://registry.npmjs.org'
 
       - run: npm ci
