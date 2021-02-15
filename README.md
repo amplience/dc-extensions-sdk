@@ -38,7 +38,7 @@ Using cdn:
 import { init } from 'dc-extensions-sdk';
 
 async function initialize() {
-  const sdk = await dcExtensionsSdk.init();
+  const sdk = await init();
 }
 
 initialize();
