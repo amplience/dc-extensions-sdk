@@ -24,6 +24,26 @@ All notable changes to this project will be documented in this file. See [standa
 - **multi-select:** added multiselect to media content link & refs ([ae16cd1](https://github.com/amplience/dc-extensions-sdk/commit/ae16cd122790852ac535cd2bbe03b544f5dd3c9a))
 - **timeouts:** no more timeouts (by default) ([01abdb7](https://github.com/amplience/dc-extensions-sdk/commit/01abdb72b9a1b961a20058f27d912cc58a3f4af1))
 
+## [2.0.0](https://www.github.com/amplience/dc-extensions-sdk/compare/v1.2.0...v2.0.0) (2021-02-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* certain classes are no longer exposed - see MIGRATION.md for more info
+
+### Features
+
+* certain classes are no longer exposed - see MIGRATION.md for more info ([c9e876a](https://www.github.com/amplience/dc-extensions-sdk/commit/c9e876a6faa662414770874ca463ae175d5d166b))
+* **context:** making category mandatory for content field ([#33](https://www.github.com/amplience/dc-extensions-sdk/issues/33)) ([444ef54](https://www.github.com/amplience/dc-extensions-sdk/commit/444ef54f3866d7214b26ced0f3a0ba441f9ae24a))
+* dashboard extension ([#29](https://www.github.com/amplience/dc-extensions-sdk/issues/29)) ([0ced0c2](https://www.github.com/amplience/dc-extensions-sdk/commit/0ced0c23c37b17c64ee16c9304f8292200a2e661))
+* **dashboard:** application navigator ([#31](https://www.github.com/amplience/dc-extensions-sdk/issues/31)) ([a3e4d5d](https://www.github.com/amplience/dc-extensions-sdk/commit/a3e4d5d1a7d5159e155e7a81d763217c10c40936))
+* **users client:** adds a new class for listing users ([#34](https://www.github.com/amplience/dc-extensions-sdk/issues/34)) ([3a4b577](https://www.github.com/amplience/dc-extensions-sdk/commit/3a4b577e5aa49b6d2a5e898d9763ae32e63ebb7b))
+
+
+### Bug Fixes
+
+* migrate from adis.ws to amplience.net ([912724d](https://www.github.com/amplience/dc-extensions-sdk/commit/912724dc197b68881387711283f61e6a102d1c65))
+
 ## [1.0.3](https://github.com/amplience/dc-extensions-sdk/compare/v1.0.2...v1.0.3) (2020-02-12)
 
 ### Bug Fixes
