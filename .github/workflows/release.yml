@@ -32,3 +32,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.release_created }}
+
+      - run: npm run deploy-docs
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        if: ${{ steps.release.outputs.release_created }}
