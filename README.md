@@ -27,7 +27,7 @@ yarn add dc-extensions-sdk
 Using cdn:
 
 ```html
-<script src="https://unpkg.com/dc-extensions-sdk/dist/dc-extensions-sdk.umd.js"></script>
+<script src="https://unpkg.com/dc-extensions-sdk@^2/dist/dc-extensions-sdk.umd.js"></script>
 ```
 
 # Usage

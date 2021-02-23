@@ -35,8 +35,6 @@
     "deploy-docs": "ts-node tools/gh-pages-publish",
     "report-coverage": "cat './coverage/lcov.info' | coveralls",
     "commit": "git-cz",
-    "release": "standard-version",
-    "postrelease": "ts-node tools/gh-pages-publish",
     "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable"
@@ -104,7 +102,6 @@
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-typescript2": "^0.29.0",
     "shelljs": "^0.8.4",
-    "standard-version": "^9.0.0",
     "ts-jest": "^26.4.4",
     "ts-node": "^9.0.0",
     "typedoc": "^0.19.2",
