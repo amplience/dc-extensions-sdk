@@ -63,6 +63,7 @@ export class ContentEditorExtension<
     const { schema, params, locales, stagingEnvironment, readOnly, visualisation } = context;
 
     this.contentItem = new ContentItem(this.connection);
+    this.schema = schema;
     this.form = new ContentEditorForm(this.connection, readOnly);
     this.params = params;
     this.locales = locales;
