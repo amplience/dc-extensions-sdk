@@ -23,6 +23,12 @@ export class ContentEditorForm {
     return errors && errors.length ? errors : undefined;
   }
 
+  async isValid(value: any): Promise<Boolean> {
+    const isValid = await this.connection.request<Boolean>(CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_IS_VALID, value);
+
+    return isValid;
+  }
+
   setValue(value: any) {
     return this.connection.request(CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_SET, value);
   }
