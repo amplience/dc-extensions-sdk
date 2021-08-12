@@ -1,6 +1,6 @@
 import { EXTENSION } from '../constants/Errors';
 import { isContentEditorContextObject } from './content-editor/ContentEditorContextObject';
-import { ContentEditorExtension } from './content-editor/ContentFieldExtension';
+import { ContentEditorExtension } from './content-editor/ContentEditorExtension';
 import { isContentFieldContextObject } from './content-field/ContentFieldContextObject';
 import { ContentFieldExtension } from './content-field/ContentFieldExtension';
 import { isDashboardContextObject } from './dashboard/DashboardContextObject';
