@@ -32,7 +32,8 @@ export enum CONTENT_EDITOR_FORM {
   CONTENT_EDITOR_FORM_GET = 'content-editor-model-get',
   CONTENT_EDITOR_FORM_SET = 'content-editor-model-set',
   CONTENT_EDITOR_FORM_VALIDATE = 'content-editor-model-validate',
-  CONTENT_EDITOR_FORM_IS_VALID = 'content-editor-model-is-valid'
+  CONTENT_EDITOR_FORM_IS_VALID = 'content-editor-model-is-valid',
+  CONTENT_EDITOR_MODEL_CHANGE = 'content-editor-model-change'
 }
 
 export enum FORM {

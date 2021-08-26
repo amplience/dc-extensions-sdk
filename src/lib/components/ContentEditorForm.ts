@@ -5,16 +5,25 @@ import { Body } from '../models/ContentItemModel';
 import { ErrorReport } from '../models/ErrorReport';
 import { onChangeHandler } from './Form';
 
+
+export type onModelChangeHandler = (errors: null | ErrorReport[], value: any) => void;
+
 export class ContentEditorForm {
     private onChangeStack: Array<onChangeHandler>;
+    private onModelStack: Array<onModelChangeHandler>;
 
   constructor(private connection: ClientConnection, public readOnly: boolean) {
     this.onChangeStack = [];
+    this.onModelStack = [];
 
     this.connection.on(FORM.READ_ONLY, (readonly: boolean) => {
       this.readOnly = readonly;
       this.onChangeStack.forEach((cb) => cb(this.readOnly));
     });
+
+    this.connection.on(CONTENT_EDITOR_FORM.CONTENT_EDITOR_MODEL_CHANGE, (errors: null | ErrorReport[], value: any) => {
+      this.onModelStack.forEach(cb => cb(errors, value));
+    })
   }
 
   async validate(value: any): Promise<ErrorReport[] | void> {
@@ -92,4 +101,9 @@ export class ContentEditorForm {
         return this;
     }
 
+
+    onModelChange(cb: onModelChangeHandler): ContentEditorForm {
+        this.onModelStack.push(cb);
+        return this;
+    }
 }
