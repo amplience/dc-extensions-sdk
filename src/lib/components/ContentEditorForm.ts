@@ -6,7 +6,8 @@ import { ErrorReport } from '../models/ErrorReport';
 import { onChangeHandler } from './Form';
 
 
-export type onModelChangeHandler = (errors: null | ErrorReport[], value: any) => void;
+export type onModelChangeArgs = {errors: null | ErrorReport[], content: any};
+export type onModelChangeHandler = (errors: null | ErrorReport[], content: any) => void;
 
 export class ContentEditorForm {
     private onChangeStack: Array<onChangeHandler>;
@@ -21,8 +22,8 @@ export class ContentEditorForm {
       this.onChangeStack.forEach((cb) => cb(this.readOnly));
     });
 
-    this.connection.on(CONTENT_EDITOR_FORM.CONTENT_EDITOR_MODEL_CHANGE, (errors: null | ErrorReport[], value: any) => {
-      this.onModelStack.forEach(cb => cb(errors, value));
+    this.connection.on(CONTENT_EDITOR_FORM.CONTENT_EDITOR_MODEL_CHANGE, ({errors, content}: onModelChangeArgs) => {
+      this.onModelStack.forEach(cb => cb(errors, content));
     })
   }
 
