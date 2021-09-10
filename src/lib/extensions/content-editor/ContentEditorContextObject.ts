@@ -1,13 +1,12 @@
-import { FieldSchema } from '../../components/Field';
-
 import { LocalesModel } from '../../models/Locales';
 import { Params } from '../../models/Params';
 import { ContextObject, isContextObject } from '../Extension';
+import { SchemaType } from '../content-editor/ContentEditorExtension';
 
 export interface ContentEditorContextObject<ParamType extends Params = Params>
   extends ContextObject {
   contentItemId: string;
-  schema: FieldSchema<ParamType>;
+  schema: SchemaType;
   params: ParamType;
   locales: LocalesModel;
   stagingEnvironment: string;

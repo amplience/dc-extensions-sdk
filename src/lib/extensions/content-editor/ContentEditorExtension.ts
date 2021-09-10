@@ -7,17 +7,31 @@ import { LocalesModel } from '../../models/Locales';
 import { Params } from '../../models/Params';
 import { Extension, ExtensionOptions } from '../Extension';
 import { ContentEditorContextObject } from './ContentEditorContextObject';
+import { FieldSchema } from '../../components/Field';
+import { ObjectMap } from '../../models/ContentItemModel';
 
-export class ContentEditorExtension<
-  Schema = {},
-  ParamType extends Params = Params
-> extends Extension<ContentEditorContextObject<ParamType>> {
+export type SchemaType = ObjectMap<{
+  id?: string;
+  $id?: string;
+  $schema: string;
+  title?: string;
+  description?: string;
+  allOf: Array<{ $ref: string }>;
+  type?: string;
+  propertyOrder?: Array<string>;
+  required?: Array<string>;
+  properties: ObjectMap<any, FieldSchema>;
+}>;
+
+export class ContentEditorExtension<ParamType extends Params = Params> extends Extension<
+  ContentEditorContextObject<ParamType>
+> {
   /**
    * Content Item - The model of the Content Item that is being edited.
    */
   public contentItem!: ContentItem;
 
-  public schema!: any;
+  public schema!: SchemaType;
   /**
    * Params - optional parameters for your extension.
    */

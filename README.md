@@ -108,6 +108,27 @@ async function initialize() {
 initialize();
 ```
 
+## Creating a typed Content Editor extensions with Typescript
+
+```typescript
+import { init } from 'dc-extensions-sdk';
+import type { ContentEditorExtension } from 'dc-extensions-sdk';
+
+// define the installation config parameters
+interface Parameters {
+  instance: {};
+  installation: {
+    configParam: string;
+  };
+}
+
+async function initialize() {
+  const sdk = await init<ContentEditorExtension<Parameters>>();
+}
+
+initialize();
+```
+
 # Options
 
 You can configure your extension with the options object passed into the init function.
@@ -434,7 +455,102 @@ const sdk = await init();
 sdk.applicationNavigator.openContentItem({ id: 'CONTENT_ITEM_ID...' });
 ```
 
-# Client (Supported on Content Field & Dashboard extensions)
+# Content Editor
+
+### Get Current Model
+
+Fetching will give you the current model of the content item you're viewing.
+
+```js
+const sdk = await init();
+const model = await sdk.form.getValue();
+```
+
+### Set Model
+
+Setting the model will return Error Report if there is any invalid content
+
+```js
+const sdk = await init();
+const errors = await sdk.form.setValue({
+  title: 'hello world',
+});
+
+if (errors.length) {
+  console.log(errors);
+}
+```
+
+### Validate
+
+You can validate an object against the schema and get the full error report back
+
+```js
+const sdk = await init();
+const errors = await sdk.form.validate({
+  title: 'hello world',
+});
+
+if (errors) {
+  console.log(errors);
+}
+
+//
+[
+  {
+    errorCategory: 'DATA',
+    errorData: {
+      keyword: 'maxLength',
+      params: {
+        limit: 10,
+      },
+    },
+    errorSeverity: 'FATAL',
+    errorType: 'DATA_VALIDATION_ERROR',
+    message: 'should NOT be longer than 10 characters',
+    schema: {
+      id: 'https://simple-text.com',
+      originalId: 'https://simple-text.com',
+      location: {
+        pointer: '/properties/title/maxLength',
+      },
+    },
+    data: {
+      location: {
+        pointer: '/title',
+      },
+    },
+  },
+];
+```
+
+### isValid
+
+You can get a boolean value weather a piece of content is valid
+
+```js
+const sdk = await init();
+const isValid = await sdk.form.isValid({
+  title: 'hello world',
+});
+
+console.log(isValid); // false
+```
+
+### onModelChange
+
+For syncing your model with Dynamic Content on content changes propergated outside the extension e.g delivery key change
+
+```js
+const sdk = await init();
+
+sdk.form.onModelChange((errors, model) => {
+  setErrors(errors);
+  setModel(model);
+});
+```
+
+# Client (Supported on Content Field & Dashboard & Content Editor extensions)
 
 ## Use client with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js)
 
@@ -448,7 +564,7 @@ const dcManagement = new DynamicContent({}, {}, dcExtension.client);
 const hubs = await dcManagement.hubs.list();
 ```
 
-# Users (Supported on Content Field & Dashboard extensions)
+# Users (Supported on Content Field & Dashboard & Content Editor extensions)
 
 ## Return users logged in to the Content Management application
 

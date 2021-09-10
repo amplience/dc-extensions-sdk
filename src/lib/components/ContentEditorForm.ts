@@ -5,13 +5,12 @@ import { Body } from '../models/ContentItemModel';
 import { ErrorReport } from '../models/ErrorReport';
 import { onChangeHandler } from './Form';
 
-
-export type onModelChangeArgs = {errors: null | ErrorReport[], content: any};
+export type onModelChangeArgs = { errors: null | ErrorReport[]; content: any };
 export type onModelChangeHandler = (errors: null | ErrorReport[], content: any) => void;
 
-export class ContentEditorForm {
-    private onChangeStack: Array<onChangeHandler>;
-    private onModelStack: Array<onModelChangeHandler>;
+export class ContentEditorForm<Model = any> {
+  private onChangeStack: Array<onChangeHandler>;
+  private onModelStack: Array<onModelChangeHandler>;
 
   constructor(private connection: ClientConnection, public readOnly: boolean) {
     this.onChangeStack = [];
@@ -22,25 +21,69 @@ export class ContentEditorForm {
       this.onChangeStack.forEach((cb) => cb(this.readOnly));
     });
 
-    this.connection.on(CONTENT_EDITOR_FORM.CONTENT_EDITOR_MODEL_CHANGE, ({errors, content}: onModelChangeArgs) => {
-      this.onModelStack.forEach(cb => cb(errors, content));
-    })
+    this.connection.on(
+      CONTENT_EDITOR_FORM.CONTENT_EDITOR_MODEL_CHANGE,
+      ({ errors, content }: onModelChangeArgs) => {
+        this.onModelStack.forEach((cb) => cb(errors, content));
+      }
+    );
   }
 
-  async validate(value: any): Promise<ErrorReport[] | void> {
-    const errors = await this.connection.request<ErrorReport[] | void>(CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_VALIDATE, value);
+  /**
+   * Check the validation of your model. Returns an array containing any JSON Schema errors found.
+   *
+   * @param model The model you whish to test
+   *
+   * If you want to validate a field model and get back an  error reports [[ErrorReport]]
+   *
+   * ### Example
+   * ```typescript
+   * const errors = await sdk.form.validate({ title: 'Hello World' })});
+   *
+   * if (errors && errors.length) {
+   *   errors.forEach(error => console.log(error));
+   * } else {
+   *   // valid
+   * }
+   * ```
+   */
+  async validate(model: Body<Model>): Promise<ErrorReport[] | void> {
+    const errors = await this.connection.request<ErrorReport[] | void>(
+      CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_VALIDATE,
+      model
+    );
 
     return errors && errors.length ? errors : undefined;
   }
 
-  async isValid(value: any): Promise<Boolean> {
-    const isValid = await this.connection.request<Boolean>(CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_IS_VALID, value);
+  /**
+   * Check if your model is valid
+   *
+   * @param model The model you wish to test
+   *
+   * Gives the current validity of the form returns a boolean
+   *
+   * ### Example
+   * ```typescript
+   * const isValid = await sdk.form.isValid({ title: 'Hello World' })
+   *
+   * console.log(isValid) // false
+   * ```
+   */
+  async isValid(model: Body<Model>): Promise<Boolean> {
+    const isValid = await this.connection.request<Boolean>(
+      CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_IS_VALID,
+      model
+    );
 
     return isValid;
   }
 
-  setValue(value: any) {
-    return this.connection.request(CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_SET, value);
+  setValue(value: Body<Model>) {
+    return this.connection.request<ErrorReport[]>(
+      CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_SET,
+      value
+    );
   }
 
   /**
@@ -59,9 +102,11 @@ export class ContentEditorForm {
    * }
    * ```
    */
-   async getValue<FormModel = {}>(): Promise<Body<FormModel>> {
+  async getValue(): Promise<Body<Model>> {
     try {
-      const value = await this.connection.request<Body<FormModel>>(CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_GET);
+      const value = await this.connection.request<Body<Model>>(
+        CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_GET
+      );
 
       return value;
     } catch (e) {
@@ -75,7 +120,7 @@ export class ContentEditorForm {
    *
    * @param cb Callback function that executes upon readonly state change.
    *
-   * @returns [[Form]]
+   * @returns [[ContentEditorForm]]
    *
    * ### Example
    * ```typescript
@@ -97,14 +142,30 @@ export class ContentEditorForm {
    * }
    * ```
    */
-     onReadOnlyChange(cb: onChangeHandler): ContentEditorForm{
-        this.onChangeStack.push(cb);
-        return this;
-    }
+  onReadOnlyChange(cb: onChangeHandler): ContentEditorForm {
+    this.onChangeStack.push(cb);
+    return this;
+  }
 
-
-    onModelChange(cb: onModelChangeHandler): ContentEditorForm {
-        this.onModelStack.push(cb);
-        return this;
-    }
+  /**
+   *
+   * On changes to the model not explicitly handled by the extension, this method will be called in order to keep model in sync with Dynamic Content
+   *
+   * @param cb Callback function that executes upon model change.
+   * @returns [[ContentEditorForm]]
+   *
+   * ## Example
+   *
+   * ```typescript
+   * let currentModel;
+   *
+   * sdk.form.onModelChange(model => {
+   *  currentModel = model;
+   * });
+   * ```
+   */
+  onModelChange(cb: onModelChangeHandler): ContentEditorForm {
+    this.onModelStack.push(cb);
+    return this;
+  }
 }
