@@ -526,7 +526,7 @@ if (errors) {
 
 ### isValid
 
-You can get a boolean value weather a piece of content is valid
+You can get a boolean value whether a piece of content is valid
 
 ```js
 const sdk = await init();
@@ -539,7 +539,7 @@ console.log(isValid); // false
 
 ### onModelChange
 
-For syncing your model with Dynamic Content on content changes propergated outside the extension e.g delivery key change
+For syncing your model with Dynamic Content on content changes outside the extension e.g delivery key change
 
 ```js
 const sdk = await init();
