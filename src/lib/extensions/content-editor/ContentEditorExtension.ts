@@ -60,6 +60,11 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
    * stagingEnvironment - Used for accessing staged assets.
    */
   public stagingEnvironment!: string;
+
+  public hub!: {
+    id: string;
+    name: string;
+  };
   /**
    * Visualisation - URL of the visualisation
    */
@@ -74,7 +79,7 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
   }
 
   setupContext(context: ContentEditorContextObject<ParamType>): void {
-    const { schema, params, locales, stagingEnvironment, readOnly, visualisation } = context;
+    const { schema, params, locales, stagingEnvironment, readOnly, visualisation, hub } = context;
 
     this.contentItem = new ContentItem(this.connection);
     this.schema = schema;
@@ -83,5 +88,6 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
     this.locales = locales;
     this.visualisation = visualisation;
     this.stagingEnvironment = stagingEnvironment;
+    this.hub = hub;
   }
 }

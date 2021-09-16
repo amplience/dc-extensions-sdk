@@ -79,11 +79,17 @@ export class ContentEditorForm<Model = any> {
     return isValid;
   }
 
-  setValue(value: Body<Model>) {
-    return this.connection.request<ErrorReport[]>(
+  async setValue(value: Body<Model>) {
+    const errors = await this.connection.request<ErrorReport[]>(
       CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_SET,
       value
     );
+
+    if (errors && errors.length) {
+      return Promise.reject(errors);
+    }
+
+    return;
   }
 
   /**
@@ -142,6 +148,7 @@ export class ContentEditorForm<Model = any> {
    * }
    * ```
    */
+
   onReadOnlyChange(cb: onChangeHandler): ContentEditorForm {
     this.onChangeStack.push(cb);
     return this;

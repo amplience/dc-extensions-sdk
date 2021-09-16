@@ -58,6 +58,10 @@ describe('ContentEditorExtension', () => {
           default: ['en'],
           available: [{ locale: 'en-gb', language: 'en', country: 'gb', index: 1, selected: true }],
         },
+        hub: {
+          id: '12412535235235235235',
+          name: 'test-hub',
+        },
         stagingEnvironment: 'https://test-staging-environment',
         visualisation: 'test-visualization',
         readOnly: true,

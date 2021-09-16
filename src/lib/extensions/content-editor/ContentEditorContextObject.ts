@@ -9,6 +9,10 @@ export interface ContentEditorContextObject<ParamType extends Params = Params>
   schema: SchemaType;
   params: ParamType;
   locales: LocalesModel;
+  hub: {
+    id: string;
+    name: string;
+  };
   stagingEnvironment: string;
   visualisation: string;
   readOnly: boolean;

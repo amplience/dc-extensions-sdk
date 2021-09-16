@@ -541,6 +541,8 @@ console.log(isValid); // false
 
 For syncing your model with Dynamic Content on content changes propergated outside the extension e.g delivery key change
 
+> _Warning: Do not send received model back to Dynamic Content_
+
 ```js
 const sdk = await init();
 
