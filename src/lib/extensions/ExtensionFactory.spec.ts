@@ -1,6 +1,7 @@
 import { ClientConnection } from 'message-event-channel';
 import { ContentFieldExtension } from './content-field/ContentFieldExtension';
 import { DashboardExtension } from './dashboard/DashboardExtension';
+import { RouteExtension } from './route/RouteExtension';
 import { extensionFactory } from './ExtensionFactory';
 
 describe('ExtensionFactory', () => {
@@ -69,6 +70,30 @@ describe('ExtensionFactory', () => {
     expect(
       extensionFactory<DashboardExtension>(context, { connection, ...options })
     ).toBeInstanceOf(DashboardExtension);
+  });
+
+  it('should return a route extension', () => {
+    const options = {
+      window: window,
+      connectionTimeout: false,
+      timeout: false,
+      debug: false,
+    };
+    const connection = new ClientConnection(options);
+    const context = {
+      category: 'ROUTE',
+      hubId: 'abcdef1234567890abcdef12',
+      locationHref: 'https://test-extension-location-href',
+      params: {
+        instance: {},
+        installation: {
+          configParam: 'test-config-param',
+        },
+      },
+    };
+    expect(
+      extensionFactory<RouteExtension>(context, { connection, ...options })
+    ).toBeInstanceOf(RouteExtension);
   });
 
   it('should throw an error when extension context is not recognised', () => {
