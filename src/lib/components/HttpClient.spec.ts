@@ -68,4 +68,44 @@ describe('HttpClient', () => {
       data: 'hello world',
     });
   });
+
+  it('should fetch amd returmn status amd data', async () => {
+    jest.spyOn(connection, 'request').mockReturnValue(
+      Promise.resolve({
+        status: 200,
+        data: 'hello world',
+        headers: {},
+      })
+    );
+
+    const response = await httpClient.fetch({
+      url: 'https://bigcontent.io',
+      method: HttpMethod.GET,
+      data: {},
+    });
+
+    expect(response).toEqual({
+      status: 200,
+      data: 'hello world',
+    });
+  });
+
+  it('should fetch and throw an error', async () => {
+    jest.spyOn(connection, 'request').mockReturnValue(
+      Promise.reject({
+        status: 404,
+        data: 'Not Found',
+      })
+    );
+
+    try {
+      await httpClient.fetch({
+        url: 'https://bigcontent.io',
+        method: HttpMethod.GET,
+        data: {},
+      });
+    } catch (error: any) {
+      expect(error.message).toBe('Request Error, Status: 404');
+    }
+  });
 });
