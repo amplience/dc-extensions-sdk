@@ -91,12 +91,13 @@ export class HttpClient {
 
   public async fetch(config: HttpRequest): Promise<HttpResponse> {
     const response = await this.request(config);
-    if (response.status >= 200 && response.status < 400 || response.status === 410) {
-      return {
-        data: response.data,
-        status: response.status,
-      };
-    } 
-    throw new Error (`Request Error, Status: ${response.status}`);
+
+    return this.request(config).then((response) => {
+      if (response.status >= 200 && response.status < 300) {
+        return response;
+      } else {
+        throw new Error(`Request failed with status code ${response.status}: ${response.data}`);
+      }
+    });
   }
 }
