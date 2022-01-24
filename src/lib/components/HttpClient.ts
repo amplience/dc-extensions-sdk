@@ -97,9 +97,6 @@ export class HttpClient {
       if (response.status >= 200 && response.status < 300) {
         return response;
       } else {
-        if (typeof response.data !== 'string') {
-          response.data = JSON.stringify(response.data);
-        }
         throw new HttpError(
           `Request failed with status code ${response.status}`,
           config,
