@@ -69,7 +69,7 @@ describe('HttpClient', () => {
     });
   });
 
-  it('should fetch amd returmn status amd data', async () => {
+  it('should fetch amd return status amd data', async () => {
     jest.spyOn(connection, 'request').mockReturnValue(
       Promise.resolve({
         status: 200,
