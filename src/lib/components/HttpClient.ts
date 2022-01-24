@@ -101,7 +101,7 @@ export class HttpClient {
           response.data = JSON.stringify(response.data);
         }
         throw new HttpError(
-          `Request failed with status code ${response.status}: ${response.data}`,
+          `Request failed with status code ${response.status}`,
           config,
           response
         );

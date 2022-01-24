@@ -105,7 +105,7 @@ describe('HttpClient', () => {
         data: {},
       });
     } catch (error: any) {
-      expect(error.message).toBe('Request failed with status code 404: Not Found');
+      expect(error.message).toBe('Request failed with status code 404');
     }
   });
 });
