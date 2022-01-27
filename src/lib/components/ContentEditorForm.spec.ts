@@ -2,6 +2,8 @@ import { ClientConnection } from 'message-event-channel';
 import { ContentEditorForm } from './ContentEditorForm';
 import { CONTENT_EDITOR_FORM, FORM } from '../constants/Events';
 import { FORM as ERRORS } from '../constants/Errors';
+import { request } from 'http';
+import { ErrorReport } from '../models/ErrorReport';
 
 describe('ContentEditorForm', () => {
   let form: ContentEditorForm;
@@ -85,12 +87,35 @@ describe('ContentEditorForm', () => {
   });
 
   describe('ContentEditorForm.setValue', () => {
-    it('should set the value of the form', async () => {
+    it('should return undefined if no errors found', async () => {
       jest.spyOn(connection, 'request').mockReturnValue(Promise.resolve([]));
-      expect(await form.setValue({ hello: 'world' })).toEqual([]);
+      expect(await form.setValue({ hello: 'world' })).toBeUndefined();
       expect(connection.request).toHaveBeenCalledWith(CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_SET, {
         hello: 'world',
       });
+    });
+
+    const testError = ({
+      message: 'wrong',
+      pointer: '/here',
+      data: {
+        keyword: 'fail',
+        params: {},
+      },
+      schema: {
+        id: 'aschema',
+        pointer: '/blah/blah',
+      },
+    } as unknown) as ErrorReport;
+
+    it('setValue(testValue) should throw when validation errors are returned', async (done) => {
+      jest.spyOn(connection, 'request').mockResolvedValue([testError]);
+      try {
+        await form.setValue({hello: 'world'});
+      } catch (e) {
+        expect(e).toEqual([testError]);
+        done();
+      }
     });
   });
 
