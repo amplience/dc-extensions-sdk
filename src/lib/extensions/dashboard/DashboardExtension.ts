@@ -14,6 +14,8 @@ export class DashboardExtension<ParamType extends Params = Params> extends Exten
    * Hub Id - Id of the hub instantiating the Dashboard.
    */
   public hubId!: string;
+
+  public hub!: Record<string, unknown>
   /**
    * Location Href - Href of the Dashboards parent container.
    */
@@ -23,13 +25,16 @@ export class DashboardExtension<ParamType extends Params = Params> extends Exten
    */
   public applicationNavigator!: ApplicationNavigator;
 
+ 
+
   constructor(options: ExtensionOptions) {
     super(options);
   }
 
   setupContext(context: DashboardContextObject<ParamType>) {
-    const { hubId, locationHref, params } = context;
+    const { hubId, hub, locationHref, params } = context;
 
+    this.hub = hub;
     this.hubId = hubId;
     this.locationHref = locationHref;
     this.params = params;

@@ -6,6 +6,7 @@ describe('DashboardContextObject', () => {
       const context = {
         category: 'DASHBOARD',
         hubId: 'abcdef1234567890abcdef12',
+        hub: {id: "hubId", name: "hubName"},
         locationHref: 'https://test-extension-location-href',
         params: {
           installation: {},
@@ -18,6 +19,7 @@ describe('DashboardContextObject', () => {
       const context = {
         category: 'NOT_DASHBOARD',
         hubId: 'abcdef1234567890abcdef12',
+        hub: {id: "hubId", name: "hubName"},
         locationHref: 'https://test-extension-location-href',
         params: {
           installation: {},
