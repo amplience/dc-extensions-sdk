@@ -170,8 +170,12 @@ export class ContentEditorForm<Model = any> {
    * });
    * ```
    */
-  onModelChange(cb: onModelChangeHandler): ContentEditorForm {
+  onModelChange(cb: onModelChangeHandler): any {
     this.onModelStack.push(cb);
-    return this;
+    return {form: this, unsubscribe: this.unsubscribe};
   }
+
+  private unsubscribe = () => {
+      this.onModelStack.pop();
+    }
 }

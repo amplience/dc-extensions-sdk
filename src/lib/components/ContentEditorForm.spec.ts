@@ -43,7 +43,7 @@ describe('ContentEditorForm', () => {
   describe('ContentEditorForm.onModelChange()', () => {
     it('should push callback to the onModelChange, return an instance of the class', () => {
       const cb = jest.fn();
-      const $form = form.onModelChange(cb);
+      const $form = form.onModelChange(cb).form;
       const callOn = onSpy.mock.calls[1][1];
       callOn({ content: { hello: 'world' }, errors: [] });
       expect($form).toBe(form);
@@ -111,7 +111,7 @@ describe('ContentEditorForm', () => {
     it('setValue(testValue) should throw when validation errors are returned', async (done) => {
       jest.spyOn(connection, 'request').mockResolvedValue([testError]);
       try {
-        await form.setValue({hello: 'world'});
+        await form.setValue({ hello: 'world' });
       } catch (e) {
         expect(e).toEqual([testError]);
         done();
