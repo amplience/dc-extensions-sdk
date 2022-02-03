@@ -27,7 +27,7 @@ describe('DashboardExtension', () => {
     const context = {
       category: 'DASHBOARD',
       hubId: 'abcdef1234567890abcdef12',
-      hub: {id: 'hubid', name: "hubName"},
+      hub: { id: 'hubid', name: 'hubName' },
       locationHref: 'https://test-extension-location-href',
       params: {
         instance: {},

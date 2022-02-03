@@ -1,9 +1,10 @@
 import { Params } from '../../models/Params';
 import { ContextObject, isContextObject } from '../Extension';
+import { hubType } from './DashboardExtension';
 
 export interface DashboardContextObject<ParamType extends Params = Params> extends ContextObject {
   hubId: string;
-  hub: Record<string, unknown>
+  hub: hubType;
   locationHref: string;
   params: ParamType;
 }
