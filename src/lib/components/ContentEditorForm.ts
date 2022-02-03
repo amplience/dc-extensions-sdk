@@ -79,7 +79,7 @@ export class ContentEditorForm<Model = any> {
     return isValid;
   }
 
-  async setValue(value: Body<Model>): Promise<ErrorReport[] | void>  {
+  async setValue(value: Body<Model>): Promise<ErrorReport[] | void> {
     const errors = await this.connection.request<ErrorReport[]>(
       CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_SET,
       value
@@ -172,10 +172,12 @@ export class ContentEditorForm<Model = any> {
    */
   onModelChange(cb: onModelChangeHandler): any {
     this.onModelStack.push(cb);
-    return {form: this, unsubscribe: this.unsubscribe};
+    const unsubscribe = () => {
+      const index = this.onModelStack.indexOf(cb);
+      if (index !== -1) {
+        this.onModelStack.splice(index, 1);
+      }
+    };
+    return unsubscribe;
   }
-
-  private unsubscribe = () => {
-      this.onModelStack.pop();
-    }
 }
