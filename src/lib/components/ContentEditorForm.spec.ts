@@ -41,14 +41,14 @@ describe('ContentEditorForm', () => {
   });
 
   describe('ContentEditorForm.onModelChange()', () => {
-    it('should push callback to the onModelChange, and call callback', () => {
+    it('should push callback to the onModelChange, and callback method is called', () => {
       const cb = jest.fn();
       form.onModelChange(cb);
       const callOn = onSpy.mock.calls[1][1];
       callOn({ content: { hello: 'world' }, errors: [] });
       expect(cb).toHaveBeenCalledWith([], { hello: 'world' });
     });
-    it('should push callback to the onModelChange, return unsubscribe method and can unsubscribe', () => {
+    it('should push callback to the onModelChange, callback should not be called', () => {
       const cb = jest.fn();
       const unsubscribe = form.onModelChange(cb);
       const callOn = onSpy.mock.calls[1][1];
