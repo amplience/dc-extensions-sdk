@@ -15,8 +15,11 @@ export class DashboardExtension<ParamType extends Params = Params> extends Exten
   /**
    * Hub Id - Id of the hub instantiating the Dashboard.
    */
-  public hubId!: string;
-
+  public hubId?: string;
+  /**
+   * Deprecated
+   * hub - name and id of hub 
+   */
   public hub!: hubType;
   /**
    * Location Href - Href of the Dashboards parent container.

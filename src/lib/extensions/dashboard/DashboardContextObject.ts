@@ -4,7 +4,7 @@ import { hubType } from './DashboardExtension';
 
 export interface DashboardContextObject<ParamType extends Params = Params> extends ContextObject {
   hubId: string;
-  hub: hubType;
+  hub?: hubType;
   locationHref: string;
   params: ParamType;
 }
@@ -15,7 +15,6 @@ export function isDashboardContextObject(
   return (
     isContextObject(context) &&
     (context as DashboardContextObject).category === 'DASHBOARD' &&
-    (context as DashboardContextObject).hubId !== undefined &&
     (context as DashboardContextObject).locationHref !== undefined &&
     (context as DashboardContextObject).hub !== undefined
   );
