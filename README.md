@@ -87,7 +87,7 @@ async function initialize() {
 initialize();
 ```
 
-## Creating a typed Dashboard extensions with Typescript
+## Creating a typed Dashboard extension with Typescript
 
 ```typescript
 import { init } from 'dc-extensions-sdk';
@@ -472,9 +472,11 @@ Setting the model will return Error Report if there is any invalid content
 
 ```js
 const sdk = await init();
-const errors = await sdk.form.setValue({
-  title: 'hello world',
-});
+try {
+  await sdk.form.setValue({ title: "hello world", })
+} catch (errors) {
+  // retuens error report 
+}
 
 if (errors.length) {
   console.log(errors);
