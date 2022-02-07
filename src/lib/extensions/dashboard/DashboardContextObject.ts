@@ -3,8 +3,8 @@ import { ContextObject, isContextObject } from '../Extension';
 import { hubType } from './DashboardExtension';
 
 export interface DashboardContextObject<ParamType extends Params = Params> extends ContextObject {
-  hubId: string;
-  hub?: hubType;
+  hubId?: string;
+  hub: hubType;
   locationHref: string;
   params: ParamType;
 }
