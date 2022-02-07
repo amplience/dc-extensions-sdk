@@ -88,8 +88,6 @@ export class ContentEditorForm<Model = any> {
     if (errors && errors.length) {
       return Promise.reject(errors);
     }
-
-    return;
   }
 
   /**
