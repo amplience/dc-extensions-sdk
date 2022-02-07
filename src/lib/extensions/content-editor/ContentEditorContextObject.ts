@@ -2,6 +2,7 @@ import { LocalesModel } from '../../models/Locales';
 import { Params } from '../../models/Params';
 import { ContextObject, isContextObject } from '../Extension';
 import { SchemaType } from '../content-editor/ContentEditorExtension';
+import { Hub } from '../dashboard/DashboardExtension';
 
 export interface ContentEditorContextObject<ParamType extends Params = Params>
   extends ContextObject {
@@ -12,6 +13,7 @@ export interface ContentEditorContextObject<ParamType extends Params = Params>
   stagingEnvironment: string;
   visualisation: string;
   readOnly: boolean;
+  hub: Hub;
 }
 
 export function isContentEditorContextObject(
@@ -26,6 +28,7 @@ export function isContentEditorContextObject(
     (context as ContentEditorContextObject).locales !== undefined &&
     (context as ContentEditorContextObject).readOnly !== undefined &&
     (context as ContentEditorContextObject).stagingEnvironment !== undefined &&
-    (context as ContentEditorContextObject).visualisation !== undefined
+    (context as ContentEditorContextObject).visualisation !== undefined &&
+    (context as ContentEditorContextObject).hub !== undefined
   );
 }
