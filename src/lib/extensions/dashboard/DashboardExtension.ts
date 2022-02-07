@@ -13,12 +13,12 @@ export class DashboardExtension<ParamType extends Params = Params> extends Exten
    */
   public params!: ParamType;
   /**
-   * Deprecated
+   * Deprecated - has been superseded by the @hub object.
    * Hub Id - Id of the hub instantiating the Dashboard.
    */
-  public hubId?: string;
+  public hubId!: string;
   /**
-   * hub - name and id of hub 
+   * hub - id and name of hub 
    */
   public hub!: Hub;
   /**
