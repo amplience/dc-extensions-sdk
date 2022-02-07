@@ -3,7 +3,7 @@ import { Params } from '../../models/Params';
 import { Extension, ExtensionOptions } from '../Extension';
 import { DashboardContextObject } from './DashboardContextObject';
 
-export type hubType = { id: string; name: string };
+export type HubType = { id: string; name: string };
 
 export class DashboardExtension<ParamType extends Params = Params> extends Extension<
   DashboardContextObject<ParamType>
@@ -20,7 +20,7 @@ export class DashboardExtension<ParamType extends Params = Params> extends Exten
   /**
    * hub - name and id of hub 
    */
-  public hub!: hubType;
+  public hub!: HubType;
   /**
    * Location Href - Href of the Dashboards parent container.
    */
