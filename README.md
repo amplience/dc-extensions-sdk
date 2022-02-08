@@ -116,7 +116,6 @@ import type { ContentEditorExtension } from 'dc-extensions-sdk';
 
 // define the installation config parameters
 interface Parameters {
-  instance: {};
   installation: {
     configParam: string;
   };
@@ -473,13 +472,11 @@ Setting the model will return Error Report if there is any invalid content
 ```js
 const sdk = await init();
 try {
-  await sdk.form.setValue({ title: "hello world", })
+  await sdk.form.setValue({ title: 'hello world' });
 } catch (errors) {
-  // retuens error report 
-}
-
-if (errors.length) {
-  console.log(errors);
+  if (errors.length) {
+    console.log(errors);
+  }
 }
 ```
 
@@ -496,8 +493,11 @@ const errors = await sdk.form.validate({
 if (errors) {
   console.log(errors);
 }
+```
 
-//
+Example:
+
+```
 [
   {
     errorCategory: 'DATA',
@@ -528,7 +528,7 @@ if (errors) {
 
 ### isValid
 
-You can get a boolean value whether a piece of content is valid
+A boolean value is returned showing whether the content is valid
 
 ```js
 const sdk = await init();
@@ -552,7 +552,7 @@ sdk.form.onModelChange((errors, model) => {
 });
 ```
 
-# Client (Supported on Content Field & Dashboard & Content Editor extensions)
+# Client (Supported on Content Field, Dashboard & Content Editor extensions)
 
 ## Use client with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js)
 
@@ -566,7 +566,7 @@ const dcManagement = new DynamicContent({}, {}, dcExtension.client);
 const hubs = await dcManagement.hubs.list();
 ```
 
-# Users (Supported on Content Field & Dashboard & Content Editor extensions)
+# Users (Supported on Content Field, Dashboard & Content Editor extensions)
 
 ## Return users logged in to the Content Management application
 
