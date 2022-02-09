@@ -56,7 +56,7 @@ async function initialize() {
 initialize();
 ```
 
-## Creating a typed Content Field extensions with Typescript
+## Creating a typed Content Field extension with Typescript
 
 ```typescript
 import { init } from 'dc-extensions-sdk';
@@ -108,7 +108,7 @@ async function initialize() {
 initialize();
 ```
 
-## Creating a typed Content Editor extensions with Typescript
+## Creating a typed Content Editor extension with Typescript
 
 ```typescript
 import { init } from 'dc-extensions-sdk';
@@ -550,6 +550,15 @@ sdk.form.onModelChange((errors, model) => {
   setErrors(errors);
   setModel(model);
 });
+```
+
+returns a unsubscribe function to unsubscribe call back
+
+```js
+sdk.form.onModelChange((errors, model) => {
+  setErrors(errors);
+  setModel(model);
+}).unsubscribe();
 ```
 
 # Client (Supported on Content Field, Dashboard & Content Editor extensions)

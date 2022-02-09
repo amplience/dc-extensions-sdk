@@ -32,9 +32,9 @@ export class ContentEditorForm<Model = any> {
   /**
    * Check the validation of your model. Returns an array containing any JSON Schema errors found.
    *
-   * @param model The model you whish to test
+   * @param model The model you wish to test
    *
-   * If you want to validate a field model and get back an  error reports [[ErrorReport]]
+   * If you want to validate a field model and get back an  error report [[ErrorReport]]
    *
    * ### Example
    * ```typescript
@@ -156,7 +156,7 @@ export class ContentEditorForm<Model = any> {
    * On changes to the model not explicitly handled by the extension, this method will be called in order to keep model in sync with Dynamic Content
    *
    * @param cb Callback function that executes upon model change.
-   * @returns [[ContentEditorForm]]
+   * @returns {Function} unsubscribes callback
    *
    * ## Example
    *
