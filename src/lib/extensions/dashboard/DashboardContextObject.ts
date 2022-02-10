@@ -16,6 +16,6 @@ export function isDashboardContextObject(
     isContextObject(context) &&
     (context as DashboardContextObject).category === 'DASHBOARD' &&
     (context as DashboardContextObject).locationHref !== undefined &&
-    (context as DashboardContextObject).hub !== undefined
+    ((context as DashboardContextObject).hub !== undefined || (context as DashboardContextObject).hubId !== undefined )
   );
 }
