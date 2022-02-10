@@ -81,10 +81,11 @@ export class ContentEditorForm<Model = any> {
 
   /**
    * Set the current model state
-   * @param value to set as model 
+   *
+   * @param value to set as model
    * @returns an array containing any JSON Schema errors found.
-   * 
-   * ### Example 
+   *
+   * ### Example
    * ```typescript
    * const sdk = await init();
    *  try {
