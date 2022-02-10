@@ -79,6 +79,23 @@ export class ContentEditorForm<Model = any> {
     return isValid;
   }
 
+  /**
+   * Set the current model state
+   * @param value to set as model 
+   * @returns an array containing any JSON Schema errors found.
+   * 
+   * ### Example 
+   * ```typescript
+   * const sdk = await init();
+   *  try {
+   *     await sdk.form.setValue({ title: 'hello world' });
+   *  } catch (errors) {
+   *    if (errors.length) {
+   *       console.log(errors);
+   *    }
+   *  }
+   * ```
+   */
   async setValue(value: Body<Model>): Promise<ErrorReport[] | void> {
     const errors = await this.connection.request<ErrorReport[]>(
       CONTENT_EDITOR_FORM.CONTENT_EDITOR_FORM_SET,
