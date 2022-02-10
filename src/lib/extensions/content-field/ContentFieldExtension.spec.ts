@@ -53,6 +53,7 @@ describe('ContentFieldExtension', () => {
         stagingEnvironment: 'https://test-staging-environment',
         visualisation: 'test-visualization',
         readOnly: true,
+        hub: {id: 'hubId', name: 'hubName'}
       };
 
       const connection = new ClientConnection(options);

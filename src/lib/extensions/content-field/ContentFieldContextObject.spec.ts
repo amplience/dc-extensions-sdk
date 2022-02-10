@@ -22,6 +22,7 @@ describe('ContentFieldContextObject', () => {
         stagingEnvironment: 'https://test-staging-environment',
         visualisation: 'test-visualization',
         readOnly: true,
+        hub: { id: 'hubId', name: 'hubName' },
       };
 
       expect(isContentFieldContextObject(context)).toBe(true);

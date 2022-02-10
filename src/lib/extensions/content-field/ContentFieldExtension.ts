@@ -9,6 +9,7 @@ import { LocalesModel } from '../../models/Locales';
 import { Params } from '../../models/Params';
 import { Extension, ExtensionOptions } from '../Extension';
 import { ContentFieldContextObject } from './ContentFieldContextObject';
+import { Hub } from '../dashboard/DashboardExtension';
 
 export class ContentFieldExtension<
   FieldType = {},
@@ -58,6 +59,10 @@ export class ContentFieldExtension<
    * Visualisation - URL of the visualisation
    */
   public visualisation!: string;
+  /**
+   * 
+   */
+  public hub!: Hub;
 
   constructor(options: ExtensionOptions) {
     super(options);
@@ -69,7 +74,7 @@ export class ContentFieldExtension<
   }
 
   setupContext(context: ContentFieldContextObject<ParamType>): void {
-    const { fieldSchema, params, locales, stagingEnvironment, readOnly, visualisation } = context;
+    const { fieldSchema, params, locales, stagingEnvironment, readOnly, visualisation, hub } = context;
 
     this.contentItem = new ContentItem(this.connection);
     this.field = new Field(this.connection, fieldSchema);
@@ -78,5 +83,6 @@ export class ContentFieldExtension<
     this.locales = locales;
     this.visualisation = visualisation;
     this.stagingEnvironment = stagingEnvironment;
+    this.hub = hub;
   }
 }
