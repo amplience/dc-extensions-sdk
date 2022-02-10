@@ -28,7 +28,6 @@ export function isContentEditorContextObject(
     (context as ContentEditorContextObject).locales !== undefined &&
     (context as ContentEditorContextObject).readOnly !== undefined &&
     (context as ContentEditorContextObject).stagingEnvironment !== undefined &&
-    (context as ContentEditorContextObject).visualisation !== undefined &&
-    (context as ContentEditorContextObject).hub !== undefined
+    (context as ContentEditorContextObject).visualisation !== undefined 
   );
 }
