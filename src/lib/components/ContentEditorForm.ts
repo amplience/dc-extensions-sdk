@@ -156,7 +156,7 @@ export class ContentEditorForm<Model = any> {
    * On changes to the model not explicitly handled by the extension, this method will be called in order to keep model in sync with Dynamic Content
    *
    * @param cb Callback function that executes upon model change.
-   * @returns {Function} unsubscribes callback
+   * @returns {Function} unsubscribe callback
    *
    * ## Example
    *

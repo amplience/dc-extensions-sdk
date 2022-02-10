@@ -555,10 +555,12 @@ sdk.form.onModelChange((errors, model) => {
 returns a unsubscribe function to unsubscribe call back
 
 ```js
-sdk.form.onModelChange((errors, model) => {
+const unsubscribe = sdk.form.onModelChange((errors, model) => {
   setErrors(errors);
   setModel(model);
-}).unsubscribe();
+});
+
+unsubscribe();
 ```
 
 # Client (Supported on Content Field, Dashboard & Content Editor extensions)
