@@ -62,7 +62,7 @@ export class ContentFieldExtension<
   /**
    * Hub - Hub id and Hub name 
    */
-  public hub?: Hub;
+  public hub!: Hub;
 
   constructor(options: ExtensionOptions) {
     super(options);

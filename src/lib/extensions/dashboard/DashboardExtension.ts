@@ -20,7 +20,7 @@ export class DashboardExtension<ParamType extends Params = Params> extends Exten
   /**
    * Hub - Hub id and Hub name 
    */
-  public hub?: Hub;
+  public hub!: Hub;
   /**
    * Location Href - Href of the Dashboard's parent container.
    */
