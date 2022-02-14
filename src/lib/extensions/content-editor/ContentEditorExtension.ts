@@ -9,6 +9,7 @@ import { Extension, ExtensionOptions } from '../Extension';
 import { ContentEditorContextObject } from './ContentEditorContextObject';
 import { FieldSchema } from '../../components/Field';
 import { ObjectMap } from '../../models/ContentItemModel';
+import { Hub } from '../dashboard/DashboardExtension';
 
 export type SchemaType = ObjectMap<{
   id?: string;
@@ -64,6 +65,10 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
    * Visualisation - URL of the visualisation
    */
   public visualisation!: string;
+  /**
+   * Hub - Hub id and Hub name 
+   */
+  public hub!: Hub
 
   constructor(options: ExtensionOptions) {
     super(options);
@@ -74,7 +79,7 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
   }
 
   setupContext(context: ContentEditorContextObject<ParamType>): void {
-    const { schema, params, locales, stagingEnvironment, readOnly, visualisation } = context;
+    const { schema, params, locales, stagingEnvironment, readOnly, visualisation, hub } = context;
 
     this.contentItem = new ContentItem(this.connection);
     this.schema = schema;
@@ -83,5 +88,6 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
     this.locales = locales;
     this.visualisation = visualisation;
     this.stagingEnvironment = stagingEnvironment;
+    this.hub = hub;
   }
 }

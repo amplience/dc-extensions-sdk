@@ -60,7 +60,7 @@ export class ContentFieldExtension<
    */
   public visualisation!: string;
   /**
-   * 
+   * Hub - Hub id and Hub name 
    */
   public hub!: Hub;
 

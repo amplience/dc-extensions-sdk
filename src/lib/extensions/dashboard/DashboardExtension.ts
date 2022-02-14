@@ -18,7 +18,7 @@ export class DashboardExtension<ParamType extends Params = Params> extends Exten
    */
   public hubId!: string;
   /**
-   * hub - id and name of hub 
+   * Hub - Hub id and Hub name 
    */
   public hub!: Hub;
   /**
