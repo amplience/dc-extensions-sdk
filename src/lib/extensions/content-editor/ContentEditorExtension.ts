@@ -68,7 +68,7 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
   /**
    * Hub - Hub id and Hub name 
    */
-  public hub!: Hub
+  public hub?: Hub
 
   constructor(options: ExtensionOptions) {
     super(options);
