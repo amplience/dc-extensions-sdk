@@ -54,7 +54,16 @@ describe('ContentEditorForm', () => {
       const callOn = onSpy.mock.calls[1][1];
       unsubscribe();
       callOn({ content: { hello: 'world' }, errors: [] });
-      expect(cb).not.toHaveBeenCalledWith([], { hello: 'world' });
+      expect(cb).not.toHaveBeenCalled();
+    });
+    it('should push callback to the onModelChange, and callback method is called once', () => {
+      const cb = jest.fn();
+      const unsubscribe = form.onModelChange(cb);
+      const secoondUnsubscribe = form.onModelChange(cb);
+      secoondUnsubscribe();
+      const callOn = onSpy.mock.calls[1][1];
+      callOn({ content: { hello: 'world' }, errors: [] });
+      expect(cb).toHaveBeenCalledTimes(1);
     });
   });
 
