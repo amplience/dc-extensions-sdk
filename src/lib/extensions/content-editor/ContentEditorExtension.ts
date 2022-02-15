@@ -31,7 +31,9 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
    * Content Item - The model of the Content Item that is being edited.
    */
   public contentItem!: ContentItem;
-
+  /**
+   * Schema - The JSON Schema of the Content Item that is being edited.
+   */
   public schema!: SchemaType;
   /**
    * Params - optional parameters for your extension.
