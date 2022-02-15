@@ -42,4 +42,4 @@ jobs:
         uses: coverallsapp/github-action@8cbef1dea373ebce56de0a14c68d6267baa10b44 #v1.1.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: './coverage/karma/lcovonly'
+          path-to-lcov: './coverage/lcov.info'
