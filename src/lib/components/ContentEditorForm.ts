@@ -184,6 +184,13 @@ export class ContentEditorForm<Model = any> {
    * sdk.form.onModelChange(model => {
    *  currentModel = model;
    * });
+   * 
+   * const unsubscribe = sdk.form.onModelChange((errors, model) => {
+   *  setErrors(errors);
+   *  setModel(model)
+   * });
+   * 
+   * unsubscribe()
    * ```
    */
   onModelChange(cb: onModelChangeHandler): any {
