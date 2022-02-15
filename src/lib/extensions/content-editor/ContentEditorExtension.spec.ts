@@ -61,7 +61,7 @@ describe('ContentEditorExtension', () => {
         stagingEnvironment: 'https://test-staging-environment',
         visualisation: 'test-visualization',
         readOnly: true,
-        hub: {id: "hubId", name: "hubName"}
+        hub: { id: 'hubId', name: 'hubName' },
       };
 
       const connection = new ClientConnection(options);
@@ -81,6 +81,7 @@ describe('ContentEditorExtension', () => {
       expect(instance.locales).toEqual(context.locales);
       expect(instance.visualisation).toEqual(context.visualisation);
       expect(instance.stagingEnvironment).toEqual(context.stagingEnvironment);
+      expect(instance.hub).toEqual(context.hub);
     });
   });
 });
