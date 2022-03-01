@@ -27,6 +27,7 @@ describe('DashboardExtension', () => {
     const context = {
       category: 'DASHBOARD',
       hubId: 'abcdef1234567890abcdef12',
+      hub: { id: 'hubid', name: 'hubName' },
       locationHref: 'https://test-extension-location-href',
       params: {
         instance: {},
@@ -38,6 +39,8 @@ describe('DashboardExtension', () => {
     instance.setupContext(context);
 
     expect(instance.hubId).toEqual(context.hubId);
+    expect(instance.hub.id).toEqual(context.hub.id);
+    expect(instance.hub.name).toEqual(context.hub.name);
     expect(instance.locationHref).toEqual(context.locationHref);
     expect(instance.params).toEqual(context.params);
   });

@@ -1,32 +1,40 @@
+import { ContentEditorForm } from '../../components/ContentEditorForm';
 import { ContentItem } from '../../components/ContentItem';
 import { ContentLink } from '../../components/ContentLink';
 import { ContentReference } from '../../components/ContentReference';
-import { Field } from '../../components/Field';
-import { Form } from '../../components/Form';
-import { Frame } from '../../components/Frame';
 import { MediaLink } from '../../components/MediaLink';
 import { LocalesModel } from '../../models/Locales';
 import { Params } from '../../models/Params';
 import { Extension, ExtensionOptions } from '../Extension';
-import { ContentFieldContextObject } from './ContentFieldContextObject';
+import { ContentEditorContextObject } from './ContentEditorContextObject';
+import { FieldSchema } from '../../components/Field';
+import { ObjectMap } from '../../models/ContentItemModel';
 import { Hub } from '../dashboard/DashboardExtension';
 
-export class ContentFieldExtension<
-  FieldType = {},
-  ParamType extends Params = Params
-> extends Extension<ContentFieldContextObject<ParamType>> {
+export type SchemaType = ObjectMap<{
+  id?: string;
+  $id?: string;
+  $schema: string;
+  title?: string;
+  description?: string;
+  allOf: Array<{ $ref: string }>;
+  type?: string;
+  propertyOrder?: Array<string>;
+  required?: Array<string>;
+  properties: ObjectMap<any, FieldSchema>;
+}>;
+
+export class ContentEditorExtension<ParamType extends Params = Params> extends Extension<
+  ContentEditorContextObject<ParamType>
+> {
   /**
    * Content Item - The model of the Content Item that is being edited.
    */
   public contentItem!: ContentItem;
   /**
-   * Field - Allows you to get and set the value of the field the extension is control of.
+   * Schema - The JSON Schema of the Content Item that is being edited.
    */
-  public field!: Field<FieldType, ParamType>;
-  /**
-   * Frame - Use to control the height sizing behaviour of your extension.
-   */
-  public frame!: Frame;
+  public schema!: SchemaType;
   /**
    * Params - optional parameters for your extension.
    */
@@ -50,7 +58,7 @@ export class ContentFieldExtension<
   /**
    * Form - controls over the form such as readonly change handlers.
    */
-  public form!: Form;
+  public form!: ContentEditorForm;
   /**
    * stagingEnvironment - Used for accessing staged assets.
    */
@@ -62,7 +70,7 @@ export class ContentFieldExtension<
   /**
    * Hub - Hub id and Hub name 
    */
-  public hub!: Hub;
+  public hub!: Hub
 
   constructor(options: ExtensionOptions) {
     super(options);
@@ -70,15 +78,14 @@ export class ContentFieldExtension<
     this.mediaLink = new MediaLink(this.connection);
     this.contentLink = new ContentLink(this.connection);
     this.contentReference = new ContentReference(this.connection);
-    this.frame = new Frame(this.connection, options.window);
   }
 
-  setupContext(context: ContentFieldContextObject<ParamType>): void {
-    const { fieldSchema, params, locales, stagingEnvironment, readOnly, visualisation, hub } = context;
+  setupContext(context: ContentEditorContextObject<ParamType>): void {
+    const { schema, params, locales, stagingEnvironment, readOnly, visualisation, hub } = context;
 
     this.contentItem = new ContentItem(this.connection);
-    this.field = new Field(this.connection, fieldSchema);
-    this.form = new Form(this.connection, readOnly);
+    this.schema = schema;
+    this.form = new ContentEditorForm(this.connection, readOnly);
     this.params = params;
     this.locales = locales;
     this.visualisation = visualisation;

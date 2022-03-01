@@ -1,16 +1,20 @@
-import { isContentFieldContextObject } from './ContentFieldContextObject';
+import { isContentEditorContextObject } from './ContentEditorContextObject';
 
-describe('ContentFieldContextObject', () => {
-  describe('isContentFieldContextObject', () => {
+describe('ContentEditorContextObject', () => {
+  describe('isContentEditorContextObject', () => {
     it('should return true with a valid content field context', () => {
       const context = {
-        category: 'CONTENT_FIELD',
+        category: 'CONTENT_EDITOR',
         contentItemId: '12345678-abcd-1234-1234-abcdef123456',
-        fieldSchema: {
+        schema: {
           title: 'test-field-schema-title',
           type: 'test-field-schema-type',
           description: 'test-field-schema-desc',
-          'ui:extension': {},
+          properties: {
+            title: {
+              type: 'string',
+            },
+          },
         },
         params: {
           installation: {},
@@ -22,10 +26,10 @@ describe('ContentFieldContextObject', () => {
         stagingEnvironment: 'https://test-staging-environment',
         visualisation: 'test-visualization',
         readOnly: true,
-        hub: { id: 'hubId', name: 'hubName' },
+        hub: {id: 'hubId', name: 'hubName'}
       };
 
-      expect(isContentFieldContextObject(context)).toBe(true);
+      expect(isContentEditorContextObject(context)).toBe(true);
     });
 
     it('should return false when context does not contain content field params', () => {
@@ -33,7 +37,7 @@ describe('ContentFieldContextObject', () => {
         params: { installation: {}, instance: {} },
       };
 
-      expect(isContentFieldContextObject(context)).toBe(false);
+      expect(isContentEditorContextObject(context)).toBe(false);
     });
   });
 });

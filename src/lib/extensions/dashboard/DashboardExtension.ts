@@ -3,6 +3,8 @@ import { Params } from '../../models/Params';
 import { Extension, ExtensionOptions } from '../Extension';
 import { DashboardContextObject } from './DashboardContextObject';
 
+export type Hub = { id: string; name: string };
+
 export class DashboardExtension<ParamType extends Params = Params> extends Extension<
   DashboardContextObject<ParamType>
 > {
@@ -11,11 +13,16 @@ export class DashboardExtension<ParamType extends Params = Params> extends Exten
    */
   public params!: ParamType;
   /**
+   * @deprecated has been superseded by the hub object.
    * Hub Id - Id of the hub instantiating the Dashboard.
    */
   public hubId!: string;
   /**
-   * Location Href - Href of the Dashboards parent container.
+   * Hub - Hub id and Hub name 
+   */
+  public hub!: Hub;
+  /**
+   * Location Href - Href of the Dashboard's parent container.
    */
   public locationHref!: string;
   /**
@@ -28,8 +35,9 @@ export class DashboardExtension<ParamType extends Params = Params> extends Exten
   }
 
   setupContext(context: DashboardContextObject<ParamType>) {
-    const { hubId, locationHref, params } = context;
+    const { hubId, hub, locationHref, params } = context;
 
+    this.hub = hub;
     this.hubId = hubId;
     this.locationHref = locationHref;
     this.params = params;
