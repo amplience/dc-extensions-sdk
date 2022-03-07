@@ -15,3 +15,7 @@ Keep in mind that after running `npm install` the git repo is reset. So a good w
 Make and commit your changes. Make sure the commands npm run build and npm run test:prod are working.
 
 Finally send a [GitHub Pull Request](https://github.com/alexjoverm/typescript-library-starter/compare?expand=1) with a clear list of what you've done (read more [about pull requests](https://help.github.com/articles/about-pull-requests/)). Make sure all of your commits are atomic (one feature per commit).
+
+## Release
+
+This repository uses Github Actions to manage releases. To create a release, merge your approved PR into the master branch. This will then create a release PR which needs to be approved before it can be merged. This PR will include the bunped version and update the changelog. Once merged, Github Actions will automatically build, test, and publish the release as well as deploy the documentation [gh-page](https://amplience.github.io/dc-extensions-sdk/).
