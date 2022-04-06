@@ -25,10 +25,20 @@ jobs:
           node-version: 14
           registry-url: 'https://registry.npmjs.org'
 
-      - run: npm ci
+      - run: |
+          npm ci
+          npm test
+          npm run build
         if: ${{ steps.release.outputs.release_created }}
 
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.release_created }}
+        
+      - name: Deploy docs 🚀
+        uses: JamesIves/github-pages-deploy-action@93065a8b71cd5d57c379528f7a43a2e38d908af0
+        if: ${{ steps.release.outputs.release_created }}
+        with:
+          branch: gh-pages
+          folder: docs

@@ -2,6 +2,8 @@ import { FieldSchema } from '../../components/Field';
 import { LocalesModel } from '../../models/Locales';
 import { Params } from '../../models/Params';
 import { ContextObject, isContextObject } from '../Extension';
+import { Hub } from '../dashboard/DashboardExtension';
+import { ContentEditorContextObject } from '../content-editor/ContentEditorContextObject';
 
 export interface ContentFieldContextObject<ParamType extends Params = Params>
   extends ContextObject {
@@ -12,6 +14,7 @@ export interface ContentFieldContextObject<ParamType extends Params = Params>
   stagingEnvironment: string;
   visualisation: string;
   readOnly: boolean;
+  hub: Hub;
 }
 
 export function isContentFieldContextObject(
@@ -26,6 +29,7 @@ export function isContentFieldContextObject(
     (context as ContentFieldContextObject).locales !== undefined &&
     (context as ContentFieldContextObject).readOnly !== undefined &&
     (context as ContentFieldContextObject).stagingEnvironment !== undefined &&
-    (context as ContentFieldContextObject).visualisation !== undefined
+    (context as ContentFieldContextObject).visualisation !== undefined && 
+    (context as ContentEditorContextObject).hub !== undefined 
   );
 }

@@ -27,7 +27,7 @@ yarn add dc-extensions-sdk
 Using cdn:
 
 ```html
-<script src="https://unpkg.com/dc-extensions-sdk/dist/dc-extensions-sdk.umd.js"></script>
+<script src="https://unpkg.com/dc-extensions-sdk@^2"></script>
 ```
 
 # Usage
@@ -56,7 +56,7 @@ async function initialize() {
 initialize();
 ```
 
-## Creating a typed Content Field extensions with Typescript
+## Creating a typed Content Field extension with Typescript
 
 ```typescript
 import { init } from 'dc-extensions-sdk';
@@ -87,7 +87,7 @@ async function initialize() {
 initialize();
 ```
 
-## Creating a typed Dashboard extensions with Typescript
+## Creating a typed Dashboard extension with Typescript
 
 ```typescript
 import { init } from 'dc-extensions-sdk';
@@ -103,6 +103,26 @@ interface Parameters {
 
 async function initialize() {
   const sdk = await init<DashboardExtension<Parameters>>();
+}
+
+initialize();
+```
+
+## Creating a typed Content Editor extension with Typescript
+
+```typescript
+import { init } from 'dc-extensions-sdk';
+import type { ContentEditorExtension } from 'dc-extensions-sdk';
+
+// define the installation config parameters
+interface Parameters {
+  installation: {
+    configParam: string;
+  };
+}
+
+async function initialize() {
+  const sdk = await init<ContentEditorExtension<Parameters>>();
 }
 
 initialize();
@@ -434,7 +454,116 @@ const sdk = await init();
 sdk.applicationNavigator.openContentItem({ id: 'CONTENT_ITEM_ID...' });
 ```
 
-# Client (Supported on Content Field & Dashboard extensions)
+# Content Editor
+
+### Get Current Model
+
+Fetching will give you the current model of the content item you're viewing.
+
+```js
+const sdk = await init();
+const model = await sdk.form.getValue();
+```
+
+### Set Model
+
+Setting the model will return Error Report if there is any invalid content
+
+```js
+const sdk = await init();
+try {
+  await sdk.form.setValue({ title: 'hello world' });
+} catch (errors) {
+  if (errors.length) {
+    console.log(errors);
+  }
+}
+```
+
+### Validate
+
+You can validate an object against the schema and get the full error report back
+
+```js
+const sdk = await init();
+const errors = await sdk.form.validate({
+  title: 'hello world',
+});
+
+if (errors) {
+  console.log(errors);
+}
+```
+
+Example:
+
+```
+[
+  {
+    errorCategory: 'DATA',
+    errorData: {
+      keyword: 'maxLength',
+      params: {
+        limit: 10,
+      },
+    },
+    errorSeverity: 'FATAL',
+    errorType: 'DATA_VALIDATION_ERROR',
+    message: 'should NOT be longer than 10 characters',
+    schema: {
+      id: 'https://simple-text.com',
+      originalId: 'https://simple-text.com',
+      location: {
+        pointer: '/properties/title/maxLength',
+      },
+    },
+    data: {
+      location: {
+        pointer: '/title',
+      },
+    },
+  },
+];
+```
+
+### isValid
+
+A boolean value is returned showing whether the content is valid
+
+```js
+const sdk = await init();
+const isValid = await sdk.form.isValid({
+  title: 'hello world',
+});
+
+console.log(isValid); // false
+```
+
+### onModelChange
+
+For syncing your model with Dynamic Content on content changes outside the extension e.g delivery key change
+
+```js
+const sdk = await init();
+
+sdk.form.onModelChange((errors, model) => {
+  setErrors(errors);
+  setModel(model);
+});
+```
+
+returns a unsubscribe function to unsubscribe call back
+
+```js
+const unsubscribe = sdk.form.onModelChange((errors, model) => {
+  setErrors(errors);
+  setModel(model);
+});
+
+unsubscribe();
+```
+
+# Client (Supported on Content Field, Dashboard & Content Editor extensions)
 
 ## Use client with [dc-management-sdk-js](https://github.com/amplience/dc-management-sdk-js)
 
@@ -448,7 +577,7 @@ const dcManagement = new DynamicContent({}, {}, dcExtension.client);
 const hubs = await dcManagement.hubs.list();
 ```
 
-# Users (Supported on Content Field & Dashboard extensions)
+# Users (Supported on Content Field, Dashboard & Content Editor extensions)
 
 ## Return users logged in to the Content Management application
 
