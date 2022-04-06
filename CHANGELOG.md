@@ -24,6 +24,18 @@ All notable changes to this project will be documented in this file. See [standa
 - **multi-select:** added multiselect to media content link & refs ([ae16cd1](https://github.com/amplience/dc-extensions-sdk/commit/ae16cd122790852ac535cd2bbe03b544f5dd3c9a))
 - **timeouts:** no more timeouts (by default) ([01abdb7](https://github.com/amplience/dc-extensions-sdk/commit/01abdb72b9a1b961a20058f27d912cc58a3f4af1))
 
+## [2.1.0](https://www.github.com/amplience/dc-extensions-sdk/compare/v2.0.0...v2.1.0) (2022-04-06)
+
+
+### Features
+
+* **content editor:** updates content editor extensions ([#63](https://www.github.com/amplience/dc-extensions-sdk/issues/63)) ([9d337b1](https://www.github.com/amplience/dc-extensions-sdk/commit/9d337b1d4bfacad55ccb3d9a6b7210560d9c55f7))
+
+
+### Reverts
+
+* "chore: upgraded to husky 5.x" ([ccaf151](https://www.github.com/amplience/dc-extensions-sdk/commit/ccaf1512cc8e1a1693cf30efa43414280688465d))
+
 ## [2.0.0](https://www.github.com/amplience/dc-extensions-sdk/compare/v1.2.0...v2.0.0) (2021-02-15)
 
 
