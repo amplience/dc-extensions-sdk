@@ -68,12 +68,12 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
    */
   public visualisation!: string;
   /**
-   * Hub - Hub id and Hub name 
+   * Hub - Hub id and Hub name
    */
-  public hub!: Hub
+  public hub!: Hub;
 
-  constructor(options: ExtensionOptions) {
-    super(options);
+  constructor(options: ExtensionOptions, context: ContentEditorContextObject<ParamType>) {
+    super(options, context);
 
     this.mediaLink = new MediaLink(this.connection);
     this.contentLink = new ContentLink(this.connection);
