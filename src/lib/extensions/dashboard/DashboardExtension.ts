@@ -3,7 +3,7 @@ import { Params } from '../../models/Params';
 import { Extension, ExtensionOptions } from '../Extension';
 import { DashboardContextObject } from './DashboardContextObject';
 
-export type Hub = { id: string; name: string };
+export type Hub = { id: string; name: string; organizationId?: string };
 
 export class DashboardExtension<ParamType extends Params = Params> extends Extension<
   DashboardContextObject<ParamType>
@@ -18,7 +18,7 @@ export class DashboardExtension<ParamType extends Params = Params> extends Exten
    */
   public hubId!: string;
   /**
-   * Hub - Hub id and Hub name 
+   * Hub - Hub id, Hub name and organization ID
    */
   public hub!: Hub;
   /**
@@ -30,8 +30,8 @@ export class DashboardExtension<ParamType extends Params = Params> extends Exten
    */
   public applicationNavigator!: ApplicationNavigator;
 
-  constructor(options: ExtensionOptions) {
-    super(options);
+  constructor(options: ExtensionOptions, context: DashboardContextObject<ParamType>) {
+    super(options, context);
   }
 
   setupContext(context: DashboardContextObject<ParamType>) {

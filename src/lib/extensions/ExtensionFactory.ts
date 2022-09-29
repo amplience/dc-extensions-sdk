@@ -8,23 +8,20 @@ import { DashboardExtension } from './dashboard/DashboardExtension';
 import { ContextObject, Extension, ExtensionOptions } from './Extension';
 
 export function extensionFactory<ExtensionType extends Extension<ContextObject>>(
-  context: unknown,
+  context: ContextObject,
   options: ExtensionOptions
 ): ExtensionType {
   let extension;
 
   if (isContentFieldContextObject(context)) {
-    extension = new ContentFieldExtension(options);
-    extension.setupContext(context);
+    extension = new ContentFieldExtension(options, context);
   }
   if (isDashboardContextObject(context)) {
-    extension = new DashboardExtension(options);
-    extension.setupContext(context);
+    extension = new DashboardExtension(options, context);
   }
 
   if (isContentEditorContextObject(context)) {
-    extension = new ContentEditorExtension(options);
-    extension.setupContext(context);
+    extension = new ContentEditorExtension(options, context);
   }
 
   if (!extension) {
