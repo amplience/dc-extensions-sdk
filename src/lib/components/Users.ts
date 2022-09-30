@@ -106,8 +106,6 @@ export class Users {
       ...(after ? { after } : null),
     };
 
-    // {a: 1, ...true ? null : {b: 2}
-
     try {
       const response: OrgUserResponse = await this.graphQlClient.query(orgUsersQuery, vars);
 
@@ -119,7 +117,7 @@ export class Users {
 
       return [...members.edges.reduce(this.transformMembersToAuthUsers, []), ...otherMembers];
     } catch (error) {
-      throw new Error(`Unable to get users: ${error.message}`);
+      return [];
     }
   }
 
