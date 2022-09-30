@@ -1,6 +1,6 @@
 import { ClientConnection } from 'message-event-channel';
+import { Hub } from '../../dc-extensions-sdk';
 import { USERS_URL } from '../constants/Users';
-import { ContextObject } from '../extensions/Extension';
 import { GraphQlClient } from './GraphQLClient';
 import { HttpClient, HttpMethod, HttpResponse } from './HttpClient';
 
@@ -21,8 +21,12 @@ interface OrgUser {
   };
 }
 
-interface AuthUserResponse {
-  data: AuthUser[];
+interface OrgUserResponse extends HttpResponse {
+  data: {
+    node: {
+      members: { edges: OrgUser[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
+    };
+  };
 }
 
 export interface User {
@@ -62,7 +66,7 @@ export class Users {
   private httpClient: HttpClient;
   private graphQlClient: GraphQlClient;
 
-  constructor(private connection: ClientConnection, private context: ContextObject) {
+  constructor(connection: ClientConnection, private hub: Hub) {
     this.httpClient = new HttpClient(connection);
     this.graphQlClient = new GraphQlClient(connection);
   }
@@ -94,26 +98,24 @@ export class Users {
     }
   }
 
-  private async getOrgUsers(
-    defaultVars: { orgId?: string; first?: number; after?: number } = {}
-  ): Promise<AuthUser[]> {
-    const organizationId = this.context.hub.organizationId;
+  private async getOrgUsers(after?: string): Promise<AuthUser[]> {
+    const organisationId = this.hub.organizationId;
     const vars = {
-      orgId: `Organization:${organizationId}`,
+      orgId: `Organization:${organisationId}`,
       first: 100,
-      ...defaultVars,
+      ...(after ? { after } : null),
     };
 
+    // {a: 1, ...true ? null : {b: 2}
+
     try {
-      const response: HttpResponse = await this.graphQlClient.query(orgUsersQuery, vars);
+      const response: OrgUserResponse = await this.graphQlClient.query(orgUsersQuery, vars);
 
       this.throwIfResponseError(response);
 
       const members = response.data.node.members;
       const { hasNextPage, endCursor } = members.pageInfo;
-      const otherMembers = hasNextPage
-        ? await this.getOrgUsers({ after: endCursor }, organisationId)
-        : [];
+      const otherMembers = hasNextPage ? await this.getOrgUsers(endCursor) : [];
 
       return [...members.edges.reduce(this.transformMembersToAuthUsers, []), ...otherMembers];
     } catch (error) {
