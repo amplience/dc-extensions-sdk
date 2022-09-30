@@ -83,6 +83,8 @@ describe('ExtensionFactory', () => {
     const connection = new ClientConnection(options);
     const context = {
       category: 'UNKNOWN_CATEGORY',
+      hub: { id: 'hubId', name: 'hubName' },
+      params: { installation: {} },
     };
 
     expect(() =>

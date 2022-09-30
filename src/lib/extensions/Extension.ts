@@ -36,9 +36,11 @@ export abstract class Extension<ContextObject> {
   public users!: Users;
 
   constructor(protected readonly options: ExtensionOptions, context: ContextObject) {
+    const hub = ((context as unknown) as Record<'hub', Hub>).hub;
+
     this.connection = this.options.connection;
     this.client = new HttpClient(this.connection);
-    this.users = new Users(this.connection, context);
+    this.users = new Users(this.connection, hub);
     this.setupContext(context);
   }
 

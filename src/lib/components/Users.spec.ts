@@ -9,7 +9,7 @@ describe('Users', () => {
 
   beforeEach(() => {
     connection = new ClientConnection();
-    users = new Users(connection);
+    users = new Users(connection, { id: 'hubId', name: 'hubName', organizationId: '1234' });
   });
 
   it('should return a list of users', async () => {
@@ -36,6 +36,7 @@ describe('Users', () => {
         },
       },
     });
+
     const response = await users.list();
 
     expect(request).toHaveBeenCalledWith('dc-management-sdk-js:request', {
