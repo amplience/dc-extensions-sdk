@@ -90,7 +90,13 @@ export class Users {
         method: HttpMethod.GET,
       });
 
-      this.throwIfResponseError(response);
+      if (response.status !== 200) {
+        throw new Error(
+          `API responded with a non 200 status code. Error: ${
+            response.data || `status code ${response.status}`
+          }`
+        );
+      }
 
       return (response.data as Record<'data', AuthUser[]>).data;
     } catch (error) {
@@ -149,15 +155,5 @@ export class Users {
       lastName: authUser.attributes['last-name'],
       email: authUser.attributes.email,
     };
-  }
-
-  private throwIfResponseError(response: HttpResponse) {
-    if (response.status !== 200) {
-      throw new Error(
-        `API responded with a non 200 status code. Error: ${
-          response.data || `status code ${response.status}`
-        }`
-      );
-    }
   }
 }
