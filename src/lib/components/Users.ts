@@ -91,7 +91,7 @@ export class Users {
       });
 
       this.throwIfResponseError(response);
-
+      console.log('USERS RESPONSE', response);
       return (response.data as unknown) as AuthUser[];
     } catch (error) {
       throw new Error(`Unable to get users: ${error.message}`);
