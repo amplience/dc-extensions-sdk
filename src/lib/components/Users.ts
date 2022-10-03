@@ -101,7 +101,7 @@ export class Users {
   private async getOrgUsers(after?: string): Promise<AuthUser[]> {
     const organisationId = this.hub.organizationId;
     const vars = {
-      orgId: `Organization:${organisationId}`,
+      orgId: btoa(`Organization:${organisationId}`),
       first: 100,
       ...(after ? { after } : null),
     };
