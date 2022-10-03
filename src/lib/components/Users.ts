@@ -96,7 +96,7 @@ export class Users {
         );
       }
 
-      return (response.data as Record<'data', AuthUser[]>).data;
+      return (response?.data as Record<'data', AuthUser[]>)?.data || [];
     } catch (error) {
       throw new Error(`Unable to get users: ${error.message}`);
     }
