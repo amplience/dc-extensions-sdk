@@ -19,14 +19,11 @@ export class GraphQlClient {
 
   public async query(query: string, vars: object) {
     try {
-      const { data, status } = await this.connection.request<HttpResponse>(
-        'dc-management-sdk-js:graphQL',
-        {
-          query,
-          vars,
-        }
-      );
-      return { data, status };
+      const { data } = await this.connection.request<HttpResponse>('dc-management-sdk-js:graphQL', {
+        query,
+        vars,
+      });
+      return data;
     } catch (e) {
       if (e) {
         const { data, status } = e as { data: any; status: any };

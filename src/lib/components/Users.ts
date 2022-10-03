@@ -21,11 +21,9 @@ interface OrgUser {
   };
 }
 
-interface OrgUserResponse extends HttpResponse {
-  data: {
-    node: {
-      members: { edges: OrgUser[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
-    };
+interface OrgUserResponse {
+  node: {
+    members: { edges: OrgUser[]; pageInfo: { hasNextPage: boolean; endCursor: string } };
   };
 }
 
@@ -106,6 +104,9 @@ export class Users {
 
   private async getOrgUsers(after?: string): Promise<AuthUser[]> {
     const organisationId = this.hub.organizationId;
+    if (!organisationId) {
+      return [];
+    }
     const vars = {
       orgId: btoa(`Organization:${organisationId}`),
       first: 100,
@@ -113,14 +114,18 @@ export class Users {
     };
 
     try {
-      const response: OrgUserResponse = await this.graphQlClient.query(orgUsersQuery, vars);
-      const members = response?.data?.node?.members;
+      const response: OrgUserResponse = ((await this.graphQlClient.query(
+        orgUsersQuery,
+        vars
+      )) as unknown) as OrgUserResponse;
+      const members = response?.node?.members;
+
       if (!members) {
-        throw new Error('Could not parse org memebers');
+        return [];
       }
+
       const { hasNextPage, endCursor } = members.pageInfo;
       const otherMembers = hasNextPage ? await this.getOrgUsers(endCursor) : [];
-
       return [...members.edges.reduce(this.transformMembersToAuthUsers, []), ...otherMembers];
     } catch (error) {
       return [];
@@ -129,7 +134,7 @@ export class Users {
 
   private transformMembersToAuthUsers(members: AuthUser[], { node: member }: OrgUser) {
     const parsedId = atob(member.id);
-    const uuidRegex = new RegExp(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i);
+    const uuidRegex = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
     const userId = parsedId.match(uuidRegex);
 
     if (userId) {
