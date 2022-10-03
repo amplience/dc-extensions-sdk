@@ -108,10 +108,10 @@ export class Users {
 
     try {
       const response: OrgUserResponse = await this.graphQlClient.query(orgUsersQuery, vars);
-
-      this.throwIfResponseError(response);
-
-      const members = response.data.node.members;
+      const members = response?.data?.node?.members;
+      if (!members) {
+        throw new Error('Could not parse org memebers');
+      }
       const { hasNextPage, endCursor } = members.pageInfo;
       const otherMembers = hasNextPage ? await this.getOrgUsers(endCursor) : [];
 
