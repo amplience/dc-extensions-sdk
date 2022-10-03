@@ -70,7 +70,7 @@ export class Users {
   }
 
   async list(): Promise<User[]> {
-    const users = await Promise.all([this.getOrgUsers(), this.getAuthUsers()]);
+    const [orgUsers, authUsers] = await Promise.all([this.getOrgUsers(), this.getAuthUsers()]);
 
     const includesUser = (users: User[], user: User) =>
       Boolean(users.find(({ email }) => email === user.email));
@@ -78,7 +78,7 @@ export class Users {
     const uniqueByEmail = (users: User[], user: User) =>
       includesUser(users, user) ? users : [...users, user];
 
-    return users.flat().map(this.transformUser).reduce(uniqueByEmail, []);
+    return [...orgUsers, ...authUsers].map(this.transformUser).reduce(uniqueByEmail, []);
   }
 
   private async getAuthUsers(): Promise<AuthUser[]> {
@@ -137,20 +137,19 @@ export class Users {
     const uuidRegex = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
     const userId = parsedId.match(uuidRegex);
 
-    if (userId) {
-      return [
-        ...members,
-        {
-          id: userId[0].toLowerCase(),
-          attributes: {
-            email: member.email,
-            'first-name': member.name,
-            'last-name': '',
+    return userId
+      ? [
+          ...members,
+          {
+            id: userId[0].toLowerCase(),
+            attributes: {
+              email: member.email,
+              'first-name': member.name,
+              'last-name': '',
+            },
           },
-        },
-      ];
-    }
-    return members;
+        ]
+      : members;
   }
 
   private transformUser(authUser: AuthUser): User {
