@@ -52,13 +52,25 @@
 					<a href="users.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a href="users.html#client" class="tsd-kind-icon">client</a>
+					<a href="users.html#graphqlclient" class="tsd-kind-icon">graph<wbr>QlClient</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a href="users.html#connection" class="tsd-kind-icon">connection</a>
+					<a href="users.html#httpclient" class="tsd-kind-icon">http<wbr>Client</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a href="users.html#hub" class="tsd-kind-icon">hub</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="users.html#getauthusers" class="tsd-kind-icon">get<wbr>Auth<wbr>Users</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="users.html#getorgusers" class="tsd-kind-icon">get<wbr>Org<wbr>Users</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="users.html#list" class="tsd-kind-icon">list</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a href="users.html#transformmemberstoauthusers" class="tsd-kind-icon">transform<wbr>Members<wbr>ToAuth<wbr>Users</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 					<a href="users.html#transformuser" class="tsd-kind-icon">transform<wbr>User</a>
@@ -90,14 +102,18 @@
 					<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="users.html#client" class="tsd-kind-icon">client</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="users.html#connection" class="tsd-kind-icon">connection</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="users.html#graphqlclient" class="tsd-kind-icon">graph<wbr>QlClient</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="users.html#httpclient" class="tsd-kind-icon">http<wbr>Client</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="users.html#hub" class="tsd-kind-icon">hub</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="users.html#getauthusers" class="tsd-kind-icon">get<wbr>Auth<wbr>Users</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="users.html#getorgusers" class="tsd-kind-icon">get<wbr>Org<wbr>Users</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="users.html#list" class="tsd-kind-icon">list</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="users.html#transformmemberstoauthusers" class="tsd-kind-icon">transform<wbr>Members<wbr>ToAuth<wbr>Users</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="users.html#transformuser" class="tsd-kind-icon">transform<wbr>User</a></li>
 						</ul>
 					</section>
@@ -110,19 +126,22 @@
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Users<span class="tsd-signature-symbol">(</span>connection<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ClientConnection</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="users.html" class="tsd-signature-type">Users</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Users<span class="tsd-signature-symbol">(</span>connection<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ClientConnection</span>, hub<span class="tsd-signature-symbol">: </span><a href="../globals.html#hub" class="tsd-signature-type">Hub</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="users.html" class="tsd-signature-type">Users</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/components/Users.ts#L26">lib/components/Users.ts:26</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/Users.ts#L65">lib/components/Users.ts:65</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>connection: <span class="tsd-signature-type">ClientConnection</span></h5>
+							</li>
+							<li>
+								<h5>hub: <a href="../globals.html#hub" class="tsd-signature-type">Hub</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="users.html" class="tsd-signature-type">Users</a></h4>
@@ -133,28 +152,78 @@
 		<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-				<a name="client" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagPrivate">Private</span> client</h3>
-				<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <a href="httpclient.html" class="tsd-signature-type">HttpClient</a></div>
+				<a name="graphqlclient" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> graph<wbr>QlClient</h3>
+				<div class="tsd-signature tsd-kind-icon">graph<wbr>QlClient<span class="tsd-signature-symbol">:</span> <a href="graphqlclient.html" class="tsd-signature-type">GraphQlClient</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/components/Users.ts#L26">lib/components/Users.ts:26</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/Users.ts#L65">lib/components/Users.ts:65</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-				<a name="connection" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagPrivate">Private</span> connection</h3>
-				<div class="tsd-signature tsd-kind-icon">connection<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ClientConnection</span></div>
+				<a name="httpclient" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> http<wbr>Client</h3>
+				<div class="tsd-signature tsd-kind-icon">http<wbr>Client<span class="tsd-signature-symbol">:</span> <a href="httpclient.html" class="tsd-signature-type">HttpClient</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/components/Users.ts#L28">lib/components/Users.ts:28</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/Users.ts#L64">lib/components/Users.ts:64</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+				<a name="hub" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> hub</h3>
+				<div class="tsd-signature tsd-kind-icon">hub<span class="tsd-signature-symbol">:</span> <a href="../globals.html#hub" class="tsd-signature-type">Hub</a></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/Users.ts#L67">lib/components/Users.ts:67</a></li>
 					</ul>
 				</aside>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="getauthusers" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Auth<wbr>Users</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Auth<wbr>Users<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/authuser.html" class="tsd-signature-type">AuthUser</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/Users.ts#L84">lib/components/Users.ts:84</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/authuser.html" class="tsd-signature-type">AuthUser</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="getorgusers" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Org<wbr>Users</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Org<wbr>Users<span class="tsd-signature-symbol">(</span>after<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/authuser.html" class="tsd-signature-type">AuthUser</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/Users.ts#L105">lib/components/Users.ts:105</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> after: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/authuser.html" class="tsd-signature-type">AuthUser</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="list" class="tsd-anchor"></a>
 				<h3>list</h3>
@@ -165,10 +234,52 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/components/Users.ts#L32">lib/components/Users.ts:32</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/Users.ts#L72">lib/components/Users.ts:72</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/user.html" class="tsd-signature-type">User</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+				<a name="transformmemberstoauthusers" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> transform<wbr>Members<wbr>ToAuth<wbr>Users</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<li class="tsd-signature tsd-kind-icon">transform<wbr>Members<wbr>ToAuth<wbr>Users<span class="tsd-signature-symbol">(</span>members<span class="tsd-signature-symbol">: </span><a href="../interfaces/authuser.html" class="tsd-signature-type">AuthUser</a><span class="tsd-signature-symbol">[]</span>, __namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>member<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>email<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/authuser.html" class="tsd-signature-type">AuthUser</a><span class="tsd-signature-symbol">[]</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/Users.ts#L135">lib/components/Users.ts:135</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>members: <a href="../interfaces/authuser.html" class="tsd-signature-type">AuthUser</a><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+							<li>
+								<h5>__namedParameters: <span class="tsd-signature-symbol">{ </span>member<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>email<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter">
+										<h5>member<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>email<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h5>
+										<ul class="tsd-parameters">
+											<li class="tsd-parameter">
+												<h5>email<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+											</li>
+											<li class="tsd-parameter">
+												<h5>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+											</li>
+											<li class="tsd-parameter">
+												<h5>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="../interfaces/authuser.html" class="tsd-signature-type">AuthUser</a><span class="tsd-signature-symbol">[]</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -182,7 +293,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/components/Users.ts#L57">lib/components/Users.ts:57</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/Users.ts#L155">lib/components/Users.ts:155</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>

@@ -147,20 +147,23 @@
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Dashboard<wbr>Extension<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/extensionoptions.html" class="tsd-signature-type">ExtensionOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="dashboardextension.html" class="tsd-signature-type">DashboardExtension</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Dashboard<wbr>Extension<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/extensionoptions.html" class="tsd-signature-type">ExtensionOptions</a>, context<span class="tsd-signature-symbol">: </span><a href="../interfaces/dashboardcontextobject.html" class="tsd-signature-type">DashboardContextObject</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ParamType</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="dashboardextension.html" class="tsd-signature-type">DashboardExtension</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Overrides <a href="extension.html">Extension</a>.<a href="extension.html#constructor">constructor</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/extensions/dashboard/DashboardExtension.ts#L31">lib/extensions/dashboard/DashboardExtension.ts:31</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/extensions/dashboard/DashboardExtension.ts#L31">lib/extensions/dashboard/DashboardExtension.ts:31</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>options: <a href="../interfaces/extensionoptions.html" class="tsd-signature-type">ExtensionOptions</a></h5>
+							</li>
+							<li>
+								<h5>context: <a href="../interfaces/dashboardcontextobject.html" class="tsd-signature-type">DashboardContextObject</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ParamType</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="dashboardextension.html" class="tsd-signature-type">DashboardExtension</a></h4>
@@ -176,7 +179,7 @@
 				<div class="tsd-signature tsd-kind-icon">application<wbr>Navigator<span class="tsd-signature-symbol">:</span> <a href="applicationnavigator.html" class="tsd-signature-type">ApplicationNavigator</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/extensions/dashboard/DashboardExtension.ts#L31">lib/extensions/dashboard/DashboardExtension.ts:31</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/extensions/dashboard/DashboardExtension.ts#L31">lib/extensions/dashboard/DashboardExtension.ts:31</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -190,9 +193,9 @@
 				<h3>client</h3>
 				<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <a href="httpclient.html" class="tsd-signature-type">HttpClient</a></div>
 				<aside class="tsd-sources">
-					<p>Inherited from <a href="extension.html">Extension</a>.<a href="extension.html#client">client</a></p>
+					<p>Inherited from <a href="dashboardextension.html">DashboardExtension</a>.<a href="dashboardextension.html#client">client</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/extensions/Extension.ts#L29">lib/extensions/Extension.ts:29</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/extensions/Extension.ts#L31">lib/extensions/Extension.ts:31</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -206,9 +209,9 @@
 				<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> connection</h3>
 				<div class="tsd-signature tsd-kind-icon">connection<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ClientConnection</span></div>
 				<aside class="tsd-sources">
-					<p>Inherited from <a href="extension.html">Extension</a>.<a href="extension.html#connection">connection</a></p>
+					<p>Inherited from <a href="dashboardextension.html">DashboardExtension</a>.<a href="dashboardextension.html#connection">connection</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/extensions/Extension.ts#L24">lib/extensions/Extension.ts:24</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/extensions/Extension.ts#L26">lib/extensions/Extension.ts:26</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -223,12 +226,12 @@
 				<div class="tsd-signature tsd-kind-icon">hub<span class="tsd-signature-symbol">:</span> <a href="../globals.html#hub" class="tsd-signature-type">Hub</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/extensions/dashboard/DashboardExtension.ts#L23">lib/extensions/dashboard/DashboardExtension.ts:23</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/extensions/dashboard/DashboardExtension.ts#L23">lib/extensions/dashboard/DashboardExtension.ts:23</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Hub - Hub id and Hub name</p>
+						<p>Hub - Hub id, Hub name and organization ID</p>
 					</div>
 				</div>
 			</section>
@@ -238,7 +241,7 @@
 				<div class="tsd-signature tsd-kind-icon">hub<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/extensions/dashboard/DashboardExtension.ts#L19">lib/extensions/dashboard/DashboardExtension.ts:19</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/extensions/dashboard/DashboardExtension.ts#L19">lib/extensions/dashboard/DashboardExtension.ts:19</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -256,7 +259,7 @@
 				<div class="tsd-signature tsd-kind-icon">location<wbr>Href<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/extensions/dashboard/DashboardExtension.ts#L27">lib/extensions/dashboard/DashboardExtension.ts:27</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/extensions/dashboard/DashboardExtension.ts#L27">lib/extensions/dashboard/DashboardExtension.ts:27</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -270,9 +273,9 @@
 				<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> options</h3>
 				<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <a href="../interfaces/extensionoptions.html" class="tsd-signature-type">ExtensionOptions</a></div>
 				<aside class="tsd-sources">
-					<p>Inherited from <a href="extension.html">Extension</a>.<a href="extension.html#options">options</a></p>
+					<p>Inherited from <a href="dashboardextension.html">DashboardExtension</a>.<a href="dashboardextension.html#options">options</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/extensions/Extension.ts#L36">lib/extensions/Extension.ts:36</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/extensions/Extension.ts#L38">lib/extensions/Extension.ts:38</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -282,7 +285,7 @@
 				<div class="tsd-signature tsd-kind-icon">params<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ParamType</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/extensions/dashboard/DashboardExtension.ts#L14">lib/extensions/dashboard/DashboardExtension.ts:14</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/extensions/dashboard/DashboardExtension.ts#L14">lib/extensions/dashboard/DashboardExtension.ts:14</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -296,9 +299,9 @@
 				<h3>users</h3>
 				<div class="tsd-signature tsd-kind-icon">users<span class="tsd-signature-symbol">:</span> <a href="users.html" class="tsd-signature-type">Users</a></div>
 				<aside class="tsd-sources">
-					<p>Inherited from <a href="extension.html">Extension</a>.<a href="extension.html#users">users</a></p>
+					<p>Inherited from <a href="dashboardextension.html">DashboardExtension</a>.<a href="dashboardextension.html#users">users</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/extensions/Extension.ts#L34">lib/extensions/Extension.ts:34</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/extensions/Extension.ts#L36">lib/extensions/Extension.ts:36</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -321,7 +324,7 @@
 						<aside class="tsd-sources">
 							<p>Overrides <a href="extension.html">Extension</a>.<a href="extension.html#setupcontext">setupContext</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6dfb726/src/lib/extensions/dashboard/DashboardExtension.ts#L37">lib/extensions/dashboard/DashboardExtension.ts:37</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/extensions/dashboard/DashboardExtension.ts#L37">lib/extensions/dashboard/DashboardExtension.ts:37</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
