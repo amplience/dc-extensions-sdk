@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [2.2.0](https://github.com/amplience/dc-extensions-sdk/compare/v2.1.0...v2.2.0) (2022-10-26)
+
+### Features
+
+- Update users component so that it fetches org users as well as auth users ([ad5ef8e](https://github.com/amplience/dc-extensions-sdk/commit/ad5ef8ed6428c87cddc9a1623bd36231c207d73a))
+
 # [1.2.0](https://github.com/amplience/dc-extensions-sdk/compare/v1.1.0...v1.2.0) (2020-11-17)
 
 ### Bug Fixes
@@ -26,35 +32,31 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.1.0](https://www.github.com/amplience/dc-extensions-sdk/compare/v2.0.0...v2.1.0) (2022-04-06)
 
-
 ### Features
 
-* **content editor:** updates content editor extensions ([#63](https://www.github.com/amplience/dc-extensions-sdk/issues/63)) ([9d337b1](https://www.github.com/amplience/dc-extensions-sdk/commit/9d337b1d4bfacad55ccb3d9a6b7210560d9c55f7))
-
+- **content editor:** updates content editor extensions ([#63](https://www.github.com/amplience/dc-extensions-sdk/issues/63)) ([9d337b1](https://www.github.com/amplience/dc-extensions-sdk/commit/9d337b1d4bfacad55ccb3d9a6b7210560d9c55f7))
 
 ### Reverts
 
-* "chore: upgraded to husky 5.x" ([ccaf151](https://www.github.com/amplience/dc-extensions-sdk/commit/ccaf1512cc8e1a1693cf30efa43414280688465d))
+- "chore: upgraded to husky 5.x" ([ccaf151](https://www.github.com/amplience/dc-extensions-sdk/commit/ccaf1512cc8e1a1693cf30efa43414280688465d))
 
 ## [2.0.0](https://www.github.com/amplience/dc-extensions-sdk/compare/v1.2.0...v2.0.0) (2021-02-15)
 
-
 ### ⚠ BREAKING CHANGES
 
-* certain classes are no longer exposed - see MIGRATION.md for more info
+- certain classes are no longer exposed - see MIGRATION.md for more info
 
 ### Features
 
-* certain classes are no longer exposed - see MIGRATION.md for more info ([c9e876a](https://www.github.com/amplience/dc-extensions-sdk/commit/c9e876a6faa662414770874ca463ae175d5d166b))
-* **context:** making category mandatory for content field ([#33](https://www.github.com/amplience/dc-extensions-sdk/issues/33)) ([444ef54](https://www.github.com/amplience/dc-extensions-sdk/commit/444ef54f3866d7214b26ced0f3a0ba441f9ae24a))
-* dashboard extension ([#29](https://www.github.com/amplience/dc-extensions-sdk/issues/29)) ([0ced0c2](https://www.github.com/amplience/dc-extensions-sdk/commit/0ced0c23c37b17c64ee16c9304f8292200a2e661))
-* **dashboard:** application navigator ([#31](https://www.github.com/amplience/dc-extensions-sdk/issues/31)) ([a3e4d5d](https://www.github.com/amplience/dc-extensions-sdk/commit/a3e4d5d1a7d5159e155e7a81d763217c10c40936))
-* **users client:** adds a new class for listing users ([#34](https://www.github.com/amplience/dc-extensions-sdk/issues/34)) ([3a4b577](https://www.github.com/amplience/dc-extensions-sdk/commit/3a4b577e5aa49b6d2a5e898d9763ae32e63ebb7b))
-
+- certain classes are no longer exposed - see MIGRATION.md for more info ([c9e876a](https://www.github.com/amplience/dc-extensions-sdk/commit/c9e876a6faa662414770874ca463ae175d5d166b))
+- **context:** making category mandatory for content field ([#33](https://www.github.com/amplience/dc-extensions-sdk/issues/33)) ([444ef54](https://www.github.com/amplience/dc-extensions-sdk/commit/444ef54f3866d7214b26ced0f3a0ba441f9ae24a))
+- dashboard extension ([#29](https://www.github.com/amplience/dc-extensions-sdk/issues/29)) ([0ced0c2](https://www.github.com/amplience/dc-extensions-sdk/commit/0ced0c23c37b17c64ee16c9304f8292200a2e661))
+- **dashboard:** application navigator ([#31](https://www.github.com/amplience/dc-extensions-sdk/issues/31)) ([a3e4d5d](https://www.github.com/amplience/dc-extensions-sdk/commit/a3e4d5d1a7d5159e155e7a81d763217c10c40936))
+- **users client:** adds a new class for listing users ([#34](https://www.github.com/amplience/dc-extensions-sdk/issues/34)) ([3a4b577](https://www.github.com/amplience/dc-extensions-sdk/commit/3a4b577e5aa49b6d2a5e898d9763ae32e63ebb7b))
 
 ### Bug Fixes
 
-* migrate from adis.ws to amplience.net ([912724d](https://www.github.com/amplience/dc-extensions-sdk/commit/912724dc197b68881387711283f61e6a102d1c65))
+- migrate from adis.ws to amplience.net ([912724d](https://www.github.com/amplience/dc-extensions-sdk/commit/912724dc197b68881387711283f61e6a102d1c65))
 
 ## [1.0.3](https://github.com/amplience/dc-extensions-sdk/compare/v1.0.2...v1.0.3) (2020-02-12)
 
