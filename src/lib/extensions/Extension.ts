@@ -3,6 +3,7 @@ import { HttpClient } from '../components/HttpClient';
 import { Users } from '../components/Users';
 import { InitOptions } from '../init';
 import { Params } from '../models/Params';
+import { Hub } from './dashboard/DashboardExtension';
 
 export interface ExtensionOptions extends InitOptions {
   connection: ClientConnection;
@@ -11,6 +12,7 @@ export interface ExtensionOptions extends InitOptions {
 export interface ContextObject {
   category: string;
   params: Params;
+  hub: Hub;
 }
 
 export function isContextObject(context: unknown | ContextObject): context is ContextObject {
@@ -33,10 +35,13 @@ export abstract class Extension<ContextObject> {
    */
   public users!: Users;
 
-  constructor(protected readonly options: ExtensionOptions) {
+  constructor(protected readonly options: ExtensionOptions, context: ContextObject) {
+    const hub = ((context as unknown) as Record<'hub', Hub>).hub;
+
     this.connection = this.options.connection;
     this.client = new HttpClient(this.connection);
-    this.users = new Users(this.connection);
+    this.users = new Users(this.connection, hub);
+    this.setupContext(context);
   }
 
   public abstract setupContext(context: ContextObject): void;

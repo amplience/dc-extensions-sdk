@@ -60,12 +60,12 @@ export class ContentFieldExtension<
    */
   public visualisation!: string;
   /**
-   * Hub - Hub id and Hub name 
+   * Hub - Hub id and Hub name
    */
   public hub!: Hub;
 
-  constructor(options: ExtensionOptions) {
-    super(options);
+  constructor(options: ExtensionOptions, context: ContentFieldContextObject<ParamType>) {
+    super(options, context);
 
     this.mediaLink = new MediaLink(this.connection);
     this.contentLink = new ContentLink(this.connection);
@@ -74,7 +74,15 @@ export class ContentFieldExtension<
   }
 
   setupContext(context: ContentFieldContextObject<ParamType>): void {
-    const { fieldSchema, params, locales, stagingEnvironment, readOnly, visualisation, hub } = context;
+    const {
+      fieldSchema,
+      params,
+      locales,
+      stagingEnvironment,
+      readOnly,
+      visualisation,
+      hub,
+    } = context;
 
     this.contentItem = new ContentItem(this.connection);
     this.field = new Field(this.connection, fieldSchema);
