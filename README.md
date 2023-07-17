@@ -1,5 +1,3 @@
-[![Amplience Dynamic Content](media/header.png)](https://amplience.com/dynamic-content)
-
 # dc-extensions-sdk
 
 [![Build Status](https://travis-ci.org/amplience/dc-extensions-sdk.svg?branch=master)](https://travis-ci.org/amplience/dc-extensions-sdk)
