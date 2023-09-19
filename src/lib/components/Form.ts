@@ -3,18 +3,22 @@ import { FORM as ERRORS } from '../constants/Errors';
 import { ClientConnection } from 'message-event-channel';
 import { Body } from '../models/ContentItemModel';
 
-export type onChangeHandler = (readonly: boolean) => void;
+export type onReadOnlyChangeHandler = (readonly: boolean) => void;
+export type onFormValueChangeHandler = (formModel: Record<string, unknown>) => void;
 
 export class Form {
-  private onChangeStack: Array<onChangeHandler>;
+  private readOnlyObservers: onReadOnlyChangeHandler[] = [];
+  private formValueObservers: onFormValueChangeHandler[] = [];
 
   constructor(private connection: ClientConnection, public readOnly: boolean) {
-    this.onChangeStack = [];
-
     this.connection.on(FORM.READ_ONLY, (readonly: boolean) => {
       this.readOnly = readonly;
-      this.onChangeStack.forEach((cb) => cb(this.readOnly));
+      this.readOnlyObservers.forEach((cb) => cb(this.readOnly));
     });
+
+    this.connection.on(FORM.FORM_VALUE_CHANGE, (formModel: Record<string, unknown>) =>
+      this.formValueObservers.forEach((cb) => cb(formModel))
+    );
   }
 
   /**
@@ -45,8 +49,8 @@ export class Form {
    * }
    * ```
    */
-  onReadOnlyChange(cb: onChangeHandler): Form {
-    this.onChangeStack.push(cb);
+  onReadOnlyChange(cb: onReadOnlyChangeHandler): Form {
+    this.readOnlyObservers.push(cb);
     return this;
   }
 
@@ -74,5 +78,38 @@ export class Form {
     } catch (e) {
       throw new Error(ERRORS.NO_MODEL);
     }
+  }
+
+  /**
+   *
+   * Allows you to provide a callback to be executed after the form value changes. This method can be chained to append multiple callbacks.
+   *
+   * @param cb Callback function that executes upon form value change.
+   *
+   * @returns [[Form]]
+   *
+   * ### Example
+   * ```typescript
+   * const container = document.querySelector('.container');
+   * const submitBtn = document.querySelector('.submitBtn');
+   *
+   * sdk.form
+   *  .onFormValueChange(setActiveClass)
+   *  .onFormValueChange(enableSubmit);
+   *
+   * function enableSubmit(formValue)  {
+   *   const isEmpty = Object.keys(formValue).length === 0;
+   *   submitBtn.disabled = isEmpty;
+   * }
+   *
+   * function setActiveClass(formValue) {
+   *   const hasTitle formValue?.title !== undefined;
+   *   container.classList[hasTitle ? 'add' : 'remove']('active');
+   * }
+   * ```
+   */
+  onFormValueChange(cb: onFormValueChangeHandler): Form {
+    this.formValueObservers.push(cb);
+    return this;
   }
 }
