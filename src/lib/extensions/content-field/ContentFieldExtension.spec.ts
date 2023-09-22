@@ -7,6 +7,7 @@ import { Frame } from '../../components/Frame';
 import { ContentReference } from '../../components/ContentReference';
 import { ContentLink } from '../../components/ContentLink';
 import { MediaLink } from '../../components/MediaLink';
+import { Assets } from '../../components/Assets';
 
 describe('ContentFieldExtension', () => {
   const options = {
@@ -59,6 +60,7 @@ describe('ContentFieldExtension', () => {
       expect(instance.contentReference).toBeInstanceOf(ContentReference);
       expect(instance.frame).toBeInstanceOf(Frame);
 
+      expect(instance.assets).toBeInstanceOf(Assets);
       expect(instance.contentItem).toBeInstanceOf(ContentItem);
       expect(instance.field).toBeInstanceOf(Field);
       expect(instance.form).toBeInstanceOf(Form);
