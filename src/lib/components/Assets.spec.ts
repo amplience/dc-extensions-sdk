@@ -15,7 +15,7 @@ const asset = {
   createdDate: 1683798022161,
   name: 'an-image',
   subType: null,
-  id: '634e3733-91d4-41d3-b340-011e2d2d5103',
+  id: '00000000-0000-0000-0000-000000000000',
   thumbURL: 'https://thumbs.amplience.net/r/00000000-0000-0000-0000-000000000000',
   publishStatus: 'PUBLISHED',
   status: 'active',
