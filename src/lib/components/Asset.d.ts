@@ -9,12 +9,12 @@ export type Asset = {
   thumbFile: string;
   folderID: string;
   file: string;
-  createdDate: EpochTimeStamp;
+  createdDate: number;
   name: string;
   subType: string | null;
   id: string;
   thumbURL: string;
   publishStatus: string;
   status: string;
-  timestamp: EpochTimeStamp;
+  timestamp: number;
 };
