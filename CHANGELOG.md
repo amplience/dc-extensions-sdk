@@ -30,6 +30,21 @@ All notable changes to this project will be documented in this file. See [standa
 - **multi-select:** added multiselect to media content link & refs ([ae16cd1](https://github.com/amplience/dc-extensions-sdk/commit/ae16cd122790852ac535cd2bbe03b544f5dd3c9a))
 - **timeouts:** no more timeouts (by default) ([01abdb7](https://github.com/amplience/dc-extensions-sdk/commit/01abdb72b9a1b961a20058f27d912cc58a3f4af1))
 
+### [2.2.1](https://www.github.com/amplience/dc-extensions-sdk/compare/v2.2.0...v2.2.1) (2023-09-29)
+
+
+### Features
+
+* CMP-10458 Added method to graphQL client for mutations ([#92](https://www.github.com/amplience/dc-extensions-sdk/issues/92)) ([9b51283](https://www.github.com/amplience/dc-extensions-sdk/commit/9b51283fa36da7cc519b6fef36f444c97fe038e9))
+* CMP-10470 Added onFormValueChange method ([#91](https://www.github.com/amplience/dc-extensions-sdk/issues/91)) ([49a58b8](https://www.github.com/amplience/dc-extensions-sdk/commit/49a58b89026adb2821f03a9b2e237e89e391c03b))
+* remove Amplience DC header logo from README ([9ab0925](https://www.github.com/amplience/dc-extensions-sdk/commit/9ab092566b71876531f57d5f39b15a22ae151914))
+* remove DC header asset ([72d3454](https://www.github.com/amplience/dc-extensions-sdk/commit/72d345404b6f618002e135b65ef47833e30f5f7d))
+
+
+### Miscellaneous Chores
+
+* release 2.2.1 ([c350061](https://www.github.com/amplience/dc-extensions-sdk/commit/c350061562b3a068ffec8462ae893186bee110fa))
+
 ## [2.2.0](https://www.github.com/amplience/dc-extensions-sdk/compare/v2.1.0...v2.2.0) (2022-10-26)
 
 
