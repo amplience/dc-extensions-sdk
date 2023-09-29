@@ -3,13 +3,13 @@ import { FORM as ERRORS } from '../constants/Errors';
 import { CONTENT_EDITOR_FORM, FORM } from '../constants/Events';
 import { Body } from '../models/ContentItemModel';
 import { ErrorReport } from '../models/ErrorReport';
-import { onChangeHandler } from './Form';
+import { onReadOnlyChangeHandler } from './Form';
 
 export type onModelChangeArgs = { errors: null | ErrorReport[]; content: any };
 export type onModelChangeHandler = (errors: null | ErrorReport[], content: any) => void;
 
 export class ContentEditorForm<Model = any> {
-  private onChangeStack: Array<onChangeHandler>;
+  private onChangeStack: Array<onReadOnlyChangeHandler>;
   private onModelStack: Array<onModelChangeHandler>;
 
   constructor(private connection: ClientConnection, public readOnly: boolean) {
@@ -164,7 +164,7 @@ export class ContentEditorForm<Model = any> {
    * }
    * ```
    */
-  onReadOnlyChange(cb: onChangeHandler): ContentEditorForm {
+  onReadOnlyChange(cb: onReadOnlyChangeHandler): ContentEditorForm {
     this.onChangeStack.push(cb);
     return this;
   }
@@ -184,12 +184,12 @@ export class ContentEditorForm<Model = any> {
    * sdk.form.onModelChange(model => {
    *  currentModel = model;
    * });
-   * 
+   *
    * const unsubscribe = sdk.form.onModelChange((errors, model) => {
    *  setErrors(errors);
    *  setModel(model)
    * });
-   * 
+   *
    * unsubscribe()
    * ```
    */

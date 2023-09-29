@@ -19,16 +19,22 @@ export interface ContentEditorContextObject<ParamType extends Params = Params>
 export function isContentEditorContextObject(
   context: unknown | ContentEditorContextObject
 ): context is ContentEditorContextObject {
-  return (
-    isContextObject(context) &&
-    (context as ContentEditorContextObject).category === 'CONTENT_EDITOR' &&
-    (context as ContentEditorContextObject)?.params?.instance !== undefined &&
-    (context as ContentEditorContextObject).contentItemId !== undefined &&
-    (context as ContentEditorContextObject).schema !== undefined &&
-    (context as ContentEditorContextObject).locales !== undefined &&
-    (context as ContentEditorContextObject).readOnly !== undefined &&
-    (context as ContentEditorContextObject).stagingEnvironment !== undefined &&
-    (context as ContentEditorContextObject).visualisation !== undefined && 
-    (context as ContentEditorContextObject).hub !== undefined 
-  );
+  if (!isContextObject(context)) {
+    return false;
+  }
+
+  const isContentEditor = context.category === 'CONTENT_EDITOR';
+  const hasInstanceParams = context?.params?.instance !== undefined;
+  const contextHasProp = (prop: string) => context[prop as keyof typeof context] !== undefined;
+  const requiredProps = [
+    'contentItemId',
+    'schema',
+    'locales',
+    'readOnly',
+    'stagingEnvironment',
+    'visualisation',
+    'hub',
+  ];
+
+  return isContentEditor && hasInstanceParams && requiredProps.every(contextHasProp);
 }
