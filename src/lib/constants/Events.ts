@@ -39,6 +39,7 @@ export enum CONTENT_EDITOR_FORM {
 export enum FORM {
   READ_ONLY = 'form-read-only-change',
   GET_FORM_MODEL = 'form-model-get',
+  FORM_VALUE_CHANGE = 'form-value-change',
 }
 
 export enum FRAME {
