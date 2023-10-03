@@ -9,6 +9,7 @@ export interface ContentFieldContextObject<ParamType extends Params = Params>
   extends ContextObject {
   contentItemId: string;
   fieldSchema: FieldSchema<ParamType>;
+  fieldPath: string;
   params: ParamType;
   locales: LocalesModel;
   stagingEnvironment: string;
@@ -29,7 +30,7 @@ export function isContentFieldContextObject(
     (context as ContentFieldContextObject).locales !== undefined &&
     (context as ContentFieldContextObject).readOnly !== undefined &&
     (context as ContentFieldContextObject).stagingEnvironment !== undefined &&
-    (context as ContentFieldContextObject).visualisation !== undefined && 
-    (context as ContentEditorContextObject).hub !== undefined 
+    (context as ContentFieldContextObject).visualisation !== undefined &&
+    (context as ContentEditorContextObject).hub !== undefined
   );
 }
