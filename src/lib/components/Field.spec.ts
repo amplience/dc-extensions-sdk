@@ -23,17 +23,18 @@ const testError = ({
 
 describe('Field', () => {
   let connection: ClientConnection;
-  let schema: FieldSchema<Params>;
   let field: Field;
+  const schema: FieldSchema<Params> = {
+    title: 'My Field',
+    type: 'string',
+    'ui:extension': { url: '124' },
+  };
+
+  const path = '/somePath';
 
   beforeAll(() => {
     connection = new ClientConnection();
-    schema = {
-      title: 'My Field',
-      type: 'string',
-      'ui:extension': { url: '124' },
-    };
-    field = new Field(connection, schema);
+    field = new Field(connection, schema, path);
   });
 
   beforeEach(() => {

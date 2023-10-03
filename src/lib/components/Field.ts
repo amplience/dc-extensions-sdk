@@ -25,7 +25,11 @@ export class Field<FieldType = any, ParamType extends Params = Params> {
    * @param connection message-event-channel connection
    * @param schema JSON Schema of the field
    */
-  constructor(private connection: ClientConnection, public schema: FieldSchema<ParamType>) {}
+  constructor(
+    private connection: ClientConnection,
+    public schema: FieldSchema<ParamType>,
+    public path: string
+  ) {}
 
   /**
    * Fetch the value of the field
