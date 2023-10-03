@@ -9,7 +9,6 @@ export interface ContentFieldContextObject<ParamType extends Params = Params>
   extends ContextObject {
   contentItemId: string;
   fieldSchema: FieldSchema<ParamType>;
-  fieldPath: string;
   params: ParamType;
   locales: LocalesModel;
   stagingEnvironment: string;

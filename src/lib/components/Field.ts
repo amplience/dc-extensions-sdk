@@ -25,11 +25,7 @@ export class Field<FieldType = any, ParamType extends Params = Params> {
    * @param connection message-event-channel connection
    * @param schema JSON Schema of the field
    */
-  constructor(
-    private connection: ClientConnection,
-    public schema: FieldSchema<ParamType>,
-    public path: string
-  ) {}
+  constructor(private connection: ClientConnection, public schema: FieldSchema<ParamType>) {}
 
   /**
    * Fetch the value of the field
@@ -70,6 +66,21 @@ export class Field<FieldType = any, ParamType extends Params = Params> {
 
     return;
   }
+
+  /**
+   * Fetch the path to the field
+   *
+   * ### Example
+   * ```typescript
+   * const path = await sdk.field.getPath();
+   *
+   * console.log(path);
+   * ```
+   */
+  getPath(): Promise<string> {
+    return this.connection.request(FIELD.PATH_GET);
+  }
+
   /**
    * Check if your value is valid
    *

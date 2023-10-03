@@ -81,7 +81,6 @@ export class ContentFieldExtension<
   setupContext(context: ContentFieldContextObject<ParamType>): void {
     const {
       fieldSchema,
-      fieldPath,
       params,
       locales,
       stagingEnvironment,
@@ -92,7 +91,7 @@ export class ContentFieldExtension<
 
     this.assets = new Assets(this.connection);
     this.contentItem = new ContentItem(this.connection);
-    this.field = new Field(this.connection, fieldSchema, fieldPath);
+    this.field = new Field(this.connection, fieldSchema);
     this.form = new Form(this.connection, readOnly);
     this.params = params;
     this.locales = locales;

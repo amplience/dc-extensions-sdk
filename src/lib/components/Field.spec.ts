@@ -30,11 +30,9 @@ describe('Field', () => {
     'ui:extension': { url: '124' },
   };
 
-  const path = '/somePath';
-
   beforeAll(() => {
     connection = new ClientConnection();
-    field = new Field(connection, schema, path);
+    field = new Field(connection, schema);
   });
 
   beforeEach(() => {
