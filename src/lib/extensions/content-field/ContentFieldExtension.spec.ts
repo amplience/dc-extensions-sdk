@@ -19,6 +19,7 @@ describe('ContentFieldExtension', () => {
   const context = {
     category: 'CONTENT_FIELD',
     contentItemId: '12345678-abcd-1234-1234-abcdef123456',
+    fieldPath: '/field',
     fieldSchema: {
       title: 'test-field-schema-title',
       type: 'test-field-schema-type',
