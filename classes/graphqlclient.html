@@ -55,6 +55,9 @@
 					<a href="graphqlclient.html#connection" class="tsd-kind-icon">connection</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="graphqlclient.html#mutation" class="tsd-kind-icon">mutation</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="graphqlclient.html#query" class="tsd-kind-icon">query</a>
 				</li>
 				<li class=" tsd-kind-object-literal tsd-parent-kind-class tsd-is-private">
@@ -93,6 +96,7 @@
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="graphqlclient.html#mutation" class="tsd-kind-icon">mutation</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="graphqlclient.html#query" class="tsd-kind-icon">query</a></li>
 						</ul>
 					</section>
@@ -117,7 +121,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/GraphQLClient.ts#L16">lib/components/GraphQLClient.ts:16</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/GraphQLClient.ts#L21">lib/components/GraphQLClient.ts:21</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -139,7 +143,7 @@
 				<div class="tsd-signature tsd-kind-icon">connection<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ClientConnection</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/GraphQLClient.ts#L18">lib/components/GraphQLClient.ts:18</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/GraphQLClient.ts#L23">lib/components/GraphQLClient.ts:23</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -147,16 +151,42 @@
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="query" class="tsd-anchor"></a>
-				<h3>query</h3>
+				<a name="mutation" class="tsd-anchor"></a>
+				<h3>mutation</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">(</span>query<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, vars<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">mutation<span class="tsd-signature-symbol">(</span>mutation<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, vars<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/GraphQLClient.ts#L20">lib/components/GraphQLClient.ts:20</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/GraphQLClient.ts#L41">lib/components/GraphQLClient.ts:41</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>mutation: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5>vars: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="query" class="tsd-anchor"></a>
+				<h3>query</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">(</span>query<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, vars<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/GraphQLClient.ts#L25">lib/components/GraphQLClient.ts:25</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -165,7 +195,7 @@
 								<h5>query: <span class="tsd-signature-type">string</span></h5>
 							</li>
 							<li>
-								<h5>vars: <span class="tsd-signature-type">object</span></h5>
+								<h5>vars: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -181,7 +211,7 @@
 				<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>ERROR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/GraphQLClient.ts#L5">lib/components/GraphQLClient.ts:5</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/GraphQLClient.ts#L10">lib/components/GraphQLClient.ts:10</a></li>
 					</ul>
 				</aside>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
@@ -190,7 +220,7 @@
 					<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 403</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/GraphQLClient.ts#L6">lib/components/GraphQLClient.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/GraphQLClient.ts#L11">lib/components/GraphQLClient.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -200,7 +230,7 @@
 					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/GraphQLClient.ts#L7">lib/components/GraphQLClient.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/GraphQLClient.ts#L12">lib/components/GraphQLClient.ts:12</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
@@ -209,7 +239,7 @@
 						<div class="tsd-signature tsd-kind-icon">errors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>level<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{code: &#x27;UNKNOWN&#x27;,level: &#x27;ERROR&#x27;,message: &#x27;Unknown error&#x27;,},]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/c350061/src/lib/components/GraphQLClient.ts#L8">lib/components/GraphQLClient.ts:8</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/GraphQLClient.ts#L13">lib/components/GraphQLClient.ts:13</a></li>
 							</ul>
 						</aside>
 					</section>
