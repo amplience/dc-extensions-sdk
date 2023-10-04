@@ -107,6 +107,15 @@ describe('Field', () => {
     }
   });
 
+  describe('getPath()', () => {
+    it('Should get the path', async () => {
+      jest.spyOn(connection, 'request').mockResolvedValue('/path/t/0/field');
+      const path = await field.getPath();
+
+      expect(path).toEqual('/path/t/0/field');
+    });
+  });
+
   it('isValid(testValue) should emit one request with the FIELD.MODEL_IS_VALID event with testValue', async () => {
     const requestSpy = jest.spyOn(connection, 'request').mockResolvedValue(true);
     await field.isValid(testValue);
