@@ -20,16 +20,22 @@ export interface ContentFieldContextObject<ParamType extends Params = Params>
 export function isContentFieldContextObject(
   context: unknown | ContentFieldContextObject
 ): context is ContentFieldContextObject {
-  return (
-    isContextObject(context) &&
-    (context as ContentFieldContextObject).category === 'CONTENT_FIELD' &&
-    (context as ContentFieldContextObject)?.params?.instance !== undefined &&
-    (context as ContentFieldContextObject).contentItemId !== undefined &&
-    (context as ContentFieldContextObject).fieldSchema !== undefined &&
-    (context as ContentFieldContextObject).locales !== undefined &&
-    (context as ContentFieldContextObject).readOnly !== undefined &&
-    (context as ContentFieldContextObject).stagingEnvironment !== undefined &&
-    (context as ContentFieldContextObject).visualisation !== undefined && 
-    (context as ContentEditorContextObject).hub !== undefined 
-  );
+  if (!isContextObject(context)) {
+    return false;
+  }
+
+  const isContentField = context.category === 'CONTENT_FIELD';
+  const hasInstanceParams = context?.params?.instance !== undefined;
+  const contextHasProp = (prop: string) => context[prop as keyof typeof context] !== undefined;
+  const requiredProps = [
+    'contentItemId',
+    'fieldSchema',
+    'locales',
+    'readOnly',
+    'stagingEnvironment',
+    'visualisation',
+    'hub',
+  ];
+
+  return isContentField && hasInstanceParams && requiredProps.every(contextHasProp);
 }

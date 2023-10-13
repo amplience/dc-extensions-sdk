@@ -66,6 +66,21 @@ export class Field<FieldType = any, ParamType extends Params = Params> {
 
     return;
   }
+
+  /**
+   * Fetch the path to the field
+   *
+   * ### Example
+   * ```typescript
+   * const path = await sdk.field.getPath();
+   *
+   * console.log(path);
+   * ```
+   */
+  getPath(): Promise<string> {
+    return this.connection.request(FIELD.PATH_GET);
+  }
+
   /**
    * Check if your value is valid
    *

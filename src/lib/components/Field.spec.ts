@@ -23,16 +23,15 @@ const testError = ({
 
 describe('Field', () => {
   let connection: ClientConnection;
-  let schema: FieldSchema<Params>;
   let field: Field;
+  const schema: FieldSchema<Params> = {
+    title: 'My Field',
+    type: 'string',
+    'ui:extension': { url: '124' },
+  };
 
   beforeAll(() => {
     connection = new ClientConnection();
-    schema = {
-      title: 'My Field',
-      type: 'string',
-      'ui:extension': { url: '124' },
-    };
     field = new Field(connection, schema);
   });
 
@@ -106,6 +105,15 @@ describe('Field', () => {
       expect(e).toEqual([testError]);
       done();
     }
+  });
+
+  describe('getPath()', () => {
+    it('Should get the path', async () => {
+      jest.spyOn(connection, 'request').mockResolvedValue('/path/t/0/field');
+      const path = await field.getPath();
+
+      expect(path).toEqual('/path/t/0/field');
+    });
   });
 
   it('isValid(testValue) should emit one request with the FIELD.MODEL_IS_VALID event with testValue', async () => {

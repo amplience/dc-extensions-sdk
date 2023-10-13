@@ -26,6 +26,7 @@ export enum FIELD {
   MODEL_IS_VALID = 'field-model-is-valid',
   MODEL_VALIDATE = 'field-model-validate',
   SCHEMA_GET = 'field-schema-get',
+  PATH_GET = 'field-path-get',
 }
 
 export enum CONTENT_EDITOR_FORM {
