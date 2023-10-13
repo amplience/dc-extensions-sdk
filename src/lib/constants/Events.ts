@@ -46,3 +46,7 @@ export enum FRAME {
   HEIGHT_GET = 'height-get',
   HEIGHT_SET = 'height-set',
 }
+
+export enum ASSETS {
+  GET_BY_ID = 'get-asset-by-id',
+}

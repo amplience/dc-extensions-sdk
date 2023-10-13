@@ -7,6 +7,7 @@ import { Frame } from '../../components/Frame';
 import { ContentReference } from '../../components/ContentReference';
 import { ContentLink } from '../../components/ContentLink';
 import { MediaLink } from '../../components/MediaLink';
+import { Assets } from '../../components/Assets';
 
 describe('ContentEditorExtension', () => {
   const context = {
@@ -64,6 +65,7 @@ describe('ContentEditorExtension', () => {
 
       expect(instance.connection).toEqual(connection);
 
+      expect(instance.assets).toBeInstanceOf(Assets);
       expect(instance.mediaLink).toBeInstanceOf(MediaLink);
       expect(instance.contentLink).toBeInstanceOf(ContentLink);
       expect(instance.contentReference).toBeInstanceOf(ContentReference);

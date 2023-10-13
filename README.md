@@ -238,6 +238,41 @@ Example Content Item:
 }
 ```
 
+## Assets
+
+Use to get assets.
+
+```js
+const sdk await init();
+
+const asset = await sdk.assets.getById('123-456-789');
+```
+
+Example asset:
+
+```json
+{
+  "srcName": "an-image.jpg",
+  "revisionNumber": 8,
+  "bucketID": "00000000-0000-0000-0000-000000000000",
+  "label": "an-image.jpg",
+  "mimeType": "image/jpeg",
+  "type": "image",
+  "userID": "00000000-0000-0000-0000-000000000000",
+  "thumbFile": "00000000-0000-0000-0000-000000000000",
+  "folderID": "00000000-0000-0000-0000-000000000000",
+  "file": "00000000-0000-0000-0000-000000000000",
+  "createdDate": 1683798022161,
+  "name": "an-image",
+  "subType": null,
+  "id": "00000000-0000-0000-0000-000000000000",
+  "thumbURL": "https://thumbs.amplience.net/r/00000000-0000-0000-0000-000000000000",
+  "publishStatus": "PUBLISHED",
+  "status": "active",
+  "timestamp": 1688563779803
+}
+```
+
 ## Frame
 
 ### Setting the height

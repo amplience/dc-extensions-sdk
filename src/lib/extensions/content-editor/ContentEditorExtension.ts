@@ -10,6 +10,7 @@ import { ContentEditorContextObject } from './ContentEditorContextObject';
 import { FieldSchema } from '../../components/Field';
 import { ObjectMap } from '../../models/ContentItemModel';
 import { Hub } from '../dashboard/DashboardExtension';
+import { Assets } from '../../components/Assets';
 
 export type SchemaType = ObjectMap<{
   id?: string;
@@ -27,6 +28,10 @@ export type SchemaType = ObjectMap<{
 export class ContentEditorExtension<ParamType extends Params = Params> extends Extension<
   ContentEditorContextObject<ParamType>
 > {
+  /**
+   * Assets - Allows you to get assets
+   */
+  public assets!: Assets;
   /**
    * Content Item - The model of the Content Item that is being edited.
    */
@@ -83,6 +88,7 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
   setupContext(context: ContentEditorContextObject<ParamType>): void {
     const { schema, params, locales, stagingEnvironment, readOnly, visualisation, hub } = context;
 
+    this.assets = new Assets(this.connection);
     this.contentItem = new ContentItem(this.connection);
     this.schema = schema;
     this.form = new ContentEditorForm(this.connection, readOnly);
