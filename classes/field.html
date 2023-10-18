@@ -58,6 +58,9 @@
 					<a href="field.html#schema" class="tsd-kind-icon">schema</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="field.html#getpath" class="tsd-kind-icon">get<wbr>Path</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="field.html#getvalue" class="tsd-kind-icon">get<wbr>Value</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -117,6 +120,7 @@
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="field.html#getpath" class="tsd-kind-icon">get<wbr>Path</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="field.html#getvalue" class="tsd-kind-icon">get<wbr>Value</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="field.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="field.html#reset" class="tsd-kind-icon">reset</a></li>
@@ -139,7 +143,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/Field.ts#L21">lib/components/Field.ts:21</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/Field.ts#L21">lib/components/Field.ts:21</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -179,7 +183,7 @@
 				<div class="tsd-signature tsd-kind-icon">connection<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ClientConnection</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/Field.ts#L28">lib/components/Field.ts:28</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/Field.ts#L28">lib/components/Field.ts:28</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -194,7 +198,7 @@
 				<div class="tsd-signature tsd-kind-icon">schema<span class="tsd-signature-symbol">:</span> <a href="../globals.html#fieldschema" class="tsd-signature-type">FieldSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ParamType</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/Field.ts#L28">lib/components/Field.ts:28</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/Field.ts#L28">lib/components/Field.ts:28</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -207,6 +211,35 @@
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="getpath" class="tsd-anchor"></a>
+				<h3>get<wbr>Path</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Path<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/Field.ts#L80">lib/components/Field.ts:80</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Fetch the path to the field</p>
+							</div>
+							<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+								<h3>Example</h3>
+							</a>
+							<pre><code class="language-typescript"><span class="hljs-keyword">const</span> path = <span class="hljs-keyword">await</span> sdk.field.getPath();
+
+<span class="hljs-built_in">console</span>.log(path);
+</code></pre>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="getvalue" class="tsd-anchor"></a>
 				<h3>get<wbr>Value</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -216,7 +249,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/Field.ts#L40">lib/components/Field.ts:40</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/Field.ts#L40">lib/components/Field.ts:40</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -245,7 +278,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/Field.ts#L83">lib/components/Field.ts:83</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/Field.ts#L98">lib/components/Field.ts:98</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -284,7 +317,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/Field.ts#L124">lib/components/Field.ts:124</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/Field.ts#L139">lib/components/Field.ts:139</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -314,7 +347,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/Field.ts#L60">lib/components/Field.ts:60</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/Field.ts#L60">lib/components/Field.ts:60</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -359,7 +392,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/6bed99e/src/lib/components/Field.ts#L108">lib/components/Field.ts:108</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/Field.ts#L123">lib/components/Field.ts:123</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
