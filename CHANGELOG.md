@@ -30,6 +30,13 @@ All notable changes to this project will be documented in this file. See [standa
 - **multi-select:** added multiselect to media content link & refs ([ae16cd1](https://github.com/amplience/dc-extensions-sdk/commit/ae16cd122790852ac535cd2bbe03b544f5dd3c9a))
 - **timeouts:** no more timeouts (by default) ([01abdb7](https://github.com/amplience/dc-extensions-sdk/commit/01abdb72b9a1b961a20058f27d912cc58a3f4af1))
 
+## [2.3.0](https://www.github.com/amplience/dc-extensions-sdk/compare/v2.2.1...v2.3.0) (2023-10-13)
+
+
+### Features
+
+* **assets:** Allow getting of asset by ID ([#93](https://www.github.com/amplience/dc-extensions-sdk/issues/93)) ([f7020d2](https://www.github.com/amplience/dc-extensions-sdk/commit/f7020d284d93eed2868518e1bdab851c25431173))
+
 ### [2.2.1](https://www.github.com/amplience/dc-extensions-sdk/compare/v2.2.0...v2.2.1) (2023-09-29)
 
 
