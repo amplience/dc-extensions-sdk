@@ -36,6 +36,7 @@ describe('ContentFieldExtension', () => {
       default: ['en'],
       available: [{ locale: 'en-gb', language: 'en', country: 'gb', index: 1, selected: true }],
     },
+    locationHref: '#!',
     stagingEnvironment: 'https://test-staging-environment',
     visualisation: 'test-visualization',
     readOnly: true,

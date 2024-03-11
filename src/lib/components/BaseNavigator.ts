@@ -5,13 +5,13 @@ import { APPLICATION_NAVIGATOR } from '../constants/Errors';
 export class BaseNavigator {
   constructor(public readonly locationHref: string, public window: Window) {}
 
-  navigate(templatedUri: string, options: Partial<OpenOptions>) {
+  navigate(templatedUri: string, options: Partial<OpenOptions> = {}) {
     const base = this.getBaseHref();
 
-    return this.processHref(`${base}/${templatedUri}`, options);
+    return this.processHref(`${base}${templatedUri}`, options);
   }
 
-  private processHref(href: string, options: Partial<OpenOptions>): string | undefined {
+  private processHref(href: string, options: Partial<OpenOptions> = {}): string | undefined {
     if (options.returnHref) {
       return href;
     }

@@ -42,6 +42,7 @@ describe('ContentEditorExtension', () => {
     visualisation: 'test-visualization',
     readOnly: true,
     hub: { id: 'hubId', name: 'hubName' },
+    locationHref: '#!',
   };
 
   const options = {
