@@ -51,3 +51,11 @@ export enum FRAME {
 export enum ASSETS {
   GET_BY_ID = 'get-asset-by-id',
 }
+
+export enum WORKFLOWS {
+  GET_ALL_WORKFLOWS = 'get-workflows',
+}
+
+export enum CONTENT_TYPES {
+  GET_BY_URI = 'get-content-type-by-uri',
+}

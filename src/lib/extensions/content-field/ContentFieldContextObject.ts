@@ -15,6 +15,7 @@ export interface ContentFieldContextObject<ParamType extends Params = Params>
   visualisation: string;
   readOnly: boolean;
   hub: Hub;
+  locationHref: string;
 }
 
 export function isContentFieldContextObject(

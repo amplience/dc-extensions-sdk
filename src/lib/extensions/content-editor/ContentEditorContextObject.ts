@@ -12,6 +12,7 @@ export interface ContentEditorContextObject<ParamType extends Params = Params>
   locales: LocalesModel;
   stagingEnvironment: string;
   visualisation: string;
+  locationHref: string;
   readOnly: boolean;
   hub: Hub;
 }
