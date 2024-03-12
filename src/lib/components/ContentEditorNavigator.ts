@@ -17,7 +17,10 @@ export class ContentEditorApplicationNavigator {
     );
   }
 
-  editContentItem(pointer: string) {
-    return this.connection.request<void>('navigate-to-nested', pointer);
+  editContentItem(contentItemId: string, contentTypeUri: string) {
+    return this.connection.request<void>('navigate-to-nested', {
+      uri: contentTypeUri,
+      id: contentItemId,
+    });
   }
 }

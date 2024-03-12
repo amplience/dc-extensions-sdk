@@ -44,9 +44,15 @@ describe('ContentEditorNavigator', () => {
     it('should request from connection', async () => {
       jest.spyOn(connection, 'request').mockReturnValue(Promise.resolve());
 
-      await navigator.editContentItem('/some/pointer');
+      await navigator.editContentItem(
+        '3fc3a416-574f-48df-aa29-d96fdbdb6279',
+        'https://simple-text.com'
+      );
 
-      expect(connection.request).toBeCalledWith('navigate-to-nested', '/some/pointer');
+      expect(connection.request).toBeCalledWith('navigate-to-nested', {
+        uri: 'https://simple-text.com',
+        id: '3fc3a416-574f-48df-aa29-d96fdbdb6279',
+      });
     });
   });
 });
