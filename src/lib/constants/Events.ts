@@ -58,4 +58,5 @@ export enum WORKFLOWS {
 
 export enum CONTENT_TYPES {
   GET_BY_URI = 'get-content-type-by-uri',
+  GET_BY_URIS = 'get-content-type-by-uris',
 }
