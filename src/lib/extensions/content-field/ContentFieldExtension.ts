@@ -114,11 +114,7 @@ export class ContentFieldExtension<
     this.contentItem = new ContentItem(this.connection);
     this.field = new Field(this.connection, fieldSchema);
     this.form = new Form(this.connection, readOnly);
-    this.applicationNavigator = new ContentEditorApplicationNavigator(
-      this.connection,
-      locationHref,
-      this.options.window
-    );
+    this.applicationNavigator = new ContentEditorApplicationNavigator(this.connection);
     this.params = params;
     this.locales = locales;
     this.visualisation = visualisation;

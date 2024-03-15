@@ -17,27 +17,7 @@ describe('ContentEditorNavigator', () => {
         },
       },
     } as Window;
-    navigator = new ContentEditorApplicationNavigator(
-      connection,
-      'http://test.com/#!/hubname/',
-      localWindow
-    );
-  });
-
-  describe('openContentItem', () => {
-    it('should return window location to authoring endpoint', () => {
-      const href = navigator.openContentItem({ id: '123' }, { returnHref: true });
-
-      expect(href).toEqual('http://test.com/#!/hubname/authoring/content-item/edit/123');
-    });
-
-    it('should set window location to authoring endpoint', () => {
-      navigator.openContentItem({ id: '123' }, { returnHref: false });
-
-      expect(localWindow.parent.location.href).toEqual(
-        'http://test.com/#!/hubname/authoring/content-item/edit/123'
-      );
-    });
+    navigator = new ContentEditorApplicationNavigator(connection);
   });
 
   describe('editContentItem', () => {

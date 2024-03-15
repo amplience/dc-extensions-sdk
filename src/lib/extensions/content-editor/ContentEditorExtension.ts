@@ -129,10 +129,6 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
     this.stagingEnvironment = stagingEnvironment;
     this.hub = hub;
 
-    this.applicationNavigator = new ContentEditorApplicationNavigator(
-      this.connection,
-      locationHref,
-      this.options.window
-    );
+    this.applicationNavigator = new ContentEditorApplicationNavigator(this.connection);
   }
 }
