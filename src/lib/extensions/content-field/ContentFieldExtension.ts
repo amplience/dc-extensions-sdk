@@ -68,6 +68,10 @@ export class ContentFieldExtension<
    * Hub - Hub id and Hub name
    */
   public hub!: Hub;
+  /**
+   * CollaspseByDefault - global setting for whether or not form fields should be open or closed by default
+   */
+  public collaspseByDefault!: boolean;
 
   constructor(options: ExtensionOptions, context: ContentFieldContextObject<ParamType>) {
     super(options, context);
@@ -87,6 +91,7 @@ export class ContentFieldExtension<
       readOnly,
       visualisation,
       hub,
+      collaspseByDefault,
     } = context;
 
     this.assets = new Assets(this.connection);
@@ -97,6 +102,7 @@ export class ContentFieldExtension<
     this.locales = locales;
     this.visualisation = visualisation;
     this.stagingEnvironment = stagingEnvironment;
+    this.collaspseByDefault = collaspseByDefault;
     this.hub = hub;
   }
 }
