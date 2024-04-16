@@ -25,6 +25,54 @@ export class MediaLink {
    * @param connection message-event-channel connection
    */
   constructor(private connection: ClientConnection) {}
+
+  /**
+   * This method will trigger opening the media browser. It returns a promise that will resolve to the chosen Image or Video Link.
+   *
+   * Example of fetching media from DC
+   * ```typescript
+   * try {
+   *   // open browser and waits for media browser
+   *   // returns object that should be saved to the model
+   *   const video = await sdk.mediaLink.get()
+   *
+   * } catch (e) {
+   *   // no media returned
+   * }
+   * ```
+   */
+  async get(): Promise<MediaImageLink | MediaVideoLink> {
+    return this.connection.request(MEDIA_LINK.GET, null, {
+      timeout: false,
+    });
+  }
+
+  /**
+   * This method will trigger opening the media overlay. It returns a promise that will resolve to the chosen Image and Video Links.
+   *
+   * Example of fetching an media from DC
+   * ```typescript
+   * try {
+   *   // open browser and waits for media selection
+   *   // returns object that should be saved to the model
+   *   const media = await sdk.mediaLink.getMultiple({ max: 10 })
+   *
+   * } catch (e) {
+   *   // no media returned
+   * }
+   * ```
+   */
+  async getMultiple(
+    { max }: MediaOptions = { max: null }
+  ): Promise<Array<MediaImageLink | MediaImageLink>> {
+    return this.connection.request(
+      MEDIA_LINK.GET,
+      { max },
+      {
+        timeout: false,
+      }
+    );
+  }
   /**
    * This method will trigger an image browser. It returns a promise that will resolve to the chosen Image Link.
    *
