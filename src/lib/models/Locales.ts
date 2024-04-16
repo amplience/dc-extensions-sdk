@@ -11,4 +11,5 @@ export interface LocalModel {
   country: string;
   index: number;
   selected: boolean;
+  master?: boolean;
 }
