@@ -1,4 +1,5 @@
 import { ClientConnection } from 'message-event-channel';
+import { CONTENT_ITEM_NAVIGATOR } from '../constants/Events';
 
 export class ContentEditorApplicationNavigator {
   constructor(private readonly connection: ClientConnection) {}
@@ -12,7 +13,7 @@ export class ContentEditorApplicationNavigator {
    *
    */
   editContentItem(contentItemId: string, contentTypeUri: string) {
-    return this.connection.request<void>('navigate-to-nested', {
+    return this.connection.request<void>(CONTENT_ITEM_NAVIGATOR.NAVIGATE_TO_NESTED, {
       uri: contentTypeUri,
       id: contentItemId,
     });

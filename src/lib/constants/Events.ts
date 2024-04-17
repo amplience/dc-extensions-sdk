@@ -60,3 +60,7 @@ export enum CONTENT_TYPES {
   GET_BY_URI = 'get-content-type-by-uri',
   GET_BY_URIS = 'get-content-type-by-uris',
 }
+
+export enum CONTENT_ITEM_NAVIGATOR {
+  NAVIGATE_TO_NESTED = 'navigate-to-nested',
+}
