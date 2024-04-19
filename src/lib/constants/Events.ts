@@ -9,6 +9,7 @@ export enum CONTENT_ITEM {
 export enum MEDIA_LINK {
   IMAGE_GET = 'media-image-get',
   VIDEO_GET = 'media-video-get',
+  GET = 'media-get',
 }
 
 export enum CONTENT_LINK {
