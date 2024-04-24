@@ -43,7 +43,7 @@ describe('ContentFieldExtension', () => {
     visualisation: 'test-visualization',
     readOnly: true,
     hub: { id: 'hubId', name: 'hubName' },
-    collaspseByDefault: false,
+    collapseByDefault: false,
   };
   it('should create a new instance of ContentFieldExtension', () => {
     const connection = new ClientConnection(options);

@@ -98,9 +98,9 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
   public applicationNavigator!: ContentEditorApplicationNavigator;
 
   /**
-   * CollaspseByDefault - global setting for whether or not form fields should be open or closed by default
+   * collapseByDefault - global setting for whether or not form fields should be open or closed by default
    */
-  public collaspseByDefault!: boolean;
+  public collapseByDefault!: boolean;
 
   constructor(options: ExtensionOptions, context: ContentEditorContextObject<ParamType>) {
     super(options, context);
@@ -121,7 +121,7 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
       readOnly,
       visualisation,
       hub,
-      collaspseByDefault,
+      collapseByDefault,
     } = context;
 
     this.assets = new Assets(this.connection);
@@ -132,7 +132,7 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
     this.locales = locales;
     this.visualisation = visualisation;
     this.stagingEnvironment = stagingEnvironment;
-    this.collaspseByDefault = collaspseByDefault;
+    this.collapseByDefault = collapseByDefault;
     this.hub = hub;
 
     this.applicationNavigator = new ContentEditorApplicationNavigator(this.connection);

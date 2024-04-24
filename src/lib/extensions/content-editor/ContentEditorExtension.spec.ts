@@ -42,7 +42,7 @@ describe('ContentEditorExtension', () => {
     visualisation: 'test-visualization',
     readOnly: true,
     hub: { id: 'hubId', name: 'hubName' },
-    collaspseByDefault: false,
+    collapseByDefault: false,
   };
 
   const options = {

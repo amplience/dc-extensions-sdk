@@ -82,9 +82,9 @@ export class ContentFieldExtension<
    */
   public hub!: Hub;
   /**
-   * CollaspseByDefault - global setting for whether or not form fields should be open or closed by default
+   * collapseByDefault - global setting for whether or not form fields should be open or closed by default
    */
-  public collaspseByDefault!: boolean;
+  public collapseByDefault!: boolean;
 
   /**
    * ApplicationNavigator - used to navigate within the form
@@ -111,7 +111,7 @@ export class ContentFieldExtension<
       readOnly,
       visualisation,
       hub,
-      collaspseByDefault,
+      collapseByDefault,
     } = context;
 
     this.assets = new Assets(this.connection);
@@ -123,7 +123,7 @@ export class ContentFieldExtension<
     this.locales = locales;
     this.visualisation = visualisation;
     this.stagingEnvironment = stagingEnvironment;
-    this.collaspseByDefault = collaspseByDefault;
+    this.collapseByDefault = collapseByDefault;
     this.hub = hub;
   }
 }

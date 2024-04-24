@@ -14,7 +14,7 @@ export interface ContentFieldContextObject<ParamType extends Params = Params>
   visualisation: string;
   readOnly: boolean;
   hub: Hub;
-  collaspseByDefault: boolean;
+  collapseByDefault: boolean;
 }
 
 export function isContentFieldContextObject(
