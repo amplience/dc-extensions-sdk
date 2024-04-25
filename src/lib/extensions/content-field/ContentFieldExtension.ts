@@ -103,6 +103,7 @@ export class ContentFieldExtension<
   }
 
   setupContext(context: ContentFieldContextObject<ParamType>): void {
+    console.log(context);
     const {
       fieldSchema,
       params,

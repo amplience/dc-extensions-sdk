@@ -113,6 +113,7 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
   }
 
   setupContext(context: ContentEditorContextObject<ParamType>): void {
+    console.log(context);
     const {
       schema,
       params,
