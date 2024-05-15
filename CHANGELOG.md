@@ -30,6 +30,28 @@ All notable changes to this project will be documented in this file. See [standa
 - **multi-select:** added multiselect to media content link & refs ([ae16cd1](https://github.com/amplience/dc-extensions-sdk/commit/ae16cd122790852ac535cd2bbe03b544f5dd3c9a))
 - **timeouts:** no more timeouts (by default) ([01abdb7](https://github.com/amplience/dc-extensions-sdk/commit/01abdb72b9a1b961a20058f27d912cc58a3f4af1))
 
+## [2.4.0](https://www.github.com/amplience/dc-extensions-sdk/compare/v2.3.0...v2.4.0) (2024-05-15)
+
+
+### Features
+
+* added workflow fetching, and content type fetching aswell as form/field navigation ([6f93b91](https://www.github.com/amplience/dc-extensions-sdk/commit/6f93b91831ae3d893cc3e845d633cbf99f85eb98))
+
+
+### Bug Fixes
+
+* added enum for navigator ([f168ba6](https://www.github.com/amplience/dc-extensions-sdk/commit/f168ba6b74d79810fc161a11df363f454387fe3b))
+* added master to typings ([447e0cb](https://www.github.com/amplience/dc-extensions-sdk/commit/447e0cb444cb972e3ca87dbd43fbf77225acd82c))
+* added tests ([7b949ba](https://www.github.com/amplience/dc-extensions-sdk/commit/7b949ba3288321076b3dbde509f7b940bf7e9e02))
+* changed interface to have id and uri ([ae743f5](https://www.github.com/amplience/dc-extensions-sdk/commit/ae743f5fcfbde2f6d9d53364dee1de3f1c7fa298))
+* fixed typo ([700dadc](https://www.github.com/amplience/dc-extensions-sdk/commit/700dadc8c2b70f4f6324557fc5aaed51c8d4ec7f))
+* integration branch for sdk changes ([b86495d](https://www.github.com/amplience/dc-extensions-sdk/commit/b86495db6a40c890681a518e6086a0f2434763bc))
+* removed id ([595f03a](https://www.github.com/amplience/dc-extensions-sdk/commit/595f03a7d129a6727f00d969a294801ba037e820))
+* removed unneeded tests and code ([893d45c](https://www.github.com/amplience/dc-extensions-sdk/commit/893d45c79b0d5fb6806201a740b5eef0b7e37b62))
+* reverted lock file ([5c96bd1](https://www.github.com/amplience/dc-extensions-sdk/commit/5c96bd1a87341617497fe19653e17a66e2ace290))
+* typing and inline docs ([5929914](https://www.github.com/amplience/dc-extensions-sdk/commit/592991488a3f4f70b1d06ac81c7840d266708cf8))
+* updated tests and editContentItem interface ([f9a6271](https://www.github.com/amplience/dc-extensions-sdk/commit/f9a6271c715162d7f02dd092736d0869e7f783b1))
+
 ## [2.3.0](https://www.github.com/amplience/dc-extensions-sdk/compare/v2.2.1...v2.3.0) (2023-10-13)
 
 
