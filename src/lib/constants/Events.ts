@@ -9,6 +9,7 @@ export enum CONTENT_ITEM {
 export enum MEDIA_LINK {
   IMAGE_GET = 'media-image-get',
   VIDEO_GET = 'media-video-get',
+  GET = 'media-get',
 }
 
 export enum CONTENT_LINK {
@@ -50,4 +51,17 @@ export enum FRAME {
 
 export enum ASSETS {
   GET_BY_ID = 'get-asset-by-id',
+}
+
+export enum WORKFLOWS {
+  GET_ALL_WORKFLOWS = 'get-workflows',
+}
+
+export enum CONTENT_TYPES {
+  GET_BY_URI = 'get-content-type-by-uri',
+  GET_BY_URIS = 'get-content-type-by-uris',
+}
+
+export enum CONTENT_ITEM_NAVIGATOR {
+  NAVIGATE_TO_NESTED = 'navigate-to-nested',
 }

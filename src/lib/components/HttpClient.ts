@@ -3,9 +3,25 @@ import { ClientConnection } from 'message-event-channel';
 /**
  * @hidden
  */
-export interface HttpResponse {
+export interface HttpResponse<Resource = string | Record<string, unknown>> {
   status: number;
-  data: string | Record<string, unknown>;
+  data: Resource;
+}
+
+/**
+ * @hidden
+ */
+export interface HttpError {
+  code: string;
+  level: string;
+  message: string;
+}
+
+/**
+ * @hidden
+ */
+export interface HttpErrors {
+  errors: HttpError[];
 }
 
 /**
@@ -64,28 +80,33 @@ export class HttpClient {
 
   constructor(private connection: ClientConnection) {}
 
-  public async request(config: HttpRequest): Promise<HttpResponse> {
+  public async request<Resource = string | Record<string, unknown>>(
+    config: HttpRequest
+  ): Promise<HttpResponse<Resource | HttpErrors>> {
     try {
-      const response = await this.connection.request<HttpResponse>('dc-management-sdk-js:request', {
-        data: config.data,
-        method: config.method,
-        headers: config.headers,
-        url: config.url,
-      });
+      const response = await this.connection.request<HttpResponse<Resource>>(
+        'dc-management-sdk-js:request',
+        {
+          data: config.data,
+          method: config.method,
+          headers: config.headers,
+          url: config.url,
+        }
+      );
 
       return {
         data: response.data,
         status: response.status,
       };
-    } catch (error) {
+    } catch (error: any) {
       if (error) {
         return {
-          data: error.data,
-          status: error.status,
+          data: error?.data,
+          status: error?.status,
         };
       }
 
-      return this.DEFAULT_ERROR;
+      return this.DEFAULT_ERROR as HttpResponse<HttpErrors>;
     }
   }
 }

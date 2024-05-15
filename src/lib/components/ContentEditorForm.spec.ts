@@ -2,7 +2,6 @@ import { ClientConnection } from 'message-event-channel';
 import { ContentEditorForm } from './ContentEditorForm';
 import { CONTENT_EDITOR_FORM, FORM } from '../constants/Events';
 import { FORM as ERRORS } from '../constants/Errors';
-import { request } from 'http';
 import { ErrorReport } from '../models/ErrorReport';
 
 describe('ContentEditorForm', () => {

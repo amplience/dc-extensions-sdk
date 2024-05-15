@@ -1,9 +1,7 @@
 import { ClientConnection } from 'message-event-channel';
 import { ContentItem } from '../../components/ContentItem';
 import { ContentEditorExtension } from './ContentEditorExtension';
-import { Field } from '../../components/Field';
 import { ContentEditorForm } from '../../components/ContentEditorForm';
-import { Frame } from '../../components/Frame';
 import { ContentReference } from '../../components/ContentReference';
 import { ContentLink } from '../../components/ContentLink';
 import { MediaLink } from '../../components/MediaLink';
@@ -36,12 +34,15 @@ describe('ContentEditorExtension', () => {
     },
     locales: {
       default: ['en'],
-      available: [{ locale: 'en-gb', language: 'en', country: 'gb', index: 1, selected: true }],
+      available: [
+        { locale: 'en-gb', language: 'en', country: 'gb', index: 1, selected: true, label: '' },
+      ],
     },
     stagingEnvironment: 'https://test-staging-environment',
     visualisation: 'test-visualization',
     readOnly: true,
     hub: { id: 'hubId', name: 'hubName' },
+    collapseByDefault: false,
   };
 
   const options = {

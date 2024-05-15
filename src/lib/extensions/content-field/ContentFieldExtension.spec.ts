@@ -34,12 +34,16 @@ describe('ContentFieldExtension', () => {
     },
     locales: {
       default: ['en'],
-      available: [{ locale: 'en-gb', language: 'en', country: 'gb', index: 1, selected: true }],
+      available: [
+        { locale: 'en-gb', language: 'en', country: 'gb', index: 1, selected: true, label: '' },
+      ],
     },
+    locationHref: '#!',
     stagingEnvironment: 'https://test-staging-environment',
     visualisation: 'test-visualization',
     readOnly: true,
     hub: { id: 'hubId', name: 'hubName' },
+    collapseByDefault: false,
   };
   it('should create a new instance of ContentFieldExtension', () => {
     const connection = new ClientConnection(options);

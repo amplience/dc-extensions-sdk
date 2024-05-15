@@ -11,6 +11,9 @@ import { FieldSchema } from '../../components/Field';
 import { ObjectMap } from '../../models/ContentItemModel';
 import { Hub } from '../dashboard/DashboardExtension';
 import { Assets } from '../../components/Assets';
+import { ContentEditorApplicationNavigator } from '../../components/ContentEditorNavigator';
+import { ContentTypes } from '../../components/ContentType';
+import { Workflows } from '../../components/Workflows';
 
 export type SchemaType = ObjectMap<{
   id?: string;
@@ -48,6 +51,12 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
    * Locales - The locales you currently have available.
    */
   public locales!: LocalesModel;
+
+  /**
+   * Content Types - used for getting content type settings
+   */
+  public contentTypes!: ContentTypes;
+
   /**
    * Content Link - Use to open a content browser.
    */
@@ -63,6 +72,12 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
   /**
    * Form - controls over the form such as readonly change handlers.
    */
+
+  /**
+   * Workflows - Use to fetch workflow states.
+   */
+  public workflows!: Workflows;
+
   public form!: ContentEditorForm;
   /**
    * stagingEnvironment - Used for accessing staged assets.
@@ -77,16 +92,37 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
    */
   public hub!: Hub;
 
+  /**
+   * ApplicationNavigator - used to navigate within the form
+   */
+  public applicationNavigator!: ContentEditorApplicationNavigator;
+
+  /**
+   * collapseByDefault - global setting for whether or not form fields should be open or closed by default
+   */
+  public collapseByDefault!: boolean;
+
   constructor(options: ExtensionOptions, context: ContentEditorContextObject<ParamType>) {
     super(options, context);
 
     this.mediaLink = new MediaLink(this.connection);
     this.contentLink = new ContentLink(this.connection);
     this.contentReference = new ContentReference(this.connection);
+    this.contentTypes = new ContentTypes(this.connection);
+    this.workflows = new Workflows(this.connection);
   }
 
   setupContext(context: ContentEditorContextObject<ParamType>): void {
-    const { schema, params, locales, stagingEnvironment, readOnly, visualisation, hub } = context;
+    const {
+      schema,
+      params,
+      locales,
+      stagingEnvironment,
+      readOnly,
+      visualisation,
+      hub,
+      collapseByDefault,
+    } = context;
 
     this.assets = new Assets(this.connection);
     this.contentItem = new ContentItem(this.connection);
@@ -96,6 +132,9 @@ export class ContentEditorExtension<ParamType extends Params = Params> extends E
     this.locales = locales;
     this.visualisation = visualisation;
     this.stagingEnvironment = stagingEnvironment;
+    this.collapseByDefault = collapseByDefault;
     this.hub = hub;
+
+    this.applicationNavigator = new ContentEditorApplicationNavigator(this.connection);
   }
 }

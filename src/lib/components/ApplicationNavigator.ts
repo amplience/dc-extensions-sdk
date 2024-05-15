@@ -1,70 +1,50 @@
-import { LOCATION_HREF } from '../constants/LocationHref';
-import { APPLICATION_NAVIGATOR } from '../constants/Errors';
-interface ContentItem {
-  id?: string;
-}
-
-interface Event {
-  id?: string;
-}
-
-interface Edition {
-  id?: string;
-  eventId?: string;
-}
-
-export interface OpenOptions {
-  returnHref: boolean;
-}
+import { Event } from '../models/Event';
+import { Edition } from '../models/Edition';
+import { BaseNavigator } from './BaseNavigator';
+import { OpenOptions } from '../constants/Navigation';
+import { ContentItemModel } from '../models/ContentItemModel';
 
 export class ApplicationNavigator {
-  constructor(private readonly locationHref: string, private window: Window) {}
+  private navigationService: BaseNavigator;
+
+  constructor(locationHref: string, window: Window) {
+    this.navigationService = new BaseNavigator(locationHref, window);
+  }
 
   openEventsCalendar(options: Partial<OpenOptions> = {}): undefined | string {
-    return this.processHref(`${this.getBaseHref()}/planning/events/calendar`, options);
+    return this.navigationService.navigate(`/planning/events/calendar`, options);
   }
 
   openEventsTimeline(options: Partial<OpenOptions> = {}): undefined | string {
-    return this.processHref(`${this.getBaseHref()}/planning/events/timeline`, options);
+    return this.navigationService.navigate(`/planning/events/timeline`, options);
   }
 
   openEventsList(options: Partial<OpenOptions> = {}): undefined | string {
-    return this.processHref(`${this.getBaseHref()}/planning/events/list`, options);
+    return this.navigationService.navigate(`/planning/events/list`, options);
   }
 
   openEvent(event: Event, options: Partial<OpenOptions> = {}): undefined | string {
-    return this.processHref(`${this.getBaseHref()}/planning/event/${event.id}`, options);
+    return this.navigationService.navigate(`/planning/event/${event.id}`, options);
   }
 
   openEdition(edition: Edition, options: Partial<OpenOptions> = {}): undefined | string {
-    return this.processHref(
-      `${this.getBaseHref()}/planning/edition/${edition.eventId}/${edition.id}/`,
+    return this.navigationService.navigate(
+      `/planning/edition/${edition.eventId}/${edition.id}/`,
       options
     );
   }
 
   openContentLibrary(options: Partial<OpenOptions> = {}): undefined | string {
-    return this.processHref(`${this.getBaseHref()}/authoring/content-items`, options);
+    return this.navigationService.navigate(`/authoring/content-items`, options);
   }
 
-  openContentItem(id: ContentItem, options: Partial<OpenOptions> = {}): undefined | string {
-    return this.processHref(`${this.getBaseHref()}/authoring/content-item/edit/${id.id}`, options);
-  }
-
-  private processHref(href: string, options: Partial<OpenOptions>): string | undefined {
-    if (options.returnHref) {
-      return href;
-    }
-    this.window.parent.location.href = href;
-  }
-
-  private getBaseHref() {
-    if (this.locationHref.indexOf(LOCATION_HREF.HASH_BANG) === -1) {
-      throw new Error(APPLICATION_NAVIGATOR.MUST_INCLUDE_HASH_BANG);
-    }
-
-    const [baseUrl, hash] = this.locationHref.split(LOCATION_HREF.HASH_BANG);
-    const hubName = hash.split('/')[1];
-    return `${baseUrl}${LOCATION_HREF.HASH_BANG}/${hubName}`;
+  openContentItem(
+    contentItem: Partial<ContentItemModel>,
+    options: Partial<OpenOptions> = {}
+  ): undefined | string {
+    return this.navigationService.navigate(
+      `/authoring/content-item/edit/${contentItem.id}`,
+      options
+    );
   }
 }

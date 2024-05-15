@@ -83,7 +83,7 @@ export class Users {
 
   private async getAuthUsers(): Promise<AuthUser[]> {
     try {
-      const response: HttpResponse = await this.httpClient.request({
+      const response = await this.httpClient.request({
         url: USERS_URL,
         method: HttpMethod.GET,
       });
@@ -97,8 +97,8 @@ export class Users {
       }
 
       return (response?.data as Record<'data', AuthUser[]>)?.data || [];
-    } catch (error) {
-      throw new Error(`Unable to get users: ${error.message}`);
+    } catch (error: any) {
+      throw new Error(`Unable to get users: ${error?.message}`);
     }
   }
 

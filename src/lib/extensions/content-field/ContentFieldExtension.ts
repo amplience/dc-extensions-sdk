@@ -11,6 +11,9 @@ import { Extension, ExtensionOptions } from '../Extension';
 import { ContentFieldContextObject } from './ContentFieldContextObject';
 import { Hub } from '../dashboard/DashboardExtension';
 import { Assets } from '../../components/Assets';
+import { ContentTypes } from '../../components/ContentType';
+import { Workflows } from '../../components/Workflows';
+import { ContentEditorApplicationNavigator } from '../../components/ContentEditorNavigator';
 
 export class ContentFieldExtension<
   FieldType = {},
@@ -32,6 +35,10 @@ export class ContentFieldExtension<
    * Frame - Use to control the height sizing behaviour of your extension.
    */
   public frame!: Frame;
+  /**
+   * Workflows - Use to fetch workflow states.
+   */
+  public workflows!: Workflows;
   /**
    * Params - optional parameters for your extension.
    */
@@ -55,6 +62,12 @@ export class ContentFieldExtension<
   /**
    * Form - controls over the form such as readonly change handlers.
    */
+
+  /**
+   * Content Types - used for getting content type settings
+   */
+  public contentTypes!: ContentTypes;
+
   public form!: Form;
   /**
    * stagingEnvironment - Used for accessing staged assets.
@@ -68,6 +81,15 @@ export class ContentFieldExtension<
    * Hub - Hub id and Hub name
    */
   public hub!: Hub;
+  /**
+   * collapseByDefault - global setting for whether or not form fields should be open or closed by default
+   */
+  public collapseByDefault!: boolean;
+
+  /**
+   * ApplicationNavigator - used to navigate within the form
+   */
+  public applicationNavigator!: ContentEditorApplicationNavigator;
 
   constructor(options: ExtensionOptions, context: ContentFieldContextObject<ParamType>) {
     super(options, context);
@@ -75,6 +97,8 @@ export class ContentFieldExtension<
     this.mediaLink = new MediaLink(this.connection);
     this.contentLink = new ContentLink(this.connection);
     this.contentReference = new ContentReference(this.connection);
+    this.contentTypes = new ContentTypes(this.connection);
+    this.workflows = new Workflows(this.connection);
     this.frame = new Frame(this.connection, options.window);
   }
 
@@ -87,16 +111,19 @@ export class ContentFieldExtension<
       readOnly,
       visualisation,
       hub,
+      collapseByDefault,
     } = context;
 
     this.assets = new Assets(this.connection);
     this.contentItem = new ContentItem(this.connection);
     this.field = new Field(this.connection, fieldSchema);
     this.form = new Form(this.connection, readOnly);
+    this.applicationNavigator = new ContentEditorApplicationNavigator(this.connection);
     this.params = params;
     this.locales = locales;
     this.visualisation = visualisation;
     this.stagingEnvironment = stagingEnvironment;
+    this.collapseByDefault = collapseByDefault;
     this.hub = hub;
   }
 }
