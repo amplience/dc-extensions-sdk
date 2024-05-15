@@ -55,10 +55,16 @@
 					<a href="medialink.html#connection" class="tsd-kind-icon">connection</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="medialink.html#get" class="tsd-kind-icon">get</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="medialink.html#getimage" class="tsd-kind-icon">get<wbr>Image</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="medialink.html#getimages" class="tsd-kind-icon">get<wbr>Images</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="medialink.html#getmultiple" class="tsd-kind-icon">get<wbr>Multiple</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="medialink.html#getvideo" class="tsd-kind-icon">get<wbr>Video</a>
@@ -99,8 +105,10 @@
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="medialink.html#get" class="tsd-kind-icon">get</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="medialink.html#getimage" class="tsd-kind-icon">get<wbr>Image</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="medialink.html#getimages" class="tsd-kind-icon">get<wbr>Images</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="medialink.html#getmultiple" class="tsd-kind-icon">get<wbr>Multiple</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="medialink.html#getvideo" class="tsd-kind-icon">get<wbr>Video</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="medialink.html#getvideos" class="tsd-kind-icon">get<wbr>Videos</a></li>
 						</ul>
@@ -120,7 +128,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/MediaLink.ts#L21">lib/components/MediaLink.ts:21</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/15151d7/src/lib/components/MediaLink.ts#L21">lib/components/MediaLink.ts:21</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -152,7 +160,7 @@
 				<div class="tsd-signature tsd-kind-icon">connection<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ClientConnection</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/MediaLink.ts#L27">lib/components/MediaLink.ts:27</a></li>
+						<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/15151d7/src/lib/components/MediaLink.ts#L27">lib/components/MediaLink.ts:27</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -165,6 +173,38 @@
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="get" class="tsd-anchor"></a>
+				<h3>get</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/mediaimagelink.html" class="tsd-signature-type">MediaImageLink</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/mediavideolink.html" class="tsd-signature-type">MediaVideoLink</a><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/15151d7/src/lib/components/MediaLink.ts#L44">lib/components/MediaLink.ts:44</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>This method will trigger opening the media browser. It returns a promise that will resolve to the chosen Image or Video Link.</p>
+							</div>
+							<p>Example of fetching media from DC</p>
+							<pre><code class="language-typescript"><span class="hljs-keyword">try</span> {
+  <span class="hljs-comment">// open browser and waits for media browser</span>
+  <span class="hljs-comment">// returns object that should be saved to the model</span>
+  <span class="hljs-keyword">const</span> video = <span class="hljs-keyword">await</span> sdk.mediaLink.get()
+
+} <span class="hljs-keyword">catch</span> (e) {
+  <span class="hljs-comment">// no media returned</span>
+}
+</code></pre>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/mediaimagelink.html" class="tsd-signature-type">MediaImageLink</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/mediavideolink.html" class="tsd-signature-type">MediaVideoLink</a><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="getimage" class="tsd-anchor"></a>
 				<h3>get<wbr>Image</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -174,7 +214,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/MediaLink.ts#L77">lib/components/MediaLink.ts:77</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/15151d7/src/lib/components/MediaLink.ts#L125">lib/components/MediaLink.ts:125</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -237,7 +277,7 @@ start()
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/MediaLink.ts#L97">lib/components/MediaLink.ts:97</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/15151d7/src/lib/components/MediaLink.ts#L145">lib/components/MediaLink.ts:145</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -271,6 +311,49 @@ start()
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="getmultiple" class="tsd-anchor"></a>
+				<h3>get<wbr>Multiple</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Multiple<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/mediaimagelink.html" class="tsd-signature-type">MediaImageLink</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/mediaimagelink.html" class="tsd-signature-type">MediaImageLink</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/15151d7/src/lib/components/MediaLink.ts#L65">lib/components/MediaLink.ts:65</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>This method will trigger opening the media overlay. It returns a promise that will resolve to the chosen Image and Video Links.</p>
+							</div>
+							<p>Example of fetching an media from DC</p>
+							<pre><code class="language-typescript"><span class="hljs-keyword">try</span> {
+  <span class="hljs-comment">// open browser and waits for media selection</span>
+  <span class="hljs-comment">// returns object that should be saved to the model</span>
+  <span class="hljs-keyword">const</span> media = <span class="hljs-keyword">await</span> sdk.mediaLink.getMultiple({ <span class="hljs-attr">max</span>: <span class="hljs-number">10</span> })
+
+} <span class="hljs-keyword">catch</span> (e) {
+  <span class="hljs-comment">// no media returned</span>
+}
+</code></pre>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> __namedParameters: <span class="tsd-signature-symbol">{ </span>max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = { max: null }</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter">
+										<h5>max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/mediaimagelink.html" class="tsd-signature-type">MediaImageLink</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/mediaimagelink.html" class="tsd-signature-type">MediaImageLink</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="getvideo" class="tsd-anchor"></a>
 				<h3>get<wbr>Video</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -280,7 +363,7 @@ start()
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/MediaLink.ts#L115">lib/components/MediaLink.ts:115</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/15151d7/src/lib/components/MediaLink.ts#L163">lib/components/MediaLink.ts:163</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -312,7 +395,7 @@ start()
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/1eb8f36/src/lib/components/MediaLink.ts#L135">lib/components/MediaLink.ts:135</a></li>
+								<li>Defined in <a href="https://github.com/amplience/dc-extensions-sdk/blob/15151d7/src/lib/components/MediaLink.ts#L183">lib/components/MediaLink.ts:183</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
