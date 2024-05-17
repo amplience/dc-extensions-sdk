@@ -1,4 +1,5 @@
 import { ClientConnection } from 'message-event-channel';
+import { HttpError } from './HttpError';
 
 /**
  * @hidden
@@ -108,5 +109,21 @@ export class HttpClient {
 
       return this.DEFAULT_ERROR as HttpResponse<HttpErrors>;
     }
+  }
+
+  public async fetch(config: HttpRequest): Promise<HttpResponse> {
+    const response = await this.request(config);
+
+    return this.request(config).then((response: any) => {
+      if (response.status >= 200 && response.status < 300) {
+        return response;
+      } else {
+        throw new HttpError(
+          `Request failed with status code ${response.status}`,
+          config,
+          response
+        );
+      }
+    });
   }
 }
