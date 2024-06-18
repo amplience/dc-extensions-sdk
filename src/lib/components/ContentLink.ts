@@ -38,12 +38,16 @@ export class ContentLink {
    */
   getMultiple(
     contentTypeIds: Array<string>,
-    options: ContentLinkOptions = { max: null, pointer: '' }
+    options: ContentLinkOptions
   ): Promise<ContentItemLink[]> {
-    if (options.max === undefined) {
-      options.max = null;
+    const defaultOptions = {
+      max: null
     }
-    return this.fetchLinks(contentTypeIds, options.pointer, options.max);
+    const mergedOptions = {
+      ...defaultOptions,
+      ...options
+    }
+    return this.fetchLinks(contentTypeIds, mergedOptions.pointer, mergedOptions.max);
   }
   /**
    * This method will trigger a content browser. It returns a promise that will resolve to the chosen Content Link.

@@ -49,7 +49,7 @@ describe('ContentItem', () => {
   it('should beable to return multiple items', () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
 
-    contentLink.getMultiple(['123'], { pointer: '/fieldPointer', max: null });
+    contentLink.getMultiple(['123'], { pointer: '/fieldPointer' });
 
     expect(connection.request).toHaveBeenCalledWith(
       CONTENT_LINK.CONTENT_GET,

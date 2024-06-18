@@ -41,9 +41,16 @@ export class ContentReference {
    */
   getMultiple(
     contentTypeIds: Array<string>,
-    options: ContentReferenceOptions = { max: null, pointer: '' }
+    options: ContentReferenceOptions,
   ): Promise<ContentItemReference[]> {
-    return this.fetchReferences(contentTypeIds, options.pointer, options.max);
+    const defaultOptions = {
+      max: null
+    }
+    const mergedOptions = {
+      ...defaultOptions,
+      ...options
+    }
+    return this.fetchReferences(contentTypeIds, mergedOptions.pointer, mergedOptions.max);
   }
   /**
    * This method will trigger a content browser. It returns a promise that will resolve to the chosen Content Reference.

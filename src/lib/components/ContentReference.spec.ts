@@ -48,7 +48,7 @@ describe('ContentReference', () => {
   it('should beable to return multiple items', async () => {
     jest.spyOn(connection, 'request').mockResolvedValue({});
 
-    await expect(contentReference.getMultiple(['123'], { max: null, pointer: '/fieldPointer' })).resolves.toEqual({});
+    await expect(contentReference.getMultiple(['123'], { pointer: '/fieldPointer' })).resolves.toEqual({});
 
     expect(connection.request).toHaveBeenCalledWith(
       CONTENT_REFERENCE.CONTENT_REF_GET,
