@@ -8,10 +8,12 @@ export interface ContentItemReference {
   };
   id: string;
   contentType: string;
+  pointer: string;
 }
 
 export interface ContentReferenceOptions {
   max?: number | null;
+  pointer: string;
 }
 
 export class ContentReference {
@@ -20,13 +22,14 @@ export class ContentReference {
    *
    * @param connection message-event-channel connection
    */
-  constructor(private connection: ClientConnection) {}
+  constructor(private connection: ClientConnection) { }
 
   /**
    * This method will trigger a content browser. It returns a promise that will resolve to the chosen Content References.
    *
    * @param contentTypeIds list of Content Type Ids to filter the Content Browser by.
    * @param options.max Max amount of selected contnet references
+   * @param options.pointer The JSON path of the selected field
    *
    * ### Example
    * ```typescript
@@ -38,9 +41,9 @@ export class ContentReference {
    */
   getMultiple(
     contentTypeIds: Array<string>,
-    options: ContentReferenceOptions = { max: null }
+    options: ContentReferenceOptions = { max: null, pointer: '' }
   ): Promise<ContentItemReference[]> {
-    return this.fetchReferences(contentTypeIds, options.max);
+    return this.fetchReferences(contentTypeIds, options.pointer, options.max);
   }
   /**
    * This method will trigger a content browser. It returns a promise that will resolve to the chosen Content Reference.
@@ -55,17 +58,18 @@ export class ContentReference {
    * console.log(contentRef);
    * ```
    */
-  async get(contentTypeIds: Array<string>): Promise<ContentItemReference> {
-    return this.fetchReferences(contentTypeIds);
+  async get(contentTypeIds: Array<string>, pointer: string): Promise<ContentItemReference> {
+    return this.fetchReferences(contentTypeIds, pointer);
   }
 
-  private fetchReferences(contentTypeIds: Array<string>, max?: number | null) {
+  private fetchReferences(contentTypeIds: Array<string>, pointer: string, max?: number | null) {
     if (!contentTypeIds || !Array.isArray(contentTypeIds) || !contentTypeIds.length) {
       throw new Error(ERRORS_CONTENT_ITEM.NO_IDS);
     }
 
     const response = {
       contentTypeIds,
+      pointer,
       ...((max !== undefined && { max }) || {}),
     };
 

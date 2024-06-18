@@ -7,10 +7,12 @@ export interface ContentItemLink {
   };
   id: string;
   contentType: string;
+  pointer: string;
 }
 
 export interface ContentLinkOptions {
   max?: number | null;
+  pointer: string;
 }
 export class ContentLink {
   /**
@@ -18,12 +20,13 @@ export class ContentLink {
    *
    * @param connection message-event-channel connection
    */
-  constructor(private connection: ClientConnection) {}
+  constructor(private connection: ClientConnection) { }
   /**
    * This method will trigger a content browser. It returns a promise that will resolve to the chosen Content References.
    *
    * @param contentTypeIds list of Content Type Ids to filter the Content Browser by.
    * @param options.max Max amount of selected contnet links
+   * @param options.pointer The JSON path of the selected field
    *
    * ### Example
    * ```typescript
@@ -35,12 +38,12 @@ export class ContentLink {
    */
   getMultiple(
     contentTypeIds: Array<string>,
-    options: ContentLinkOptions = { max: null }
+    options: ContentLinkOptions = { max: null, pointer: '' }
   ): Promise<ContentItemLink[]> {
     if (options.max === undefined) {
       options.max = null;
     }
-    return this.fetchLinks(contentTypeIds, options.max);
+    return this.fetchLinks(contentTypeIds, options.pointer, options.max);
   }
   /**
    * This method will trigger a content browser. It returns a promise that will resolve to the chosen Content Link.
@@ -55,17 +58,18 @@ export class ContentLink {
    * console.log(contentLink);
    * ```
    */
-  async get(contentTypeIds: Array<string>): Promise<ContentItemLink> {
-    return this.fetchLinks(contentTypeIds);
+  async get(contentTypeIds: Array<string>, pointer: string): Promise<ContentItemLink> {
+    return this.fetchLinks(contentTypeIds, pointer);
   }
 
-  async fetchLinks(contentTypeIds: Array<string>, max?: number | null) {
+  async fetchLinks(contentTypeIds: Array<string>, pointer: string, max?: number | null) {
     if (!contentTypeIds || !Array.isArray(contentTypeIds) || !contentTypeIds.length) {
       throw new Error(ERRORS_CONTENT_ITEM.NO_IDS);
     }
 
     const response = {
       contentTypeIds,
+      pointer,
       ...((max !== undefined && { max }) || {}),
     };
 
