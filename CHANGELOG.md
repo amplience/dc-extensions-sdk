@@ -30,6 +30,16 @@ All notable changes to this project will be documented in this file. See [standa
 - **multi-select:** added multiselect to media content link & refs ([ae16cd1](https://github.com/amplience/dc-extensions-sdk/commit/ae16cd122790852ac535cd2bbe03b544f5dd3c9a))
 - **timeouts:** no more timeouts (by default) ([01abdb7](https://github.com/amplience/dc-extensions-sdk/commit/01abdb72b9a1b961a20058f27d912cc58a3f4af1))
 
+## [2.5.0](https://www.github.com/amplience/dc-extensions-sdk/compare/v2.4.0...v2.5.0) (2025-08-06)
+
+
+### Features
+
+* Bumped version ([a9d2e67](https://www.github.com/amplience/dc-extensions-sdk/commit/a9d2e677a7e7d6dcfef863c9439af81df108495a))
+* Pinned message-event-channel to hash with connection.off method ([1f1d534](https://www.github.com/amplience/dc-extensions-sdk/commit/1f1d534fe640d6dfbc2c590111797e308c6621a4))
+* updated action to use cache v4 ([3abb3d1](https://www.github.com/amplience/dc-extensions-sdk/commit/3abb3d1209512ff00f1ef2671628ffa042cb8edc))
+* updated message-event-channel version ([ec5cfb8](https://www.github.com/amplience/dc-extensions-sdk/commit/ec5cfb82a62f099cbaeec98e68ee8f471545fb8a))
+
 ## [2.4.0](https://www.github.com/amplience/dc-extensions-sdk/compare/v2.3.0...v2.4.0) (2024-05-15)
 
 
