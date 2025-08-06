@@ -57,7 +57,7 @@
     ]
   },
   "dependencies": {
-    "message-event-channel": "git+ssh://git@github.com:amplience/message-event-channel.git#7704a4d"
+    "message-event-channel": "^1.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.0.0",
